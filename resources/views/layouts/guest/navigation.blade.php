@@ -23,6 +23,16 @@
                             </a>
                         </li>
                         <li class="header-nav-list-item">
+                            <a href="{{ route('rewards') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
+                                Rewards
+                            </a>
+                        </li>
+                        <li class="header-nav-list-item">
+                            <a href="{{ route('transparency') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
+                                Transparency
+                            </a>
+                        </li>
+                        <li class="header-nav-list-item">
                             <div data-hover="true" data-delay="0" data-w-id="c1146e3a-416f-ff8e-14ce-0f478e33d7d1" class="dropdown-wrapper w-dropdown" style="max-width: 1316px;">
                                 <div class="dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">
                                     <div>Explore</div>
@@ -37,12 +47,6 @@
                                                 <div class="text-200 dropdown-column-title">Exploring</div>
                                                 <div class="grid-3-columns dropdown-main-pages-grid">
                                                     <div class="w-layout-grid grid-1-column dropdown-link-column">
-                                                        <a href="{{ route('rewards') }}" aria-current="page" class="dropdown-link w-dropdown-link w--current" tabindex="0">
-                                                            Rewards
-                                                        </a>
-                                                        <a href="/home-pages/home-v2" class="dropdown-link w-dropdown-link" tabindex="0">
-                                                            Transparency
-                                                        </a>
                                                         <a href="/home-pages/home-v3" class="dropdown-link w-dropdown-link" tabindex="0">
                                                             Affliate Program
                                                         </a>
