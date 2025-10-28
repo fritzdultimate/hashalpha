@@ -38,7 +38,7 @@ Notes:
                     </pre>
                 </div>
 
-                <div>
+                <div class="halpha-mt-10 md:halpha-mt-0">
                     <!-- Chart placeholder: integrate chart library or image -->
                     <div class="halpha-bg-[#07121a] halpha-rounded-[12px] halpha-p-4 halpha-h-60 halpha-flex halpha-items-center halpha-justify-center">
                         <img 
