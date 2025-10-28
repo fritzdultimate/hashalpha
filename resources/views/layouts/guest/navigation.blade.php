@@ -37,7 +37,7 @@
                                                 <div class="text-200 dropdown-column-title">Exploring</div>
                                                 <div class="grid-3-columns dropdown-main-pages-grid">
                                                     <div class="w-layout-grid grid-1-column dropdown-link-column">
-                                                        <a href="/home-pages/home-v1" aria-current="page" class="dropdown-link w-dropdown-link w--current" tabindex="0">
+                                                        <a href="{{ route('rewards') }}" aria-current="page" class="dropdown-link w-dropdown-link w--current" tabindex="0">
                                                             Rewards
                                                         </a>
                                                         <a href="/home-pages/home-v2" class="dropdown-link w-dropdown-link" tabindex="0">
