@@ -47,13 +47,13 @@
                                                 <div class="text-200 dropdown-column-title">Exploring</div>
                                                 <div class="grid-3-columns dropdown-main-pages-grid">
                                                     <div class="w-layout-grid grid-1-column dropdown-link-column">
-                                                        <a href="/home-pages/home-v3" class="dropdown-link w-dropdown-link" tabindex="0">
+                                                        <a href="{{ route('affiliate.index') }}" class="dropdown-link w-dropdown-link" tabindex="0">
                                                             Affliate Program
                                                         </a>
-                                                        <a href="/about" class="dropdown-link w-dropdown-link" tabindex="0">
+                                                        <a href="{{ route('resources.index') }}" class="dropdown-link w-dropdown-link" tabindex="0">
                                                             Resources
                                                         </a>
-                                                        <a href="/about" class="dropdown-link w-dropdown-link" tabindex="0">
+                                                        <a href="{{ route('support.index') }}" class="dropdown-link w-dropdown-link" tabindex="0">
                                                             Support
                                                         </a>
                                                     </div>

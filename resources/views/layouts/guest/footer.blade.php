@@ -49,7 +49,7 @@
                         
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="{{ route('affiliate') }}" class="footer-link">
+                                <a href="{{ route('affiliate.index') }}" class="footer-link">
                                     Affiliate
                                 </a>
                             </li>

@@ -2,7 +2,7 @@
 @extends('layouts.guest')
 
 @section('content')
-    <section class="section halpha-py-12">
+    <section class="halpha-py-12">
         <div class="container-default w-container">
             <div class="inner-container _608px _100-tablet">
                 <h1 class="display-2 heading-color-gradient">Transparency Hub</h1>
@@ -41,27 +41,27 @@
                 <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">On-chain transaction proof for all reward distributions and per-plan breakdowns.</p>
             </a>
 
-            <a href="/transparency/reports" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
+            <a href="{{ route('operation-reports') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
                 <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Operations Reports</h3>
                 <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">Monthly operational reports: uptime, incidents, capacity and plans (downloadable PDFs).</p>
             </a>
             </div>
 
             <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-mt-6">
-            <a href="/transparency/audits" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
+            <a href="{{ route('audits') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
                 <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Audit Dashboard</h3>
                 <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">Third-party security audits and remediation timelines.</p>
             </a>
 
-            <a href="/transparency/beacon" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
+            <a href="{{ route('beacon') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
                 <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Real-Time Beacon Data</h3>
                 <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">Live beacon chain metrics for validators and finality health.</p>
             </a>
             </div>
 
             <div class="halpha-mt-8">
-            <a href="/transparency/explorer" class="btn-primary w-button">Open Validator Explorer</a>
-            <a href="/transparency/reports" class="btn-secondary w-button">View Reports</a>
+            <a href="{{ route('validator-explorer') }}" class="btn-primary w-button">Open Validator Explorer</a>
+            <a href="{{ route('operation-reports') }}" class="btn-secondary w-button">View Reports</a>
             </div>
         </div>
     </section>
