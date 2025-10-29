@@ -34,6 +34,11 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:regular,500,700" media="all">
+    <!-- <script>
+        window.alert = function(msg) {
+            console.trace('Alert called with:', msg);
+        };
+    </script> -->
 
     <script type="text/javascript">WebFont.load({  google: {    families: ["Inter:regular,500,700"]  }});</script>
     <script type="text/javascript">
