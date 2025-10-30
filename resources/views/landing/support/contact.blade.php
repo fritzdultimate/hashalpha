@@ -4,7 +4,7 @@
 
     <section class="top-section pd-top-56px">
         <div class="w-layout-blockcontainer container-default w-container">
-            <div class="grid-2-columns contact-form-right-grid">
+            <div class="grid-2-columns contact-form-right-grid !halpha-items-start">
                 <div id="w-node-_958ba875-0a69-348e-cf9e-60f61ef8c773-5398601e">
                     <h1 style="opacity: 1; filter: blur(0px);" class="display-1 mg-bottom-12px">
                         Get in touch with us today.
@@ -60,7 +60,7 @@
                 </div>
 
 
-                <div class="card contact-form-card">
+                <div class="card contact-form-card" class="">
                     <div class="divider inside-card---top"></div>
                     <img
                         src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfd7898bb88ef1b6c53a2b_contact-card-bg-top-cryptomatic-webflow-ecommerce-template.png"
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="success-message transparentsw w-form-done" tabindex="-1" role="region" aria-label="Contact V1 Form success">
+                        <div class="success-message transparent w-form-done !halpha-hidden" role="region" aria-label="Contact V1 Form success">
                             <div>
                                 <div class="line-rounded-icon success-message-check large"></div>
                                 <h2>Thank you</h2>
@@ -107,13 +107,14 @@
                             </div>
                         </div>
 
-                        <div class="error-message w-form-fail" tabindex="-1" role="region"
+                        <div class="error-message w-form-fail !halpha-hidden" tabindex="-1" role="region"
                             aria-label="Contact V1 Form failure">
                             <div>Oops! Something went wrong while submitting the form.</div>
                         </div>
                     </div>
 
                 </div>
+
             </div>
         </div>
     </section>

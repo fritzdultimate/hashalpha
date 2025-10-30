@@ -1,30 +1,23 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<!doctype html>
+<html lang="en">
+@include('layouts.guest.head')
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+<body class="halpha-bg-[#050507] halpha-text-white halpha-min-h-screen halpha-antialiased">
+    <div class="halpha-flex halpha-items-center halpha-justify-center halpha-min-h-screen halpha-p-6 page-wrapper">
+        {{-- Phone-like shell --}}
+        <div class="halpha-w-full halpha-max-w-sm halpha-rounded-3xl halpha-overflow-hidden halpha-shadow-2xl halpha-relative"
+            style="background: linear-gradient(180deg, rgba(10,10,12,0.6), rgba(2,2,3,0.85)); border: 1px solid rgba(255,255,255,0.03);">
+            {{-- top notch / status bar --}}
+            <div class="halpha-p-4 halpha-flex halpha-items-center halpha-justify-center">
+                <div class="halpha-w-10 halpha-h-1 halpha-rounded-full halpha-bg-white halpha-opacity-10"></div>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+            {{-- content --}}
+            <div class="halpha-px-6 halpha-pb-8">
+                @yield('content')
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>

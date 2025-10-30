@@ -29,7 +29,9 @@
                     <a href="/home-pages/home-v1" aria-current="page" class="footer-logo-wrapper w-inline-block w--current">
                         <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616b1c13ffb5841a23a15ea_logo-cryptoverse-x-webflow-template.png" alt="Logo - Cryptoverse X Webflow Template" sizes="(max-width: 479px) 71vw, (max-width: 767px) 200px, (max-width: 991px) 220px, (max-width: 1439px) 19vw, 238px" srcset="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616b1c13ffb5841a23a15ea_logo-cryptoverse-x-webflow-template-p-500.png 500w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616b1c13ffb5841a23a15ea_logo-cryptoverse-x-webflow-template.png 1152w">
                     </a>
-                    <p class="mg-bottom-0 halpha-text-gray-500">Lorem ipsum dolor sit amet non consectetur in aenean a in.</p>
+                    <p class="mg-bottom-0 halpha-text-gray-500">
+                        Built for both beginners and power users, we puts full control of your assets back in your hands.
+                    </p>
                 </div>
                 
                 <div id="w-node-_59a0c9f7-296b-773a-326e-b1cc37aba373-37aba35b" data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba373" style="opacity: 1; filter: blur(0px);">
