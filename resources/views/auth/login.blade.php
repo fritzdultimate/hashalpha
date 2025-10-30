@@ -1,52 +1,37 @@
 @extends('layouts.auth')
-@section('title','Login')
+@section('title', 'Login')
 
 @section('content')
-<div class="halpha-flex halpha-flex-col halpha-items-center halpha-gap-4 halpha-pt-2">
-  <div class="halpha-rounded-full halpha-w-16 halpha-h-16 halpha-flex halpha-items-center halpha-justify-center halpha-bg-white halpha-bg-opacity-5">
-    <svg class="halpha-w-7 halpha-h-7 halpha-text-white halpha-opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11a4 4 0 10-8 0M12 14v7"></path>
-    </svg>
-  </div>
+    <div class="">
+        <div class="halpha-flex halpha-flex-col halpha-justify-center halpha-items-center halpha-gap-8 section small">
+            <!-- <div class="divider inside-card---top"></div> -->
+            <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfd7898bb88ef1b6c53a2b_contact-card-bg-top-cryptomatic-webflow-ecommerce-template.png"
+                loading="eager"
+                sizes="(max-width: 479px) 100vw, (max-width: 991px) 95vw, (max-width: 1439px) 55vw, 727.6015625px"
+                srcset="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfd7898bb88ef1b6c53a2b_contact-card-bg-top-cryptomatic-webflow-ecommerce-template-p-500.png 500w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfd7898bb88ef1b6c53a2b_contact-card-bg-top-cryptomatic-webflow-ecommerce-template-p-800.png 800w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfd7898bb88ef1b6c53a2b_contact-card-bg-top-cryptomatic-webflow-ecommerce-template-p-1080.png 1080w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfd7898bb88ef1b6c53a2b_contact-card-bg-top-cryptomatic-webflow-ecommerce-template.png 2184w"
+                alt="" class="bg-gradient-top height-66 link-item-dark-image !halpha-border">
 
-  <h1 class="halpha-text-2xl halpha-font-semibold">Welcome back</h1>
-  <p class="halpha-text-sm halpha-text-gray-400">Please fill your email and password to sign in.</p>
+            <div class="halpha-flex halpha-flex-col halpha-gap-3 halpha-items-center">
+                <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d539504d98654e1c7fa66f_create-an-account-circle-icon-cryptomatic-webflow-ecommerce-template.png"
+                    loading="eager" alt="Create An Account - Cryptomatic X Webflow Template" class="halpha-w-16">
+                <h2 class="halpha-text-4xl halpha-text-gray-300 !halpha-mb-0">Welcome back</h2>
+                <p class="halpha-text-gray-400 halpha-text-lg">Please fill your email and password to sign in</p>
+            </div>
 
-  <form method="POST" action="{{ route('login.attempt') }}" class="halpha-w-full halpha-mt-2">
-    @csrf
-
-    <div class="halpha-space-y-4">
-      <div>
-        <label for="email" class="halpha-text-xs halpha-text-gray-400">Email</label>
-        <input id="email" name="email" type="email" required value="{{ old('email') }}"
-          class="input halpha-w-full halpha-px-4 halpha-py-3 halpha-rounded-xl halpha-border halpha-border-gray-700 halpha-bg-transparent focus:halpha-ring-0 focus:halpha-outline-none" />
-        @error('email') <div class="halpha-text-xs halpha-text-red-400 halpha-mt-1">{{ $message }}</div> @enderror
-      </div>
-
-      <div>
-        <label for="password" class="halpha-text-xs halpha-text-gray-400">Password</label>
-        <input id="password" name="password" type="password" required
-          class="input halpha-w-full halpha-px-4 halpha-py-3 halpha-rounded-xl halpha-border halpha-border-gray-700 halpha-bg-transparent focus:halpha-ring-0 focus:halpha-outline-none" />
-        @error('password') <div class="halpha-text-xs halpha-text-red-400 halpha-mt-1">{{ $message }}</div> @enderror
-      </div>
-
-      <div class="halpha-flex halpha-items-center halpha-justify-between halpha-text-sm">
-        <label class="halpha-flex halpha-items-center halpha-gap-2 halpha-text-gray-300">
-          <input type="checkbox" name="remember" class="halpha-form-checkbox halpha-h-4 halpha-w-4" />
-          <span>Remember me</span>
-        </label>
-        <a href="{{ route('password.request') }}" class="halpha-text-sm halpha-text-gray-400 hover:halpha-underline">Forgot password?</a>
-      </div>
-
-      <div>
-        <button type="submit" class="halpha-w-full halpha-py-3 halpha-rounded-xl halpha-bg-gradient-to-r halpha-from-blue-600 halpha-to-purple-600 halpha-font-semibold">Sign in</button>
-      </div>
-
-      <div class="halpha-text-center halpha-text-sm halpha-text-gray-400">
-        <span>Don’t have an account?</span>
-        <a href="{{ route('register') }}" class="halpha-text-white halpha-underline">Register</a>
-      </div>
+            <form class="halpha-w-full">
+                <div class="form halpha-space-y-5">
+                    <div>
+                        <input type="text"
+                            class="input bg-transparent w-input halpha-text-xl placeholder:halpha-text-xl !halpha-rounded-[22px] !halpha-py-10 placeholder:!halpha-text-[#dddddd4d]"
+                            placeholder="Enter your email address">
+                    </div>
+                    <div>
+                        <input type="password"
+                            class="input bg-transparent w-input halpha-text-xl placeholder:halpha-text-xl !halpha-rounded-[22px] !halpha-py-10 placeholder:!halpha-text-[#dddddd4d]"
+                            placeholder="Enter your password">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-  </form>
-</div>
 @endsection
