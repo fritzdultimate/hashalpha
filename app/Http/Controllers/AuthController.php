@@ -170,8 +170,7 @@ class AuthController extends Controller
         return view('auth.recovery', ['codes'=>$codes]);
     }
 
-    public function logout(Request $r)
-    {
+    public function logout(Request $r) {
         Auth::logout();
         $r->session()->invalidate();
         $r->session()->regenerateToken();

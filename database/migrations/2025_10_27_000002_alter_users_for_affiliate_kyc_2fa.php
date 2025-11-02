@@ -14,7 +14,7 @@ return new class extends Migration {
             // KYC & 2FA
             $table->enum('kyc_status', ['unsubmitted', 'pending', 'approved', 'rejected'])->default('unsubmitted')->after('referrer_id');
             $table->timestamp('kyc_submitted_at')->nullable()->after('kyc_status');
-            $table->boolean('is_2fa_enabled')->default(false)->after('kyc_submitted_at');
+            // $table->boolean('is_2fa_enabled')->default(false)->after('kyc_submitted_at');
 
             // Soft block for sanctions/holds
             $table->timestamp('blocked_at')->nullable()->after('is_2fa_enabled');

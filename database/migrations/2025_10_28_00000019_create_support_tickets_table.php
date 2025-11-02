@@ -9,17 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::create('support_tickets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('subject');
             $table->text('message');
-            $table->string('type')->default('general'); // general | kyc | technical | billing | security
-            $table->string('priority')->default('normal'); // low | normal | high | critical
-            $table->string('status')->default('open'); // open | pending | resolved | closed
-            $table->string('platform')->nullable(); // web | android | ios
+            $table->enum('type', ['general', 'kyc', 'technical', 'billing', 'security'])->default('general');
+            $table->enum('priority', ['normal', 'low', 'hight', 'critical'])->default('normal');
+            $table->enum('status', ['open', 'pending', 'resolved', 'closed'])->default('open');
+            $table->enum('platform', ['web', 'android', 'ios'])->nullable();
             $table->json('meta')->nullable(); // device/browser info, steps, etc
             $table->string('attachment_path')->nullable();
             $table->timestamps();
@@ -29,8 +28,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists('support_tickets');
     }
 };

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Home - {{ env('APP_NAME') }}</title>
+    <title>@yield('title') | {{ env('APP_NAME') }}</title>
 
     <meta content="Cryptoverse X is our crypto Webflow Template created for crypto startups looking to have a minimal, clean and dark mode style for their website." name="description">
 
@@ -58,6 +58,23 @@
     <style>
         .w-webflow-badge{
             display:none !important;
+        }
+    </style>
+    <style>
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0px 0px transparent inset !important;
+            box-shadow: 0 0 0px 0px transparent inset !important;
+            -webkit-text-fill-color: #d1d5db !important;
+            transition: background-color 5000s ease-in-out 0s;
+            background: transparent !important;
         }
     </style>
 </head>
