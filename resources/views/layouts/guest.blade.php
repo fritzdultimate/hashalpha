@@ -6,7 +6,7 @@
     <body class="halpha-font-sans halpha-text-gray-900 halpha-antialiased">
         <div class="page-wrapper">
             @include('layouts.guest.navigation')
-            <div class="!halpha-my-5"></div>
+            <div class="!halpha-py-8 md:!halpha-py-12"></div>
             @yield('content')
             @include('layouts.guest.footer')
         </div>
