@@ -7,6 +7,14 @@
       "app.css"
     ]
   },
+  "resources/css/landing-styles.css": {
+    "file": "assets/landing-styles-D9Vx-BT2.css",
+    "src": "resources/css/landing-styles.css",
+    "isEntry": true,
+    "names": [
+      "landing-styles.css"
+    ]
+  },
   "resources/js/app.js": {
     "file": "assets/app-Bj43h_rG.js",
     "name": "app",
