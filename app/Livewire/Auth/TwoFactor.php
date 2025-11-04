@@ -51,8 +51,9 @@ class TwoFactor extends Component {
             return;
         }
 
-        $row = TwoFactorService::generateFor($this->user, session('2fa_type','login'), 6, 10);
-        // TODO: notify user: $this->user->notify(new TwoFactorCodeNotification($row->code));
+        TwoFactorService::generateFor($this->user, session('2fa_type','login'), 6, 10);
+        
+        
         $this->dispatch('toast', message: 'Code resent.', type: 'success', title: 'Success');
 
         $cooldownSeconds = 30;

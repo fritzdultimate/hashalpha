@@ -7,24 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') | {{ env('APP_NAME') }}</title>
 
-    <meta content="Cryptoverse X is our crypto Webflow Template created for crypto startups looking to have a minimal, clean and dark mode style for their website." name="description">
-
-    <meta content="Home V1 - Cryptoverse X - Webflow Ecommerce website template" property="og:title">
-
-    <meta content="Cryptoverse X is our crypto Webflow Template created for crypto startups looking to have a minimal, clean and dark mode style for their website." property="og:description">
-
     <meta content="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616d86526b24644a2085752_featured-image-cryptoverse-x-webflow-template.png" property="og:image">
-
-    <meta content="Home V1 - Cryptoverse X - Webflow Ecommerce website template" property="twitter:title">
-
-    <meta content="Cryptoverse X is our crypto Webflow Template created for crypto startups looking to have a minimal, clean and dark mode style for their website." property="twitter:description">
 
     <meta content="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616d86526b24644a2085752_featured-image-cryptoverse-x-webflow-template.png" property="twitter:image">
 
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
-    
-    <!-- <link href="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/css/cryptoversetemplate.webflow.50f571824.css" rel="stylesheet" type="text/css"> -->
 
     <!-- Fonts -->
     <!-- <link rel="preconnect" href="https://fonts.bunny.net"> -->
@@ -56,25 +44,6 @@
     <link href="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64ee44f9a8a7d2975c808651_favicon-cryptomatic-webflow-ecommerce-template.png" rel="shortcut icon" type="image/x-icon">
     <link href="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d2ce1474942ac2c2d74ff5_webclip-cryptomatic-webflow-ecommerce-template.svg" rel="apple-touch-icon">
     <style>
-        .w-webflow-badge{
-            display:none !important;
-        }
-    </style>
-    <style>
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        textarea:-webkit-autofill,
-        textarea:-webkit-autofill:hover,
-        textarea:-webkit-autofill:focus,
-        select:-webkit-autofill,
-        select:-webkit-autofill:hover,
-        select:-webkit-autofill:focus {
-            -webkit-box-shadow: 0 0 0px 0px transparent inset !important;
-            box-shadow: 0 0 0px 0px transparent inset !important;
-            -webkit-text-fill-color: #d1d5db !important;
-            transition: background-color 5000s ease-in-out 0s;
-            background: transparent !important;
-        }
+        .glass-card{ background: rgba(255,255,255,0.65); backdrop-filter: blur(6px); }
     </style>
 </head>

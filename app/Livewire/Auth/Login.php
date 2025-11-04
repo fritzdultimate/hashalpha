@@ -47,21 +47,19 @@ class Login extends Component {
         }
 
         if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            // failed
             RateLimiter::hit($key, 60);
             LoginGuardService::recordFailedAttempt($user);
             throw ValidationException::withMessages(['email' => 'These credentials do not match our records.']);
         }
 
-        // success: reset failure counters
+        
         LoginGuardService::resetFailures($user);
         RateLimiter::clear($key);
 
-        // If 2FA enabled for user: generate code and redirect to 2fa livewire page
+        
         if ($user->two_factor_enabled) {
-            $codeRow = TwoFactorService::generateFor($user, 'login', 6, 10);
+            TwoFactorService::generateFor($user, 'login', 6, 10);
 
-            // TODO: send code via notification (email or SMS). Placeholder:
             // $user->notify(new \App\Notifications\TwoFactorCodeNotification($codeRow->code));
 
             session()->put('2fa_user_id', $user->id);

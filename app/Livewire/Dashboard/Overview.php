@@ -1,22 +1,33 @@
 <?php
 
+
 namespace App\Livewire\Dashboard;
 
+
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-class Overview extends Component {
-    public $totalDeposited;
-    public $totalEarnings;
-    public $activeStakes;
 
-    public function mount() {
+#[Layout('layouts.app')]
+class Overview extends Component
+{
+    public $totalDeposited = 0;
+    public $totalEarnings = 0;
+    public $activeStakes = 0;
+
+
+    public function mount()
+    {
         $user = Auth::user();
-        $this->totalDeposited = 100;//$user->deposits()->sum('amount');
-        $this->activeStakes = 500; //$user->stakes()->count();
-        $this->totalEarnings = 405; //$user->transactions()->where('type', 'credit')->sum('amount');
+        $this->totalDeposited = (float) ($user->deposits()->sum('amount') ?? 0);
+        $this->totalEarnings = (float) ($user->transactions()->where('type', 'credit')->sum('amount') ?? 0);
+        $this->activeStakes = (int) ($user->stakes()->count() ?? 0);
     }
-    public function render() {
+
+
+    public function render()
+    {
         return view('livewire.dashboard.overview');
     }
 }

@@ -66,5 +66,9 @@ Route::prefix('support')->group(function () {
     });
 });
 
+Route::get('/terms', function() {
+    return 'Our Terms';
+})->name('terms');
+
 require __DIR__.'/auth.php';
 require __DIR__.'/dashboard.php';

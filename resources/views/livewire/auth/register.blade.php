@@ -34,17 +34,7 @@
                     <input wire:model.defer="password" type="password" placeholder="Enter your password"
                         class="halpha-w-full !halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input">
 
-                    <div class="halpha-flex halpha-items-center halpha-justify-between halpha-text-sm">
-                        <label class="halpha-flex halpha-items-center halpha-gap-2 halpha-text-gray-400">
-                            <input wire:model="remember" type="checkbox"
-                                class="halpha-h-4 halpha-w-4 halpha-rounded halpha-border-gray-600" />
-                            <span>Remember me</span>
-                        </label>
-
-                        <a href="{{ route('login') }}" class="halpha-text-gray-400 hover:halpha-underline">
-                            Forgot password?
-                        </a>
-                    </div>
+                    
 
                     <label class="halpha-flex halpha-items-center halpha-gap-2 halpha-justify-center">
                         <input 
@@ -57,7 +47,7 @@
                                 halpha-text-gray-200 halpha-cursor-pointer"
                         /> 
                         <span class="@error('terms') halpha-text-red-500 @else halpha-text-gray-500 @enderror">
-                            I accept all the terms & conditions
+                            I hereby accept all the <a class="halpha-text-gray-400" href="{{ route('terms') }}"> terms & conditions </a>
                         </span>
                     </label>
 
@@ -66,6 +56,10 @@
                         <span wire:loading.remove wire:target="submit">{{ $statusMessage ?: 'Register' }}</span>
                         <x-codicon-loading wire:loading wire:target="submit" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
                     </button>
+                    
+                    <p class="halpha-text-white halpha-text-center">
+                        Already have an account? <a class="halpha-text-gray-400" href="{{ route('login') }}">Login</a>
+                    </p>
                 </div>
             </form>
         </div>
@@ -74,7 +68,6 @@
 
 @push('styles')
     <style>
-        /* small extra polish so mobile looks like your reference while large screens look mature */
         @media (min-width: 1024px) {
             .halpha-rounded-\[22px\] {
                 border-radius: 18px;
