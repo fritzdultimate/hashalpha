@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="halpha-max-w-3xl halpha-mx-auto halpha-px-3 md:halpha-px-6 halpha-py-12">
-        <div class="halpha-bg-[#0b0b0d] halpha-rounded-2xl halpha-p-6 halpha-border halpha-border-gray-800">
+        <div class="halpha-bg-[#0b0b0d] halpha-rounded-2xl halpha-p-4 md:halpha-p-6 halpha-border halpha-border-gray-800">
             <h2 class="halpha-text-2xl halpha-font-semibold">Report an Issue</h2>
             <p class="halpha-text-sm halpha-text-gray-400 halpha-mt-2">
                 Found a bug? Provide steps and screenshots to help us
