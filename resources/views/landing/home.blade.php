@@ -18,7 +18,7 @@
                     </p>
                     <div class="buttons-flex-container">
                         <div data-w-id="64d41687-720e-ca5c-a050-26b768b07fd0" class="btn-primary-wrapper">
-                            <a href="/pricing" class="btn-primary w-button">
+                            <a href="{{ route('login') }}" class="btn-primary w-button">
                                 {{ env('APP_LINK') }}
                                 <span class="line-rounded-icon link-icon-right" style=""></span>
                             </a>
