@@ -9,7 +9,7 @@
     @include('components.guest.team-performance')
 
     <!-- Yield Strategy & Payout Schedule -->
-    <section id="yield" class="halpha-py-10 halpha-bg-[rgba(255,255,255,0.01)]">
+    <section id="yield" class="halpha-py-5 md:halpha-py-12 halpha-bg-[rgba(255,255,255,0.01)]">
         <div class="container-default w-container">
             <div class="inner-container _608px _100-tablet">
                 <h2 class="display-2 heading-color-gradient">Yield Strategy & Payout Schedule</h2>

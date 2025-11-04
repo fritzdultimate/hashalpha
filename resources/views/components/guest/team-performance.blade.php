@@ -2,7 +2,7 @@
      Drop into your Blade view. Requires Alpine v3+ on the page.
 --}}
 
-<section class="halpha-py-12">
+<section class="halpha-py-5 md:halpha-py-12">
     <div class="container-default w-container">
         <div class="inner-container _1000px _100-tablet">
             <h2 class="display-2 heading-color-gradient mg-bottom-6">Team Performance Bonus (Daily ROI Rewards)</h2>
