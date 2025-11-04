@@ -7,7 +7,7 @@
             <div class="text-center mg-bottom-40px !halpha-flex halpha-flex-col halpha-gap-6">
                 <div data-w-id="a4708a42-280d-b422-b575-8ac43cd058e5" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _764px center">
-                    <h1 class="display-1 heading-color-gradient mg-bottom-0">Founded with a mission to simplify blockchain participation.</h1>
+                    <h1 class="halpha-text-4xl sm:halpha-text-5xl md:halpha-text-7xl halpha-font-semibold heading-color-gradient mg-bottom-0">Founded with a mission to simplify blockchain participation.</h1>
                 </div>
                 <div data-w-id="c16957c9-54cf-1436-610a-b7a81345da1f" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _694px center halpha-text-gray-400">
