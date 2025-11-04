@@ -3,7 +3,7 @@
 @section('title', 'Affiliate Program')
 
 @section('content')
-    <div class="halpha-px-6 halpha-py-12 halpha-bg-[#070707] halpha-text-white">
+    <div class="halpha-px-3 md:halpha-px-6 halpha-py-12 halpha-bg-[#070707] halpha-text-white">
         <div class="halpha-max-w-6xl halpha-mx-auto">
             <header class="halpha-mb-8">
                 <h1 class="halpha-text-4xl halpha-font-semibold halpha-leading-tight">Affiliate Program</h1>
@@ -69,11 +69,10 @@
                 </article>
             </section>
 
-            <section
-                class="halpha-mt-8 halpha-bg-gradient-to-b halpha-from-transparent halpha-to-[#040405] halpha-rounded-2xl halpha-p-6">
+            <section class="halpha-mt-8 halpha-bg-gradient-to-b halpha-from-transparent halpha-to-[#040405] halpha-rounded-2xl md:halpha-p-6">
                 <div class="halpha-flex halpha-items-center halpha-justify-between halpha-mb-4">
-                    <h3 class="halpha-text-2xl halpha-font-semibold">Rank Progress Tracker</h3>
-                    <a href="{{ route('affiliate.ranks') }}" class="halpha-text-sm halpha-opacity-80">View full tracker
+                    <h3 class="halpha-text-xl md:halpha-text-2xl halpha-font-semibold">Rank Progress Tracker</h3>
+                    <a href="{{ route('affiliate.ranks') }}" class="halpha-text-xs md:halpha-text-sm halpha-opacity-80">View full tracker
                         →</a>
                 </div>
 
