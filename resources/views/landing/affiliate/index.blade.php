@@ -54,7 +54,7 @@
                 </article>
 
                 
-                <article class="halpha-bg-[#0b0b0d] halpha-rounded-2xl halpha-p-6 halpha-shadow-sm">
+                <article class="halpha-bg-[#0b0b0d] halpha-rounded-2xl halpha-p-6 halpha-shadow-sm !halpha-hidden">
                     <h2 class="halpha-text-xl halpha-font-medium">Affiliate Tools & Banners</h2>
                     <p class="halpha-mt-3 halpha-text-gray-300 halpha-text-sm">Download pre-built banners, tracking links,
                         and copy templates to get started quickly.</p>
