@@ -54,7 +54,7 @@
                 <div class="halpha-text-sm halpha-text-gray-400">
                     Showing <span x-text="meta.from"></span> - <span x-text="meta.to"></span> of <span x-text="meta.total"></span>
                 </div>
-                <div>
+                <div class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-gap-3 md:halpha-gap-5 md:halpha-items-center">
                     <button @click="load(page-1)" :disabled="page===1" class="btn-secondary w-button">Prev</button>
                     <button @click="load(page+1)" :disabled="page>=meta.last_page" class="btn-primary w-button">Next</button>
                 </div>
