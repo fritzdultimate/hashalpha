@@ -10,7 +10,7 @@ class ResourceController extends Controller
 {
     public function index() {
         $resources = [
-            ['title'=>'GitBook', 'type'=>'external', 'url'=>'https://yourproject.gitbook.io', 'description'=>'Full developer & user docs'],
+            ['title'=>'GitBook', 'type'=>'external', 'url'=>'https://halphalpha.gitbook.io', 'description'=>'Full developer & user docs'],
             ['title'=>'Roadmap', 'type'=>'internal', 'url'=>route('resources.roadmap'), 'description'=>'Planned features & delivery timeline'],
             ['title'=>'Whitepaper', 'type'=>'download', 'url'=>route('resources.whitepaper.download'), 'description'=>'In-depth tokenomics & system architecture'],
             ['title'=>'Media Kit / Brand Assets', 'type'=>'download', 'url'=>route('resources.media.download'), 'description'=>'Logos, fonts, banners and brand guidelines'],

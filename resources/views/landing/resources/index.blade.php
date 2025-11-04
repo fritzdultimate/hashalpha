@@ -14,7 +14,7 @@
             <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6">
                 @foreach($resources as $r)
                     <div class="halpha-bg-[#0b0b0d] halpha-rounded-2xl halpha-p-5">
-                        <div class="halpha-flex halpha-justify-between halpha-items-start">
+                        <div class="halpha-flex halpha-justify-between halpha-items-start"> 
                             <div>
                                 <h3 class="halpha-text-lg halpha-font-medium">{{ $r['title'] }}</h3>
                                 <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">{{ $r['description'] }}</p>
