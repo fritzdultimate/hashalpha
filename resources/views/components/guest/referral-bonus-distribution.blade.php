@@ -17,21 +17,21 @@
 
                 {{-- Card --}}
                 <div class="halpha-mt-3 halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04060a] halpha-to-[#071021] halpha-border halpha-border-[#505050] halpha-shadow-[0_6px_30px_rgba(2,6,12,0.6)] halpha-relative">
-                    {{-- Floating Top Label --}}
+                    
                     <div class="halpha-absolute -halpha-top-3 md:-halpha-top-4 halpha-right-[36%] md:halpha-right-[49%]">
                         <span class="halpha-inline-block halpha-bg-[#07121a] halpha-text-[#e6f7f0] halpha-px-6 md:halpha-py-1 halpha-rounded-full halpha-border halpha-border-[#2b3944] halpha-text-base md:halpha-text-xl halpha-shadow-sm">
                             Level
                         </span>
                     </div>
 
-                    {{-- horizontal rule + ticks container (scroll on small) --}}
+                    
                     <div class="halpha-overflow-x-auto halpha-no-scrollbar">
                         <div class="halpha-min-w-[920px] md:halpha-min-w-0">
                             {{-- level numbers --}}
                             <div class="halpha-grid halpha-grid-cols-10 halpha-gap-6 halpha-items-end halpha-text-center">
                                 <template x-for="(lvl, idx) in levels" :key="idx">
                                     <div class="halpha-flex halpha-flex-col halpha-items-center">
-                                        <div class="halpha-text-base md:halpha-text-xl halpha-text-gray-300"> 
+                                        <div class="halpha-text-base md:halpha-text-xl !halpha-text-gray-300"> 
                                             <span x-text="idx+1"></span> 
                                         </div>
                                     </div>
@@ -75,10 +75,10 @@
                             </div>
 
                         </div> {{-- min-w wrapper --}}
-                    </div> {{-- overflow-x-auto --}}
+                    </div> 
 
 
-                    {{-- Bottom label --}}
+                    
                     <div class="halpha-mt-3 md:halpha-mt-[6px] halpha-absolute halpha-right-[30%] md:halpha-right-[46%]">
                         <span class="halpha-inline-block halpha-bg-[#07121a] halpha-text-[#e6f7f0] halpha-px-4 md:halpha-py-1 halpha-rounded-full halpha-border halpha-border-[#2b3944] halpha-text-base md:halpha-text-xl">
                             Commission %
@@ -91,7 +91,7 @@
             </div>
 
             <div class="halpha-flex halpha-flex-col halpha-py-5">
-                <h4 class="">Example:</h4>
+                <h4>Example:</h4>
                 <p class="!halpha-text-gray-300">
                     If your direct referral invests 5 ETH, you earn 4% immediately — paid in the same token or USDT equivalent.
                 </p>
@@ -100,11 +100,12 @@
     </div>
 </section>
 
+ 
 @once
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script>
         function referralLevelsComponent() {
             return {
-                // base percentage values (strings or numbers). Update these to change percentages.
                 levels: [4, 2, 1, 1, 0.5, 0.5, 0.5, 0.25, 0.15, 0.10],
                 // displayed text (animated)
                 displayValues: [],
