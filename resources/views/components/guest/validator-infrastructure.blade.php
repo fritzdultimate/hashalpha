@@ -1,4 +1,4 @@
-<section class="top-section top-section-bg-img-right !halpha-overflow-hidden">
+<section class="top-section top-section-bg-img-right !halpha-overflow-hidden" id="infrastructure">
     <div class="w-layout-blockcontainer container-default position-relative---z-index-1 w-container">
         <div class="grid-2-columns _1-col-tablet">
             <div id="w-node-_924b8ab0-686c-9d71-25ab-87214b088c45-bd0d2b38" class="inner-container _510px _100-tablet">
