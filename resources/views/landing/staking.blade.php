@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero -->
-    <section class="section halpha-py-16 md:halpha-py-32 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a]">
+    <section class="section halpha-py-8 md:halpha-py-32 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a]">
         <div class="container-default w-container">
             <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-items-center">
                 <div>
