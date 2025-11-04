@@ -119,7 +119,7 @@ Net to user after fees & splits = ~$0.18/day (illustrative)
                 <div>
                     <!-- Chart placeholder: integrate chart library or image -->
                     <div class="halpha-bg-[#07121a] halpha-rounded-[12px] halpha-p-4 halpha-h-60 halpha-flex halpha-items-center halpha-justify-center">
-                        <div class="halpha-text-sm halpha-text-gray-400">[Yield projection chart — replace with Chart.js / Recharts]</div>
+                        <div class="halpha-text-sm halpha-text-gray-400"><!--[Yield projection chart]--></div>
                     </div>
 
                     <div class="halpha-mt-4">
