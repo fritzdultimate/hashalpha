@@ -107,8 +107,8 @@
             <div class="halpha-text-center !halpha-pt-10 halpha-text-sm halpha-text-gray-500">
                 <p>
                     Need urgent help? Email us at
-                    <a href="mailto:support@yourdomain.com" class="halpha-text-blue-400 hover:halpha-underline">
-                        support@yourdomain.com
+                    <a href="mailto:support@halphalpha.io" class="halpha-text-blue-400 hover:halpha-underline">
+                        support@halphalpha.io
                     </a>
                 </p>
                 <p class="halpha-mt-2">
