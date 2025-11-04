@@ -10,14 +10,14 @@
                 reproduce it.
             </p>
 
-            <form action="{{ route('support.report.submit') }}" method="post" class="halpha-mt-6"
+            <form action="{{ route('support.report.submit') }}" method="post" class="halpha-mt-6 halpha-w-full"
                 enctype="multipart/form-data">
                 @csrf
-                <div class="halpha-grid halpha-gap-4">
+                <div class="halpha-flex halpha-flex-col halpha-gap-4 ">
                     <input name="title" placeholder="Short title" value="{{ old('title') }}"
-                        class="halpha-w-full halpha-px-4 halpha-py-3 halpha-rounded halpha-bg-[#070708] halpha-border !halpha-border-gray-700 halpha-text-gray-300 focus:halpha-outline-none focus:halpha-ring-0 input" />
+                        class="halpha-w-full halpha-px-4 halpha-py-3 halpha-rounded halpha-bg-[#070708] halpha-border !halpha-border-gray-700 halpha-text-gray-300 focus:halpha-outline-none focus:halpha-ring-0" />
                     <input name="url" placeholder="Page URL (optional)" value="{{ old('url') }}"
-                        class="halpha-w-full halpha-px-4 halpha-py-3 halpha-rounded halpha-bg-[#070708] halpha-border !halpha-border-gray-700 halpha-text-gray-300 focus:halpha-outline-none focus:halpha-ring-0 input" />
+                        class="halpha-w-full halpha-px-4 halpha-py-3 halpha-rounded halpha-bg-[#070708] halpha-border !halpha-border-gray-700 halpha-text-gray-300 focus:halpha-outline-none focus:halpha-ring-0" />
                     <select name="severity"
                         class="halpha-w-full halpha-px-4 halpha-py-3 halpha-rounded halpha-bg-[#070708] halpha-border !halpha-border-gray-700 halpha-text-gray-300 focus:halpha-outline-none focus:halpha-ring-0">
                         <option value="low">Low</option>
