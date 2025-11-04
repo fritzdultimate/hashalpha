@@ -11,7 +11,7 @@
                 </div>
                 <div data-w-id="c16957c9-54cf-1436-610a-b7a81345da1f" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _694px center halpha-text-gray-400">
-                    <p>We specialize in validator node operations, decentralized staking pools, and yield optimization through MEV-boosted infrastructure. Our goal is to make institutional-grade blockchain earning opportunities accessible to individuals and communities across the globe.</p>
+                    <p class="">We specialize in validator node operations, decentralized staking pools, and yield optimization through MEV-boosted infrastructure. Our goal is to make institutional-grade blockchain earning opportunities accessible to individuals and communities across the globe.</p>
                 </div>
             </div>
             <div data-w-id="5efe5cb4-a493-305f-011b-7f8e173d14a6" style="opacity: 1; filter: blur(0px);"

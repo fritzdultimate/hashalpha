@@ -1,5 +1,5 @@
 {{-- 2) Staking Plans (responsive) --}}
-<section class="pd-top-0">
+<section class="pd-top-0" id="plans">
     <div class="container-default w-container">
         <div class="heading-and-content-grid mg-bottom-24px">
             <div class="inner-container _564px _100-tablet">
