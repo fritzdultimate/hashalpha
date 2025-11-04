@@ -1,4 +1,4 @@
-<div data-w-id="c1146e3a-416f-ff8e-14ce-0f478e33d7bf" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="header-wrapper w-nav !halpha-fixed halpha-top-0" style="opacity: 1;">
+<div data-w-id="c1146e3a-416f-ff8e-14ce-0f478e33d7bf" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="header-wrapper w-nav !halpha-fixed !halpha-top-0" style="opacity: 1;">
     <div class="container-default w-container">
         <div class="header-content-wrapper">
             <div class="header-left-side">
