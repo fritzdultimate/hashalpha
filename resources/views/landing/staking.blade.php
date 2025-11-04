@@ -56,11 +56,10 @@
 
     @include('components.guest.plans-overview')
 
-    <!-- 2) Validator Infrastructure -->
-    <div class="halpha-my-24"></div>
+    <!-- Validator Infrastructure -->
     @include('components.guest.validator-infrastructure')
 
-    <!-- 3) MEV-Boosted Staking -->
+    <!-- MEV-Boosted Staking -->
     <section id="mev" class="halpha-py-16 md:halpha-py-32">
         <div class="container-default w-container">
             <div class="inner-container _608px _100-tablet">
@@ -99,7 +98,7 @@
         </div>
     </section>
 
-    <!-- 4) Yield Strategy & Payout Schedule -->
+    <!-- Yield Strategy & Payout Schedule -->
     <section id="yield" class="halpha-py-10 halpha-bg-[rgba(255,255,255,0.01)]">
         <div class="container-default w-container">
             <div class="inner-container _608px _100-tablet">
