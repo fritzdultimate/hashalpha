@@ -30,7 +30,7 @@ class Login extends Component {
 
         // throttle key (by email + ip)
         $key = Str::lower($this->email).'|'.request()->ip();
-        if (RateLimiter::tooManyAttempts($key, 10)) {
+        if (RateLimiter::tooManyAttempts($key, 4)) {
             throw ValidationException::withMessages(['email' => 'Too many attempts. Please try again later.']);
         }
 
@@ -43,7 +43,7 @@ class Login extends Component {
 
         // suspended?
         if ($user->is_suspended && $user->suspended_until && now()->lessThan($user->suspended_until)) {
-            throw ValidationException::withMessages(['email' => 'Account is on hold. Please try later or contact support.']);
+            throw ValidationException::withMessages(['email' => "Account is on hold. Please try again in " . remaining_time_until($user->suspended_until)]);
         }
 
         if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {

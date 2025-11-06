@@ -22,7 +22,7 @@
             </div>
 
             <div class="halpha-mt-4 halpha-p-4 halpha-rounded-2xl halpha-bg-white halpha-shadow-sm halpha-border">
-                <h3 class="halpha-font-semibold halpha-mb-3">Recent Activity</h3>
+                <h3 class="halpha-font-semibold halpha-mb-3 !halpha-text-black">Recent Activity</h3>
                 <div class="halpha-space-y-3">
                     {{-- sample entries --}}
                     <div class="halpha-flex halpha-items-center halpha-justify-between">

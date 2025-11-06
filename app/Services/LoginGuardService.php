@@ -11,7 +11,7 @@ class LoginGuardService
         $user->last_failed_at = Carbon::now();
         if ($user->failed_logins >= 5) {
             $user->is_suspended = true;
-            $user->suspended_until = Carbon::now()->addMinutes(30); // hold 30 minutes
+            $user->suspended_until = Carbon::now()->addMinutes(1); // hold 30 minutes
         }
         $user->save();
     }
