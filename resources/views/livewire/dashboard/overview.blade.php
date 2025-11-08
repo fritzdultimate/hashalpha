@@ -65,7 +65,6 @@
         const data = [4, -2, 3, 1, -6, 5, 2, -3, 4, 3, -1, 6, 4, 4, 4, 4, -10, -12];
 
         const colors = data.map(v => v >= 0 ? '#10b981' : '#ef4444');
-        console.log(colors)
         const options = {
             series: [{ name: 'Daily', data }],
             chart: {
