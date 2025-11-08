@@ -1,76 +1,22 @@
-<aside 
-    x-show="isSidebarOpen" 
-    x-transition:enter="halpha-transition halpha-ease-out halpha-duration-150"
+<aside x-show="isSidebarOpen" x-transition:enter="halpha-transition halpha-ease-out halpha-duration-150"
     x-transition:enter-start="halpha-opacity-0 halpha-translate-x-[-10px]"
     x-transition:enter-end="halpha-opacity-100 halpha-translate-x-0" 
     :class="[ 
         { 'halpha-w-sidebar-collapsed': sidebarCollapsed, 'halpha-w-sidebar-expanded halpha-min-w-sidebar-expanded': !sidebarCollapsed }, 
         'halpha-flex halpha-flex-col halpha-overflow-hidden halpha-h-screen halpha-bg-[#1e1e1e] halpha-text-[var(--halpha-sidebar-text)] halpha-fixed halpha-z-30 halpha-left-0 halpha-top-0 halpha-bottom-0 halpha-border-r halpha-border-r-[#343434] halpha-min-w-sidebar-expanded'
-    ]"
-    @keydown.window.escape="closeMobileSidebar" 
-    class="halpha-hidden lg:halpha-flex"
-    aria-label="Main navigation"
->
+    ]" @keydown.window.escape="closeMobileSidebar" class="halpha-hidden lg:halpha-flex halpha-overflow-hiddenr"
+    aria-label="Main navigation">
     <div
-        class="halpha-flex halpha-items-center halpha-justify-between halpha-px-4 halpha-py-3 halpha-border-b halpha-border-black/10">
+        class="halpha-flex halpha-items-center halpha-justify-between halpha-px-6 halpha-py-3 halpha-border-b halpha-border-black/10">
         <div class="halpha-flex halpha-items-center halpha-gap-3">
-            <img src="/images/halpha-logo-white.svg" alt="HashAlpha" class="halpha-h-8 halpha-w-8" />
-            <span class="halpha-text halpha-font-semibold halpha-text-sm" x-show="!sidebarCollapsed">HashAlpha</span>
+            <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616b1c13ffb5841a23a15ea_logo-cryptoverse-x-webflow-template.png"
+                alt="HashAlpha" class="halpha-w-[190px] halpha-h-auto" />
+            <span class="halpha-text halpha-font-semibold halpha-text-sm halpha-sr-only"
+                x-show="!sidebarCollapsed">HashAlpha</span>
         </div>
     </div>
 
-    @php
-        $activeDashboard = isRoute('dashboard');
-    @endphp
-
-    <nav class="halpha-flex-1 halpha-overflow-auto halpha-py-4 halpha-space-y-1 halpha-px-2">
-        <!-- Dashboard -->
-        <a href="{{ route('dashboard') }}"
-            class="halpha-flex halpha-items-center halpha-gap-3 halpha-px-3 halpha-py-2 halpha-rounded halpha-text-sm hover:halpha-bg-black/10"
-            :class="{'halpha-bg-black/15': {{ $activeDashboard ? 'true' : 'false' }}}">
-            <svg class="halpha-h-5 halpha-w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 10h4V3H3v7zM3 21h4v-7H3v7zM10 3v18h7V3h-7zM21 10h-4v11h4V10z" />
-            </svg>
-            <span x-show="!sidebarCollapsed">Overview</span>
-        </a>
-
-
-        <!-- Investments -->
-        <a href="#"
-            class="halpha-flex halpha-items-center halpha-gap-3 halpha-px-3 halpha-py-2 halpha-rounded halpha-text-sm hover:halpha-bg-black/10">
-            <svg class="halpha-h-5 halpha-w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18"></path>
-            </svg>
-            <span x-show="!sidebarCollapsed">Investments</span>
-        </a>
-
-
-        <!-- Validators (niche) -->
-        <a href="#"
-            class="halpha-flex halpha-items-center halpha-gap-3 halpha-px-3 halpha-py-2 halpha-rounded halpha-text-sm hover:halpha-bg-black/10">
-            <svg class="halpha-h-5 halpha-w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"></path>
-            </svg>
-            <span x-show="!sidebarCollapsed">Validators</span>
-        </a>
-
-
-        <!-- Wallets, Transactions, Reports -->
-        <a href="#"
-            class="halpha-flex halpha-items-center halpha-gap-3 halpha-px-3 halpha-py-2 halpha-rounded halpha-text-sm hover:halpha-bg-black/10">
-            <svg class="halpha-h-5 halpha-w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18"></path>
-            </svg>
-            <span x-show="!sidebarCollapsed">Wallets</span>
-        </a>
-
-
-    </nav>
+    @include('partials.dashboard.navigation', $navs)
 
 
     <div class="halpha-p-3 halpha-border-t halpha-border-black/10">

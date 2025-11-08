@@ -4,39 +4,103 @@
 
 
 :root {
-/* Light theme (investment-friendly): clean neutrals with navy/teal accent */
---halpha-bg: #f7fafc; /* very light gray */
---halpha-surface: #ffffff; /* card background */
---halpha-muted: #6b7280; /* gray-500 */
---halpha-accent: #0f172a; /* navy-900 for headings */
---halpha-accent-2: #0ea5a4; /* teal-ish */
---halpha-success: #10b981;
---halpha-danger: #ef4444;
---halpha-sidebar-bg: #0f172a;
---halpha-sidebar-text: #cbd5e1;
---halpha-header-bg: #020617;
---halpha-backdrop: rgba(2,6,23,0.6);
+  /* Light theme (investment-friendly): clean neutrals with navy/teal accent */
+  --halpha-bg: #f7fafc;
+  /* very light gray */
+  --halpha-surface: #ffffff;
+  /* card background */
+  --halpha-muted: #6b7280;
+  /* gray-500 */
+  --halpha-accent: #0f172a;
+  /* navy-900 for headings */
+  --halpha-accent-2: #0ea5a4;
+  /* teal-ish */
+  --halpha-success: #10b981;
+  --halpha-danger: #ef4444;
+  --halpha-sidebar-bg: #0f172a;
+  --halpha-sidebar-text: #cbd5e1;
+  --halpha-header-bg: #020617;
+  --halpha-backdrop: rgba(2, 6, 23, 0.6);
 }
 
 
 /* Dark theme variables - default */
 .halpha-theme-dark {
---halpha-bg: #071126; /* deep navy */
---halpha-surface: #071a2b; /* slightly lighter panel */
---halpha-muted: #9aa8bf; /* muted text */
---halpha-accent: #e6f6ff; /* light text */
---halpha-accent-2: #22d3ee; /* cyan accent */
---halpha-success: #34d399;
---halpha-danger: #fb7185;
---halpha-sidebar-bg: #041226;
---halpha-sidebar-text: #9fb4c9;
---halpha-header-bg: #021028;
---halpha-backdrop: rgba(2,10,24,0.7);
+  --halpha-bg: #121212;
+  /* deep navy */
+  --halpha-surface: #071a2b;
+  /* slightly lighter panel */
+  --halpha-muted: rgba(255 255 255 / 0.45);
+  /* muted text */
+  --halpha-accent: #e6f6ff;
+  /* light text */
+  --halpha-accent-2: #22d3ee;
+  --halpha-accent-3: #055966;
+  --halpha-accent-2-darker: #001d21;
+  --halpha-success: #34d399;
+  --halpha-danger: #fb7185;
+  --halpha-sidebar-bg: #041226;
+  --halpha-sidebar-text: #9fb4c9;
+  --halpha-header-bg: #021028;
+  --halpha-backdrop: rgba(2, 10, 24, 0.7);
+
+  --halpha-card-bg: #1e1e1e;
 }
 
 
 /* small helpers to ensure panels use surface/bg tokens */
-.halpha-bg { background-color: var(--halpha-bg); }
-.halpha-surface { background-color: var(--halpha-surface); }
-.halpha-text { color: var(--halpha-accent); }
-.halpha-muted { color: var(--halpha-muted); }
+.halpha-bg {
+  background-color: var(--halpha-bg);
+}
+
+.halpha-surface {
+  background-color: var(--halpha-surface);
+}
+
+.halpha-text {
+  color: var(--halpha-accent);
+}
+
+.halpha-muted {
+  color: var(--halpha-muted);
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background-color: #383838;
+  border-radius: 10px;
+}
+
+aside::-webkit-scrollbar-track {
+  background: #1c1c1c;
+}
+
+.apexcharts-tooltip {
+  background: rgba(23, 23, 23, 0.95) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
+  padding: 6px 10px !important;
+  font-family: "Public Sans", sans-serif !important;
+  font-size: 15px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.apexcharts-tooltip-title {
+  background: transparent !important;
+  color: red !important;
+  font-weight: 500;
+}
+
+
+.apexcharts-tooltip-text-value {
+    color: green !important;
+    font-weight: 600 !important;
+  }

@@ -8,6 +8,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', Overview::class)->name('dashboard');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/deposit/pending', Overview::class)->name('deposit.pending');
+    Route::get('/deposit/approved', Overview::class)->name('deposit.approved');
+    Route::get('/deposit/denied', Overview::class)->name('deposit.denied');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/withdrawal', Overview::class)->name('withdrawal');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

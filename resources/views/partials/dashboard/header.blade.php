@@ -3,9 +3,10 @@
 
     <div class="halpha-flex halpha-items-center halpha-gap-3">
         <!-- Mobile menu button -->
-        <button @click.prevent="openMobileSidebar"
+        <button 
+            @click.prevent="openMobileSidebar"
             class="halpha-inline-flex lg:halpha-hidden halpha-items-center halpha-p-2 halpha-rounded halpha-font-medium hover:halpha-bg-black/30">
-            <x-iconpark-menufoldone class="halpha-w-6 halpha-h-6" />
+            <x-iconpark-menufoldone class="halpha-w-6 halpha-h-6 halpha-text-[#e6f6ff]" />
         </button>
 
         <!-- <button @click.prevent="toggleSidebarCollapse"
@@ -63,7 +64,7 @@
         <div class="halpha-relative" x-data="{open:false}">
             <button @click="open = !open"
                 class="halpha-flex halpha-items-center halpha-gap-2 halpha-rounded halpha-p-1">
-                <x-heroicon-user-circle class="halpha-w-8 halpha-h-8" />
+                <x-heroicon-o-user-circle class="halpha-w-6 halpha-h-6 halpha-text-[#e6f6ff]" />
                 <span class="halpha-hidden sm:halpha-inline-block halpha-text-sm halpha-text-[#e6f6ff]">
                     {{ Auth::user()->name ?? 'User' }}
                 </span>

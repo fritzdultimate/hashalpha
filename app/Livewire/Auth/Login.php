@@ -73,8 +73,7 @@ class Login extends Component {
         return redirect()->intended('/dashboard');
     }
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.auth.login');
     }
 }

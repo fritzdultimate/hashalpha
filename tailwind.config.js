@@ -4,7 +4,11 @@ import forms from '@tailwindcss/forms';
 /** @type {import('tailwindcss').Config} */
 export default {
     darkMode: 'class',
-    safelist: ['halpha-w-sidebar-expanded'],
+    safelist: [
+        'halpha-w-sidebar-expanded',
+        'halpha-translate-x-0',
+        'halpha--translate-x-full'
+    ],
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -20,18 +24,23 @@ export default {
                 'muted': 'var(--halpha-muted)',
                 'accent': 'var(--halpha-accent)',
                 'accent-2': 'var(--halpha-accent-2)',
+                'accent-3': 'var(--halpha-accent-3)',
+                'accent-2-darker': 'var(--halpha-accent-2-darker)',
                 'success': 'var(--halpha-success)',
-                'danger': 'var(--halpha-danger)'
+                'danger': 'var(--halpha-danger)',
+
+                'card-bg': 'var(--halpha-card-bg)',
+                
             },
             spacing: {
                 'sidebar-collapsed': '5rem', // 80px
-                'sidebar-expanded': '14rem'
+                'sidebar-expanded': '17rem'
             },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['"Public Sans"', 'Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, require('tailwind-scrollbar'),],
 };
