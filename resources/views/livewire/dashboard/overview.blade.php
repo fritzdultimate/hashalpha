@@ -1,33 +1,39 @@
-<section
-    class="halpha-grid halpha-grid-cols-1 sm:halpha-grid-cols-2 md:halpha-grid-cols-3 lg:halpha-grid-cols-4 halpha-gap-5">
-    <x-dashboard.stat title="Total Deposits" value="$78,250">
-        <div id="deposit-chart" style="height:120px;"></div>
-    </x-dashboard.stat>
+<div class="halpha-flex halpha-flex-col halpha-gap-5">
+    <section
+        class="halpha-grid halpha-grid-cols-1 sm:halpha-grid-cols-2 md:halpha-grid-cols-3 lg:halpha-grid-cols-4 halpha-gap-5">
+        <x-dashboard.stat title="Total Deposits" value="$78,250">
+            <div id="deposit-chart" style="height:120px;"></div>
+        </x-dashboard.stat>
 
-    <x-dashboard.stat title="Active Investments" value="$8,250" delta="42.32%">
-        <div id="active-investment-chart"></div>
-    </x-dashboard.stat>
+        <x-dashboard.stat title="Active Investments" value="$8,250" delta="42.32%">
+            <div id="active-investment-chart"></div>
+        </x-dashboard.stat>
 
-    <x-dashboard.stat title="Daily Earnings" value="$8,250" delta="2.32%">
-        <div id="daily-earnings"></div>
-    </x-dashboard.stat>
+        <x-dashboard.stat title="Daily Earnings" value="$8,250" delta="2.32%">
+            <div id="daily-earnings"></div>
+        </x-dashboard.stat>
 
-    <x-dashboard.stat title="Referral Bonus" value="$83,250" delta="22.32%">
-        <div id="referral-bonus"></div>
-    </x-dashboard.stat>
+        <x-dashboard.stat title="Referral Bonus" value="$83,250" delta="22.32%">
+            <div id="referral-bonus"></div>
+        </x-dashboard.stat>
 
-    <x-dashboard.stat title="Team Performance" value="$833,250" delta="22.32%">
-        <div id="team-performance-bonus"></div>
-    </x-dashboard.stat>
+        <x-dashboard.stat title="Team Performance" value="$833,250" delta="22.32%">
+            <div id="team-performance-bonus"></div>
+        </x-dashboard.stat>
 
-    <x-dashboard.stat title="Total Withdrawn" value="$833,250" delta="22.32%">
-        <div id="total-withdrawn"></div>
-    </x-dashboard.stat>
+        <x-dashboard.stat title="Total Withdrawn" value="$833,250" delta="22.32%">
+            <div id="total-withdrawn"></div>
+        </x-dashboard.stat>
 
-    <x-dashboard.stat title="Wallet Balance" value="$833,250" delta="22.32%">
-        <div id="wallet-balance"></div>
-    </x-dashboard.stat>
-</section>
+        <x-dashboard.stat title="Wallet Balance" value="$833,250" delta="22.32%">
+            <div id="wallet-balance"></div>
+        </x-dashboard.stat>
+    </section>
+
+    <section>
+        <livewire:dashboard.latest-transactions-table />
+    </section>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
