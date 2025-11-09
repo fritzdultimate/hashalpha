@@ -40,8 +40,8 @@ class TwoFactor extends Component {
             return redirect()->route('password.reset');
         }
         session()->forget(['2fa_user_id','2fa_type']);
-        auth()->user()->markEmailAsVerified();
         auth()->loginUsingId($this->user->id);
+        auth()->user()->markEmailAsVerified();
         return redirect()->intended('/dashboard');
     }
 
