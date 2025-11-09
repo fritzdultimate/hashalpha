@@ -3,7 +3,7 @@
         <div class="header-content-wrapper">
             <div class="header-left-side">
                 <a href="{{ route('home') }}" aria-current="page" class="header-logo-link w-nav-brand w--current">
-                    <img src="{{ asset('img/logo/HASHALPHA 3.jpg') }}" alt="Logo - {{ env('APP_NAME') }}" sizes="(max-width: 479px) 100vw, (max-width: 767px) 200px, (max-width: 991px) 220px, (max-width: 1439px) 21vw, 238px" srcset="{{ asset('img/logo/HASHALPHA 3.jpg') }} 500w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616b1c13ffb5841a23a15ea_logo-cryptoverse-x-webflow-template.png 1152w">
+                    <img src="{{ asset('img/logo/hash-alpha.svg') }}" alt="Logo - {{ env('APP_NAME') }}" class="halpha-h-10 halpha-w-full md:halpha-h-16 transition-transform duration-300 hover:scale-105">
                 </a>
                 <nav role="navigation" class="header-nav-menu-wrapper w-nav-menu">
                     <ul role="list" class="header-nav-menu-list">
