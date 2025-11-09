@@ -11,12 +11,12 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             // $table->foreignId('coin_id')->constrained('coins')->cascadeOnDelete();
             $table->enum('type', ['credit','debit','hold','release','fee'])->index();
-            $table->unsignedBigInteger('amount')->default(0); // smallest unit
+            $table->unsignedBigInteger('amount')->default(0);
             $table->bigInteger('amount_usd_cents')->nullable();
-            $table->unsignedBigInteger('balance_after')->default(0); // user's balance after tx (smallest unit)
+            $table->unsignedBigInteger('balance_after')->default(0);
             $table->string('related_type')->nullable(); // morphable: Deposit|Payout|Stake|Affiliate etc
             $table->unsignedBigInteger('related_id')->nullable();
-            $table->json('meta')->nullable(); // reason, note, webhook payload, etc.
+            $table->json('meta')->nullable();
             $table->timestamps();
 
             $table->index(['user_id']);
