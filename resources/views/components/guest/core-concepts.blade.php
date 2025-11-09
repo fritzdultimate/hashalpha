@@ -32,7 +32,7 @@
                                
 
                                 <p class="halpha-text-sm md:halpha-text-base halpha-leading-6 halpha-text-gray-300">
-                                    We believe everyone should have the power to grow and control their own digital assets without relying on intermediaries. Our platform is built to give investors full ownership and participation in decentralized systems.
+                                    {{ $concept }}
                                 </p>
                             </div>
                         </li>
