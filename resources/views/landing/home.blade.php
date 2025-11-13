@@ -33,7 +33,7 @@
         </div>
 
         <img class="top-section-bg-img-center---img"
-            src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d53335f62d56e2da3e5a36_home-v1-hero-bg-image-cryptomatic-webflow-ecommerce-template.jpg"
+            src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d662c156553bb641e879af_home-v2-hero-image-right-cryptomatic-webflow-ecommerce-template.jpg"
             alt="" style="opacity: 1; filter: blur(0px);"
             sizes="(max-width: 479px) 80vw, (max-width: 767px) 72vw, (max-width: 991px) 80vw, (max-width: 1439px) 78vw, 1107.9862060546875px"
             data-w-id="64d41687-720e-ca5c-a050-26b768b07fd8" loading="eager">

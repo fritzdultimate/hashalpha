@@ -45,6 +45,51 @@
   --halpha-backdrop: rgba(2, 10, 24, 0.7);
 
   --halpha-card-bg: #1e1e1e;
+
+  --halpha-card-bg-deeper: #0f0f0f;
+  --halpha-card-bg-deeper-2: #0a0a0a;
+  --halpha-card-bg-deeper-black: #000000;
+
+}
+
+.halpha-pagination .flex button,
+.halpha-pagination .flex span {
+  @apply halpha-px-3 halpha-py-1 halpha-rounded halpha-text-sm halpha-transition-all;
+}
+
+.halpha-pagination nav button > svg {
+  @apply halpha-h-5 halpha-w-5;
+}
+
+.halpha-pagination > div {
+  @apply halpha-w-full;
+}
+
+.halpha-pagination .flex button {
+  @apply !halpha-bg-[#2a2a2a] halpha-text-gray-300 hover:halpha-bg-accent hover:halpha-text-white;
+}
+
+.halpha-pagination nav {
+  @apply !halpha-flex !halpha-items-center !halpha-justify-between halpha-w-full;
+}
+
+
+/* Styles for Next and Previous */
+.halpha-pagination nav > :first-child {
+  @apply halpha-flex halpha-justify-between sm:halpha-hidden !halpha-w-full;
+}
+
+
+.halpha-pagination nav > :nth-child(2) {
+  @apply halpha-hidden sm:halpha-flex-1  sm:halpha-flex sm:halpha-gap-4 sm:halpha-flex-col-reverse sm:halpha-items-center sm:halpha-justify-between;
+}
+
+.halpha-pagination nav > :nth-child(2) p {
+  @apply halpha-text-gray-500 halpha-text-xs;
+}
+
+.halpha-pagination nav > :nth-child(2) > :nth-child(2) > span {
+  @apply halpha-flex halpha-items-center !halpha-gap-1 halpha-flex-wrap;
 }
 
 
@@ -103,4 +148,14 @@ aside::-webkit-scrollbar-track {
 .apexcharts-tooltip-text-value {
     color: green !important;
     font-weight: 600 !important;
-  }
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.halpha-scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.halpha-scroll-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

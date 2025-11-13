@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard;
 
 
+use App\Models\Transaction;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -49,7 +50,7 @@ class LatestTransactionsTable extends Component
 
 
     public function render() {
-        $query = \App\Models\Transaction::query()
+        $query = Transaction::with('user')
             ->when($this->search, function ($q) {
                 $q->where(function ($sub) {
                     $sub->where('id', 'like', "%{$this->search}%")

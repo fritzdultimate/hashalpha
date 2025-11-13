@@ -19,7 +19,7 @@ class TransactionsTableSeeder extends Seeder
             $this->command->info('Skipping TransactionsTableSeeder in non-dev environment.');
             return;
         }
-        // User::factory()->count(7)->create();
+        User::factory()->count(7)->create();
 
         User::chunk(100, function ($users) {
             foreach ($users as $user) {

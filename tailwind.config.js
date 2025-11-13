@@ -30,6 +30,8 @@ export default {
                 'danger': 'var(--halpha-danger)',
 
                 'card-bg': 'var(--halpha-card-bg)',
+
+                'card-bg-deeper': 'var(--halpha-card-bg-deeper)',
                 
             },
             spacing: {
