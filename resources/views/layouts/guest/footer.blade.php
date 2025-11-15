@@ -6,10 +6,18 @@
             <div class="footer-top">
                 <div data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba361" class="inner-container _608px _100-tablet" style="opacity: 1; filter: blur(0px);">
                     <h2 class="display-2 mg-bottom-0">
-                        Try {{ env('APP_LONG_NAME') }}, the crypto wallet of the future — today.
+                        THE FUTURE OF {{ env('APP_NAME') }}
                     </h2>
+                    <p class="halpha-text-gray-400">
+                        The future of blockchain belongs to infrastructure. {{ env('APP_LONG_NAME') }} is building a long-term ecosystem rooted in validator technology — from core ETH consensus nodes to cross-network staking, L2 integrations, and institutional VaaS deployments.
+                    </p>
+
+                    <p class="halpha-text-gray-400">
+                        We’re not just following the future of Web3.
+                    </p>
+
                     <p class="mg-bottom-0 halpha-text-gray-400">
-                        Secure, non-custodial and lightning-fast: manage multiple chains, stake and earn, swap tokens, and monitor portfolio performance — all from one intuitive app. Built for both beginners and power users, {{ env('APP_NAME') }} puts full control of your assets back in your hands with enterprise-grade security and transparent fees.
+                        We’re powering it.
                     </p>
                 </div>
                 

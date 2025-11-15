@@ -9,13 +9,13 @@
                 <div data-w-id="a4708a42-280d-b422-b575-8ac43cd058e5" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _764px center">
                     <h1 class="display-1 heading-color-gradient mg-bottom-0">
-                        Founded with a mission to simplify blockchain participation.
+                        Building the Infrastructure Layer of Web3
                     </h1>
                 </div>
                 <div data-w-id="c16957c9-54cf-1436-610a-b7a81345da1f" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _694px center">
                     <p class="!halpha-text-gray-500 halpha-text-xl">
-                        We specialize in validator node operations, decentralized staking pools, and yield optimization through MEV-boosted infrastructure. Our goal is to make institutional-grade blockchain earning opportunities accessible to all.
+                        {{ env('APP_LONG_NAME') }} operates institutional-grade Ethereum validators and MEV-boosted infrastructure, enabling transparent and sustainable staking for users worldwide.
                     </p>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         Get Started
                         <span class="line-rounded-icon link-icon-right" style=""></span></a>
                     <div class="btn-primary-border"></div>
-                </div><a href="{{ route('staking') }}" class="btn-secondary w-button">Learn more</a>
+                </div>
             </div>
 
 
@@ -72,9 +72,7 @@
     </section>
 
     @include('components.guest.our-story')
-    <!-- @include('components.guest.vission-and-mission') -->
     @include('components.guest.our-values')
-    @include('components.guest.core-concepts')
     @include('components.guest.why-us')
     @include('components.guest.our-team')
     @include('components.guest.testimonies')

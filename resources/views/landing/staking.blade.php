@@ -47,14 +47,14 @@
     <nav
         class="halpha-mb-10 halpha-sticky halpha-top-0 halpha-bg-[rgba(6,8,12,0.6)] halpha-backdrop-blur halpha-py-3 halpha-z-40">
         <div class="container-default w-container halpha-flex halpha-gap-4 halpha-items-center halpha-justify-center">
-            <a href="#plans" class="halpha-text-sm halpha-text-gray-300">Plans</a>
+            <!-- <a href="#plans" class="halpha-text-sm halpha-text-gray-300">Plans</a> -->
             <a href="#infrastructure" class="halpha-text-sm halpha-text-gray-300">Infrastructure</a>
             <a href="#mev" class="halpha-text-sm halpha-text-gray-300">MEV</a>
             <a href="#yield" class="halpha-text-sm halpha-text-gray-300">Yield & Payouts</a>
         </div>
     </nav>
 
-    @include('components.guest.plans-overview')
+    <!-- @include('components.guest.plans-overview') -->
 
     <!-- Validator Infrastructure -->
     @include('components.guest.validator-infrastructure')

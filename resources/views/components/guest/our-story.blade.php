@@ -12,13 +12,24 @@
                 class="inner-container _470px _100-tablet">
                 <h2 class="display-2 mg-bottom-4px">The story behind our company</h2>
 
-                <p class="halpha-text-gray-300 halpha-text-lg">
-                    Validator Investments was founded to help individuals and institutions grow their digital assets securely through validator staking and blockchain opportunities. We combine technical expertise with market insights to deliver reliable and transparent investment solutions.
-                </p>
+                <div class="halpha-flex halpha-flex-col halpha-gap-2">
+                    <p class="halpha-text-gray-300 halpha-text-lg">
+                        {{ env('APP_LONG_NAME') }} was founded with a simple vision: to bring validator-level blockchain rewards to the world in a transparent, accessible, and scalable way.
+                    </p>
 
-                <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
-                    Our mission is to make decentralized finance accessible and trustworthy, enabling investors to earn optimized returns while supporting the stability and growth of blockchain networks.
-                </p>
+                    <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
+                        The blockchain ecosystem depends on validators — the silent backbone securing billions in daily transactions. Until now, only large institutions benefited from this infrastructure revenue.
+                    </p>
+
+                    <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
+                        We bridge that gap.
+                    </p>
+
+                    <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
+                        Through a combination of enterprise-grade validator operations, MEV optimization, strong partner networks, and a global education-first approach, {{ env('APP_NAME') }} empowers everyday users to participate in the core of Ethereum’s infrastructure.
+                    </p>
+                </div>
+                
             </div>
             <div data-w-id="c25d5f06-e5af-7950-3dc5-75d82468532e" style="opacity: 1; filter: blur(0px);"
                 class="large-image-right---image-wrapper">
