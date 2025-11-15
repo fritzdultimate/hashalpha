@@ -16,13 +16,14 @@
                 <div class="slide-item-mg w-slide" aria-label="1 of 9" role="group" aria-hidden="true"
                     style="transition: all, transform 500ms; transform: translateX(-1404.8px); opacity: 1;">
                     <a
-                        data-w-id="dfaf9a7e-590a-0357-121c-2a04c1215fb8" href="/features"
-                        class="text-decoration-none width-100 w-inline-block" tabindex="-1" aria-hidden="true"><img
+                        data-w-id="dfaf9a7e-590a-0357-121c-2a04c1215fb8" href="#"
+                        class="text-decoration-none width-100 w-inline-block" tabindex="-1" aria-hidden="true">
+                        <img
                             src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de486685a77cfc9b5ae_easy-to-create-wallet-image-cryptomatic-webflow-ecommerce-template.png"
                             loading="eager" sizes="(max-width: 767px) 92vw, 620px"
                             srcset="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de486685a77cfc9b5ae_easy-to-create-wallet-image-cryptomatic-webflow-ecommerce-template-p-500.png 500w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de486685a77cfc9b5ae_easy-to-create-wallet-image-cryptomatic-webflow-ecommerce-template-p-800.png 800w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de486685a77cfc9b5ae_easy-to-create-wallet-image-cryptomatic-webflow-ecommerce-template.png 1240w"
                             alt="Easy To Create Wallet - Cryptomatic X Webflow Template"
-                            class="link-item-dark-image mg-bottom-24px" aria-hidden="true"
+                            class="link-item-dark-image mg-bottom-24px halpha-hidden" aria-hidden="true"
                             style="filter: saturate(100%) contrast(100%);">
                         <div class="flex align-start gap-column-16px" aria-hidden="true"><img
                                 src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de3958bb0587e6e8a80_easy-to-create-wallet-circle-image-cryptomatic-webflow-ecommerce-template.png"
@@ -50,12 +51,13 @@
                 <div class="slide-item-mg w-slide" aria-label="2 of 9" role="group" aria-hidden="true"
                     style="transition: all, transform 500ms; transform: translateX(-1404.8px); opacity: 1;">
                     <a
-                        data-w-id="209190fc-f790-bc9d-ea0e-7713468ca674" href="/features"
-                        class="text-decoration-none width-100 w-inline-block" tabindex="-1" aria-hidden="true"><img
+                        data-w-id="209190fc-f790-bc9d-ea0e-7713468ca674" href="#"
+                        class="text-decoration-none width-100 w-inline-block" tabindex="-1" aria-hidden="true">
+                        <img
                             src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d669d7a94416279f85e3b8_send-and-receive-anytime-image-cryptomatic-webflow-ecommerce-template.png"
                             loading="eager" sizes="(max-width: 767px) 92vw, 620px"
                             alt="Send &amp; Receive Anytime - Cryptomatic X Webflow Template"
-                            class="link-item-dark-image mg-bottom-24px" aria-hidden="true"
+                            class="link-item-dark-image mg-bottom-24px halpha-hidden" aria-hidden="true"
                             style="filter: saturate(100%) contrast(100%);">
                         <div class="flex align-start gap-column-16px" aria-hidden="true"><img
                                 src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de38b5b8b51a375978a_send-and-receive-circle-image-cryptomatic-webflow-ecommerce-template.png"
@@ -83,12 +85,13 @@
                 <div class="slide-item-mg w-slide" aria-label="3 of 9" role="group" aria-hidden="true"
                     style="transition: all, transform 500ms; transform: translateX(-1404.8px); opacity: 1;">
                     <a
-                        data-w-id="28033f2e-0456-03c1-4649-e7762a2752ca" href="/features"
-                        class="text-decoration-none width-100 w-inline-block" tabindex="-1" aria-hidden="true"><img
+                        data-w-id="28033f2e-0456-03c1-4649-e7762a2752ca" href="#"
+                        class="text-decoration-none width-100 w-inline-block" tabindex="-1" aria-hidden="true">
+                        <img
                             src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d669d72bdb3cd6fdd80baf_view-charts-and-reports-image-cryptomatic-webflow-ecommerce-template.png"
                             loading="eager" sizes="(max-width: 767px) 92vw, 620px"
                             alt="View Charts &amp; Reports - Cryptomatic X Webflow Template"
-                            class="link-item-dark-image mg-bottom-24px" aria-hidden="true"
+                            class="link-item-dark-image mg-bottom-24px halpha-hidden" aria-hidden="true"
                             style="filter: saturate(100%) contrast(100%);">
                         <div class="flex align-start gap-column-16px" aria-hidden="true"><img
                                 src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de305adb0e3c913d2cf_charts-and-reports-circle-image-cryptomatic-webflow-ecommerce-template.png"

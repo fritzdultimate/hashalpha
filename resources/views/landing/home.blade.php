@@ -7,17 +7,15 @@
             <div class="grid-2-columns _1-col-tablet gap-row-8px">
                 <div data-w-id="bc6f8e73-abc8-b69a-68e1-73c6d3a67216" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _558px _100-tablet">
-                    <h1 class="display-1 heading-color-gradient mg-bottom-0">
-                        {{ env('APP_LONG_NAME') }}, THE BACKBONE OF BLOCKCHAIN
+                    <h1 class="display-1 heading-color-gradient mg-bottom-0 halpha-uppercase">
+                        Earn daily from Ethereum Validator Infrastructure
                     </h1>
                 </div>
                 <div id="w-node-_64d41687-720e-ca5c-a050-26b768b07fcc-04e3ff82"
                     data-w-id="64d41687-720e-ca5c-a050-26b768b07fcc" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _504px _100-tablet">
                     <p class="color-neutral-100 mg-bottom-32px">
-                        {{ env('APP_LONG_NAME') }}, the operational brand of {{ env('APP_NAME') }} Ltd - a legally
-                        registered blockchain infrastructure company - enables you to earn daily from the backbone of
-                        blockchain through validator nodes and masternodes powering web3.
+                        {{ env('APP_LONG_NAME') }} transforms Ethereum validator operations into accessible, daily staking rewards powered by real on-chain performance and MEV optimization.
                     </p>
                     <div class="buttons-flex-container">
                         <div data-w-id="64d41687-720e-ca5c-a050-26b768b07fd0" class="btn-primary-wrapper">
@@ -26,7 +24,7 @@
                             </a>
                             <div class="btn-primary-border"></div>
                         </div>
-                        <a href="{{ route('about') }}" class="btn-secondary w-button">Learn more</a>
+                        <a href="{{ route('about') }}" class="btn-secondary w-button !halpha-hidden">Learn more</a>
                     </div>
                 </div>
             </div>
@@ -46,6 +44,8 @@
 
     @include('components.guest.companies-supported')
 
+    @include('components.guest.why-us')
+
     @include('components.guest.features')
 
     @include('components.guest.take-away-attributes')
@@ -56,7 +56,7 @@
 
     @include('components.guest.core-concepts')
 
-    @include('components.guest.why-us')
+    
 
 
     @include('components.guest.plans-overview')
@@ -118,9 +118,9 @@
                     <div class="halpha-flex halpha-gap-4">
                         <div class="halpha-w-10 halpha-text-center halpha-text-white">Q1</div>
                         <div>
-                            <h5 class="halpha-text-white halpha-font-semibold">Validator expansion</h5>
+                            <h5 class="halpha-text-white halpha-font-semibold">Foundation Phase</h5>
                             <p class="halpha-text-sm halpha-text-gray-300">
-                                Add 50+ new high-availability validators across regions.
+                                Partnerships with node operators, infrastructure providers, and validator engineers. Internal R&D and security architecture.
                             </p>
                         </div>
                     </div>
@@ -128,9 +128,9 @@
                     <div class="halpha-flex halpha-gap-4">
                         <div class="halpha-w-10 halpha-text-center halpha-text-white">Q2</div>
                         <div>
-                            <h5 class="halpha-text-white halpha-font-semibold">MEV improvements</h5>
+                            <h5 class="halpha-text-white halpha-font-semibold">Validator Deployment Phase</h5>
                             <p class="halpha-text-sm halpha-text-gray-300">
-                                MEV revenue sharing model refinement and auditor review.
+                                Launch of HashAlpha’s institutional-grade Ethereum validators, MEV relay integration, and transparency framework.
                             </p>
                         </div>
                     </div>
@@ -140,9 +140,9 @@
                     <div class="halpha-flex halpha-gap-4">
                         <div class="halpha-w-10 halpha-text-center halpha-text-white">Q3</div>
                         <div>
-                            <h5 class="halpha-text-white halpha-font-semibold">Mobile dashboard</h5>
+                            <h5 class="halpha-text-white halpha-font-semibold">Platform Expansion Phase</h5>
                             <p class="halpha-text-sm halpha-text-gray-300">
-                                Release mobile app for dashboard, withdrawals and notifications.
+                                Public platform launch, global affiliate ecosystem, enhanced dashboard, and validator proof layer.
                             </p>
                         </div>
                     </div>
@@ -150,9 +150,9 @@
                     <div class="halpha-flex halpha-gap-4">
                         <div class="halpha-w-10 halpha-text-center halpha-text-white">Q4</div>
                         <div>
-                            <h5 class="halpha-text-white halpha-font-semibold">Institutional products</h5>
+                            <h5 class="halpha-text-white halpha-font-semibold">Ecosystem Scaling Phase</h5>
                             <p class="halpha-text-sm halpha-text-gray-300">
-                                Launch tailored SLAs and escrow integrations for partners.
+                                Validator-as-a-Service, L2 integrations, enterprise partnerships, and long-term tokenized validator share model.
                             </p>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
 
     @include('components.guest.our-team')
 
-    @include('components.guest.faqs')
+    @include('components.guest.faqs', ['showing' => 3])
 
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 @endsection

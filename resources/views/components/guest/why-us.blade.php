@@ -2,18 +2,21 @@
     <div class="container-default w-container">
         <div class="heading-and-content-grid mg-bottom-24px">
             <div class="inner-container _564px _100-tablet">
-                <h2 class="display-2 heading-color-gradient mg-bottom-0">Why {{ env('APP_LONG_NAME') }}</h2>
-                <p class="color-neutral-100 mg-bottom-24px !halpha-text-gray-400">Secure validator infrastructure,
-                    transparent payouts, industry-grade operations — built for long-term staking yield.</p>
+                <h2 class="display-2 heading-color-gradient mg-bottom-0">
+                    Why {{ env('APP_NAME') }} Exists
+                </h2>
+                <p class="color-neutral-100 mg-bottom-24px !halpha-text-gray-400">
+                    The world runs on blockchain infrastructure, and Ethereum stands at the center of it. HashAlpha Global provides direct access to the validator economy — the same infrastructure large institutions rely on to secure billions in value. We combine enterprise-grade node operations, transparent reporting, and a global reward system to bring validator-level income to everyday users.
+                </p>
             </div>
         </div>
 
         <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 lg:halpha-grid-cols-3 halpha-gap-6">
             @php
                 $features = [
-                    ['title' => 'Institutional Validator Ops', 'text' => 'Hardware-grade nodes, redundant validators, 99.9% uptime SLA.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de3958bb0587e6e8a80_easy-to-create-wallet-circle-image-cryptomatic-webflow-ecommerce-template.png'],
-                    ['title' => 'MEV-Boost Integration', 'text' => 'MEV-boost enabled to improve proposer revenue while remaining compliant.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c058/64e3bc5e1a7dcf1cadcefa4e_ethereum-tokens-2025-blog-thumbnail-v1-cryptomatic-webflow-ecommerce-template.jpg'],
-                    ['title' => 'Automated Payouts', 'text' => 'Daily settlement engine and clear payout schedule with on-chain proof.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg'],
+                    ['title' => 'Institutional Validator Infrastructure', 'text' => 'Enterprise-grade ETH validators operating across multiple Tier-4 data centers with MEV-boosted performance.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de3958bb0587e6e8a80_easy-to-create-wallet-circle-image-cryptomatic-webflow-ecommerce-template.png'],
+                    ['title' => 'Real Daily Staking Rewards', 'text' => 'Rewards sourced directly from Ethereum’s Proof-of-Stake issuance and MEV relay optimization.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de38b5b8b51a375978a_send-and-receive-circle-image-cryptomatic-webflow-ecommerce-template.png'],
+                    ['title' => 'Bulletproof Transparency', 'text' => 'Live validator keys, on-chain activity, uptime metrics, and monthly operational reports.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg'], ['title' => 'Global Affiliate Ecosystem', 'text' => 'A structured multi-tier partner program that rewards network growth sustainably and transparently.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg']
                 ];
             @endphp
 

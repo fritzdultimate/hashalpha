@@ -13,10 +13,10 @@
                 <ul class="halpha-flex halpha-flex-col halpha-gap-5 halpha-w-full !halpha-pl-0">
                     @php
                         $concepts = [
-                            'Every process, from validation to reward distribution, is open and verifiable. We maintain full visibility in how funds move and how returns are generated, ensuring lasting trust with our community.', 
-                            'We believe everyone should have the power to grow and control their own digital assets without relying on intermediaries. Our platform is built to give investors full ownership and participation in decentralized systems.', 
-                            'We continuously adopt cutting-edge blockchain technologies to improve performance, security, and returns. Our commitment to innovation keeps us — and our investors — ahead in the evolving digital finance landscape.'
-                        ] //dummy
+                            'Each deposit contributes to hashalpha pool of Ethereum validator nodes and MEV- boosting infrastructure', 
+                            'The validator rewards + MEV yields are aggregated, averaged and distributed daily(up to 0.6% per day, depending on staking plan)', 
+                            'Rewards are sustainable, backed by real blockchain operations'
+                        ]
                     @endphp
                     @foreach ($concepts as $concept)
                         <li data-w-id="60cd25b4-2ff9-8574-64f5-ad4d432d7346d"

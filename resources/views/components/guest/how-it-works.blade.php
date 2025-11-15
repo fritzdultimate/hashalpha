@@ -19,7 +19,7 @@
                     alt="How Does Cryptomatic App Work - Cryptomatic X Webflow Template">
             </div>
 
-            <div id="w-node-_8b3978d1-4458-f5aa-7def-32b724eece21-bd0d2b38" class="inner-container _600px _100-tablet">
+            <div id="w-node-_8b3978d1-4458-f5aa-7def-32b724eece21-bd0d2b38" class="inner-container _600px _100-tablet halpha-w-full">
 
                 @php
                     $steps = [
@@ -43,7 +43,7 @@
                 @endphp
 
                 @foreach ($steps as $step)
-                    <div x-data="{ open: false }" class="halpha-bg-card-bg halpha-overflow-hidden halpha-transition-all halpha-duration-300 accordion-item-wrapper !halpha-flex-col">
+                    <div x-data="{ open: false }" class="halpha-bg-card-bg halpha-overflow-hidden halpha-transition-all halpha-duration-300 accordion-item-wrapper !halpha-flex-col halpha-w-full">
                         <!-- Header -->
                         <button @click="open = !open"
                             class="halpha-flex halpha-items-center halpha-justify-between halpha-w-full halpha-py-3 halpha-text-left focus:halpha-outline-none hover:halpha-bg-accent-2-darker accordion-header">

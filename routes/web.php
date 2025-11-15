@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'landing.home')->name('home');
+Route::get('/', [PageController::class, 'index'])->name('home');
 Route::view('/about', 'landing.about')->name('about');
 Route::view('/staking', 'landing.staking')->name('staking');
 Route::view('/rewards', 'landing.rewards')->name('rewards');
