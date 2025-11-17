@@ -3,7 +3,7 @@
         <div class="header-content-wrapper">
             <div class="header-left-side">
                 <a href="{{ route('home') }}" aria-current="page" class="header-logo-link w-nav-brand w--current">
-                    <img src="{{ asset('img/logo/HashAlpha 512x512_1.png') }}" alt="Logo - {{ env('APP_NAME') }}" class="halpha-h-10 halpha-w-full md:halpha-h-16 transition-transform duration-300 hover:scale-105">
+                    <img src="{{ asset('img/logo/logo-white.png') }}" alt="Logo - {{ env('APP_NAME') }}" class="halpha-h-10 halpha-w-full md:halpha-h-16 transition-transform duration-300 hover:scale-105">
                 </a>
                 <nav role="navigation" class="header-nav-menu-wrapper w-nav-menu">
                     <ul role="list" class="header-nav-menu-list">
