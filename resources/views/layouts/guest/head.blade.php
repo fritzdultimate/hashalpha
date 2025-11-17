@@ -7,13 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') | {{ env('APP_NAME') }}</title>
 
-    <meta content="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616d86526b24644a2085752_featured-image-cryptoverse-x-webflow-template.png" property="og:image">
-
-    <meta content="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616d86526b24644a2085752_featured-image-cryptoverse-x-webflow-template.png" property="twitter:image">
-
-    <meta property="og:type" content="website">
-    <meta content="summary_large_image" name="twitter:card">
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -41,8 +34,8 @@
     ])
 
     <!-- SHortcut Icon -->
-    <link href="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64ee44f9a8a7d2975c808651_favicon-cryptomatic-webflow-ecommerce-template.png" rel="shortcut icon" type="image/x-icon">
-    <link href="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d2ce1474942ac2c2d74ff5_webclip-cryptomatic-webflow-ecommerce-template.svg" rel="apple-touch-icon">
+    <link href="{{ asset('favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ asset('favicon.ico') }}" rel="apple-touch-icon">
     <style>
         .glass-card{ background: rgba(255,255,255,0.65); backdrop-filter: blur(6px); }
     </style>
