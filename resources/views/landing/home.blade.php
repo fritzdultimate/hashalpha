@@ -7,8 +7,8 @@
             <div class="grid-2-columns _1-col-tablet gap-row-8px">
                 <div data-w-id="bc6f8e73-abc8-b69a-68e1-73c6d3a67216" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _558px _100-tablet">
-                    <h1 class="display-1 heading-color-gradient mg-bottom-0 halpha-uppercase">
-                        Earn daily from Ethereum Validator Infrastructure
+                    <h1 class="display-2 heading-color-gradient mg-bottom-0 halpha-uppercase">
+                        Earn daily from the backbone of blockchain
                     </h1>
                 </div>
                 <div id="w-node-_64d41687-720e-ca5c-a050-26b768b07fcc-04e3ff82"
