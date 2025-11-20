@@ -54,7 +54,7 @@
     
 
 
-    @include('components.guest.plans-overview')
+    <!-- @include('components.guest.plans-overview') -->
 
 
     {{-- 4) Transparency (responsive KPIs + CTA) --}}
