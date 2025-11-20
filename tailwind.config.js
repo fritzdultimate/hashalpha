@@ -7,7 +7,9 @@ export default {
     safelist: [
         'halpha-w-sidebar-expanded',
         'halpha-translate-x-0',
-        'halpha--translate-x-full'
+        'halpha--translate-x-full',
+        // 'halpha-bg-[#2ca07a]',
+        // 'halpha-text-[#2ca07a]'
     ],
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
@@ -36,7 +38,9 @@ export default {
 
                 // Icon colors
                 'btc': '#F7931A',
-                'eth': '#282828'
+                'eth': '#282828',
+                'usdt': '#2ca07a',
+                'xrp': '#346aa9'
                 
             },
             spacing: {

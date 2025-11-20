@@ -78,12 +78,51 @@
         @endif
     </div>
 
+    @php
+        $wallets = [
+            [
+                'currency' => 'btc',
+                'label' => 'Bitcoin',
+                'icon' => 'icon-btc',
+                'bg' => 'halpha-bg-btc'
+
+            ],
+            [
+                'currency' => 'eth',
+                'label' => 'Ethereum',
+                'icon' => 'icon-eth',
+                'bg' => 'halpha-bg-eth'
+
+            ],
+            [
+                'currency' => 'usdt',
+                'label' => 'USDT',
+                'icon' => 'icon-usdt',
+                'bg' => 'halpha-bg-usdt'
+
+            ],
+            [
+                'currency' => 'xrp',
+                'label' => 'Ripple',
+                'icon' => 'icon-xrp',
+                'bg' => 'halpha-bg-xrp'
+
+            ]
+        ];
+
+        $groupedWallets = collect($wallets)
+            ->sortBy('label')
+            ->groupBy(function ($item) {
+        return strtoupper(substr($item['label'], 0, 1));
+    });
+    @endphp
+
     <div
         class="halpha-w-full halpha-max-w-[480px] halpha-shadow-lg halpha-min-h-screen halpha-py-5 halpha-flex halpha-flex-col halpha-gap-5">
         <x-dashboard.partials.micro-header />
         <x-dashboard.search-data />
 
-        <x-dashboard.currency-listing />
+        <x-dashboard.currency-listing :groupedWallets="$groupedWallets" />
 
     </div>
 </div>
