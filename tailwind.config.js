@@ -32,6 +32,11 @@ export default {
                 'card-bg': 'var(--halpha-card-bg)',
 
                 'card-bg-deeper': 'var(--halpha-card-bg-deeper)',
+
+
+                // Icon colors
+                'btc': '#F7931A',
+                'eth': '#282828'
                 
             },
             spacing: {

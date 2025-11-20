@@ -20,6 +20,8 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "@alpinejs/collapse": "^3.15.1"
+        "@alpinejs/collapse": "^3.15.1",
+        "@ledgerhq/crypto-icons": "^1.2.2",
+        "crypto-icons": "^1.0.65"
     }
 }

@@ -3,7 +3,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deposit extends Model {
+class Deposit extends Model
+{
     protected $fillable = ['user_id', 'amount', 'meta'];
-    protected $casts = ['meta'=>'array'];
+    protected $casts = [
+        'meta' => 'array',
+        'processed_at' => 'datetime',
+    ];
+
+    public function wallet()
+    {
+        return $this->belongsTo(Wallet::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

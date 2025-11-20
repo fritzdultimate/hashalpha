@@ -2,39 +2,34 @@
 
 @section('content')
 
-    <div class="top-section section small halpha-mt-10 top-section-bg-img-center">
-        <div class="container-default w-container">
-            <div class="grid-2-columns _1-col-tablet gap-row-8px">
-                <div data-w-id="bc6f8e73-abc8-b69a-68e1-73c6d3a67216" style="opacity: 1; filter: blur(0px);"
-                    class="inner-container _558px _100-tablet">
-                    <h1 class="display-2 heading-color-gradient mg-bottom-0 halpha-uppercase">
-                        Earn daily from the backbone of blockchain
-                    </h1>
-                </div>
-                <div id="w-node-_64d41687-720e-ca5c-a050-26b768b07fcc-04e3ff82"
-                    data-w-id="64d41687-720e-ca5c-a050-26b768b07fcc" style="opacity: 1; filter: blur(0px);"
-                    class="inner-container _504px _100-tablet">
-                    <p class="color-neutral-100 mg-bottom-32px">
+    <div class="halpha-overflow-hidden">
+        <section class="top-section section halpha-mt-10 top-section-bg-img-right">
+            <div class="w-layout-blockcontainer container-default position-relative---z-index-1 w-container">
+                <div class="grid-2-columns _1-col-tablet">
+                    <div id="w-node-_924b8ab0-686c-9d71-25ab-87214b088c45-bd0d2b38" class="inner-container _510px _100-tablet">
+                        <h1 data-w-id="e94fab0b-b7aa-0619-af02-bbb42d83efb8" style="opacity: 1; filter: blur(0px);" class="display-1 heading-color-gradient mg-bottom-0">
+                            Earn daily from the backbone of blockchain
+                        </h1>
+                        
+                        <p class="color-neutral-100 mg-bottom-32px">
                         {{ env('APP_LONG_NAME') }} transforms Ethereum validator operations into accessible, daily staking rewards powered by real on-chain performance and MEV optimization.
-                    </p>
-                    <div class="buttons-flex-container">
-                        <div data-w-id="64d41687-720e-ca5c-a050-26b768b07fd0" class="btn-primary-wrapper">
-                            <a href="{{ route('register') }}" class="btn-primary w-button">Get started<span
-                                    class="line-rounded-icon link-icon-right"></span>
-                            </a>
-                            <div class="btn-primary-border"></div>
+                        </p>
+                        
+                        <div data-w-id="94b66ed0-3a57-7602-7036-6692c6d028e9" style="opacity: 1; filter: blur(0px);" class="buttons-flex-container">
+                            <div data-w-id="94b66ed0-3a57-7602-7036-6692c6d028ea" class="btn-primary-wrapper">
+                                <a href="{{ route('register') }}" class="btn-primary w-button">
+                                    Get started<span class="line-rounded-icon link-icon-right" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></span>
+                                </a>
+                                
+                                <div class="btn-primary-border"></div>
+                            </div>
                         </div>
-                        <a href="{{ route('about') }}" class="btn-secondary w-button !halpha-hidden">Learn more</a>
                     </div>
                 </div>
+                
+                <img class="top-section-bg-img-right---img" src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d662c156553bb641e879af_home-v2-hero-image-right-cryptomatic-webflow-ecommerce-template.jpg" alt="" style="opacity: 1; filter: blur(0px);" sizes="(max-width: 767px) 92vw, (max-width: 1439px) 86vw, 1118px" data-w-id="9f4d1131-f255-c237-25bf-d393edb46f2a" loading="eager">
             </div>
-        </div>
-
-        <img class="top-section-bg-img-center---img"
-            src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d662c156553bb641e879af_home-v2-hero-image-right-cryptomatic-webflow-ecommerce-template.jpg"
-            alt="" style="opacity: 1; filter: blur(0px);"
-            sizes="(max-width: 479px) 80vw, (max-width: 767px) 72vw, (max-width: 991px) 80vw, (max-width: 1439px) 78vw, 1107.9862060546875px"
-            data-w-id="64d41687-720e-ca5c-a050-26b768b07fd8" loading="eager">
+        </section>
     </div>
 
     <div data-w-id="6bb2631d-8226-c422-0ba3-4602f716ae36" style="opacity: 1; filter: blur(0px);"

@@ -59,6 +59,8 @@
     @vite([
         'resources/css/app.css',
         'resources/js/app.js',
+        'resources/css/crypto-icons/styles.css',
+        'resources/css/crypto-icons/font.css'
     ])
 </head>
 
@@ -95,8 +97,8 @@
                         'icon' => 'fas-coins',
                         "children" => [
                             [
-                                "url" => route('deposit.pending'),
-                                "label" => "Pending"
+                                "url" => route('deposit.create'),
+                                "label" => "Create Deposit"
                             ],
                             [
                                 "url" => route('deposit.approved'),
