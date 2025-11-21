@@ -15,12 +15,57 @@ class Create extends Component {
     public $amount;
     public $invoice;
     public $depositId;
+    public $wallets;
 
+    public $selectedWallet = null;
 
     protected $rules = [
         'amount' => 'required|numeric|min:0.0001',
         'currency' => 'required|string',
     ];
+
+    public function mount() {
+        $this->wallets = [
+            [
+                'currency' => 'btc',
+                'label' => 'Bitcoin',
+                'icon' => 'icon-btc',
+                'bg' => 'halpha-bg-btc'
+
+            ],
+            [
+                'currency' => 'eth',
+                'label' => 'Ethereum',
+                'icon' => 'icon-eth',
+                'bg' => 'halpha-bg-eth'
+
+            ],
+            [
+                'currency' => 'usdt',
+                'label' => 'USDT',
+                'icon' => 'icon-usdt',
+                'bg' => 'halpha-bg-usdt'
+
+            ],
+            [
+                'currency' => 'xrp',
+                'label' => 'Ripple',
+                'icon' => 'icon-xrp',
+                'bg' => 'halpha-bg-xrp'
+
+            ]
+        ];
+    }
+
+    public function createDeposit() {
+        $this->validate();
+
+        dd($this->currency);
+    }
+
+    public function selectWallet($wallet) {
+        $this->selectedWallet = $wallet;
+    }
 
 
     public function createInvoice() {
