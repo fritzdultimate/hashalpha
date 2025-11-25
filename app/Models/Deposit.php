@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deposit extends Model
 {
-    protected $fillable = ['user_id', 'amount', 'meta'];
+    protected $fillable = ['user_id', 'amount', 'meta', 'currency', 'wallet_id', 'nowpayments_invoice_id'];
     protected $casts = [
         'meta' => 'array',
         'processed_at' => 'datetime',

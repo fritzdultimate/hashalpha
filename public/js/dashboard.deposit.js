@@ -3,7 +3,7 @@ function depositPanel() {
     return {
         panelOpen: false,
         selected: {currency: '', label: ''},
-        networks: ['Mainnet', 'ERC20', 'BEP20', 'TRC20'], // default networks - replace dynamically if you want
+        networks: ['Mainnet', 'ERC20', 'BEP20', 'TRC20'],
         form: { currency: '', network: '', amount: '' },
         step: 'form', // 'form' | 'otp' | 'address'
         error: null,
@@ -13,8 +13,46 @@ function depositPanel() {
         status: 'pending',
         progress: 0,
         pollInterval: null,
+        pay_amount: 0.00,
+        total: 20 * 60,
+        time: 0,
+        created_at: null,
+        loadingAddress: true,
 
         init() {
+            this.$watch('step', (value) => {
+                this.$wire.set('step', value);
+
+                if(value === 'address') {
+                    setTimeout(() => {
+                        this.loadingAddress = false;
+                        this.startCountdown(this.created_at);
+                    }, 6000)
+                }
+            });
+
+            this._depositStepListener = (event) => {
+                if (!event || !event.detail) return;
+                const s = event.detail.step;
+                if (!s) return;
+                this.step = s;
+
+                
+                if (event.detail.depositId) {
+                    this.depositId = event.detail.depositId;
+                }
+
+                console.log('init', this.depositId);
+                if (s === 'address' && this.depositId) {
+                    const { address, pay_amount } = event.detail;
+                    this.address = address;
+                    this.pay_amount = pay_amount;
+                    console.log("address", address);
+                    console.log("amount", pay_amount);
+                    this.startPolling();
+                }
+            };
+            window.addEventListener('deposit:step', this._depositStepListener);
         },
 
         openPanel(wallet) {
@@ -23,7 +61,7 @@ function depositPanel() {
             // set sensible default network if you have one per coin
             this.form.network = this.networks[0];
             this.form.amount = '';
-            this.step = 'form';
+            this.step = 'form' //'form'; //form
             this.error = null;
             this.otp = '';
             this.depositId = null;
@@ -40,6 +78,24 @@ function depositPanel() {
             }, 350);
         },
 
+        startCountdown(createdAt) {
+            const created = new Date(createdAt).getTime();
+            const now = Date.now();
+
+            const elapsed = Math.floor((now - created) / 1000);
+            this.time = Math.max(0, this.total - elapsed);
+            
+            setInterval(() => {
+                if (this.time > 0) this.time--
+            }, 1000)
+        },
+
+        get display() {
+            const m = String(Math.floor(this.time / 60)).padStart(2, '0')
+            const s = String(this.time % 60).padStart(2, '0')
+            return `${m}:${s}`
+        },
+
         closePanel() {
             this.panelOpen = false;
             this.stopPolling();
@@ -47,120 +103,6 @@ function depositPanel() {
             setTimeout(() => {
                 this.selected = {currency: '', label: ''};
             }, 300);
-        },
-
-        async submitForm() {
-            this.error = null;
-
-            if (!this.form.amount || parseFloat(this.form.amount) <= 0) {
-                this.error = 'Enter a valid amount';
-                return;
-            }
-
-            // disable button UI would be nice — omitted for brevity
-            try {
-                // POST to your server to initiate deposit and send OTP
-                const res = await fetch('/deposit/initiate', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-                    },
-                    body: JSON.stringify({
-                        currency: this.form.currency,
-                        network: this.form.network,
-                        amount: this.form.amount
-                    })
-                });
-
-                const data = await res.json();
-
-                if (!res.ok || !data.success) {
-                    this.error = data.message || 'Failed to initiate deposit';
-                    return;
-                }
-
-                this.depositId = data.deposit_id;
-                // server indicates OTP step next (or maybe direct address)
-                if (data.otp_required) {
-                    this.step = 'otp';
-                } else if (data.address) {
-                    this.address = data.address;
-                    this.step = 'address';
-                    this.startPolling();
-                } else {
-                    // fallback
-                    this.step = 'address';
-                    this.startPolling();
-                }
-
-            } catch (e) {
-                this.error = 'Network error. Try again.';
-                console.error(e);
-            }
-        },
-
-        async verifyOtp() {
-            this.error = null;
-            if (!this.otp || this.otp.length < 4) {
-                this.error = 'Enter the OTP';
-                return;
-            }
-
-            try {
-                const res = await fetch('/deposit/verify-otp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-                    },
-                    body: JSON.stringify({
-                        deposit_id: this.depositId,
-                        otp: this.otp
-                    })
-                });
-
-                const data = await res.json();
-
-                if (!res.ok || !data.success) {
-                    this.error = data.message || 'OTP validation failed';
-                    return;
-                }
-
-                // server returns the deposit address and maybe initial status
-                this.address = data.address;
-                this.status = data.status || 'pending';
-                this.progress = data.progress ?? 0;
-                this.step = 'address';
-
-                // start polling for updates
-                this.startPolling();
-
-            } catch (e) {
-                this.error = 'Network error while verifying OTP';
-                console.error(e);
-            }
-        },
-
-        async resendOtp() {
-            this.error = null;
-            try {
-                const res = await fetch('/deposit/resend-otp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-                    },
-                    body: JSON.stringify({ deposit_id: this.depositId })
-                });
-                const data = await res.json();
-                if (!res.ok || !data.success) {
-                    this.error = data.message || 'Failed to resend OTP';
-                }
-            } catch (e) {
-                this.error = 'Network error';
-                console.error(e);
-            }
         },
 
         copyAddress() {
@@ -179,17 +121,18 @@ function depositPanel() {
 
             if (!this.depositId) return;
 
-            // poll every 4 seconds - server should return latest status and progress
             this.pollInterval = setInterval(async () => {
                 try {
-                    const res = await fetch(`/deposit/status/${this.depositId}`, {
+                    const res = await fetch(`/api/deposit/status/${this.depositId}`, {
                         headers: { 'X-Requested-With': 'XMLHttpRequest' }
                     });
                     const data = await res.json();
-                    // expected: { status: 'pending'|'confirmed'|'cancelled'|'expired', progress: number }
-                    if (data.status) this.status = data.status;
-                    if (typeof data.progress !== 'undefined') this.progress = data.progress;
-                    if (data.address) this.address = data.address;
+                    console.log(data);
+                    if (data.details.payment_status) this.status = data.details.payment_status;
+                    if (data.details.progress) this.progress = data.details.progress;
+                    if (data.details.pay_address) this.address = data.details.pay_address;
+                    if (data.details.created_at) this.created_at = data.details.created_at;
+
 
                     if (this.status === 'confirmed' || this.status === 'cancelled' || this.status === 'expired') {
                         // stop polling when final state
@@ -214,7 +157,7 @@ function depositPanel() {
                 return;
             }
             try {
-                const res = await fetch(`/deposit/cancel/${this.depositId}`, {
+                const res = await fetch(`/api/deposit/cancel/${this.depositId}`, {
                     method: 'POST', headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
@@ -240,12 +183,6 @@ function currencySelector({ initial = {}, items = [] } = {}) {
     return {
         open: false,
         items: items,
-        // selected: {
-        //     currency: initial.currency ?? (items[0] ? items[0].currency : ''),
-        //     label: initial.label ?? (items[0] ? items[0].label : ''),
-        //     icon: initial.icon ?? (items[0] ? items[0].icon : ''),
-        //     bg: initial.bg ?? (items[0] ? items[0].bg : '')
-        // },
         activeIndex: -1,
 
         toggle() {

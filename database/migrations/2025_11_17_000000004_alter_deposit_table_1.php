@@ -8,13 +8,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('deposits', function (Blueprint $table) {
-            $table->foreignId('wallet_id')->nullable()->after('confirmed_at')->constrained('wallets')
-                ->nullOnDelete();
+            $table->foreignId('wallet_id')->nullable()->after('confirmed_at')->constrained('wallets')->nullOnDelete();
             $table->string('currency', 30)->after('wallet_id');
             $table->decimal('amount_usd', 36, 8)->nullable()->after('currency');
             $table->string('nowpayments_invoice_id')->nullable()->after('amount_usd');
             $table->string('tx_id')->nullable()->after('nowpayments_invoice_id');
-            $table->integer('confirmations')->default(0)->after('tx_id');
             $table->timestamp('processed_at')->nullable()->after('confirmations');
         });
 

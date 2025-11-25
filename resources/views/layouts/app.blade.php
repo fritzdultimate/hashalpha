@@ -62,6 +62,7 @@
         'resources/css/crypto-icons/styles.css',
         'resources/css/crypto-icons/font.css'
     ])
+    @livewireStyles
 </head>
 
 <body class="halpha-font-sans halpha-text-gray-900 halpha-antialiased halpha-bg halpha-text halpha-min-h-screen halpha-flex halpha-flex-col">
@@ -325,6 +326,10 @@
         window.startGlobalLoader = () => window.dispatchEvent(new Event('global-loader:start'));
         window.finishGlobalLoader = () => window.dispatchEvent(new Event('global-loader:done'));
     </script>
+
+    @livewireScripts
+    
+    @stack('scripts')
 </body>
 
 </html>

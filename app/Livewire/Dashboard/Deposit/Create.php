@@ -2,20 +2,32 @@
 
 namespace App\Livewire\Dashboard\Deposit;
 
+use App\Livewire\QrCode;
 use App\Models\Deposit;
 use App\Models\Wallet;
 use App\Services\NowPaymentsService;
+use App\Services\TwoFactorService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Livewire;
 
 #[Layout('layouts.app')]
 class Create extends Component {
     public $currency = 'ETH';
     public $amount;
     public $invoice;
-    public $depositId;
+    public $depositId = 2;
     public $wallets;
+    public $note = '';
+    public $network = '';
+    public $nowPaymentStatus;
+    public $nowPaymentWallets;
+    public $otp = null;
+
+    public $step;
 
     public $selectedWallet = null;
 
@@ -24,43 +36,35 @@ class Create extends Component {
         'currency' => 'required|string',
     ];
 
-    public function mount() {
-        $this->wallets = [
-            [
-                'currency' => 'btc',
-                'label' => 'Bitcoin',
-                'icon' => 'icon-btc',
-                'bg' => 'halpha-bg-btc'
+    protected $listeners = [
+        'otpUpdated' => 'setOtpFromChild',
+        'resendOtp' => 'handleResend',
+        'example' => 'example'
+    ];
 
-            ],
-            [
-                'currency' => 'eth',
-                'label' => 'Ethereum',
-                'icon' => 'icon-eth',
-                'bg' => 'halpha-bg-eth'
+    #[On('set-address')]
+    public function dispatchAddress($address) {
+        $this->dispatch('address-available', $address)->to(QrCode::class);
+    }
 
-            ],
-            [
-                'currency' => 'usdt',
-                'label' => 'USDT',
-                'icon' => 'icon-usdt',
-                'bg' => 'halpha-bg-usdt'
 
-            ],
-            [
-                'currency' => 'xrp',
-                'label' => 'Ripple',
-                'icon' => 'icon-xrp',
-                'bg' => 'halpha-bg-xrp'
+    public function setOtpFromChild($value) {
+        dd('this is parent otp');
+        $this->otp = preg_replace('/\D/', '', substr($value, 0, 4));
+    }
 
-            ]
-        ];
+    public function mount(NowPaymentsService $np) {
+        $this->nowPaymentWallets = $np->getCurrencies();
+    }
+
+
+
+    public function resendOtp() {
+        TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
     }
 
     public function createDeposit() {
         $this->validate();
-
-        dd($this->currency);
     }
 
     public function selectWallet($wallet) {
@@ -68,40 +72,67 @@ class Create extends Component {
     }
 
 
-    public function createInvoice() {
+    public function createInvoice($isOtp = false) {
+        if($isOtp && $this->otp === null) {
+            $this->addError('otp', 'Your OTP is required.');
+            return;
+        }
+
         $this->validate();
+
+        if($this->otp === null) {
+            TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
+            $this->dispatch('otp-created', $this->invoice);
+
+            return;
+        }
+
+        $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
+        if(!$ok) {
+            $this->addError('otp', 'Your OTP is invalid.');
+        }
+
 
 
         DB::transaction(function () {
             $wallet = Wallet::firstOrCreate(
             ['user_id' => auth()->id(), 'currency' => $this->currency],
-            ['balance' => 0]
+            [
+                'balance' => 0, 
+                'currency' => $this->currency,
+                'user_id' => auth()->id()
+                ]
             );
 
 
             $deposit = Deposit::create([
                 'user_id' => auth()->id(),
                 'wallet_id' => $wallet->id,
-                'currency' => $this->currency,
+                'currency' => $this->network,
                 'amount' => $this->amount,
                 'status' => 'waiting'
             ]);
+ 
 
 
-        $this->depositId = $deposit->id;
+            $invoice = NowPaymentsService::createInvoice($deposit);
+            $deposit->nowpayments_invoice_id = $invoice['payment_id'] ?? null;
+            $deposit->meta = $invoice;
+            $deposit->address = $invoice['pay_address'];
+            $deposit->save();
+
+            $wallet->address = $invoice['pay_address'];
+            $wallet->save();
 
 
-        $invoice = NowPaymentsService::createInvoice($deposit);
-        $deposit->nowpayments_invoice_id = $invoice['id'] ?? null;
-        $deposit->metadata = $invoice;
-        $deposit->save();
+            $this->invoice = $invoice;
 
+            session()->put('pay_address', $invoice['pay_address']);
 
-        $this->invoice = $invoice;
+            $this->depositId = $deposit->id;
+            $this->dispatch('address-created', invoice: $this->invoice, depositId: $this->depositId);
         });
-
-
-        $this->emit('invoiceCreated', $this->invoice);
+        
     }
 
 

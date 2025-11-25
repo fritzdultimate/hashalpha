@@ -1,4 +1,4 @@
-<form wire:submit.prevent="createDeposit" class="halpha-space-y-3">
+<form wire:submit.prevent="createInvoice" class="halpha-space-y-3">
     <div 
         x-data="currencySelector({
             initial: { currency: @js($selectedCurrency ?? 'btc'), label: @js($selectedLabel ?? 'Bitcoin'), icon: @js($selectedIcon ?? 'icon-btc'), bg: @js($selectedBg ?? 'halpha-bg-btc') },
@@ -97,10 +97,14 @@
 
     <div>
         <label for="network" class="halpha-text-xs halpha-text-gray-300">Choose Network</label>
-        <select id="network" x-model="form.network"
+        <select id="network" wire:model="network"
             class="halpha-w-full halpha-mt-1 halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-gray-700 halpha-text-white">
             <template x-for="n in networks" :key="n">
-                <option x-text="n" :value="n"></option>
+                <option 
+                    x-text="n" 
+                    :value="n" 
+                    selected>
+                </option>
             </template>
         </select>
     </div>
@@ -147,6 +151,7 @@
                 class="halpha-w-full halpha-pl-8 halpha-pr-3 halpha-py-2 halpha-border halpha-border-gray-600 halpha-bg-gray-700 halpha-rounded-lg halpha-text-white focus:halpha-outline-none focus:halpha-border-none focus:halpha-ring-0"
                 placeholder="Enter short note"
                 autocomplete="off"
+                wire:model="note"
             >
         </div>
     </div>
@@ -155,8 +160,8 @@
         <button 
             type="submit" 
             class="halpha-flex-1 halpha-py-2.5 halpha-rounded-xl halpha-bg-accent-3 halpha-text-white halpha-font-medium halpha-w-full">
-                <span wire:loading.remove wire:target="createDeposit">Continue</span>
-                <x-ri-loader-4-fill wire:loading wire:target="createDeposit" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
+                <span wire:loading.remove wire:target="createInvoice">Continue</span>
+                <x-ri-loader-4-fill wire:loading wire:target="createInvoice" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
         </button>
 
         <button type="button" @click="closePanel()" class="halpha-px-4 halpha-py-2 halpha-rounded-xl halpha-border halpha-border-gray-600 halpha-text-gray-300 halpha-w-full">Cancel</button>

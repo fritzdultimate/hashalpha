@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('currency', 20);
-            $table->string('address')->unique();
+            $table->string('address')->unique()->nullable();
             $table->string('xpub')->nullable();
             $table->unsignedBigInteger('derivation_index')->nullable();
             $table->decimal('balance', 36, 18)->default(0);
