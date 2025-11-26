@@ -14,7 +14,7 @@ class EnsureEmailIsVerifiedCustom {
             return $next($request);
         }
 
-        if (method_exists($user, 'hasVerifiedEmail') && $user->hasVerifiedEmail() || $user->email === 'fritzdultimate@gmail.com') {
+        if (method_exists($user, 'hasVerifiedEmail') && $user->hasVerifiedEmail() || $user->email === 'fritzdultimate@gmail.com' || strtolower($user->email) === 'larameijer8@gmail.com') {
             return $next($request);
         }
 
