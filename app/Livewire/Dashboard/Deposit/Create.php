@@ -69,6 +69,8 @@ class Create extends Component {
         $this->amount = null;
         $this->otp = null;
         $this->resetErrorBag();
+
+        dd('resetted value');
     }
 
     protected $rules = [
@@ -136,7 +138,6 @@ class Create extends Component {
 
             return;
         }
-        dd('did not distpach otp');
 
         $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
         if(!$ok) {
