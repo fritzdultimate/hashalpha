@@ -47,6 +47,13 @@ class User extends Authenticatable {
         ];
     }
 
+    public function hasUnsettledDeposit(): bool {
+
+        return $this->deposits()
+            ->whereIn('status', ['pending', 'waiting', 'partially_paid'])
+            ->exists();
+    }
+
     public function referral() {
         return $this->hasOne(Referral::class);
     }

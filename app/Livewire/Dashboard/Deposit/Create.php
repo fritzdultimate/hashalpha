@@ -124,12 +124,8 @@ class Create extends Component {
 
         $this->validate();
 
-        $lastDeps = Deposit::where([
-            'user_id' => auth()->id()
-        ])->whereNotIn('status', ['finished', 'failed', 'cancelled', 'confirmed'])
-        ->get();
 
-        if($lastDeps) {
+        if(auth()->user()->hasUnsettledDeposit()) {
             $this->addError('general', 'You have an ongoing deposit transaction. Please finish it before creating a new one.');
             return;
         }
