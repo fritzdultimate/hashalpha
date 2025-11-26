@@ -66,18 +66,11 @@ function otpComponent() {
             // window.addEventListener('focus-input', this._parentHandler);
 
             window.addEventListener('reset-otp', () => {
-                console.log(this.boxes)
+                // console.log(this.boxes)
                 this.boxes = ['', '', '', ''];
                 this.syncToLivewire();
-                // focus first input
                 this.$refs.otp1.focus();
             });
-
-            // document.addEventListener('alpine:init', () => {
-            //     window.addEventListener('reset-otp', () => {
-            //         alert('otp reset');
-            //     });
-            // });
 
             const initial = this.$refs.hiddenOtp ? this.$refs.hiddenOtp.value : '';
             if (initial) {
