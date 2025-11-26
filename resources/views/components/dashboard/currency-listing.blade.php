@@ -46,8 +46,8 @@
                             tabindex="0" 
                             role="button" 
                             @click="
-                                openPanel({{ json_encode($wallet) }});
-                                let wallet = {{ json_encode($wallet) }}
+                                openPanel(JSON.parse($el.dataset.wallet));
+                                let wallet = JSON.parse($el.dataset.wallet)
                                 let mapped = wallet.networks.map((net) => {
                                     const entry = wallet.raw_entries.filter((entry) => {
                                         return entry.toLowerCase().endsWith(net.raw.toLowerCase())
@@ -58,8 +58,9 @@
                                 networks = mapped
                             "
                             wire:click='selectWallet({{ json_encode($wallet) }})'
-                            @keydown.enter="openPanel({{ json_encode($wallet) }})"
+                            @keydown.enter="openPanel(JSON.parse($el.dataset.wallet))"
                             aria-label="Select {{ $wallet['currency'] }} - {{ $wallet['label'] }}"
+                            data-wallet='@json($wallet)'
                         >
                             <span
                                 class="halpha-w-6 halpha-h-6 {{ $wallet['bg'] }} halpha-rounded-full halpha-flex halpha-justify-center halpha-items-center">

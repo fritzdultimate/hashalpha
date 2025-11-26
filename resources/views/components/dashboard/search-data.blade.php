@@ -5,12 +5,17 @@
             <x-heroicon-s-magnifying-glass class="halpha-w-4 halpha-h-4 halpha-text-gray-400" />
         </button>
 
-        <input id="search" type="text" placeholder="Search"
+        <input
+            id="search" 
+            type="text" 
+            placeholder="Search"
             class="halpha-w-full halpha-pl-10 halpha-pr-3 halpha-py-2 halpha-text-sm halpha-rounded-md halpha-bg-gray-700 halpha-text-white halpha-placeholder-gray-400 halpha-border halpha-border-transparent halpha-shadow-sm focus:!halpha-outline-none halpha-transition focus:!halpha-ring-0 focus:halpha-border-transparent"
-            aria-label="Search" />
+            aria-label="Search"
+            wire:model.live="search"
+        />
     </div>
 
-    <div class="halpha-flex halpha-flex-col halpha-gap-3">
+    <div class="halpha-flex halpha-flex-col halpha-gap-3" x-show="false">
         <div class="halpha-flex halpha-justify-between halpha-items-center halpha-w-full">
             <span class="halpha-text-base halpha-font-semibold halpha-text-gray-300">Search history</span>
 

@@ -1,19 +1,22 @@
 <div class="halpha-w-full halpha-min-h-screen halpha-flex halpha-justify-center">
     @php
 
-        $groupedWallets = collect($nowPaymentWallets)
+        $groupedWallets = collect($filteredCurrencies)
             ->sortBy('label')
             ->groupBy(function ($item) {
-        return strtoupper(substr($item['label'], 0, 1));
-    });
+                return strtoupper(substr($item['label'], 0, 1));
+            });
+
+        $wallets = collect($this->filteredCurrencies)
     @endphp
 
     <div
         class="halpha-w-full halpha-max-w-[480px] halpha-shadow-lg halpha-min-h-screen halpha-py-5 halpha-flex halpha-flex-col halpha-gap-5">
         <x-dashboard.partials.micro-header />
         <x-dashboard.search-data />
+        <span>{{ $search }}</span>
 
-        <x-dashboard.currency-listing :wallets="$nowPaymentWallets" :groupedWallets="$groupedWallets" />
+        <x-dashboard.currency-listing :wallets="$wallets" :groupedWallets="$groupedWallets" />
 
     </div>
 </div>

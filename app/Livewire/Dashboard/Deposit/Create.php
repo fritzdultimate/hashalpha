@@ -25,11 +25,43 @@ class Create extends Component {
     public $network = '';
     public $nowPaymentStatus;
     public $nowPaymentWallets;
+    public $filteredCurrencies;
     public $otp = null;
 
     public $step;
+    public $search;
 
     public $selectedWallet = null;
+
+    public function updated($prop, $value) {
+        if($prop === "search") {
+            $q = trim($value);
+            if ($q === '') {
+                $this->filteredCurrencies = $this->nowPaymentWallets;
+                return;
+            }
+
+            $search = strtolower($q);
+
+            $filtered = array_filter($this->nowPaymentWallets, function ($item) use ($search) {
+
+                if (str_contains(strtolower($item['currency']), $search)) return true;
+                if (str_contains(strtolower($item['label']), $search)) return true;
+
+                if (!empty($item['networks'])) {
+                    foreach ($item['networks'] as $net) {
+                        if (isset($net['network']) && str_contains(strtolower($net['network']), $search)) {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            });
+
+            $this->filteredCurrencies = $filtered;
+        }
+    }
 
     #[On('resetValues')]
     public function resetValues() {
@@ -66,6 +98,7 @@ class Create extends Component {
 
     public function mount(NowPaymentsService $np) {
         $this->nowPaymentWallets = $np->getCurrencies();
+        $this->filteredCurrencies = $this->nowPaymentWallets;
     }
 
 
