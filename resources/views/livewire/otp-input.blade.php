@@ -8,6 +8,8 @@
                 x-on:input="handleInput($event, {{ $i }})"
                 x-on:keydown.backspace="handleBackspace($event, {{ $i }})"
                 maxlength="1"
+                inputmode="numeric"
+                pattern="[0-9]*"
                 class="halpha-w-10 halpha-h-12 halpha-text-center halpha-text-lg halpha-rounded halpha-bg-gray-700 halpha-text-white halpha-flex-1"
             />
         @endfor
