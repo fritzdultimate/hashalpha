@@ -8,7 +8,8 @@ export default defineConfig({
                 'resources/css/app.css', 
                 'resources/js/app.js', 
                 'resources/css/landing-styles.css',
-                'resources/css/crypto-icons/styles.css'
+                'resources/css/crypto-icons/styles.css',
+                'resources/css/crypto-icons/font.css'
             ],
             refresh: true,
         }),

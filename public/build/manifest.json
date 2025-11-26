@@ -7,6 +7,18 @@
       "app.css"
     ]
   },
+  "resources/css/crypto-icons/font.css": {
+    "file": "assets/font-CHu7VdwC.css",
+    "src": "resources/css/crypto-icons/font.css",
+    "isEntry": true,
+    "names": [
+      "font.css"
+    ]
+  },
+  "resources/css/crypto-icons/fonts/coins.ttf": {
+    "file": "assets/coins-BQo6JZed.ttf",
+    "src": "resources/css/crypto-icons/fonts/coins.ttf"
+  },
   "resources/css/crypto-icons/styles.css": {
     "file": "assets/styles-4qsOh5cC.css",
     "src": "resources/css/crypto-icons/styles.css",
