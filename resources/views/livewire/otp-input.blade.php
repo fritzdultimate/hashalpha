@@ -70,7 +70,7 @@ function otpComponent() {
                 this.boxes = ['', '', '', ''];
                 this.syncToLivewire();
                 // focus first input
-                this.$refs.otp0.focus();
+                this.$refs.otp1.focus();
             });
 
             // document.addEventListener('alpine:init', () => {
