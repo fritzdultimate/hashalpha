@@ -13,7 +13,7 @@
         @endfor
     </div>
 
-    {{-- Hidden Livewire model --}}
+    
     <input type="hidden" wire:model.live="otp" x-ref="hiddenOtp" />
 
     <p class="halpha-text-xs halpha-text-gray-400 halpha-mt-1 text-center">
@@ -27,6 +27,11 @@
 <script>
 function otpComponent() {
     return {
+        handleParentEvent() {
+            // this.$refs.otp2.focus();
+        },
+
+
         boxes: ['', '', '', ''],
         get combined() {
             return this.boxes.join('');
@@ -55,6 +60,9 @@ function otpComponent() {
             this.syncToLivewire();
         },
         init() {
+            this._parentHandler = (e) => this.handleParentEvent(e.detail);
+            window.addEventListener('focus-input', this._parentHandler);
+
             const initial = this.$refs.hiddenOtp ? this.$refs.hiddenOtp.value : '';
             if (initial) {
                 for (let i=0;i<4;i++){

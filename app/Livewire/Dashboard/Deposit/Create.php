@@ -31,9 +31,20 @@ class Create extends Component {
 
     public $selectedWallet = null;
 
+    #[On('resetValues')]
+    public function resetValues() {
+        $this->note = '';
+        $this->amount = null;
+        $this->resetErrorBag();
+    }
+
     protected $rules = [
-        'amount' => 'required|numeric|min:0.0001',
+        'amount' => 'required|numeric|min:50',
         'currency' => 'required|string',
+    ];
+
+    protected $messages = [
+        'amount.min' => "Amount must be at least $50."
     ];
 
     protected $listeners = [
@@ -80,6 +91,16 @@ class Create extends Component {
 
         $this->validate();
 
+        $lastDeps = Deposit::where([
+            'user_id' => auth()->id()
+        ])->whereNotIn('status', ['finished', 'failed', 'cancelled', 'confirmed'])
+        ->get();
+
+        if($lastDeps) {
+            $this->addError('general', 'You have an ongoing deposit transaction. Please finish it before creating a new one.');
+            return;
+        }
+
         if($this->otp === null) {
             TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
             $this->dispatch('otp-created', $this->invoice);
@@ -90,6 +111,7 @@ class Create extends Component {
         $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
         if(!$ok) {
             $this->addError('otp', 'Your OTP is invalid.');
+            return;
         }
 
 

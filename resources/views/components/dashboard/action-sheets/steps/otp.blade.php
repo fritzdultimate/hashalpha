@@ -9,6 +9,10 @@
 
     <div class="halpha-w-full halpha-px-10 md:halpha-px-40 halpha-py-5">
         <livewire:otp-input wire:model="otp" />
+
+        @error('otp')
+            <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="halpha-flex halpha-flex-col halpha-w-full halpha-items-center halpha-gap-2">
@@ -20,8 +24,4 @@
         <button @click="closePanel()"
             class="halpha-px-4 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-600 halpha-text-gray-300 halpha-w-full">Cancel</button>
     </div>
-
-    @error('otp')
-        <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
-    @enderror
 </div>

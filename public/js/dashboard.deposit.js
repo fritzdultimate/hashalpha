@@ -4,6 +4,7 @@ function depositPanel() {
         panelOpen: false,
         selected: {currency: '', label: ''},
         networks: ['Mainnet', 'ERC20', 'BEP20', 'TRC20'],
+        // network: 'Maka',
         form: { currency: '', network: '', amount: '' },
         step: 'form', // 'form' | 'otp' | 'address'
         error: null,
@@ -22,6 +23,8 @@ function depositPanel() {
         init() {
             this.$watch('step', (value) => {
                 this.$wire.set('step', value);
+
+                window.dispatchEvent(new CustomEvent('focus-input'));
 
                 if(value === 'address') {
                     setTimeout(() => {
@@ -99,7 +102,7 @@ function depositPanel() {
         closePanel() {
             this.panelOpen = false;
             this.stopPolling();
-            // small reset after closing
+            Livewire.dispatch('resetValues');
             setTimeout(() => {
                 this.selected = {currency: '', label: ''};
             }, 300);
@@ -134,8 +137,8 @@ function depositPanel() {
                     if (data.details.created_at) this.created_at = data.details.created_at;
 
 
-                    if (this.status === 'confirmed' || this.status === 'cancelled' || this.status === 'expired') {
-                        // stop polling when final state
+                    if (this.status === 'confirmed' || this.status === 'finished' || this.status === 'cancelled' || this.status === 'expired') {
+                        this.created_at = null;
                         this.stopPolling();
                     }
                 } catch (e) {

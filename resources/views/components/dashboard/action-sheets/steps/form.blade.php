@@ -154,6 +154,10 @@
                 wire:model="note"
             >
         </div>
+
+        @error('general')
+            <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="halpha-flex halpha-flex-col halpha-items-center halpha-justify-between halpha-gap-3 halpha-mt-10">
