@@ -63,6 +63,13 @@ function otpComponent() {
             this._parentHandler = (e) => this.handleParentEvent(e.detail);
             window.addEventListener('focus-input', this._parentHandler);
 
+            window.addEventListener('reset-otp', () => {
+                this.boxes = ['', '', '', ''];
+                this.syncToLivewire();
+                // focus first input
+                this.$refs.otp0.focus();
+            });
+
             const initial = this.$refs.hiddenOtp ? this.$refs.hiddenOtp.value : '';
             if (initial) {
                 for (let i=0;i<4;i++){

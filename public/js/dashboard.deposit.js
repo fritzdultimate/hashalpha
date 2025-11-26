@@ -103,6 +103,10 @@ function depositPanel() {
             this.panelOpen = false;
             this.stopPolling();
             Livewire.dispatch('resetValues');
+
+            window.dispatchEvent(new CustomEvent('reset-otp'));
+
+            
             setTimeout(() => {
                 this.selected = {currency: '', label: ''};
             }, 300);
