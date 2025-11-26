@@ -21,7 +21,7 @@
             font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         }
 
-        
+
         .initial-backdrop {
             position: fixed;
             inset: 0;
@@ -34,7 +34,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        
+
         [x-cloak] {
             display: none !important;
         }
@@ -52,7 +52,8 @@
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:regular,500,700" media="all">
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -65,17 +66,20 @@
     @livewireStyles
 </head>
 
-<body class="halpha-font-sans halpha-text-gray-900 halpha-antialiased halpha-bg halpha-text halpha-min-h-screen halpha-flex halpha-flex-col">
+<body
+    class="halpha-font-sans halpha-text-gray-900 halpha-antialiased halpha-bg halpha-text halpha-min-h-screen halpha-flex halpha-flex-col">
 
     <div x-data="globalLoader()" x-init="start(); init()" x-cloak>
         <!-- Top loader -->
-        <div id="top-loader" class="halpha-fixed halpha-top-0 halpha-left-0 halpha-right-0 halpha-z-[9999] halpha-pointer-events-none" aria-hidden>
+        <div id="top-loader"
+            class="halpha-fixed halpha-top-0 halpha-left-0 halpha-right-0 halpha-z-[9999] halpha-pointer-events-none"
+            aria-hidden>
             <div x-ref="bar"
-            style="height:3px; width:0; transition:width 220ms linear, opacity 180ms linear; transform-origin:left; opacity:0;"
-            :style="`height:3px; background: linear-gradient(90deg,#3b82f6,#60a5fa);`"></div>
+                style="height:3px; width:0; transition:width 220ms linear, opacity 180ms linear; transform-origin:left; opacity:0;"
+                :style="`height:3px; background: linear-gradient(90deg,#3b82f6,#60a5fa);`"></div>
         </div>
 
-        
+
         <div id="initial-backdrop" class="initial-backdrop" x-show="showBackdrop" x-transition.opacity>
             <div class="halpha-text-white halpha-text-2xl halpha-font-bold">My Dashboard</div>
         </div>
@@ -89,34 +93,48 @@
                         "url" => route('dashboard'),
                         "label" => "Dashboard",
                         'icon' => 'radix-dashboard',
-                        'route' => 'dashboard'
+                        'route' => 'dashboard',
+                        "children" => [
+                            [
+                                "url" => route('dashboard'),
+                                "label" => "Overview"
+                            ],
+                        ],
 
                     ],
                     [
                         "url" => "",
-                        "label" => "Deposit",
+                        "label" => "Staking",
                         'icon' => 'fas-coins',
                         "children" => [
                             [
                                 "url" => route('deposit.create'),
-                                "label" => "Create Deposit"
+                                "label" => "Deposit"
                             ],
                             [
                                 "url" => route('deposit.history'),
-                                "label" => "History"
+                                "label" => "My Stakes"
+                            ],
+                            [
+                                "url" => route('deposit.history'),
+                                "label" => "Earnings"
                             ],
                         ],
-                        'route' => 'deposit'
+                        'route' => 'staking'
 
                     ],
                     [
                         "url" => route('withdrawal'),
-                        "label" => "Earning & Payouts",
+                        "label" => "V-NFT & Token",
                         'icon' => 'ri-secure-payment-line',
                         "children" => [
                             [
                                 "url" => "",
-                                "label" => "Pending"
+                                "label" => "My V-NFTs"
+                            ],
+                            [
+                                "url" => "",
+                                "label" => '$HASH (Coming Soon)'
                             ]
                         ],
                         'route' => 'withdrawal'
@@ -124,24 +142,24 @@
                     ],
                     [
                         "url" => route('withdrawal'),
-                        "label" => "Validator Panel",
-                        'icon' => 'hugeicons-blockchain-04'
-
-                    ],
-                    [
-                        "url" => route('withdrawal'),
-                        "label" => "Affiliate System",
-                        'icon' => 'iconsax-bul-driver-refresh'
-
-                    ],
-                    [
-                        "url" => route('withdrawal'),
-                        "label" => "Ranking",
-                        'icon' => 'iconsax-bul-ranking-1',
+                        "label" => "Affliate",
+                        'icon' => 'iconsax-bul-driver-refresh',
                         "children" => [
                             [
                                 "url" => "",
-                                "label" => "Pending"
+                                "label" => "Referral Center"
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Team Dashboard'
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Bonuses'
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Rank Progress'
                             ]
                         ],
                         'route' => 'withdrawal'
@@ -149,10 +167,67 @@
                     ],
                     [
                         "url" => route('withdrawal'),
-                        "label" => "Settings",
-                        'icon' => 'ri-settings-3-fill'
+                        "label" => "Transparency",
+                        'icon' => 'hugeicons-blockchain-04',
+                        "children" => [
+                            [
+                                "url" => "",
+                                "label" => "Validators"
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Proof of Rewards'
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Reports'
+                            ],
+                        ],
+                        'route' => 'withdrawal'
 
-                    ]
+                    ],
+                    [
+                        "url" => route('withdrawal'),
+                        "label" => "Account",
+                        'icon' => 'ri-settings-3-fill',
+                        "children" => [
+                            [
+                                "url" => "",
+                                "label" => "Wallets"
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Withdrawal'
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Settings'
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Support'
+                            ],
+                            [
+                                "url" => "",
+                                "label" => 'Logout'
+                            ],
+                        ],
+                        'route' => 'withdrawal'
+
+                    ],
+                    // [
+                    //     "url" => route('withdrawal'),
+                    //     "label" => "Ranking",
+                    //     'icon' => 'iconsax-bul-ranking-1',
+                    //     "children" => [
+                    //         [
+                    //             "url" => "",
+                    //             "label" => "Pending"
+                    //         ]
+                    //     ],
+                    //     'route' => 'withdrawal'
+
+                    // ],
                 ]
             @endphp
             <!-- SIDEBAR -->
@@ -216,9 +291,9 @@
                     this.sidebarCollapsed = !this.sidebarCollapsed;
                     localStorage.setItem('halpha_sidebar_collapsed', this.sidebarCollapsed ? '1' : '0');
                 },
-                openMobileSidebar() { 
-                    this.mobileSidebarOpen = true; 
-                    this.isSidebarOpen = true; 
+                openMobileSidebar() {
+                    this.mobileSidebarOpen = true;
+                    this.isSidebarOpen = true;
                 },
                 closeMobileSidebar() {
                     this.mobileSidebarOpen = false;
@@ -242,20 +317,20 @@
                 init() {
                     const done = () => {
                         this.showBackdrop = false;
-                        
+
                         this.appStyle = { transition: 'opacity 160ms ease', opacity: '1' };
                     };
-                    
+
                     requestAnimationFrame(() => setTimeout(done, 50));
 
-                    
+
                     if (window.Livewire) {
                         Livewire.hook('message.sent', () => this.start());
                         Livewire.hook('message.failed', () => this.finish());
                         Livewire.hook('message.processed', () => this.finish());
                     }
 
-                    
+
                     window.addEventListener('global-loader:start', () => this.start());
                     window.addEventListener('global-loader:done', () => this.finish());
                 },
@@ -324,7 +399,7 @@
     </script>
 
     @livewireScripts
-    
+
     @stack('scripts')
 </body>
 
