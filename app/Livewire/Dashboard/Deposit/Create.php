@@ -69,8 +69,6 @@ class Create extends Component {
         $this->amount = null;
         $this->otp = null;
         $this->resetErrorBag();
-
-        dd($this->otp);
     }
 
     protected $rules = [
