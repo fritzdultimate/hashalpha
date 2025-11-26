@@ -35,7 +35,7 @@
 
 
         <!-- Theme toggle -->
-        <button @click="toggleTheme()" class="halpha-p-2 halpha-rounded !halpha-text-accent" title="Toggle theme">
+        <button @click="toggleTheme()" class="halpha-p-2 halpha-rounded !halpha-text-accent halpha-hidden" title="Toggle theme">
             <template x-if="isDark">
                 <x-eos-light-mode class="halpha-w-5 halpha-h-5 !halpha-text-accent" />
             </template>

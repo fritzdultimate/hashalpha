@@ -18,10 +18,18 @@ use Livewire\Livewire;
 #[Layout('layouts.app')]
 class History extends Component {
 
+    public $search = '';
+    public $status = '';
+    public $perPage = 12;
     public $transactions;
 
+    public $showModal = false;
+    public $selected = null;
+
+    protected $updatesQueryString = ['search', 'status', 'page'];
+
     public function mount() {
-        $this->transactions = Transaction::where('user_id', auth()->id())->get();
+        $this->transactions = Deposit::where('user_id', auth()->id())->get();
     }
 
     public function render() {
