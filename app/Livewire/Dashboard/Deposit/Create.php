@@ -134,9 +134,9 @@ class Create extends Component {
             TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
             $this->dispatch('otp-created', $this->invoice);
 
-            dd('distpached otp');
             return;
         }
+        dd('did not distpach otp');
 
         $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
         if(!$ok) {
