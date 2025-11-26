@@ -31,7 +31,6 @@ function otpComponent() {
     return {
         handleParentEvent() {
             this.$refs.otp1.focus();
-            alert('focus')
         },
 
 
