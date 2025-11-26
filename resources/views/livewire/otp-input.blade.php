@@ -62,8 +62,8 @@ function otpComponent() {
             this.syncToLivewire();
         },
         init() {
-            this._parentHandler = (e) => this.handleParentEvent(e.detail);
-            window.addEventListener('focus-input', this._parentHandler);
+            // this._parentHandler = (e) => this.handleParentEvent(e.detail);
+            // window.addEventListener('focus-input', this._parentHandler);
 
             window.addEventListener('reset-otp', () => {
                 alert('otp reset');
@@ -72,7 +72,7 @@ function otpComponent() {
                 // focus first input
                 this.$refs.otp0.focus();
             });
-            
+
             document.addEventListener('alpine:init', () => {
                 window.addEventListener('reset-otp', () => {
                     alert('otp reset');
