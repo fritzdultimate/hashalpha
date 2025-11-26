@@ -93,7 +93,6 @@ class Create extends Component {
 
 
     public function setOtpFromChild($value) {
-        dd('this is parent otp');
         $this->otp = preg_replace('/\D/', '', substr($value, 0, 4));
     }
 
@@ -135,6 +134,7 @@ class Create extends Component {
             TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
             $this->dispatch('otp-created', $this->invoice);
 
+            dd('distpached otp');
             return;
         }
 
