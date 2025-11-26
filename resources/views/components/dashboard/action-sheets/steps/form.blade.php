@@ -128,6 +128,8 @@
                 class="halpha-w-full halpha-pl-8 halpha-pr-3 halpha-py-2 halpha-border halpha-border-gray-600 halpha-bg-gray-700 halpha-rounded-lg halpha-text-white focus:halpha-outline-none focus:halpha-border-none focus:halpha-ring-0"
                 placeholder="Enter amount"
                 autocomplete="off"
+                inputmode="numeric"
+                pattern="[0-9]*"
             >
         </div>
 
