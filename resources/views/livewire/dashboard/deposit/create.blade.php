@@ -25,6 +25,7 @@
     <script>
 
         Livewire.on('otp-created', (event) => {
+            console.log('for otp');
             window.dispatchEvent(new CustomEvent('deposit:step', {
                 detail: { step: 'otp' }
             }));
