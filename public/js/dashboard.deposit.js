@@ -100,13 +100,15 @@ function depositPanel() {
         },
 
         closePanel() {
+            this.$wire.set('otp', null);
+            
             this.panelOpen = false;
             this.stopPolling();
             Livewire.dispatch('resetValues');
 
             window.dispatchEvent(new CustomEvent('reset-otp'));
 
-            
+
             setTimeout(() => {
                 this.selected = {currency: '', label: ''};
             }, 300);
