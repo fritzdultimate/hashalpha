@@ -72,6 +72,12 @@ function otpComponent() {
                 // focus first input
                 this.$refs.otp0.focus();
             });
+            
+            document.addEventListener('alpine:init', () => {
+                window.addEventListener('reset-otp', () => {
+                    alert('otp reset');
+                });
+            });
 
             const initial = this.$refs.hiddenOtp ? this.$refs.hiddenOtp.value : '';
             if (initial) {
