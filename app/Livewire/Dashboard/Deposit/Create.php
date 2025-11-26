@@ -67,6 +67,7 @@ class Create extends Component {
     public function resetValues() {
         $this->note = '';
         $this->amount = null;
+        $this->otp = null;
         $this->resetErrorBag();
     }
 
