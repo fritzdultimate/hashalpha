@@ -53,7 +53,7 @@
 
                 <li
                     class="halpha-bg-gray-800 halpha-p-3 halpha-rounded-md halpha-transition halpha-duration-150 hover:halpha-bg-gray-700
-                        halpha-flex halpha-flex-col md:halpha-grid md:halpha-grid-cols-6 md:halpha-items-center halpha-gap-3">
+                            halpha-flex halpha-flex-col md:halpha-grid md:halpha-grid-cols-6 md:halpha-items-center halpha-gap-3">
 
                     {{-- Transaction (label + reference) - occupies 2 cols on md+ --}}
                     <div class="halpha-flex halpha-items-start halpha-gap-3 halpha-min-w-0">
@@ -61,17 +61,19 @@
                             class="halpha-flex halpha-items-center halpha-justify-center halpha-w-10 halpha-h-10 halpha-rounded-full halpha-flex-shrink-0">
                             <div
                                 class="halpha-w-10 halpha-h-10 halpha-rounded-full halpha-flex halpha-items-center halpha-justify-center
-                                    {{ $tx->currency ? 'halpha-bg-' . \Illuminate\Support\Str::slug(strtolower($tx->currency), '-') : 'halpha-bg-gray-700' }}">
+                                        {{ $tx->currency ? 'halpha-bg-' . \Illuminate\Support\Str::slug(strtolower($tx->currency), '-') : 'halpha-bg-gray-700' }}">
                                 <span class="icon {{ $tx->currency ? 'icon-' . strtolower($tx->currency) : '' }}"></span>
                             </div>
                         </div>
 
                         <div class="halpha-min-w-0">
                             <div class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-truncate">
-                                {{ $tx->label ?? 'Bitcoin' }}</div>
+                                {{ $tx->label ?? 'Bitcoin' }}
+                            </div>
                             {{-- short reference ensures no overflow on mobile --}}
                             <div class="halpha-text-xs halpha-text-gray-400 halpha-truncate" title="{{ $ref }}">
-                                {{ $shortRef }}</div>
+                                {{ $shortRef }}
+                            </div>
                         </div>
                     </div>
 
@@ -93,12 +95,12 @@
                     </div>
 
                     {{-- Status + Actions --}}
-                    <div class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-3 md:halpha-col-span-1">
+                    <div class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-3 md:halpha-col-span-2">
                         <div class="halpha-flex halpha-items-center halpha-gap-2">
                             <span
                                 class="@if($tx->status == 'completed') halpha-text-green-400 halpha-bg-green-900/10 halpha-px-2 halpha-py-1 halpha-rounded-full 
                                 @elseif($tx->status == 'pending') halpha-text-yellow-300 halpha-bg-yellow-900/10 halpha-px-2 halpha-py-1 halpha-rounded-full 
-                                        @else halpha-text-red-400 halpha-bg-red-900/10 halpha-px-2 halpha-py-1 halpha-rounded-full @endif halpha-text-xs halpha-font-semibold halpha-uppercase">
+                                    @else halpha-text-red-400 halpha-bg-red-900/10 halpha-px-2 halpha-py-1 halpha-rounded-full @endif halpha-text-xs halpha-font-semibold halpha-uppercase">
                                 {{ strtoupper($tx->status) }}
                             </span>
                         </div>
@@ -152,7 +154,8 @@
                         <div>
                             <div class="halpha-text-xs halpha-text-gray-400">Amount</div>
                             <div class="halpha-text-sm halpha-font-semibold halpha-text-white">
-                                {{ number_format($selected->amount, 2) }}</div>
+                                {{ number_format($selected->amount, 2) }}
+                            </div>
                         </div>
 
                         <div>
@@ -169,7 +172,8 @@
                         <div>
                             <div class="halpha-text-xs halpha-text-gray-400">Created</div>
                             <div class="halpha-text-sm halpha-font-semibold halpha-text-white">
-                                {{ $selected->created_at->format('M d, Y H:i') }}</div>
+                                {{ $selected->created_at->format('M d, Y H:i') }}
+                            </div>
                         </div>
                     </div>
 
@@ -179,7 +183,8 @@
                         <div><strong class="halpha-text-gray-200">Notes:</strong> <span>{{ $selected->note ?? '—' }}</span>
                         </div>
                         <div><strong class="halpha-text-gray-200">Address:</strong>
-                            <span>{{ $selected->address ?? '—' }}</span></div>
+                            <span>{{ $selected->address ?? '—' }}</span>
+                        </div>
                     </div>
 
                     <div class="halpha-flex halpha-justify-end halpha-gap-2 halpha-mt-4">
@@ -197,24 +202,22 @@
 </div>
 
 <script>
-  function copyRefAndEmit(ref) {
+    function copyRefAndEmit(ref) {
         if (!ref) return;
-        // client copy
         if (navigator.clipboard) {
             navigator.clipboard.writeText(ref).then(() => {
-                // small toast
+                // toast
                 const t = document.createElement('div');
                 t.textContent = 'Reference copied';
                 t.className = 'halpha-fixed halpha-bottom-4 halpha-right-4 halpha-bg-gray-800 halpha-text-white halpha-p-2 halpha-rounded';
                 document.body.appendChild(t);
-                setTimeout(()=> t.remove(), 1600);
-            }).catch(()=>{ /* ignore */ });
+                setTimeout(() => t.remove(), 1600);
+            }).catch(() => {  });
         }
-        // also call Livewire for existing server-side handler
+
         if (window.Livewire) {
             Livewire.emit('requestCopyReference', ref);
         } else {
-            // fallback: trigger your custom browser event that your Livewire listener expects
             window.dispatchEvent(new CustomEvent('copy-ref', { detail: { ref } }));
         }
     }

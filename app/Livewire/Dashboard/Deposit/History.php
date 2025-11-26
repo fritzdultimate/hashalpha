@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
 class History extends Component {
-    // use WithPagination;
+    use WithPagination;
 
     public $search = '';
     public $status = '';
@@ -22,7 +22,7 @@ class History extends Component {
     // protected $updatesQueryString = ['search', 'status', 'page'];
 
     public function updated($prop) {
-        // $this->resetPage();
+        $this->resetPage();
     }
 
     public function showDetails($id){
