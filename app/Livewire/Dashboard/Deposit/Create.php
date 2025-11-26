@@ -115,33 +115,32 @@ class Create extends Component {
         $this->selectedWallet = $wallet;
     }
 
-
-    public function createInvoice($isOtp = false) {
-        if($isOtp && $this->otp === null) {
-            $this->addError('otp', 'Your OTP is required.');
-            return;
-        }
-
+    public function prepareDeposit() {
         $this->validate();
 
+        TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
+        $this->dispatch('otp-created', $this->invoice);
 
+    }
+
+
+    public function createPayment() {
         if(auth()->user()->hasUnsettledDeposit()) {
             $this->addError('general', 'You have an ongoing deposit transaction. Please finish it before creating a new one.');
             return;
         }
-
+        
         if($this->otp === null) {
-            TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
-            $this->dispatch('otp-created', $this->invoice);
-
+            $this->addError('otp', 'Your OTP is required.');
             return;
         }
 
         $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
         if(!$ok) {
-            $this->addError('otp', 'Your OTP is invalid.');
+            $this->addError('otp', 'Invalid or expired otp.');
             return;
         }
+
 
 
 

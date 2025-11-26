@@ -101,12 +101,11 @@ function depositPanel() {
 
         closePanel() {
             this.$wire.set('otp', null);
-            
+            window.dispatchEvent(new CustomEvent('reset-otp'));
+
             this.panelOpen = false;
             this.stopPolling();
             Livewire.dispatch('resetValues');
-
-            window.dispatchEvent(new CustomEvent('reset-otp'));
 
 
             setTimeout(() => {

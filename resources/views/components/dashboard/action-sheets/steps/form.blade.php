@@ -1,4 +1,4 @@
-<form wire:submit.prevent="createInvoice" class="halpha-space-y-3">
+<form wire:submit.prevent="prepareDeposit" class="halpha-space-y-3">
     <div 
         x-data="currencySelector({
             initial: { currency: @js($selectedCurrency ?? 'btc'), label: @js($selectedLabel ?? 'Bitcoin'), icon: @js($selectedIcon ?? 'icon-btc'), bg: @js($selectedBg ?? 'halpha-bg-btc') },
@@ -166,8 +166,8 @@
         <button 
             type="submit" 
             class="halpha-flex-1 halpha-py-2.5 halpha-rounded-xl halpha-bg-accent-3 halpha-text-white halpha-font-medium halpha-w-full">
-                <span wire:loading.remove wire:target="createInvoice">Continue</span>
-                <x-ri-loader-4-fill wire:loading wire:target="createInvoice" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
+                <span wire:loading.remove wire:target="prepareDeposit">Continue</span>
+                <x-ri-loader-4-fill wire:loading wire:target="prepareDeposit" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
         </button>
 
         <button type="button" @click="closePanel()" class="halpha-px-4 halpha-py-2 halpha-rounded-xl halpha-border halpha-border-gray-600 halpha-text-gray-300 halpha-w-full">Cancel</button>

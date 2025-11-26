@@ -16,9 +16,9 @@
     </div>
 
     <div class="halpha-flex halpha-flex-col halpha-w-full halpha-items-center halpha-gap-2">
-        <button wire:click="createInvoice(true)" class="halpha-flex-1 halpha-py-2 halpha-rounded halpha-bg-accent-3 halpha-text-white halpha-w-full">
-            <span wire:loading.remove wire:target="createInvoice">Verify</span>
-            <x-ri-loader-4-fill wire:loading wire:target="createInvoice" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
+        <button wire:click="createPayment" class="halpha-flex-1 halpha-py-2 halpha-rounded halpha-bg-accent-3 halpha-text-white halpha-w-full">
+            <span wire:loading.remove wire:target="createPayment">Verify</span>
+            <x-ri-loader-4-fill wire:loading wire:target="createPayment" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
         </button>
 
         <button @click="closePanel()"
