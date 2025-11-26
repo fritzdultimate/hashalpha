@@ -66,6 +66,7 @@ function otpComponent() {
             window.addEventListener('focus-input', this._parentHandler);
 
             window.addEventListener('reset-otp', () => {
+                alert('otp reset');
                 this.boxes = ['', '', '', ''];
                 this.syncToLivewire();
                 // focus first input
