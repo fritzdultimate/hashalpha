@@ -118,6 +118,11 @@ class Create extends Component {
     public function prepareDeposit() {
         $this->validate();
 
+        if(auth()->user()->hasUnsettledDeposit()) {
+            $this->addError('general', 'You have an ongoing deposit transaction. Please finish it before creating a new one.');
+            return;
+        }
+
         TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
         $this->dispatch('otp-created', $this->invoice);
 
@@ -125,11 +130,7 @@ class Create extends Component {
 
 
     public function createPayment() {
-        if(auth()->user()->hasUnsettledDeposit()) {
-            $this->addError('general', 'You have an ongoing deposit transaction. Please finish it before creating a new one.');
-            return;
-        }
-        
+
         if($this->otp === null) {
             $this->addError('otp', 'Your OTP is required.');
             return;
