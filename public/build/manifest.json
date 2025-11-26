@@ -7,6 +7,14 @@
       "app.css"
     ]
   },
+  "resources/css/crypto-icons/styles.css": {
+    "file": "assets/styles-4qsOh5cC.css",
+    "src": "resources/css/crypto-icons/styles.css",
+    "isEntry": true,
+    "names": [
+      "styles.css"
+    ]
+  },
   "resources/css/landing-styles.css": {
     "file": "assets/landing-styles-D9Vx-BT2.css",
     "src": "resources/css/landing-styles.css",
