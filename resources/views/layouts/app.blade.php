@@ -94,7 +94,7 @@
                     ],
                     [
                         "url" => "",
-                        "label" => "Deposit & Stakes",
+                        "label" => "Deposit",
                         'icon' => 'fas-coins',
                         "children" => [
                             [
@@ -102,13 +102,9 @@
                                 "label" => "Create Deposit"
                             ],
                             [
-                                "url" => route('deposit.approved'),
-                                "label" => "Approved"
+                                "url" => route('deposit.history'),
+                                "label" => "History"
                             ],
-                            [
-                                "url" => route('deposit.denied'),
-                                "label" => "Denied"
-                            ]
                         ],
                         'route' => 'deposit'
 

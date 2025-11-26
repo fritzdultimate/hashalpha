@@ -12,7 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/deposit/create', CreateDeposit::class)->name('deposit.create');
-    Route::get('/deposit/approved', Overview::class)->name('deposit.approved');
+    Route::get('/deposit/history', Overview::class)->name('deposit.history');
     Route::get('/deposit/denied', Overview::class)->name('deposit.denied');
 });
 

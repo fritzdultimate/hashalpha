@@ -11,7 +11,8 @@
     @endphp
 
     <div
-        class="halpha-w-full halpha-max-w-[480px] halpha-shadow-lg halpha-min-h-screen halpha-py-5 halpha-flex halpha-flex-col halpha-gap-5">
+        class="halpha-w-full halpha-max-w-[480px] halpha-shadow halpha-shadow-white/20 halpha-min-h-screen halpha-py-5 halpha-flex halpha-flex-col halpha-gap-5 halpha-p-2 md:halpha-p-6"
+    >
         <x-dashboard.partials.micro-header />
         <x-dashboard.search-data />
         <span>{{ $search }}</span>
