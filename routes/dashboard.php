@@ -3,6 +3,7 @@ use App\Http\Controllers\NowPaymentsController;
 use App\Http\Controllers\ProfileController;
 
 use App\Livewire\Dashboard\Deposit\Create as CreateDeposit;
+use App\Livewire\Dashboard\Deposit\History as DepositHistory;
 use App\Livewire\Dashboard\Overview;
 use Illuminate\Support\Facades\Route;
 
@@ -12,8 +13,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/deposit/create', CreateDeposit::class)->name('deposit.create');
-    Route::get('/deposit/history', Overview::class)->name('deposit.history');
-    Route::get('/deposit/denied', Overview::class)->name('deposit.denied');
+    Route::get('/deposit/history', DepositHistory::class)->name('deposit.history');
+    Route::get('/deposit/denied', DepositHistory::class)->name('deposit.denied');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

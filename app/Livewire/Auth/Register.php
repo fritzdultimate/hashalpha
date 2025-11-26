@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 #[Layout('layouts.auth')]
 class Register extends Component {
-    public $fullname = 'Nwosu Darlington';
-    public $email = 'fritzdultimate@gmail.com';
-    public $password = '123456';
+    public $fullname = '';
+    public $email = '';
+    public $password = '';
     public $terms = false;
     public $remember = false;
     public $statusMessage = null;
