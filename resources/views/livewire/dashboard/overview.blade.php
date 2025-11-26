@@ -68,19 +68,19 @@
         if (!el) return;
 
 
-        const data = [4, -2, 3, 1, -6, 5, 2, -3, 4, 3, -1, 6, 4, 4, 4, 4, -10, -12];
+        const data = [4, 3, 1, 5, 2, 4, 3, 6, 4, 4, 4, 4];
 
         const colors = data.map(v => v >= 0 ? '#10b981' : '#ef4444');
         const options = {
             series: [{ name: 'Daily', data }],
             chart: {
-                type: 'bar',
+                type: 'area',
                 height: 120,
                 sparkline: { enabled: true },
                 toolbar: { show: false }
             },
             plotOptions: {
-                bar: { columnWidth: '80%', borderRadius: 2, distributed: true }
+                bar: { columnWidth: '80%', borderRadius: 0.5, distributed: true }
             },
             colors,
             tooltip: {
