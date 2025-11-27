@@ -214,11 +214,5 @@
                 setTimeout(() => t.remove(), 1600);
             }).catch(() => {  });
         }
-
-        if (window.Livewire) {
-            Livewire.emit('requestCopyReference', ref);
-        } else {
-            window.dispatchEvent(new CustomEvent('copy-ref', { detail: { ref } }));
-        }
     }
 </script>
