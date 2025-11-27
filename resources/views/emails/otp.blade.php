@@ -1,10 +1,10 @@
 <x-mail::message>
     # Your OTP Code
 
-    Your one-time password is: **{{ $otp }}**
+    Your one-time password is: {{ $otp }}
 
     <x-mail::button :url="''">
-        ** {{ $otp }} **
+        {{ $otp }}
     </x-mail::button>
 
     It is valid for 10 minutes.
