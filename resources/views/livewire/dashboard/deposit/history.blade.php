@@ -46,7 +46,7 @@
         <ul class="halpha-space-y-3">
             @forelse ($transactions as $tx)
                 @php
-                    $ref = 'd1hhdffeue7366x23543829392d992';
+                    $ref = $tx->address;
                     // create short form: first 10 chars + ... + last 6 chars (only if longer)
                     $shortRef = strlen($ref) > 18 ? substr($ref, 0, 10) . '...' . substr($ref, -6) : $ref;
                 @endphp
