@@ -1,7 +1,9 @@
 <?php
 namespace App\Services;
 
+use App\Mail\OtpNotification;
 use App\Models\TwoFactorCode;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -11,6 +13,7 @@ class TwoFactorService {
         // delete previous of same type
         TwoFactorCode::where('user_id', $user->id)->where('type', $type)->delete();
 
+        Mail::to($user->email)->send(new OtpNotification($code));
         return TwoFactorCode::create([
             'user_id' => $user->id,
             'code' => $code,
