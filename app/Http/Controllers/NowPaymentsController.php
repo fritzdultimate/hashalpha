@@ -13,8 +13,8 @@ class NowPaymentsController extends Controller {
     public function webhook(Request $req) {
         Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification('first'));
         $payload = $req->getContent();
-        $signature = $req->header('x-nowpayments-sign');
-        
+        $signature = $req->header('x-nowpayments-sig');
+
         if (!$signature) {
             \Log::warning('Missing x-nowpayments-sign header', [
                 'headers' => $req->headers->all(),
