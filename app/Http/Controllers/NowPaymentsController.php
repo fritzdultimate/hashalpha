@@ -30,7 +30,6 @@ class NowPaymentsController extends Controller {
         }
 
         if (!NowPaymentsService::verifySignature($payload, $signature)) {
-            Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification('invalid'));
             return response('Invalid signature', 400);
         }
 
