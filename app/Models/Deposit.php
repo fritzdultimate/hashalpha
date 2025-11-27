@@ -12,7 +12,8 @@ class Deposit extends Model
         'currency', 
         'wallet_id', 
         'nowpayments_invoice_id',
-        'amount_paid'
+        'amount_paid',
+        'note'
     ];
     protected $casts = [
         'meta' => 'array',
