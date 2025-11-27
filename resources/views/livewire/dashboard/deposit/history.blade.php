@@ -164,9 +164,9 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="halpha-flex halpha-flex-col halpha-gap-2 halpha-items-center">
                             <div class="halpha-text-xs halpha-text-gray-400">Status</div>
-                            <div class="halpha-text-sm halpha-font-semibold {{ $statusClasses[$selected->status] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }}">{{ $selected->status }}</div>
+                            <div class="halpha-text-sm halpha-font-semibold {{ $statusClasses[$selected->status] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }} halpha-inline-block halpha-px-3 halpha-py-0.5 halpha-rounded-full halpha-shadow">{{ $selected->status }}</div>
                         </div>
 
                         <div>
