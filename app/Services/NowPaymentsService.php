@@ -65,7 +65,8 @@ class NowPaymentsService {
         \Log::info('nowpayments expected', [
             'expected_hex_len' => strlen($expected_hex),
             'expected_hex_prefix' => substr($expected_hex, 0, 24) . '...',
-            'received_prefix' => is_string($receivedSignature) ? substr($receivedSignature, 0, 24) . '...' : json_encode($signatureHeader)
+            'received_prefix' => is_string($receivedSignature) ? substr($receivedSignature, 0, 24) . '...' : json_encode($receivedSignature),
+            'len' => strlen(self::$ipnSecret),
         ]);
 
         if ($receivedSignature === null) {
