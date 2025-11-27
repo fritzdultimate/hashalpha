@@ -4,36 +4,37 @@
 
 
 :root {
-  /* Light theme (investment-friendly): clean neutrals with navy/teal accent */
   --halpha-bg: #f7fafc;
-  /* very light gray */
   --halpha-surface: #ffffff;
-  /* card background */
   --halpha-muted: #6b7280;
-  /* gray-500 */
   --halpha-accent: #0f172a;
-  /* navy-900 for headings */
   --halpha-accent-2: #0ea5a4;
-  /* teal-ish */
   --halpha-success: #10b981;
   --halpha-danger: #ef4444;
   --halpha-sidebar-bg: #0f172a;
   --halpha-sidebar-text: #cbd5e1;
   --halpha-header-bg: #020617;
   --halpha-backdrop: rgba(2, 6, 23, 0.6);
+
+  --halpha-radius: 12px;
+  --halpha-radius-sm: 8px;
+  --halpha-gap: 12px;
+  --halpha-muted-2: #9ca3af;       /* gray-400 */
+  --halpha-focus: 2px solid rgba(34,211,238,0.18); /* subtle aqua focus */
+  --halpha-elev-1: 0 4px 14px rgba(2,6,23,0.5);
+  --halpha-success-weak: rgba(52,211,153,0.12);
+  --halpha-danger-weak: rgba(239,68,68,0.12);
+  --halpha-ghost: rgba(255,255,255,0.03);
+  --halpha-muted-bg: rgba(255,255,255,0.02);
 }
 
 
 /* Dark theme variables - default */
 .halpha-theme-dark {
   --halpha-bg: #121212;
-  /* deep navy */
   --halpha-surface: #071a2b;
-  /* slightly lighter panel */
   --halpha-muted: rgba(255 255 255 / 0.45);
-  /* muted text */
   --halpha-accent: #e6f6ff;
-  /* light text */
   --halpha-accent-2: #22d3ee;
   --halpha-accent-3: #055966;
   --halpha-accent-2-darker: #001d21;
@@ -43,6 +44,7 @@
   --halpha-sidebar-text: #9fb4c9;
   --halpha-header-bg: #021028;
   --halpha-backdrop: rgba(2, 10, 24, 0.7);
+  --halpha-card-border: rgba(255,255,255,0.04);
 
   --halpha-card-bg: #1e1e1e;
 
@@ -51,6 +53,14 @@
   --halpha-card-bg-deeper-black: #000000;
 
 }
+
+.halpha-card { 
+  background: var(--halpha-card-bg); 
+  border-radius: var(--halpha-radius); 
+  box-shadow: var(--halpha-elev-1); 
+}
+.halpha-focus:focus{ outline: none; box-shadow: var(--halpha-focus); border-radius: var(--halpha-radius-sm); }
+.halpha-truncate-2 { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .halpha-pagination .flex button,
 .halpha-pagination .flex span {

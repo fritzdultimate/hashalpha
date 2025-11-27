@@ -112,7 +112,7 @@
                                 "label" => "Deposit"
                             ],
                             [
-                                "url" => route('deposit.history'),
+                                "url" => route('staking.stake'),
                                 "label" => "My Stakes"
                             ],
                             [

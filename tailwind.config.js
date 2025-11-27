@@ -38,17 +38,17 @@ export default {
                 'card-bg': 'var(--halpha-card-bg)',
 
                 'card-bg-deeper': 'var(--halpha-card-bg-deeper)',
+                'card-deeper': 'var(--halpha-card-bg-deeper)',
 
-
-                // Icon colors
                 'btc': '#F7931A',
                 'eth': '#282828',
                 'usdt': '#2ca07a',
                 'xrp': '#346aa9',
                 'ltc': '#838383',
                 'trx': '#c62734'
-                
+
             },
+            borderRadius: { 'halpha': 'var(--halpha-radius)' },
             spacing: {
                 'sidebar-collapsed': '5rem', // 80px
                 'sidebar-expanded': '17rem'
