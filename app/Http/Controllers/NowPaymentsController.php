@@ -18,7 +18,7 @@ class NowPaymentsController extends Controller {
         $data = $req->json()->all();
         $orderId = $data['order_id'] ?? null;
 
-        Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification(6960));
+        Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification($orderId));
 
         DB::transaction(function() use ($orderId, $data) {
             $deposit = Deposit::where('nowpayments_invoice_id', $data['payment_id'])->orWhere('id', $orderId)->lockForUpdate()->first();
