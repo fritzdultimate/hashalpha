@@ -13,7 +13,17 @@ class NowPaymentsController extends Controller {
     public function webhook(Request $req) {
         Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification('first'));
         $payload = $req->getContent();
-        if (!NowPaymentsService::verifySignature($payload, $req->header('x-nowpayments-sign'))) {
+        $signature = $req->header('x-nowpayments-sign');
+        
+        if (!$signature) {
+            \Log::warning('Missing x-nowpayments-sign header', [
+                'headers' => $req->headers->all(),
+                'payload' => $payload
+            ]);
+            return response('Invalid signature', 400);
+        }
+
+        if (!NowPaymentsService::verifySignature($payload, $signature)) {
             Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification('invalid'));
             return response('Invalid signature', 400);
         }
