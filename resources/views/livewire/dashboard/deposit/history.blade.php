@@ -1,6 +1,6 @@
 <div class="halpha-w-full halpha-min-h-screen halpha-flex halpha-justify-center halpha-bg-transparent halpha-py-6">
     <div
-        class="halpha-w-full halpha-max-w-[900px] halpha-shadow halpha-shadow-white/10 halpha-bg-gray-900 halpha-rounded-xl halpha-p-4 halpha-space-y-4">
+        class="halpha-w-full halpha-max-w-[900px] halpha-shadow halpha-shadow-white/10 halpha-bg-gray-900 halpha-rounded-xl md:halpha-p-4 halpha-space-y-4">
 
         <header class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-4">
             <h1 class="halpha-text-lg halpha-font-semibold halpha-text-white">Transaction history</h1>
