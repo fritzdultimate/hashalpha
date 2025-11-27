@@ -66,7 +66,7 @@ class NowPaymentsService {
             'expected_hex_len' => strlen($expected_hex),
             'expected_hex_prefix' => substr($expected_hex, 0, 24) . '...',
             'received_prefix' => is_string($receivedSignature) ? substr($receivedSignature, 0, 24) . '...' : json_encode($receivedSignature),
-            'len' => strlen(self::$ipnSecret),
+            'len' => strlen(env("NOWPAYMENT_IPN_KEY")),
         ]);
 
         if ($receivedSignature === null) {
