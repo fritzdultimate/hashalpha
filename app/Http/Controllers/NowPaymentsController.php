@@ -14,11 +14,12 @@ class NowPaymentsController extends Controller {
         $payload = $req->getContent();
         $signature = $req->header('x-nowpayments-sig');
 
-        \Log::info('nowpayments debug', [
-            'header_raw'   => $signature,
-            'header_type'  => is_array($signature) ? 'array' : gettype($signature),
-            'payload_len'  => strlen($payload),
-            // do NOT log the secret itself
+        \Log::info('nowpayments debug pre-verify', [
+            'header_raw'  => $signature,
+            'header_type' => is_array($signature) ? 'array' : gettype($signature),
+            'payload_len' => strlen($payload),
+            // Partial payload for inspection (redact sensitive fields if needed)
+            'payload_preview' => substr($payload, 0, 300)
         ]);
 
         if (!$signature) {
