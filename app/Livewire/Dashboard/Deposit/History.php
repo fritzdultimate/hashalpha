@@ -25,6 +25,20 @@ class History extends Component {
         $this->resetPage();
     }
 
+    public function mapCurrencyLabel($currency) {
+        $nameMap = [
+            'BTC'  => 'Bitcoin',
+            'ETH'  => 'Ethereum',
+            'LTC'  => 'Litecoin',
+            'TRX'  => 'TRON',
+            'USDTTRC20' => 'Tether',
+            'USDERRC20' => 'Tether',
+            'USDC' => 'USD Coin',
+        ];
+        
+        return $nameMap[\strtoupper($currency)] ?? null;
+    }
+
     public function showDetails($id){
         $this->selected = Deposit::find($id);
         $this->showModal = (bool) $this->selected;

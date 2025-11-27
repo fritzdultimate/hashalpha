@@ -23,7 +23,7 @@ class NowPaymentsController extends Controller {
             $deposit = Deposit::where('nowpayments_invoice_id', $data['payment_id'])->orWhere('id', $orderId)->lockForUpdate()->first();
             if (!$deposit) return;
             // map status
-            $status = $data['status']; // 'confirmed', 'waiting', etc.
+            $status = $data['status'];
             $deposit->status = $status;
             $deposit->tx_id = $data['pay_address'] ?? $data['tx_hash'] ?? $deposit->tx_id;
             $deposit->confirmations = $data['confirmations'] ?? $deposit->confirmations;

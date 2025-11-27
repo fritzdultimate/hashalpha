@@ -17,7 +17,7 @@ class DepositController extends Controller {
 
         $deposit->status = $details["payment_status"] ?? $deposit->status;
         $deposit->tx_hash = $details["payin_hash"] ?? $deposit->tx_hash;
-        $deposit->amount = $details["actually_paid"] ?? $deposit->amount;
+        $deposit->amount_paid = $details["actually_paid"] ?? $deposit->amount_paid;
         $deposit->save();
 
         $details["created_at"] = $deposit->created_at;

@@ -68,7 +68,7 @@
 
                         <div class="halpha-min-w-0">
                             <div class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-truncate">
-                                {{ $tx->label ?? 'Bitcoin' }}
+                                {{ $this->mapCurrencyLabel($tx->currency) ?? 'Bitcoin' }}
                             </div>
                             {{-- short reference ensures no overflow on mobile --}}
                             <div class="halpha-text-xs halpha-text-gray-400 halpha-truncate" title="{{ $ref }}">
@@ -79,14 +79,14 @@
 
                     {{-- Amount (fixed column) --}}
                     <div
-                        class="halpha-text-sm halpha-font-semibold halpha-text-white/30 halpha-w-full md:halpha-col-span-1 halpha-flex halpha-justify-end md:halpha-justify-start halpha-items-center halpha-flex-none halpha-whitespace-nowrap md:halpha-ml-6">
+                        class="halpha-text-sm halpha-font-semibold halpha-text-white/30 halpha-w-full md:halpha-col-span-1 halpha-flex halpha-justify-end md:halpha-justify-start halpha-items-center halpha-flex-none halpha-whitespace-nowrap">
                         ${{ number_format($tx->amount, 2) }}
                     </div>
 
                     {{-- Network / Currency (desktop only) --}}
                     <div
                         class="halpha-hidden md:halpha-flex md:halpha-items-center md:halpha-col-span-1 halpha-text-xs halpha-text-gray-300 halpha-truncate">
-                        {{ $tx->network ?? '—' }} &middot; {{ $tx->currency ?? '—' }}
+                        {{ $tx->currency ?? '—' }} &middot;  {{ $this->mapCurrencyLabel($tx->currency) }}
                     </div>
 
                     {{-- Date --}}
@@ -97,11 +97,17 @@
                     {{-- Status + Actions --}}
                     <div class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-3 md:halpha-col-span-2">
                         <div class="halpha-flex halpha-items-center halpha-gap-2">
+                            @php
+                                $statusClasses = [
+                                    'completed' => 'halpha-text-green-400 halpha-bg-green-900/20',
+                                    'pending'   => 'halpha-text-yellow-300 halpha-bg-yellow-900/20',
+                                    'waiting'   => 'halpha-text-orange-300 halpha-bg-orange-900/20',
+                                    'failed'    => 'halpha-text-red-400 halpha-bg-red-900/20',
+                                ];
+                            @endphp
                             <span
-                                class="@if($tx->status == 'completed') halpha-text-green-400 halpha-bg-green-900/10 halpha-px-2 halpha-py-1 halpha-rounded-full 
-                                @elseif($tx->status == 'pending') halpha-text-yellow-300 halpha-bg-yellow-900/10 halpha-px-2 halpha-py-1 halpha-rounded-full 
-                                    @else halpha-text-red-400 halpha-bg-red-900/10 halpha-px-2 halpha-py-1 halpha-rounded-full @endif halpha-text-xs halpha-font-semibold halpha-uppercase">
-                                {{ strtoupper($tx->status) }}
+                                class="{{ $statusClasses[$tx->status] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }} halpha-px-2 halpha-py-1 halpha-rounded-full halpha-text-xs halpha-font-semibold">
+                                {{ strtolower($tx->status) }}
                             </span>
                         </div>
 
