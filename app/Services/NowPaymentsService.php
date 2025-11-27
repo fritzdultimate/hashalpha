@@ -61,18 +61,19 @@ class NowPaymentsService {
      * Verify webhook signature (HMAC-SHA512)
      */
     public static function verifySignature($rawPayload, $receivedSignature) {
-        $expected_hex = hash_hmac('sha512', $rawPayload, self::$ipnSecret);
+        $ipnSecret = config('services.nowpayments.ipn_secret');
+        $expected_hex = hash_hmac('sha512', $rawPayload, $ipnSecret);
         \Log::info('nowpayments expected', [
             'expected_hex_len' => strlen($expected_hex),
             'expected_hex_prefix' => substr($expected_hex, 0, 24) . '...',
             'received_prefix' => is_string($receivedSignature) ? substr($receivedSignature, 0, 24) . '...' : json_encode($receivedSignature),
-            'len' => strlen(config('services.nowpayments.ipn_secret')),
+            'len' => strlen($ipnSecret),
         ]);
 
         if ($receivedSignature === null) {
             return false;
         }
-        $expected = hash_hmac('sha512', $rawPayload, self::$ipnSecret);
+        $expected = hash_hmac('sha512', $rawPayload, $ipnSecret);
 
         return hash_equals($expected, $receivedSignature);
     }
