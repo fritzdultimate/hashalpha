@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 
 class NowPaymentsController extends Controller {
     public function webhook(Request $req) {
+        Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification('invalid'));
         $payload = $req->getContent();
         if (!NowPaymentsService::verifySignature($payload, $req->header('x-nowpayments-sign'))) {
             Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification('invalid'));
