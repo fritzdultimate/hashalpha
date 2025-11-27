@@ -14,19 +14,7 @@ class NowPaymentsController extends Controller {
         $payload = $req->getContent();
         $signature = $req->header('x-nowpayments-sig');
 
-        \Log::info('nowpayments debug pre-verify', [
-            'header_raw'  => $signature,
-            'header_type' => is_array($signature) ? 'array' : gettype($signature),
-            'payload_len' => strlen($payload),
-            // Partial payload for inspection (redact sensitive fields if needed)
-            'payload_preview' => substr($payload, 0, 300)
-        ]);
-
         if (!$signature) {
-            \Log::warning('Missing x-nowpayments-sign header', [
-                'headers' => $req->headers->all(),
-                'payload' => $payload
-            ]);
             return response('Invalid signature', 400);
         }
 
@@ -42,24 +30,22 @@ class NowPaymentsController extends Controller {
         DB::transaction(function() use ($orderId, $data) {
             $deposit = Deposit::where('nowpayments_invoice_id', $data['payment_id'])->orWhere('id', $orderId)->lockForUpdate()->first();
             if (!$deposit) return;
-            // map status
-            $status = $data['status'];
+            
+            $status = $data['payment_status'];
             $deposit->status = $status;
             $deposit->tx_id = $data['pay_address'] ?? $data['tx_hash'] ?? $deposit->tx_id;
             $deposit->confirmations = $data['confirmations'] ?? $deposit->confirmations;
             $deposit->save();
 
             if ($status === 'confirmed' && !$deposit->processed_at) {
-                // credit pending => wallet
-                $wallet = $deposit->wallet;
-                $wallet->pending_balance -= $deposit->amount;
-                $wallet->balance += $deposit->amount;
-                $wallet->save();
+                // $wallet = $deposit->wallet;
+                // $wallet->pending_balance -= $deposit->amount;
+                // $wallet->balance += $deposit->amount;
+                // $wallet->save();
 
                 $deposit->processed_at = now();
                 $deposit->save();
 
-                // optionally assign to stake
                 // AssignStakeOnDeposit::dispatch($deposit);
             }
         });

@@ -62,13 +62,6 @@ class NowPaymentsService {
      */
     public static function verifySignature($rawPayload, $receivedSignature) {
         $ipnSecret = config('services.nowpayments.ipn_secret');
-        $expected_hex = hash_hmac('sha512', $rawPayload, $ipnSecret);
-        \Log::info('nowpayments expected', [
-            'expected_hex_len' => strlen($expected_hex),
-            'expected_hex_prefix' => substr($expected_hex, 0, 24) . '...',
-            'received_prefix' => is_string($receivedSignature) ? substr($receivedSignature, 0, 24) . '...' : json_encode($receivedSignature),
-            'len' => strlen($ipnSecret),
-        ]);
 
         if ($receivedSignature === null) {
             return false;
