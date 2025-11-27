@@ -161,7 +161,8 @@ class Create extends Component {
                 'wallet_id' => $wallet->id,
                 'currency' => $this->network,
                 'amount' => $this->amount,
-                'status' => 'waiting'
+                'status' => 'waiting',
+                'note' => $this->note
             ]);
  
 
