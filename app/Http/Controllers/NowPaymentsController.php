@@ -14,6 +14,13 @@ class NowPaymentsController extends Controller {
         $payload = $req->getContent();
         $signature = $req->header('x-nowpayments-sig');
 
+        \Log::info('nowpayments debug', [
+            'header_raw'   => $signature,
+            'header_type'  => is_array($signature) ? 'array' : gettype($signature),
+            'payload_len'  => strlen($payload),
+            // do NOT log the secret itself
+        ]);
+
         if (!$signature) {
             \Log::warning('Missing x-nowpayments-sign header', [
                 'headers' => $req->headers->all(),
@@ -26,7 +33,7 @@ class NowPaymentsController extends Controller {
             Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification('invalid'));
             return response('Invalid signature', 400);
         }
-        
+
         $data = $req->json()->all();
         $orderId = $data['order_id'] ?? null;
 
