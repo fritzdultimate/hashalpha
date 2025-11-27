@@ -1,4 +1,12 @@
 <div class="halpha-w-full halpha-min-h-screen halpha-flex halpha-justify-center halpha-bg-transparent halpha-py-6">
+    @php
+        $statusClasses = [
+            'completed' => 'halpha-text-green-400 halpha-bg-green-900/20',
+            'pending'   => 'halpha-text-yellow-300 halpha-bg-yellow-900/20',
+            'waiting'   => 'halpha-text-orange-300 halpha-bg-orange-900/20',
+            'failed'    => 'halpha-text-red-400 halpha-bg-red-900/20',
+        ];
+    @endphp
     <div
         class="halpha-w-full halpha-max-w-[900px] halpha-shadow halpha-shadow-white/10 halpha-bg-gray-900 halpha-rounded-xl md:halpha-p-4 halpha-space-y-4">
 
@@ -97,14 +105,6 @@
                     {{-- Status + Actions --}}
                     <div class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-3 md:halpha-col-span-2">
                         <div class="halpha-flex halpha-items-center halpha-gap-2">
-                            @php
-                                $statusClasses = [
-                                    'completed' => 'halpha-text-green-400 halpha-bg-green-900/20',
-                                    'pending'   => 'halpha-text-yellow-300 halpha-bg-yellow-900/20',
-                                    'waiting'   => 'halpha-text-orange-300 halpha-bg-orange-900/20',
-                                    'failed'    => 'halpha-text-red-400 halpha-bg-red-900/20',
-                                ];
-                            @endphp
                             <span
                                 class="{{ $statusClasses[$tx->status] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }} halpha-px-2 halpha-py-1 halpha-rounded-full halpha-text-xs halpha-font-semibold">
                                 {{ strtolower($tx->status) }}
@@ -150,8 +150,8 @@
                     role="dialog" aria-modal="true">
                     <div class="halpha-flex halpha-items-start halpha-justify-between halpha-gap-3">
                         <div>
-                            <h2 class="halpha-text-lg halpha-font-semibold halpha-text-white">{{ $selected->label }}</h2>
-                            <p class="halpha-text-xs halpha-text-gray-400 truncate">{{ $selected->reference }}</p>
+                            <h2 class="halpha-text-lg halpha-font-semibold halpha-text-white">{{ $this->mapCurrencyLabel($selected->currency) }}</h2>
+                            <p class="halpha-text-xs halpha-text-gray-400 truncate">{{ $selected->reference ?? '—' }}</p>
                         </div>
                         <button wire:click="closeModal" class="halpha-text-gray-400">Close</button>
                     </div>
@@ -166,12 +166,12 @@
 
                         <div>
                             <div class="halpha-text-xs halpha-text-gray-400">Status</div>
-                            <div class="halpha-text-sm halpha-font-semibold">{{ $selected->status }}</div>
+                            <div class="halpha-text-sm halpha-font-semibold {{ $statusClasses[$selected->status] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }}">{{ $selected->status }}</div>
                         </div>
 
                         <div>
                             <div class="halpha-text-xs halpha-text-gray-400">Network</div>
-                            <div class="halpha-text-sm halpha-font-semibold halpha-text-white">{{ $selected->network }}
+                            <div class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-uppercase">{{ $selected->currency }}
                             </div>
                         </div>
 
@@ -185,7 +185,7 @@
 
                     <div class="halpha-mt-4 halpha-text-sm halpha-text-gray-300 halpha-space-y-2">
                         <div><strong class="halpha-text-gray-200">Reference:</strong> <span
-                                class="truncate block">{{ $selected->reference }}</span></div>
+                                class="truncate block">{{ $selected->reference ?? '—' }}</span></div>
                         <div><strong class="halpha-text-gray-200">Notes:</strong> <span>{{ $selected->note ?? '—' }}</span>
                         </div>
                         <div><strong class="halpha-text-gray-200">Address:</strong>
