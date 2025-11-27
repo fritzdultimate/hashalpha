@@ -40,7 +40,8 @@
             <div class="halpha-text-xs halpha-text-gray-400">Claimable</div>
             <div class="halpha-flex halpha-items-center halpha-justify-between">
                 <div class="halpha-text-lg halpha-font-bold halpha-text-white">
-                    {{ number_format((float) $withdrawable, 8) }}</div>
+                    {{ number_format((float) $withdrawable, 8) }}
+                </div>
                 <button wire:click="claimAll"
                     class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold"
                     aria-label="Claim all rewards">
@@ -68,6 +69,15 @@
             </select>
         </div>
     </div>
+
+    @if($withdrawable > 0)
+        <div class="halpha-flex halpha-justify-end halpha-mb-3">
+            <button wire:click="withdrawAll"
+                class="halpha-px-4 halpha-py-2 halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-rounded-lg halpha-text-sm">
+                Withdraw All
+            </button>
+        </div>
+    @endif
 
     <!-- Earnings list -->
     <div class="halpha-space-y-3">
@@ -103,7 +113,8 @@
                     <div class="halpha-card halpha-p-3 halpha-flex halpha-items-start halpha-justify-between halpha-gap-3">
                         <div class="halpha-min-w-0">
                             <div class="halpha-flex halpha-items-center halpha-gap-2">
-                                <div class="halpha-text-xs halpha-text-gray-400">{{ ucfirst(str_replace('_', ' ', $tx->type)) }}</div>
+                                <div class="halpha-text-xs halpha-text-gray-400">{{ ucfirst(str_replace('_', ' ', $tx->type)) }}
+                                </div>
                                 @if(isset($tx->meta['stake_id']))
                                     <div class="halpha-text-xs halpha-text-gray-500">• Stake #{{ $tx->meta['stake_id'] }}</div>
                                 @endif

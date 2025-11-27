@@ -47,7 +47,7 @@ class EarningsPage extends Component
         $q = Transaction::query()
             ->where('user_id', auth()->id())
             // only earnings-related types
-            ->whereIn('type', ['stake_reward','stake_reward_claim','stake_compound']);
+            ->whereIn('type', ['stake_reward', 'stake_reward_claim', 'stake_compound']);
 
         if ($this->filter === 'claimable') {
             // we'll prefer to show transactions representing claimable rewards:
@@ -58,10 +58,10 @@ class EarningsPage extends Component
         }
 
         if (!empty($this->search)) {
-            $q->where(function($sub) {
-                $sub->where('meta->stake_id', 'like', '%'.$this->search.'%')
-                    ->orWhere('meta->plan_id', 'like', '%'.$this->search.'%')
-                    ->orWhere('type', 'like', '%'.$this->search.'%');
+            $q->where(function ($sub) {
+                $sub->where('meta->stake_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('meta->plan_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('type', 'like', '%' . $this->search . '%');
             });
         }
 
@@ -76,23 +76,23 @@ class EarningsPage extends Component
         $user = auth()->user();
 
         // sum withdrawable across user's active stakes
-        $sum = $user->stakes()->where('status','active')->sum('withdrawable_decimal');
+        $sum = $user->stakes()->where('status', 'active')->sum('withdrawable_decimal');
 
-        if (bccomp((string)$sum, '0', 8) <= 0) {
+        if (bccomp((string) $sum, '0', 8) <= 0) {
             $this->dispatchBrowserEvent('toast', ['message' => 'No rewards available to claim']);
             return;
         }
 
-        DB::transaction(function() use ($user, $sum) {
+        DB::transaction(function () use ($user, $sum) {
             // lock user row
             $u = $user->lockForUpdate()->first();
             $before = $u->balance_decimal;
-            $after = bcadd($before, (string)$sum, 8);
+            $after = bcadd($before, (string) $sum, 8);
             $u->balance_decimal = $after;
             $u->save();
 
             // zero withdrawable on all stakes and record transactions per stake
-            $stakes = $u->stakes()->where('status','active')->lockForUpdate()->get();
+            $stakes = $u->stakes()->where('status', 'active')->lockForUpdate()->get();
             foreach ($stakes as $stake) {
                 if (bccomp($stake->withdrawable_decimal, '0', 8) > 0) {
                     $amt = $stake->withdrawable_decimal;
@@ -118,6 +118,49 @@ class EarningsPage extends Component
         $this->emit('refreshDashboard');
     }
 
+    public function withdrawAll()
+    {
+        $user = auth()->user();
+        $withdrawable = $user->stakes()->where('status', 'active')->sum('withdrawable_decimal');
+
+        if (bccomp($withdrawable, '0', 8) <= 0) {
+            $this->dispatchBrowserEvent('toast', ['message' => 'No withdrawable rewards']);
+            return;
+        }
+
+        // Optional early withdrawal fee
+        $feePercentage = 2; // 2%
+        $fee = bcmul((string) $withdrawable, bcdiv((string) $feePercentage, '100', 8), 8);
+        $final = bcsub((string) $withdrawable, $fee, 8);
+
+        DB::transaction(function () use ($user, $final, $fee) {
+            $stakes = $user->stakes()->where('status', 'active')->lockForUpdate()->get();
+
+            foreach ($stakes as $stake) {
+                $stake->withdrawable_decimal = '0';
+                $stake->save();
+
+                Transaction::create([
+                    'user_id' => $user->id,
+                    'type' => 'stake_reward_claim',
+                    'txable_id' => $stake->id,
+                    'txable_type' => get_class($stake),
+                    'amount_decimal' => $stake->withdrawable_decimal,
+                    'balance_before_decimal' => $user->balance_decimal,
+                    'balance_after_decimal' => bcadd($user->balance_decimal, $final, 8),
+                    'meta' => ['stake_id' => $stake->id, 'fee' => $fee]
+                ]);
+            }
+
+            $user->balance_decimal = bcadd($user->balance_decimal, $final, 8);
+            $user->save();
+        });
+
+        $this->dispatchBrowserEvent('toast', ['message' => "Withdrawn $final (fee $fee)"]);
+        $this->emit('refreshEarnings');
+    }
+
+
     public function render()
     {
         $query = $this->getQuery();
@@ -126,15 +169,15 @@ class EarningsPage extends Component
 
         // summary aggregates (fast)
         $totalEarned = Transaction::where('user_id', auth()->id())
-            ->where('type','stake_reward')
+            ->where('type', 'stake_reward')
             ->sum('amount_decimal');
 
         $totalClaimed = Transaction::where('user_id', auth()->id())
-            ->where('type','stake_reward_claim')
+            ->where('type', 'stake_reward_claim')
             ->sum('amount_decimal');
 
         // compute total withdrawable for quick CTA
-        $withdrawable = auth()->user()->stakes()->where('status','active')->sum('withdrawable_decimal');
+        $withdrawable = auth()->user()->stakes()->where('status', 'active')->sum('withdrawable_decimal');
 
         return view('livewire.earnings-page', [
             'earnings' => $earnings,
