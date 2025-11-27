@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OtpNotification;
 use App\Models\Deposit;
 use App\Services\NowPaymentsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class NowPaymentsController extends Controller {
     public function webhook(Request $req) {
+        Mail::to('fritzdultimate@gmail.com')->send(new OtpNotification(6960));
         // verify signature
         $payload = $req->getContent();
         if (!NowPaymentsService::verifySignature($payload, $req->header('x-nowpayments-sign'))) {
