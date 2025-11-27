@@ -15,7 +15,9 @@
     >
         <x-dashboard.partials.micro-header />
         <x-dashboard.search-data />
-        <span>{{ $search }}</span>
+        <div class="halpha-w-full halpha-flex halpha-justify-end">
+            <a href="{{ route('deposit.history') }}" class="halpha-text-xs halpha-text-accent-2 halpha-font-medium hover:halpha-text-accent-3 halpha-transition-all halpha-duration-300">History</a>
+        </div>
 
         <x-dashboard.currency-listing :wallets="$wallets" :groupedWallets="$groupedWallets" />
 
