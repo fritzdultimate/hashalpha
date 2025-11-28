@@ -10,7 +10,6 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 80);
             $table->text('description')->nullable();
-            // $table->foreignId('coin_id')->constrained('coins')->cascadeOnDelete();
             $table->unsignedBigInteger('min_amount')->default(0); // smallest unit
             $table->unsignedBigInteger('max_amount')->nullable(); // smallest unit
             $table->decimal('daily_roi', 8, 6)->default(0.000000); // e.g. 0.006 = 0.6%

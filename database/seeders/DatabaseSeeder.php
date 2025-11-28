@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            TransactionsTableSeeder::class,
+            // TransactionsTableSeeder::class,
+            StakingPlanSeeder::class
         ]);
     }
 }

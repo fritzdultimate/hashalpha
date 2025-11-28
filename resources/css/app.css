@@ -35,7 +35,7 @@
   --halpha-surface: #071a2b;
   --halpha-muted: rgba(255 255 255 / 0.45);
   --halpha-accent: #e6f6ff;
-  --halpha-accent-2: #22d3ee;
+  --halpha-accent-2: #0284C7; /** #22d3ee; */
   --halpha-accent-3: #055966;
   --halpha-accent-2-darker: #001d21;
   --halpha-success: #34d399;

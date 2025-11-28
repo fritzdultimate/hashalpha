@@ -13,7 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/staking/create', CreateDeposit::class)->name('deposit.create');
+    Route::get('/staking/deposit', CreateDeposit::class)->name('deposit.create');
     Route::get('/staking/history', DepositHistory::class)->name('deposit.history');
     Route::get('/staking/stake', PlansList::class)->name('staking.stake');
     Route::get('/staking/earnings', EarningsPage::class)->name('staking.earnings');
