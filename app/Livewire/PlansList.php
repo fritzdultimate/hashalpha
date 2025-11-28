@@ -12,7 +12,7 @@ use Livewire\Component;
 class PlansList extends Component {
     public string $sortDir = 'desc'; 
     public ?int $durationFilter = null;
-    public int $perPage = 1;
+    public int $perPage = 6;
     public bool $loading = true;
     public string $search = '';
     public string $sortBy = 'apy_decimal';
