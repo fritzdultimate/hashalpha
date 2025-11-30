@@ -19,10 +19,10 @@
                     data-w-id="cab063ba-de9b-9602-7315-1c907aaafdf5" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _466px _100-tablet">
                     <h2 class="display-2 heading-color-gradient mg-bottom-0">
-                        Why {{ env('APP_NAME') }} Exists
+                        Protocol-Level Visibility
                     </h2>
                     <p class="mg-bottom-24px halpha-text-gray-300">
-                        Blockchain has become critical infrastructure, yet accessing the economics behind it remains complex and inaccessible for most people. HashAlpha exists to bridge that gap — operating validator infrastructure and exposing it through a structured, transparent platform for participation and growth.
+                        All validation activity operates within Ethereum’s public consensus layer, allowing on-chain verification of infrastructure performance.
                     </p>
                     <div class="grid-1-column gap-row-20px">
                         <div id="w-node-eeeea74f-45e3-d157-c1cb-612e32195e1a-04e3ff82"
@@ -31,7 +31,7 @@
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
-                                    Blockchain Infrastructure,
+                                    Seamless blockchain investing
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
-                                    Digital Infrastructure Identity (V-NFTs & $HASH)
+                                    Trusted validator network
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
-                                    Protocol-Level Visibility
+                                    Enterprise-grade security
                                 </div>
                             </div>
                         </div>

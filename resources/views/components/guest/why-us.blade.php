@@ -6,7 +6,8 @@
                     Why {{ env('APP_NAME') }} Exists
                 </h2>
                 <p class="color-neutral-100 mg-bottom-24px !halpha-text-gray-400">
-                    The world runs on blockchain infrastructure, and Ethereum stands at the center of it. HashAlpha Global provides direct access to the validator economy — the same infrastructure large institutions rely on to secure billions in value. We combine enterprise-grade node operations, transparent reporting, and a global reward system to bring validator-level income to everyday users.
+                    Blockchain has become critical infrastructure, yet accessing the economics behind it remains complex and inaccessible for most people. HashAlpha exists to bridge that gap — operating validator infrastructure and exposing it through a structured, transparent platform for participation and growth.
+
                 </p>
             </div>
         </div>
@@ -16,7 +17,7 @@
                 $features = [
                     ['title' => 'Institutional Validator Infrastructure', 'text' => 'Enterprise-grade ETH validators operating across multiple Tier-4 data centers with MEV-boosted performance.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de3958bb0587e6e8a80_easy-to-create-wallet-circle-image-cryptomatic-webflow-ecommerce-template.png'],
                     ['title' => 'Real Daily Staking Rewards', 'text' => 'Rewards sourced directly from Ethereum’s Proof-of-Stake issuance and MEV relay optimization.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de38b5b8b51a375978a_send-and-receive-circle-image-cryptomatic-webflow-ecommerce-template.png'],
-                    ['title' => 'Bulletproof Transparency', 'text' => 'Live validator keys, on-chain activity, uptime metrics, and monthly operational reports.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg'], ['title' => 'Global Affiliate Ecosystem', 'text' => 'A structured multi-tier partner program that rewards network growth sustainably and transparently.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg']
+                    ['title' => 'Digital Infrastructure Identity (V-NFTs & $HASH)', 'text' => 'A layered ecosystem of validator credentials and utility tokens designed to power long-term participation, access, and governance.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg'], ['title' => 'Global Affiliate Ecosystem', 'text' => 'A structured multi-tier partner program that rewards network growth sustainably and transparently.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg']
                 ];
             @endphp
 
