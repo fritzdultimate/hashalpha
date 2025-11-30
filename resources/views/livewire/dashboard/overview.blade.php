@@ -68,6 +68,8 @@
         </div>
     </div>
 
+    <livewire:dashboard.earnings-chart />
+
     <section>
         <livewire:dashboard.latest-transactions-table />
     </section>
