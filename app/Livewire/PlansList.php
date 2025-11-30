@@ -40,11 +40,21 @@ class PlansList extends Component {
     #[On('stakeCreated')]
     public function refresh() {
         $this->plans = StakingPlan::orderBy('apy_decimal', 'desc')->get();
-        $this->emit('refreshDashboard');
+        $this->dispatch('refreshDashboard');
     }
 
     public function openStakeModal($planId) {
-        $this->emit('openStakeModal', $planId);
+        $this->dispatch('openStakeModal', $planId);
+    }
+
+
+    #[On('openStakeModel')]
+    public function handleOpenStakeModal() {
+
+    }
+
+    public function openPlanDetails(int $planId) {
+        $this->dispatch('openPlanDetails', id: $planId);
     }
 
     public function loadMore() {

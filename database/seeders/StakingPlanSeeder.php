@@ -22,11 +22,11 @@ class StakingPlanSeeder extends Seeder
         }
 
         $tx = StakingPlan::factory()->make([
-            'name' => 'Executive',
-            'description' => 'for big boys',
-            'min_amount' => 500,
-            'max_amount' => 50000,
-            'daily_roi' => 10,
+            'name' => 'Legend',
+            'description' => 'for vip who have solid experience in crypto market.',
+            'min_amount' => 10000,
+            'max_amount' => 900001,
+            'daily_roi' => 60,
             'rules' => 'lockup_days'
         ]);
 

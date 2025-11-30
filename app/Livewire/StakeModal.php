@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\StakingPlan;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Stake;
 use App\Models\Transaction;
@@ -16,21 +17,17 @@ class StakeModal extends Component
     public $show = false;
     public ?StakingPlan $plan = null;
     public $amount;
-    public $autoCompound = false; // user chooses if plan allows
-    public $termDays = null; // optional override for duration
-    public $user; // current user instance
+    public $autoCompound = false;
+    public $termDays = null;
+    public $user;
 
-    protected $listeners = [
-        'openStakeModal' => 'open'
-    ];
 
-    public function mount()
-    {
+    public function mount() {
         $this->user = auth()->user();
     }
 
-    public function open($planId)
-    {
+    #[On('openStakeModal')]
+    public function open($planId) {
         $this->plan = StakingPlan::findOrFail($planId);
         $this->amount = null;
         $this->autoCompound = $this->plan->compound_allowed ? false : false;
@@ -41,9 +38,10 @@ class StakeModal extends Component
 
     protected function rules()
     {
-        $min = (string)($this->plan->min_amount_decimal ?? 0);
+        $min = (string)($this->plan->min_amount ?? 0);
+        $max = (string)($this->plan->max_amount ?? 0);
         return [
-            'amount' => ['required','numeric','min:'.$min],
+            'amount' => ['required','numeric','min:'.$min, 'max:'.$max],
             'autoCompound' => ['boolean']
         ];
     }

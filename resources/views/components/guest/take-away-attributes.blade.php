@@ -19,10 +19,10 @@
                     data-w-id="cab063ba-de9b-9602-7315-1c907aaafdf5" style="opacity: 1; filter: blur(0px);"
                     class="inner-container _466px _100-tablet">
                     <h2 class="display-2 heading-color-gradient mg-bottom-0">
-                        A Validator Platform from the Future
+                        Why {{ env('APP_NAME') }} Exists
                     </h2>
                     <p class="mg-bottom-24px halpha-text-gray-300">
-                        Join the next generation of decentralized investing — built for transparency, security, and growth. Earn, validate, and grow your digital assets with confidence in a fully decentralized ecosystem.
+                        Blockchain has become critical infrastructure, yet accessing the economics behind it remains complex and inaccessible for most people. HashAlpha exists to bridge that gap — operating validator infrastructure and exposing it through a structured, transparent platform for participation and growth.
                     </p>
                     <div class="grid-1-column gap-row-20px">
                         <div id="w-node-eeeea74f-45e3-d157-c1cb-612e32195e1a-04e3ff82"
@@ -31,7 +31,7 @@
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
-                                    Seamless blockchain investing
+                                    Blockchain Infrastructure,
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
-                                    Trusted validator network
+                                    Digital Infrastructure Identity (V-NFTs & $HASH)
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
-                                    Enterprise-grade security
+                                    Protocol-Level Visibility
                                 </div>
                             </div>
                         </div>
