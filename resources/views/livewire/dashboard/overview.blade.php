@@ -1,18 +1,38 @@
 <div class="halpha-flex halpha-flex-col halpha-gap-5">
-    <section
-        class="halpha-grid halpha-grid-cols-1 sm:halpha-grid-cols-2 md:halpha-grid-cols-3 lg:halpha-grid-cols-4 halpha-gap-5">
-        <x-dashboard.stat title="Total Deposits" value="$78,250">
+
+    <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 lg:halpha-grid-cols-2 halpha-gap-5">
+        <div class="halpha-bg-card-bg halpha-rounded halpha-border halpha-border-white/5">
+            <div class="halpha-flex halpha-justify-between halpha-gap-2">
+                <div class="halpha-flex halpha-flex-col halpha-gap-2 halpha-p-4">
+                    <h6 class="halpha-text-muted">Total Balance</h6>
+
+                    <div class="halpha-flex halpha-items-center halpha-gap-3">
+                        <h4 class="halpha-text-xl halpha-font-semibold halpha-text-accent halpha-font-sans">
+                            $94,589.34
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="halpha-flex halpha-flex-col halpha-gap-2 halpha-p-4 halpha-items-end">
+                    <h6 class="halpha-text-muted">Daily Est. Reward</h6>
+
+                    <div class="halpha-flex halpha-items-center halpha-gap-3">
+                        <h4 class="halpha-text-xl halpha-font-semibold halpha-text-accent halpha-font-sans">
+                            $108.25
+                        </h4>
+                    </div>
+                </div>
+            </div>
             <div id="deposit-chart" style="height:120px;"></div>
-        </x-dashboard.stat>
+        </div>
 
-        <x-dashboard.stat title="Active Investments" value="$8,250" delta="42.32%">
-            <div id="active-investment-chart"></div>
-        </x-dashboard.stat>
-
-        <x-dashboard.stat title="Daily Earnings" value="$8,250" delta="2.32%">
+        <x-dashboard.stat title="Total Earned" value="$8,250" delta="2.32%">
             <div id="daily-earnings"></div>
         </x-dashboard.stat>
+    </div>
 
+
+    <section class="halpha-grid halpha-grid-cols-1 sm:halpha-grid-cols-2 md:halpha-grid-cols-3 lg:halpha-grid-cols-3 halpha-gap-5">
         <x-dashboard.stat title="Referral Bonus" value="$83,250" delta="22.32%">
             <div id="referral-bonus"></div>
         </x-dashboard.stat>
@@ -20,15 +40,33 @@
         <x-dashboard.stat title="Team Performance" value="$833,250" delta="22.32%">
             <div id="team-performance-bonus"></div>
         </x-dashboard.stat>
-
-        <x-dashboard.stat title="Total Withdrawn" value="$833,250" delta="22.32%">
-            <div id="total-withdrawn"></div>
-        </x-dashboard.stat>
-
-        <x-dashboard.stat title="Wallet Balance" value="$833,250" delta="22.32%">
-            <div id="wallet-balance"></div>
-        </x-dashboard.stat>
     </section>
+
+    <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-5">
+        <div class="halpha-grid halpha-grid-cols-2">
+            <div class="halpha-bg-card-bg halpha-rounded-l halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
+                <h6 class="halpha-text-muted">ETH Staked</h6>
+                <span>12.85 ETH</span>
+            </div>
+
+            <div class="halpha-bg-card-bg halpha-rounded-r halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
+                <h6 class="halpha-text-muted">Uptime</h6>
+                <span>99.98%</span>
+            </div>
+        </div>
+
+        <div class="halpha-grid halpha-grid-cols-2">
+            <div class="halpha-bg-card-bg halpha-rounded-l halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
+                <h6 class="halpha-text-muted">Active Nodes</h6>
+                <span>128</span>
+            </div>
+
+            <div class="halpha-bg-card-bg halpha-rounded-r halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
+                <h6 class="halpha-text-muted">Rank</h6>
+                <span>Silver</span>
+            </div>
+        </div>
+    </div>
 
     <section>
         <livewire:dashboard.latest-transactions-table />
@@ -61,40 +99,6 @@
         };
 
         new ApexCharts(depositChartEl, options).render();
-    })();
-
-    (function () {
-        const el = document.getElementById('active-investment-chart');
-        if (!el) return;
-
-
-        const data = [4, 3, 1, 5, 2, 4, 3, 6, 4, 4, 4, 4];
-
-        const colors = data.map(v => v >= 0 ? '#10b981' : '#ef4444');
-        const options = {
-            series: [{ name: 'Daily', data }],
-            chart: {
-                type: 'area',
-                height: 120,
-                sparkline: { enabled: true },
-                toolbar: { show: false }
-            },
-            plotOptions: {
-                bar: { columnWidth: '80%', borderRadius: 0.5, distributed: true }
-            },
-            colors,
-            tooltip: {
-                enabled: true,
-                theme: false,
-                style: { fontSize: '12px', fontFamily: 'Public Sans, sans-serif' },
-                y: { formatter: v => (v >= 0 ? '+' : '') + v + '%' },
-                x: { show: false }
-            }
-        };
-
-        if (window._sparkCol) { try { window._sparkCol.destroy(); } catch (e) { } }
-        window._sparkCol = new ApexCharts(el, options);
-        window._sparkCol.render();
     })();
 
     (function () {
@@ -169,52 +173,5 @@
         };
 
         new ApexCharts(depositChartEl, options).render();
-    })();
-
-    (function () {
-        const withdrawalChartEl = document.getElementById('total-withdrawn');
-        if (!withdrawalChartEl) return;
-
-        const options = {
-            series: [{ name: 'Total Withdrawn', data: [800, 950, 700, 850, 900, 1000, 950, 1100, 1050, 1200, 1150, 1300] }],
-            chart: { type: 'line', sparkline: { enabled: true }, height: 120 },
-            stroke: { curve: 'smooth', width: 3 },
-            fill: { 
-                type: 'gradient', 
-                gradient: { 
-                    shade: 'light',
-                    type: 'vertical',
-                    shadeIntensity: 0.3,
-                    opacityFrom: 0.4, 
-                    opacityTo: 1,
-                    stops: [0, 100]
-                } 
-            },
-            colors: ['#ef4444'],
-            tooltip: {
-                x: { show: false },
-                y: { formatter: val => `$${val}` }
-            }
-        };
-
-        new ApexCharts(withdrawalChartEl, options).render();
-    })();
-
-    (function () {
-        const withdrawalChartEl = document.getElementById('wallet-balance');
-        if (!withdrawalChartEl) return;
-
-        const options = {
-            series: [{ name: 'Wallet Balance', data: [5000, 5200, 5400, 5600, 5800, 6000, 6200, 6400, 6600, 6800, 7000, 7200] }],
-            chart: { type: 'area', sparkline: { enabled: true }, height: 120 },
-            stroke: { curve: 'smooth', width: 2 },
-            fill: { type: 'gradient', gradient: { opacityFrom: 0.3, opacityTo: 0 } },
-            colors: ['#f59e0b'],
-            tooltip: {
-                x: { show: false }
-            }
-        };
-
-        new ApexCharts(withdrawalChartEl, options).render();
     })();
 </script>
