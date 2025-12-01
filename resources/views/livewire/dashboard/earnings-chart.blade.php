@@ -66,7 +66,27 @@
                         },
                         y: { formatter: v => '$' + Number(v).toLocaleString() },
                         x: { show: true },
-                        marker: { show: true }
+                        marker: { show: true },
+                        custom: function({ series, seriesIndex, dataPointIndex, w }) {
+                            const label = w.globals.categoryLabels[dataPointIndex];
+                            const value = series[seriesIndex][dataPointIndex];
+                            console.log(value)
+                            return `
+                                <div style="
+                                    background: white;
+                                    padding: 6px 10px;
+                                    border-radius: 6px;
+                                    font-family: 'Public Sans', sans-serif;
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                                    color: black;
+                                ">
+                                    <div style="font-size: 11px; opacity: 0.7;">${label}</div>
+                                    <div style="font-weight: 600; font-size: 13px;">
+                                        $${Number(value).toLocaleString()}
+                                    </div>
+                                </div>
+                            `;
+                        }
                     },
                 };
 
@@ -74,12 +94,14 @@
                 chart.render();
 
                 window.addEventListener('earningsUpdated', ({ detail }) => {
-                    const labels = Array.isArray(detail.labels) ? detail.labels : [];
+                    const labels = Array.isArray(detail[0].labels) ? detail[0].labels : [];
                     const data = Array.isArray(detail[0].usd) ? detail[0].usd : [];
-                    chart.updateOptions({ xaxis: { categories: labels } }, true, true);
-                    chart.updateSeries([{ name: 'Earnings Maka', data }], true);
-                    console.log('data', data)
-                    chart.render()
+                    console.log('label', labels)
+                    chart.updateOptions({ xaxis: { categories: labels } }, true, true)
+                        .then(() => {
+                            chart.updateSeries([{ name: 'Earnings Maka', data }], true);
+                        })
+                        .catch(err => console.error('Apex update error:', err));
                 });
             })();
         </script>
