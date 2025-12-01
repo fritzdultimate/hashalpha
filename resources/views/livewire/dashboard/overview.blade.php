@@ -81,10 +81,7 @@
             class="halpha-relative halpha-w-full halpha-py-2 md:halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#0ea5a4] halpha-to-[#22d3ee] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-2">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="halpha-w-5 halpha-h-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m4-4H8" />
-                </svg>
+                <x-fas-plus class="halpha-w-4 halpha-h-4" />
                 Deposit
             </div>
         </button>
@@ -94,10 +91,7 @@
             class="halpha-relative halpha-w-full halpha-py-2 md:halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#10b981] halpha-to-[#34d399] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-success">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="halpha-w-5 halpha-h-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
+                <x-fas-coins class="halpha-w-4 halpha-h-4" />
                 Stake
             </div>
         </button>
