@@ -22,7 +22,7 @@
                         <li data-w-id="60cd25b4-2ff9-8574-64f5-ad4d432d7346d"
                             class="halpha-relative halpha-rounded-[24px] halpha-p-4 md:halpha-p-4 halpha-py-6 halpha-w-full">
                             <div class="divider inside-card---top"></div>
-                            <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64e7eb2aef37364669954a14_features-card-bg-top-cryptomatic-webflow-ecommerce-template.png"
+                            <img src="{{ asset('images/landing/features-card-bg-top.png') }}"
                                 loading="eager"
                                 sizes="(max-width: 479px) 93vw, (max-width: 991px) 95vw, (max-width: 1439px) 96vw, 1268px"
                                 alt="" class="bg-gradient-top">
@@ -40,7 +40,7 @@
                 </ul>
             </div>
             <img loading="eager" alt="5 new interesting Ethereum tokens you should pay attention to in 2025"
-                src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c058/64e3bc5e1a7dcf1cadcefa4e_ethereum-tokens-2025-blog-thumbnail-v1-cryptomatic-webflow-ecommerce-template.jpg"
+                src="{{ asset('images/landing/ethereum-tokens-2025-blog-thumbnail-v1.jpg') }}"
                 sizes="(max-width: 479px) 100vw, (max-width: 767px) 95vw, (max-width: 991px) 46vw, (max-width: 1439px) 47vw, 620px"
                 class="link-item-dark-image border-radius-24px mg-bottom-40px"
                 style="filter: saturate(100%) contrast(100%);">

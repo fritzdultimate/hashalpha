@@ -160,7 +160,6 @@
         </div>
     </section>
 
-    <!-- @include('components.guest.our-team') -->
 
     @include('components.guest.faqs', ['showing' => 3])
 

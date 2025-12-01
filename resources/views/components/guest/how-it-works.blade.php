@@ -13,7 +13,7 @@
         <div class="grid-2-columns gap-row-64px">
             <div data-w-id="7461cf72-8e3d-e1fb-68d0-073db3cb7445" style="opacity: 1; filter: blur(0px);"
                 class="max-w-540px">
-                <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d67758c9670a06dc2e1e00_cryptomatic-app-image-cryptomatic-webflow-ecommerce-template.png"
+                <img src="{{ asset('images/landing/cryptomatic-app-image.png') }}"
                     loading="eager"
                     sizes="(max-width: 479px) 100vw, (max-width: 767px) 92vw, (max-width: 991px) 46vw, (max-width: 1439px) 47vw, 540px"
                     alt="How Does Cryptomatic App Work - Cryptomatic X Webflow Template">
@@ -27,17 +27,17 @@
                             'title' => 'Create an Account',
                             'description' => 'Sign up in seconds and secure your profile with advanced encryption — your data and assets
                             stay protected from the start.',
-                            'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d539504d98654e1c7fa66f_create-an-account-circle-icon-cryptomatic-webflow-ecommerce-template.png'
+                            'img' => asset('images/landing/create-an-account-circle-icon.png')
                         ],
                         [
                             'title' => 'Invest on Blockchain',
                             'description' => 'Choose a plan, stake your assets, and start earning through our decentralized validator network with full transparency.',
-                            'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de3958bb0587e6e8a80_easy-to-create-wallet-circle-image-cryptomatic-webflow-ecommerce-template.png'
+                            'img' => asset('images/landing/easy-to-create-wallet-circle-image.png')
                         ],
                         [
                             'title' => 'Track and Earn',
                             'description' => 'Monitor your portfolio growth in real time, withdraw rewards anytime, and enjoy consistent returns backed by blockchain reliability.',
-                            'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de3df0f41b21172d648_earn-passively-circle-image-cryptomatic-webflow-ecommerce-template.png'
+                            'img' => asset('images/landing/earn-passively-circle-image.png')
                         ]
                     ]
                 @endphp

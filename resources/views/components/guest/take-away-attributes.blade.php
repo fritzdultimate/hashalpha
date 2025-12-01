@@ -4,13 +4,15 @@
             class="card features-card">
             <div class="divider inside-card---top"></div>
             <img
-                src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64e7eb2aef37364669954a14_features-card-bg-top-cryptomatic-webflow-ecommerce-template.png"
+                src="{{ asset('images/landing/features-card-bg-top.png') }}"
                 loading="eager"
                 sizes="(max-width: 479px) 93vw, (max-width: 991px) 95vw, (max-width: 1439px) 96vw, 1268.0035400390625px"
-                alt="" class="bg-gradient-top height-26">
+                alt="" 
+                class="bg-gradient-top height-26"
+            >
             <div class="grid-2-columns _1-col-tablet gap-row-64px">
                 <img
-                    src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d512580977960d0df28a84_crypto-wallet-from-the-future-image-cryptomatic-webflow-ecommerce-template.png"
+                    src="{{ asset('images/landing/crypto-wallet-from-the-future-image.png') }}"
                     alt="A Crypto Wallet From The Future - Cryptomatic X Webflow Template"
                     style="opacity: 1; filter: blur(0px);"
                     sizes="(max-width: 479px) 100vw, (max-width: 767px) 86vw, (max-width: 991px) 84vw, (max-width: 1439px) 40vw, 540px"
@@ -26,8 +28,9 @@
                     </p>
                     <div class="grid-1-column gap-row-20px">
                         <div id="w-node-eeeea74f-45e3-d157-c1cb-612e32195e1a-04e3ff82"
-                            class="flex align-start gap-column-12px"><img
-                                src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d512585148c96c4c5764bd_checkmark-circle-cryptomatic-webflow-ecommerce-template.png"
+                            class="flex align-start gap-column-12px">
+                            <img
+                                src="{{ asset('images/landing/checkmark-circle.png') }}"
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
@@ -37,7 +40,7 @@
                         </div>
                         <div id="w-node-_54e3bb24-a139-4870-b2c5-323aaf8892d6-04e3ff82"
                             class="flex align-start gap-column-12px"><img
-                                src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d512585148c96c4c5764bd_checkmark-circle-cryptomatic-webflow-ecommerce-template.png"
+                                src="{{ asset('images/landing/checkmark-circle.png') }}"
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
@@ -47,7 +50,7 @@
                         </div>
                         <div id="w-node-cdeee600-bb00-e114-7f3f-624dfc40fd6a-04e3ff82"
                             class="flex align-start gap-column-12px"><img
-                                src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d512585148c96c4c5764bd_checkmark-circle-cryptomatic-webflow-ecommerce-template.png"
+                                src="{{ asset('images/landing/checkmark-circle.png') }}"
                                 loading="eager" alt="" class="max-w-24px">
                             <div class="mg-top-2px">
                                 <div class="text-200 medium color-neutral-100">
@@ -92,13 +95,14 @@
                 </div>
                 <div id="w-node-_25a48a09-9f85-c5e7-3813-0bdbb12e9cce-04e3ff82"
                     data-w-id="25a48a09-9f85-c5e7-3813-0bdbb12e9cce" style="opacity: 1; filter: blur(0px);"
-                    class="max-w-464px max-w-100-tablet"><img
-                        src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51258f053fde7048266dc_bulletproof-security-image-cryptomatic-webflow-ecommerce-template.png"
+                    class="max-w-464px max-w-100-tablet">
+                    <img
+                        src="{{ asset('images/landing/bulletproof-security-image.png') }}"
                         loading="eager"
                         sizes="(max-width: 479px) 100vw, (max-width: 767px) 86vw, (max-width: 991px) 84vw, (max-width: 1439px) 40vw, 463.9930725097656px"
                         alt="Bulletproof Security - Cryptomatic X Webflow Template"></div>
             </div><img
-                src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64e7eb2ae776de1b27a4a300_features-card-bg-bottom-cryptomatic-webflow-ecommerce-template.png"
+                src="{{ asset('images/landing/features-card-bg-top.png') }}"
                 loading="eager"
                 sizes="(max-width: 479px) 93vw, (max-width: 991px) 95vw, (max-width: 1439px) 96vw, 1268.0035400390625px"
                 alt="" class="bg-gradient-bottom height-26">
