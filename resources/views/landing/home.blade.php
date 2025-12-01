@@ -37,7 +37,7 @@
         <div class="divider mg-0"></div>
     </div>
 
-    @include('components.guest.companies-supported')
+    <!-- @include('components.guest.companies-supported') -->
 
     @include('components.guest.why-us')
 

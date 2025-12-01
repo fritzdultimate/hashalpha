@@ -77,7 +77,7 @@
                     <div class="halpha-flex halpha-justify-between halpha-items-start halpha-gap-3">
                         <div class="halpha-min-w-0 halpha-flex halpha-flex-col halpha-gap-2">
                             <div class="halpha-flex halpha-items-center halpha-gap-3">
-                                <div class="halpha-flex halpha-items-center halpha-justify-center halpha-w-10 halpha-h-10 halpha-rounded-full halpha-bg-gray-800">
+                                <div class="halpha-flex halpha-items-center halpha-justify-center halpha-w-10 halpha-h-10 halpha-rounded-full halpha-bg-gray-800 halpha-min-w-10">
                                     <span
                                         class="halpha-text-xs halpha-text-gray-400">{{ strtoupper(substr($plan->name, 0, 2)) }}</span>
                                 </div>
@@ -142,7 +142,6 @@
 
                         {{-- utilization bar --}}
                         @php
-                            // example: assume plan has meta->utilization (0..100) else fake
                             $util = optional($plan->meta)['utilization'] ?? (50 + ($plan->id % 40));
                             $util = (int) min(100, max(0, $util));
                         @endphp
@@ -158,14 +157,20 @@
 
                     {{-- actions --}}
                     <div class="halpha-mt-4 halpha-flex halpha-gap-3">
-                        <button wire:click="openStakeModal({{ $plan->id }})"
-                            class="halpha-flex-1 halpha-py-2 halpha-rounded-lg halpha-bg-accent-2 halpha-text-white halpha-font-semibold"
-                            aria-label="Stake on {{ $plan->name }}">Stake</button>
-
-                        <button type="button"
-                            class="halpha-py-2 halpha-px-4 halpha-rounded-lg halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300"
+                        <button 
+                            wire:click="openStakeModal({{ $plan->id }})"
+                            class="halpha-flex-1 halpha-py-2 halpha-rounded-lg halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-max-h-10 halpha-flex halpha-justify-center halpha-items-center"
+                            aria-label="Stake on {{ $plan->name }}"
+                        >
+                            <span wire:loading.remove wire:target="openStakeModal">Stake</span>
+                            <x-ri-loader-4-fill wire:target="openStakeModal" wire:loading class="halpha-w-6 halpha-h-6 halpha-animate-spin" />
+                        </button>
+                        <button 
+                            type="button" 
+                            class="halpha-py-2 halpha-px-4 halpha-rounded-lg halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300" 
                             aria-label="View details for {{ $plan->name }}"
-                            onclick="dispatchEvent(new CustomEvent('openPlanDetails', { detail: {{ $plan->id }} }))">
+                            onclick="dispatchEvent(new CustomEvent('openPlanDetails', { detail: {{ $plan->id }} }))"
+                        >
                             Details
                         </button>
                     </div>

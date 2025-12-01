@@ -1,12 +1,12 @@
 <div wire:ignore.self>
     @if($this->show)
-    <div class="halpha-fixed halpha-inset-0 halpha-z-50" aria-modal="true" role="dialog">
+    <div x-data="{ open: @entangle('show') }" x-show="open" class="halpha-fixed halpha-inset-0 halpha-z-50" aria-modal="true" role="dialog">
         {{-- Backdrop --}}
         <div class="halpha-absolute halpha-inset-0 halpha-bg-black/70" wire:click="$set('show', false)"></div>
 
         {{-- Modal container --}}
         <div class="halpha-absolute halpha-inset-0 halpha-flex halpha-items-center halpha-justify-center halpha-p-4 md:halpha-p-6">
-            <div class="halpha-bg-card-bg halpha-rounded-xl halpha-shadow-lg w-full max-w-md md:max-w-lg lg:max-w-2xl overflow-hidden flex flex-col md:flex-row">
+            <div class="halpha-bg-card-bg halpha-rounded-xl halpha-shadow-lg halpha-w-full halpha-max-w-md md:halpha-max-w-lg lg:halpha-max-w-2xl halpha-overflow-hidden halpha-flex halpha-flex-col md:halpha-flex-row halpha-border halpha-border-gray-800">
                 
                 {{-- Left section: plan info --}}
                 <div class="halpha-bg-gray-900 halpha-p-6 halpha-flex halpha-flex-col halpha-gap-4 md:halpha-w-1/2">
@@ -41,19 +41,22 @@
                     {{-- Amount input --}}
                     <div class="halpha-flex halpha-flex-col halpha-gap-1">
                         <label class="halpha-text-xs halpha-text-gray-400">Amount</label>
-                        <input 
-							type="number" 
-							step="0.00000001" 
-							wire:model.defer="amount" 
-							inputmode="decimal"
-                        	class="halpha-w-full halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-gray-800 halpha-text-white halpha-outline-none no-spinner" 
-						/>
+                        <div class="halpha-relative">
+                            <span class="halpha-absolute halpha-left-3 halpha-top-1/2 -halpha-translate-y-1/2 halpha-text-gray-400">$</span>
+                            <input 
+                                type="number" 
+                                step="0.00000001" 
+                                wire:model.defer="amount" 
+                                inputmode="decimal"
+                                class="halpha-w-full halpha-pl-7 halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-gray-800 halpha-text-white halpha-outline-none no-spinner focus:halpha-ring-gray-600 focus:halpha-border-gray-600" 
+                            />
+                        </div>
                         @error('amount') <div class="halpha-text-xs halpha-text-red-400 mt-1">{{ $message }}</div> @enderror
                     </div>
 
                     {{-- Auto-compound --}}
                     @if($this->plan->compound_allowed)
-                    <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-text-xs">
+                    <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-text-xs !halpha-hidden">
                         <input type="checkbox" wire:model="autoCompound" id="autoCompound" class="halpha-checked:halpha-ring" />
                         <label for="autoCompound" class="halpha-text-gray-300">Auto-compound rewards</label>
                     </div>
@@ -62,25 +65,26 @@
                     {{-- Estimated rewards --}}
                     <div class="halpha-bg-gray-800 halpha-p-3 halpha-rounded halpha-text-xs halpha-text-gray-300">
                         <p><strong>Estimated daily reward:</strong>
-                        @if($amount)
-                            <span>{{ \App\Services\RewardCalculator::rewardForDays(number_format((float)$amount, 8, '.', ''), $this->plan->apy_decimal, 1) }} approx</span>
-                        @else
-                            <span>Enter amount to estimate</span>
-                        @endif
+                        <span>$43.23</span>
                         </p>
                         <p><strong>Estimated weekly reward:</strong>
-                        @if($amount)
-                            <span>{{ \App\Services\RewardCalculator::rewardForDays(number_format((float)$amount, 8, '.', ''), $this->plan->apy_decimal, 7) }} approx</span>
-                        @else
-                            <span>Enter amount to estimate</span>
-                        @endif
+                        <span>$454.33</span>
                         </p>
                     </div>
 
                     {{-- Buttons --}}
                     <div class="halpha-flex halpha-gap-3 halpha-justify-end halpha-mt-4">
-                        <button wire:click="$set('show', false)" class="halpha-text-xs halpha-px-4 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700">Cancel</button>
-                        <button wire:click="stake" class="halpha-text-xs halpha-px-4 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold">Confirm Stake</button>
+                        <button wire:click="$set('show', false)" class="halpha-text-xs halpha-px-4 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700">
+                            Cancel
+                        </button>
+                        <button 
+                            wire:click="stake" 
+                            class="halpha-text-xs halpha-px-4 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-min-w-32 halpha-max-w-32"
+                        >
+                            
+                            <span wire:loading.remove wire:target="stake">Confirm Stake</span>
+                            <x-ri-loader-4-fill wire:loading wire:target="stake" class="halpha-w-4 halpha-h-4 halpha-animate-spin" />
+                        </button>
                     </div>
                 </div>
 

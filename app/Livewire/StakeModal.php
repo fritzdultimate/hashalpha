@@ -36,8 +36,7 @@ class StakeModal extends Component
         $this->resetValidation();
     }
 
-    protected function rules()
-    {
+    protected function rules() {
         $min = (string)($this->plan->min_amount ?? 0);
         $max = (string)($this->plan->max_amount ?? 0);
         return [
@@ -46,13 +45,22 @@ class StakeModal extends Component
         ];
     }
 
+    protected function messages() {
+        $min = (string)($this->plan->min_amount ?? 0);
+        $max = (string)($this->plan->max_amount ?? 0);
+        return [
+            'amount.min' => "Minimum amount for this plan is $$min",
+            'amount.max' => "Maximum amount for this plan is $$max",
+        ];
+    }
+
     public function updated($prop)
     {
         $this->resetValidation($prop);
     }
 
-    public function stake()
-    {
+    public function stake() {
+        $this->resetErrorBag();
         if (!$this->plan) {
             $this->addError('plan', 'Invalid plan selected.');
             return;
@@ -64,7 +72,7 @@ class StakeModal extends Component
         $amt = (string) number_format((float)$this->amount, 8, '.', '');
 
         // quick guard
-        if (bccomp($user->balance_decimal, $amt, 8) === -1) {
+        if (bccomp($user->balance, $amt, 8) === -1) {
             $this->addError('amount', 'Insufficient account balance to stake this amount.');
             return;
         }
@@ -72,36 +80,22 @@ class StakeModal extends Component
         DB::beginTransaction();
         try {
             // Subtract from user wallet balance
-            $before = $user->balance_decimal;
+            $before = $user->balance;
             $newBalance = bcsub($before, $amt, 8);
-            $user->balance_decimal = $newBalance;
+            $user->balance = $newBalance;
             $user->save();
 
             // Create stake
             $stake = Stake::create([
                 'user_id' => $user->id,
                 'plan_id' => $this->plan->id,
-                'principal_decimal' => $amt,
+                'amount' => $amt,
                 'status' => 'active',
-                'start_at' => now(),
-                'last_accrued_at' => now(),
-                'accrued_rewards_decimal' => '0',
-                'withdrawable_decimal' => '0',
+                'started_at' => now(),
+                'wallet_id' => '1',
                 'meta' => [
                     'auto_compound' => (bool) $this->autoCompound
                 ]
-            ]);
-
-            // Ledger entry
-            Transaction::create([
-                'user_id' => $user->id,
-                'type' => 'stake_create',
-                'txable_id' => $stake->id,
-                'txable_type' => get_class($stake),
-                'amount_decimal' => bcmul('-1', $amt, 8),
-                'balance_before_decimal' => $before,
-                'balance_after_decimal' => $newBalance,
-                'meta' => ['plan_id' => $this->plan->id]
             ]);
 
             DB::commit();
@@ -111,13 +105,12 @@ class StakeModal extends Component
         }
 
         // notify components and close
-        $this->emit('stakeCreated', $stake->id);
+        // $this->emit('stakeCreated', $stake->id);
         $this->show = false;
-        $this->dispatchBrowserEvent('toast', ['message' => 'Stake created successfully']);
+        $this->dispatch('toast', ['message' => 'Stake created successfully']);
     }
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.stake-modal');
     }
 }

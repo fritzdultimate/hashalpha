@@ -25,7 +25,6 @@ class EarningsChart extends Component {
         $userId = auth()->id();
 
         $start = match($this->range) {
-            '1d' => Carbon::now()->subDays(0),
             '7d' => Carbon::now()->subDays(6),
             '30d' => Carbon::now()->subDays(29),
             '90d' => Carbon::now()->subDays(89),
@@ -51,7 +50,7 @@ class EarningsChart extends Component {
 
         foreach ($period as $dt) {
             $d = $dt->format('Y-m-d');
-            $labels[] = $dt->format('d M'); // e.g. "01 Nov"
+            $labels[] = $dt->format('d M');
             $usdData[] = isset($rows[$d]) ? (float) $rows[$d]->usd : 0.0;
         }
 

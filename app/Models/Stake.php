@@ -11,6 +11,7 @@ class Stake extends Model
     protected $casts = [
         'start_at' => 'datetime',
         'next_payout_at' => 'datetime',
+        'meta' => 'array',
     ];
 
     public function user()
