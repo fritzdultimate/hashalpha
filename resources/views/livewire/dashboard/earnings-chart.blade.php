@@ -70,7 +70,6 @@
                         custom: function({ series, seriesIndex, dataPointIndex, w }) {
                             const label = w.globals.categoryLabels[dataPointIndex];
                             const value = series[seriesIndex][dataPointIndex];
-                            console.log(value)
                             return `
                                 <div style="
                                     background: white;
@@ -96,7 +95,6 @@
                 window.addEventListener('earningsUpdated', ({ detail }) => {
                     const labels = Array.isArray(detail[0].labels) ? detail[0].labels : [];
                     const data = Array.isArray(detail[0].usd) ? detail[0].usd : [];
-                    console.log('label', labels)
                     chart.updateOptions({ xaxis: { categories: labels } }, true, true)
                         .then(() => {
                             chart.updateSeries([{ name: 'Earnings Maka', data }], true);
