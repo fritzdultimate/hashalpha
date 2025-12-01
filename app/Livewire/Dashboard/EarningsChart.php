@@ -25,6 +25,7 @@ class EarningsChart extends Component {
         $userId = auth()->id();
 
         $start = match($this->range) {
+            '1d' => Carbon::now()->subDays(0),
             '7d' => Carbon::now()->subDays(6),
             '30d' => Carbon::now()->subDays(29),
             '90d' => Carbon::now()->subDays(89),
