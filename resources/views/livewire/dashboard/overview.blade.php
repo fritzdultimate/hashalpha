@@ -101,11 +101,7 @@
             class="halpha-relative halpha-w-full halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#ef4444] halpha-to-[#f87171] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-danger halpha-hidden md:halpha-block">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="halpha-w-5 halpha-h-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-                </svg>
+                <x-fas-arrow-down class="halpha-w-4 halpha-h-4" />
                 Withdraw
             </div>
         </button>
@@ -115,11 +111,7 @@
             class="halpha-relative halpha-w-full halpha-py-2 md:halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#0284C7] halpha-to-[#0ea5a4] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-2 halpha-hidden md:halpha-block">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="halpha-w-5 halpha-h-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 7V3m0 0a4 4 0 014 4h8m-4 4v4m0 0a4 4 0 01-4 4H4" />
-                </svg>
+                <x-fas-users class="halpha-w-4 halpha-h-4" />
                 Referrals
             </div>
         </button>
