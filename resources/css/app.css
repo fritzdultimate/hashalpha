@@ -60,6 +60,13 @@
     margin: 0;
 }
 
+select.no-arrow {
+    -webkit-appearance: none; /* Chrome, Safari, Edge */
+    -moz-appearance: none;    /* Firefox */
+    appearance: none;         /* Standard */
+    background-image: none !important; /* Remove default arrow */
+}
+
 .no-spinner {
     -moz-appearance: textfield;
     appearance: textfield;

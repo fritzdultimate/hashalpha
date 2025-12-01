@@ -1,140 +1,91 @@
 <div wire:ignore.self>
-    <div class="halpha-bg-card-bg halpha-border halpha-border-white/5 halpha-rounded halpha-p-4">
-        <div class="halpha-flex halpha-justify-between halpha-items-center halpha-mb-3">
+    <div class="halpha-bg-card-bg halpha-border halpha-border-white/5 halpha-rounded">
+        <div class="halpha-flex halpha-justify-between halpha-items-center halpha-mb-3 halpha-p-4">
             <div>
                 <h3 class="halpha-text-base halpha-font-semibold">Earnings</h3>
                 <p class="halpha-text-muted halpha-text-xs">Validator earnings over time</p>
             </div>
 
             <div class="halpha-flex halpha-items-center halpha-gap-2">
-                <select wire:model="range" class="halpha-bg-gray-800 halpha-text-sm halpha-px-2 halpha-py-1 halpha-rounded">
+                <select wire:model.live="range"
+                    class="halpha-bg-gray-800 halpha-text-sm halpha-px-2 halpha-py-1 halpha-rounded halpha-appearance-none no-arrow">
                     <option value="7d">7d</option>
                     <option value="30d">30d</option>
                     <option value="90d">90d</option>
                     <option value="365d">365d</option>
                 </select>
-
-                <button x-data x-on:click="$dispatch('toggle-currency')"
-                    class="halpha-text-sm halpha-px-3 halpha-py-1 halpha-border halpha-border-white/5 halpha-rounded">
-                    Toggle USD/ETH
-                </button>
             </div>
         </div>
 
         <div class="halpha-relative">
-            <canvas id="earningsChart" width="600" height="260"></canvas>
+            <div id="earnings-chart" class=""></div>
         </div>
     </div>
-</div>
 
-@push('scripts')
-    <!-- Chart.js CDN (or use npm build) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts@4.4.0/dist/apexcharts.min.js"></script>
 
-    <script>
-        document.addEventListener('livewire:load', function () {
-            const ctx = document.getElementById('earningsChart').getContext('2d');
+        <script>
+            (function () {
+                const earningChart = document.getElementById('earnings-chart');
+                if (!earningChart) return;
 
-            // create gradient matching halpha theme
-            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, 'rgba(0,200,255,0.25)'); // top
-            gradient.addColorStop(1, 'rgba(0,200,255,0.03)'); // bottom
-
-            const config = {
-                type: 'line',
-                data: {
-                    labels: @json($labels),
-                    datasets: [
-                        {
-                            label: 'ETH',
-                            data: @json($ethData),
-                            fill: true,
-                            backgroundColor: gradient,
-                            borderColor: 'rgba(0,200,255,0.9)',
-                            pointRadius: 2,
-                            tension: 0.25,
-                            borderWidth: 2,
-                            hoverRadius: 4,
-                            yAxisID: 'y',
-                        },
-                        {
-                            label: 'USD',
-                            data: @json($usdData),
-                            fill: false,
-                            borderColor: 'rgba(120,120,255,0.9)',
-                            borderDash: [6, 4],
-                            pointRadius: 0,
-                            tension: 0.25,
-                            borderWidth: 1.5,
-                            hidden: true, // start hidden; toggle with button
-                            yAxisID: 'yRight',
-                        },
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: '#D1D5DB', // tailwind gray-300 for dark
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (ctx) {
-                                    const val = ctx.parsed.y;
-                                    if (ctx.dataset.label === 'ETH') return `${val} ETH`;
-                                    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
-                                }
-                            }
+                const options = {
+                    series: [{ name: 'Earnings', data: [] }],
+                    chart: { 
+                        type: 'area', 
+                        height: 160, 
+                        sparkline: { enabled: true },
+                        animations: { enabled: true, easing: 'easeout', speed: 450 },
+                        zoom: { enabled: false },
+                        toolbar: { show: false },
+                    },
+                    stroke: { curve: 'smooth', width: 2.5 },
+                    markers: { size: 0, hover: { size: 6 } },
+                    grid: { show: false },
+                    fill: { 
+                        type: 'gradient', 
+                        // gradient: { opacityFrom: 0.45, opacityTo: 0.05 },
+                        gradient: {
+                            shade: 'light',
+                            type: 'vertical',
+                            shadeIntensity: 0.4,
+                            inverseColors: false,
+                            opacityFrom: 0.45,
+                            opacityTo: 0.02,
+                            stops: [20, 100]
                         }
                     },
-                    scales: {
-                        x: {
-                            ticks: { color: '#9CA3AF' },
-                            grid: { display: false }
+                    colors: ['#3b82f6'],
+                    tooltip: {
+                        enabled: true,
+                        theme: 'light',
+                        style: {
+                            fontSize: '12px',
+                            fontFamily: 'Public Sans, sans-serif'
                         },
-                        y: {
-                            type: 'linear',
-                            position: 'left',
-                            ticks: { color: '#9CA3AF', callback: v => v + ' ETH' },
-                            grid: { color: 'rgba(255,255,255,0.03)' }
-                        },
-                        yRight: {
-                            type: 'linear',
-                            position: 'right',
-                            ticks: { color: '#9CA3AF', callback: v => '$' + v },
-                            grid: { drawOnChartArea: false },
-                        }
-                    }
-                }
-            };
+                        y: { formatter: v => '$' + Number(v).toLocaleString() },
+                        x: { show: true },
+                        marker: { show: true }
+                    },
+                };
 
-            let chart = new Chart(ctx, config);
+                const chart = new ApexCharts(earningChart, options);
+                chart.render();
 
-            // Listen for Livewire updates
-            Livewire.on('earningsUpdated', payload => {
-                chart.data.labels = payload.labels;
-                chart.data.datasets[0].data = payload.eth;
-                chart.data.datasets[1].data = payload.usd;
-                chart.update();
-            });
+                window.addEventListener('earningsUpdated', ({ detail }) => {
+                    const labels = Array.isArray(detail.labels) ? detail.labels : [];
+                    const data = Array.isArray(detail[0].usd) ? detail[0].usd : [];
+                    chart.updateOptions({ xaxis: { categories: labels } }, true, true);
+                    chart.updateSeries([{ name: 'Earnings Maka', data }], true);
+                    console.log('data', data)
+                    chart.render()
+                });
+            })();
+        </script>
+    @endpush
 
-            // Toggle currency dataset visibility (button dispatch)
-            window.addEventListener('toggle-currency', () => {
-                const usdSet = chart.data.datasets[1];
-                usdSet.hidden = !usdSet.hidden;
-                chart.update();
-            });
 
-            // Also support the button that dispatches from Alpine above
-            document.addEventListener('toggle-currency', () => {
-                const usdSet = chart.data.datasets[1];
-                usdSet.hidden = !usdSet.hidden;
-                chart.update();
-            });
-        });
-    </script>
-@endpush
+
+
+</div>

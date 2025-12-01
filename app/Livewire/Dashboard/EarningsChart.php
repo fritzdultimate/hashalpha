@@ -9,7 +9,6 @@ use Carbon\Carbon;
 class EarningsChart extends Component {
     public string $range = '30d';
     public array $labels = [];
-    public array $ethData = [];
     public array $usdData = [];
 
     public function mount(string $range = '30d') {
@@ -59,12 +58,11 @@ class EarningsChart extends Component {
         $this->usdData = $usdData;
 
         // push to frontend
-        // $this->emit('earningsUpdated', [
-        //     'labels' => $this->labels,
-        //     'eth' => $this->ethData,
-        //     'usd' => $this->usdData,
-        //     'range' => $this->range,
-        // ]);
+        $this->dispatch('earningsUpdated', [
+            'labels' => $this->labels,
+            'usd' => $this->usdData,
+            'range' => $this->range,
+        ]);
     }
 
     public function render() {
