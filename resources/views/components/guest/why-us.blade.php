@@ -15,9 +15,25 @@
         <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 lg:halpha-grid-cols-3 halpha-gap-6">
             @php
                 $features = [
-                    ['title' => 'Institutional Validator Infrastructure', 'text' => 'Enterprise-grade ETH validators operating across multiple Tier-4 data centers with MEV-boosted performance.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de3958bb0587e6e8a80_easy-to-create-wallet-circle-image-cryptomatic-webflow-ecommerce-template.png'],
-                    ['title' => 'Real Daily Staking Rewards', 'text' => 'Rewards sourced directly from Ethereum’s Proof-of-Stake issuance and MEV relay optimization.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d51de38b5b8b51a375978a_send-and-receive-circle-image-cryptomatic-webflow-ecommerce-template.png'],
-                    ['title' => 'Digital Infrastructure Identity (V-NFTs & $HASH)', 'text' => 'A layered ecosystem of validator credentials and utility tokens designed to power long-term participation, access, and governance.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg'], ['title' => 'Global Affiliate Ecosystem', 'text' => 'A structured multi-tier partner program that rewards network growth sustainably and transparently.', 'img' => 'https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dac102eb9789e6c7dbb45d_floating-bg-shape-3-cryptomatic-webflow-ecommerce-template.jpg']
+                    [
+                        'title' => 'Institutional Validator Infrastructure', 
+                        'text' => 'Enterprise-grade ETH validators operating across multiple Tier-4 data centers with MEV-boosted performance.', 
+                        'img' => asset('images/landing/easy-to-create-wallet-circle-image.png')
+                    ],
+                    [
+                        'title' => 'Real Daily Staking Rewards', 
+                        'text' => 'Rewards sourced directly from Ethereum’s Proof-of-Stake issuance and MEV relay optimization.', 'img' => asset('images/landing/send-and-receive-circle-image.png')
+                    ],
+                    [
+                        'title' => 'Digital Infrastructure Identity (V-NFTs & $HASH)', 
+                        'text' => 'A layered ecosystem of validator credentials and utility tokens designed to power long-term participation, access, and governance.', 
+                        'img' => asset('images/landing/floating-bg-shape-3.jpg')
+                    ], 
+                    [
+                        'title' => 'Global Affiliate Ecosystem', 
+                        'text' => 'A structured multi-tier partner program that rewards network growth sustainably and transparently.', 
+                        'img' => asset('images/landing/floating-bg-shape-3.jpg')
+                    ]
                 ];
             @endphp
 

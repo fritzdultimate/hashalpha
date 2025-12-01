@@ -97,6 +97,13 @@
             <div class="footer-bottom-gradient"></div>
         </div>
 
-        <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d40e4db8b48a6fac052376_footer-bg-shape-cryptomatic-webflow-ecommerce-template.png" loading="eager" data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba3e4" sizes="(max-width: 1439px) 100vw, 1124px" alt="" srcset="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d40e4db8b48a6fac052376_footer-bg-shape-cryptomatic-webflow-ecommerce-template-p-500.png 500w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d40e4db8b48a6fac052376_footer-bg-shape-cryptomatic-webflow-ecommerce-template-p-800.png 800w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d40e4db8b48a6fac052376_footer-bg-shape-cryptomatic-webflow-ecommerce-template-p-1080.png 1080w, https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d40e4db8b48a6fac052376_footer-bg-shape-cryptomatic-webflow-ecommerce-template.png 1686w" class="footer-bg-image" style="opacity: 1; filter: blur(0px);">
+        <img 
+            src="{{ asset('images/landing/64d40e4db8b48a6fac052376_footer-bg-shape-cryptomatic.png') }}" 
+            loading="eager" 
+            data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba3e4" 
+            sizes="(max-width: 1439px) 100vw, 1124px" 
+            alt="" 
+            class="footer-bg-image" 
+            style="opacity: 1; filter: blur(0px);">
     </div>
 </div>

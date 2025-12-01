@@ -27,7 +27,14 @@
                     </div>
                 </div>
                 
-                <img class="top-section-bg-img-right---img" src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64d662c156553bb641e879af_home-v2-hero-image-right-cryptomatic-webflow-ecommerce-template.jpg" alt="" style="opacity: 1; filter: blur(0px);" sizes="(max-width: 767px) 92vw, (max-width: 1439px) 86vw, 1118px" data-w-id="9f4d1131-f255-c237-25bf-d393edb46f2a" loading="eager">
+                <img 
+                    class="top-section-bg-img-right---img" 
+                    src="{{ asset('images/landing/64d662c156553bb641e879af_home-v2-hero-validator-block.jpg') }}" 
+                    alt="" 
+                    style="opacity: 1; filter: blur(0px);" 
+                    sizes="(max-width: 767px) 92vw, (max-width: 1439px) 86vw, 1118px" data-w-id="9f4d1131-f255-c237-25bf-d393edb46f2a" 
+                    loading="eager"
+                >
             </div>
         </section>
     </div>
@@ -37,7 +44,6 @@
         <div class="divider mg-0"></div>
     </div>
 
-    <!-- @include('components.guest.companies-supported') -->
 
     @include('components.guest.why-us')
 
@@ -47,14 +53,12 @@
 
     @include('components.guest.how-it-works')
 
-    <!-- @include('components.guest.testimonies') -->
 
     @include('components.guest.core-concepts')
 
     
 
 
-    <!-- @include('components.guest.plans-overview') -->
 
 
     {{-- 4) Transparency (responsive KPIs + CTA) --}}
