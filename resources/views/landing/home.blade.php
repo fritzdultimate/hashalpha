@@ -47,7 +47,7 @@
 
     @include('components.guest.how-it-works')
 
-    @include('components.guest.testimonies')
+    <!-- @include('components.guest.testimonies') -->
 
     @include('components.guest.core-concepts')
 
