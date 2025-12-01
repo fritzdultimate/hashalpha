@@ -118,7 +118,7 @@
 
         <!-- Referrals Button -->
         <button
-            class="halpha-relative halpha-w-full halpha-py-4 halpha-rounded-xl halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
+            class="halpha-relative halpha-w-full halpha-py-2 md:halpha-py-4 halpha-rounded-xl halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#0284C7] halpha-to-[#0ea5a4] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-2 halpha-hidden md:halpha-block">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="halpha-w-5 halpha-h-5" fill="none" viewBox="0 0 24 24"
