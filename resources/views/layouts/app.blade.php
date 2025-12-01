@@ -64,6 +64,7 @@
         'resources/css/crypto-icons/font.css'
     ])
     @livewireStyles
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.6.2/dist/countUp.umd.js"></script>
 </head>
 
 <body

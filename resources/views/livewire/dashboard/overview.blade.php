@@ -48,13 +48,13 @@
             <div
                 class="halpha-bg-card-bg halpha-rounded-l halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
                 <h6 class="halpha-text-muted">ETH Staked</h6>
-                <span>12.85 ETH</span>
+                <span class="count-up" data-value="12.85" data-suffix=" ETH">12.85 ETH</span>
             </div>
 
             <div
                 class="halpha-bg-card-bg halpha-rounded-r halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
                 <h6 class="halpha-text-muted">Uptime</h6>
-                <span>99.98%</span>
+                <span class="count-up" data-value="99.98" data-suffix="%">99.98%</span>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
             <div
                 class="halpha-bg-card-bg halpha-rounded-l halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
                 <h6 class="halpha-text-muted">Active Nodes</h6>
-                <span>128</span>
+                <span class="count-up" data-value="128">128</span>
             </div>
 
             <div
@@ -226,3 +226,36 @@
         new ApexCharts(depositChartEl, options).render();
     })();
 </script>
+
+@push('scripts')
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const countUpEls = document.querySelectorAll('.count-up');
+            countUpEls.forEach((el) => {
+                let { value, suffix } = el.dataset
+                if(!suffix) suffix = '';
+
+                const counter = new window.countUp.CountUp(el, value, {
+                    duration: 2.0,
+                    useEasing: true,
+                    separator: ',',
+                    suffix: suffix,
+                    decimalPlaces: Number.isInteger(Number(value)) ? 0 : 2
+                });
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            counter.start();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(el);
+            });
+        });
+    </script>
+@endpush
