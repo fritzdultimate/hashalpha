@@ -43,10 +43,31 @@
                     class="halpha-font-medium halpha-text-white">{{ $totalPlans }}</span> plans
             </div>
 
-            @if($this->plans->isNotEmpty())
-                <div class="halpha-text-xs halpha-text-gray-400">Tip: tap <span
-                        class="halpha-font-semibold halpha-text-white">Stake</span> to open the stake sheet</div>
-            @endif
+            <div class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-items-center halpha-gap-3 halpha-w-full md:halpha-w-auto">
+                @if($this->plans->isNotEmpty())
+                    <div class="halpha-text-xs halpha-text-gray-400 halpha-w-full">Tip: tap <span
+                            class="halpha-font-semibold halpha-text-white">Stake</span> to open the stake sheet</div>
+                @endif
+
+                <div class="halpha-flex halpha-justify-between md:halpha-justify-end halpha-w-full">
+
+                    <a 
+                        href="{{ route('stakes.index') }}"
+                        class="halpha-ml-2 halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-white halpha-flex halpha-items-center halpha-gap-2 hover:halpha-bg-accent-2 halpha-transition-all halpha-duration-300"
+                        title="View my stakes"
+                    >
+                        <x-fas-coins class="halpha-w-4 halpha-h-4" />
+                        <span>My stakes</span>
+                    </a>
+
+                    <button 
+                        onclick="Livewire.emit && Livewire.emit('openMyStakesModal')"
+                        class="halpha-ml-2 halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-text-xs"
+                    >
+                        Quick view
+                    </button>
+                </div>
+            </div>
         </div>
 
         {{-- Empty state --}}

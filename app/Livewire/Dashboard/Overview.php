@@ -10,8 +10,7 @@ use Livewire\Component;
 
 
 #[Layout('layouts.app')]
-class Overview extends Component
-{
+class Overview extends Component {
     public $totalDeposited = 0;
     public $totalEarnings = 0;
     public $activeStakes = 0;

@@ -85,7 +85,7 @@ class StakeModal extends Component
             $user->balance = $newBalance;
             $user->save();
 
-            // Create stake
+            
             $stake = Stake::create([
                 'user_id' => $user->id,
                 'plan_id' => $this->plan->id,
@@ -98,6 +98,20 @@ class StakeModal extends Component
                 ]
             ]);
 
+            Transaction::create([
+                'user_id' => $user->id,
+                'type' => 'hold',
+                'amount' => $amt,
+                'balance_after' => $user->balance,
+                'related_type' => 'App\Models\Stake',
+                'related_id' => $stake->id,
+                'meta' => [
+                    'note' => 'Staked'
+                ],
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
@@ -107,7 +121,11 @@ class StakeModal extends Component
         // notify components and close
         // $this->emit('stakeCreated', $stake->id);
         $this->show = false;
-        $this->dispatch('toast', ['message' => 'Stake created successfully']);
+        $this->dispatch('toast', payload: [
+            'message' => 'Stake created successfully.',
+            'timeout' => 5000,
+            'stake_id' => $stake->id
+        ]);
     }
 
     public function render() {

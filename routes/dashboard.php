@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ProfileController;
 
+use App\Livewire\Dashboard\StakesIndex;
 use App\Livewire\EarningsPage;
 use App\Livewire\PlansList;
 use App\Livewire\Dashboard\Deposit\Create as CreateDeposit;
@@ -17,6 +18,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/staking/history', DepositHistory::class)->name('deposit.history');
     Route::get('/staking/stake', PlansList::class)->name('staking.stake');
     Route::get('/staking/earnings', EarningsPage::class)->name('staking.earnings');
+
+     Route::get('/stakes', StakesIndex::class)->name('stakes.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

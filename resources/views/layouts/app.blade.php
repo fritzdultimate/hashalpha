@@ -402,6 +402,94 @@
     @livewireScripts
 
     @stack('scripts')
+
+    <script>
+        (function () {
+            if (!document.querySelector('.halpha-toast-container')) {
+                const c = document.createElement('div');
+                c.className = 'halpha-toast-container';
+                document.body.appendChild(c);
+            }
+            const container = document.querySelector('.halpha-toast-container');
+
+            function createToastElement(message, { variant = 'primary', timeout = 3500 } = {}) {
+                const t = document.createElement('div');
+                t.className = 'halpha-toast' + (variant === 'subtle' ? ' halpha-toast--subtle' : '');
+                t.setAttribute('role', 'status');
+                t.innerHTML = `<div class="halpha-toast__message">${escapeHtml(message)}</div>`;
+
+                // close button
+                const btn = document.createElement('button');
+                btn.className = 'halpha-toast__close';
+                btn.setAttribute('aria-label', 'Dismiss toast');
+                btn.innerHTML = '✕';
+                btn.addEventListener('click', () => removeToast(t));
+                t.appendChild(btn);
+
+                // auto remove after timeout
+                const timer = setTimeout(() => removeToast(t), timeout);
+
+                // store timer so we can clear if user dismisses early
+                t._halpha_timer = timer;
+                return t;
+            }
+
+            function showToast(message, options = {}) {
+                const toastEl = createToastElement(message, options);
+                // append at top of stack (newest on top)
+                if (container.firstChild) container.insertBefore(toastEl, container.firstChild);
+                else container.appendChild(toastEl);
+
+                // Force a reflow then add show class to trigger transition
+                requestAnimationFrame(() => {
+                    toastEl.classList.add('halpha-toast--show');
+                });
+
+                // return element for further control if needed
+                return toastEl;
+            }
+
+            function removeToast(el) {
+                if (!el) return;
+                // clear timeout if exists
+                if (el._halpha_timer) clearTimeout(el._halpha_timer);
+                // animate out (slide slightly up and fade)
+                el.style.transition = 'transform 260ms ease, opacity 260ms ease';
+                el.style.transform = 'translateY(-18px)';
+                el.style.opacity = '0';
+                // remove after transition
+                setTimeout(() => {
+                    if (el && el.remove) el.remove();
+                }, 300);
+            }
+
+            function escapeHtml(str) {
+                if (typeof str !== 'string') return String(str);
+                return str
+                    .replaceAll('&', '&amp;')
+                    .replaceAll('<', '&lt;')
+                    .replaceAll('>', '&gt;')
+                    .replaceAll('"', '&quot;')
+                    .replaceAll("'", '&#39;');
+            }
+
+            if (window.Livewire) {
+                Livewire.on('toast', ({ payload }) => {
+                    let message = '';
+                    let opts = {};
+                    if (typeof payload === 'string') {
+                        message = payload;
+                    } else if (payload && typeof payload === 'object') {
+                        message = payload.message;
+                        if (payload.variant) opts.variant = payload.variant;
+                        if (payload.timeout) opts.timeout = Number(payload.timeout) || 3500;
+                    }
+                    if (!message) return;
+                    showToast(message, opts);
+                });
+            }
+        })();
+    </script>
 </body>
 
 </html>
