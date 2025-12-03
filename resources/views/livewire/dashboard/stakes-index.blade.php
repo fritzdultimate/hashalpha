@@ -52,65 +52,7 @@
 
     {{-- Content area --}}
     @if($tab === 'list')
-        <div class="halpha-space-y-3">
-            <div class="halpha-flex halpha-items-center halpha-gap-3">
-                <input 
-                    wire:model.live.debounce.300ms="search" 
-                    type="search" 
-                    placeholder="Search stakes"
-                    class="halpha-w-full halpha-bg-gray-800 halpha-text-white halpha-rounded halpha-px-3 halpha-py-2 halpha-text-sm" 
-                />
-                <select wire:model.live="filterStatus"
-                    class="halpha-bg-gray-800 halpha-text-sm halpha-px-3 halpha-py-2 halpha-rounded">
-                    <option value="">All</option>
-                    <option value="active">Active</option>
-                    <option value="completed">Completed</option>
-                    <option value="cancelled">Cancelled</option>
-                </select>
-            </div>
-
-            <div class="halpha-space-y-3">
-                @forelse($stakes as $stake)
-                    <div
-                        class="halpha-card halpha-p-3 halpha-bg-gray-900 halpha-border halpha-border-gray-800 halpha-flex halpha-items-center halpha-justify-between">
-                        <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-min-w-0">
-                            <div
-                                class="halpha-min-w-10 halpha-h-10 halpha-rounded-full halpha-bg-gray-800 halpha-flex halpha-items-center halpha-justify-center halpha-text-sm halpha-text-gray-300">
-                                {{ strtoupper(substr($stake->plan->name ?? 'PL', 0, 2)) }}
-                            </div>
-                            <div class="halpha-min-w-0">
-                                <div class="halpha-text-sm halpha-text-white halpha-font-semibold halpha-truncate">
-                                    {{ $stake->plan->name ?? '—' }}
-                                </div>
-                                <div class="halpha-text-xs halpha-text-gray-400 halpha-truncate halpha-flex halpha-flex-col md:halpha-flex-row">
-                                    <span>Amount: {{ number_format($stake->amount, 2) }}</span>
-                                    <span class="halpha-hidden md:halpha-block">&nbsp; • &nbsp;</span>
-                                    <span>Started: {{ $stake->started_at->format('d M, Y') }}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-right">
-                            <div class="halpha-text-sm halpha-font-semibold halpha-text-white">
-                                ${{ number_format($stake->earned_total ?? 0, 2) }}
-                            </div>
-                            <button 
-                                wire:click="viewStake({{ $stake->id }})"
-                                class="halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300"
-                            >
-                                View
-                            </button>
-                        </div>
-                    </div>
-                @empty
-                    <div class="halpha-text-center halpha-py-8 halpha-text-gray-400">You have no stakes yet.</div>
-                @endforelse
-            </div>
-
-            <div class="halpha-mt-3">
-                {{ $stakes->links() }}
-            </div>
-        </div>
+        <livewire:dashboard.stakes-list :per-page="8" />
     @elseif($tab === 'earnings')
         <div class="halpha-space-y-4">
             {{-- Chart --}}
@@ -171,44 +113,8 @@
         </div>
     @endif
 
-    {{-- Details --}}
     @if($tab === 'details' && $selectedStakeId)
-        @php $s = \App\Models\Stake::with('plan')->find($selectedStakeId); @endphp
-        @if($s)
-            <div class="halpha-card halpha-p-4 halpha-bg-gray-900 halpha-border halpha-border-gray-800">
-                <div class="halpha-flex halpha-items-start halpha-gap-4">
-                    <div>
-                        <div class="halpha-text-sm halpha-text-gray-400">Stake #{{ $s->id }}</div>
-                        <div class="halpha-text-lg halpha-font-semibold halpha-text-white">{{ $s->plan->name ?? '—' }}</div>
-                        <div class="halpha-text-xs halpha-text-gray-400">
-                            Started: {{ optional($s->started_at)->format('d M, Y') }}
-                        </div>
-                    </div>
-                    <div class="halpha-ml-auto halpha-text-right">
-                        <div class="halpha-text-xs halpha-text-gray-400">Amount</div>
-                        <div class="halpha-text-lg halpha-font-semibold halpha-text-white">
-                            ${{ number_format($s->amount, 2) }}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="halpha-mt-4 halpha-space-y-2">
-                    <div class="halpha-text-sm halpha-text-gray-400">Total earned</div>
-                    <div class="halpha-text-lg halpha-font-semibold halpha-text-white">
-                        ${{ number_format($s->earned_total ?? 0, 2) }}
-                    </div>
-
-                    <div class="halpha-flex halpha-items-center halpha-gap-2">
-                        <button 
-                            wire:click="$set('tab','list')"
-                            class="halpha-px-3 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300"
-                        >
-                            Back
-                        </button>
-                    </div>
-                </div>
-            </div>
-        @endif
+        <livewire:dashboard.stake-details :selectedStakeId="$selectedStakeId"  />
     @endif
 
 </div>

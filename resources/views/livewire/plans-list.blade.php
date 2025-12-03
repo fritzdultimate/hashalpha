@@ -14,7 +14,7 @@
             </div>
 
             <div class="halpha-mt-2 sm:halpha-mt-0 halpha-ml-auto halpha-flex halpha-items-center halpha-gap-2">
-                <select wire:model="durationFilter"
+                <select wire:model.live="durationFilter"
                     class="halpha-bg-gray-800 halpha-text-sm halpha-px-3 halpha-py-2 halpha-rounded">
                     <option value="">All durations</option>
                     <option value="7">7 days</option>
@@ -22,16 +22,16 @@
                     <option value="90">90 days</option>
                 </select>
 
-                <select wire:model="sortBy"
+                <select wire:model.live="sortBy"
                     class="halpha-bg-gray-800 halpha-text-sm halpha-px-3 halpha-py-2 halpha-rounded">
-                    <option value="apy_decimal">Sort: APY</option>
-                    <option value="min_amount_decimal">Sort: Min amount</option>
-                    <option value="duration_days">Sort: Duration</option>
+                    <option value="daily_roi">Sort: ROI</option>
+                    <option value="min_amount">Sort: Min amount</option>
+                    <option value="duration">Sort: Duration</option>
                 </select>
 
-                <button wire:click="$toggle('sortDir', 'asc')" title="Toggle sort direction"
+                <button wire:click="toggleSortDir" title="Toggle sort direction"
                     class="halpha-ml-2 halpha-px-3 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700 halpha-text-xs">
-                    @if($sortDir === 'desc') Desc @else Asc @endif
+                    @if($sortDir === 'asc') Desc @else Asc @endif
                 </button>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     </a>
 
                     <button 
-                        onclick="Livewire.emit && Livewire.emit('openMyStakesModal')"
+                        wire:click="$toggle('quickView')"
                         class="halpha-ml-2 halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-text-xs"
                     >
                         Quick view
@@ -115,10 +115,13 @@
 
                         <div class="halpha-text-right halpha-flex halpha-flex-col halpha-items-end halpha-justify-between">
                             <div>
-                                <div class="halpha-text-2xl halpha-font-bold halpha-text-accent-2">
-                                    {{ rtrim((string) $plan->daily_roi, '.') }}%
+                                <div class="halpha-flex">
+                                    <div class="halpha-text-2xl halpha-font-bold halpha-text-accent-2">
+                                        {{ rtrim((string) $plan->daily_roi, '.') }}%
+                                    </div>
+                                    <span class="halpha-mt-auto halpha-text-gray-400 halpha-text-xs halpha-capitalize">/{{ $plan->payout_frequency }}</span>
                                 </div>
-                                <div class="halpha-text-xs halpha-text-gray-400">APY</div>
+                                <div class="halpha-text-xs halpha-text-gray-400">ROI</div>
                             </div>
                         </div>
                     </div>
@@ -134,7 +137,7 @@
                                 class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300 halpha-font-medium">Min:
                                 {{ number_format($plan->min_amount, 2) }}</span>
                             <span
-                                class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300 halpha-font-medium">{{ $plan->duration_days ? $plan->duration_days . 'd' : 'Flexible' }}</span>
+                                class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300 halpha-font-medium">{{ $plan->duration ? $plan->duration . 'd' : 'Flexible' }}</span>
                         </div>
                     </div>
 
@@ -142,16 +145,25 @@
                     <div class="halpha-mt-4 halpha-space-y-2">
                         <div class="halpha-h-8 halpha-w-full halpha-bg-gray-800 halpha-rounded overflow-hidden">
                             @php
-                                $seed = crc32($plan->id);
-                                $vals = [];
-                                for ($i = 0; $i < 12; $i++) {
-                                    $vals[] = (sin($seed + $i) + 1) * (0.5 + ($i % 3) / 5);
+                                $amounts = $plan->stakes->pluck('amount')->toArray();
+
+                                if (count($amounts) === 0) {
+                                    $amounts = [1, 1, 1, 1, 1];
                                 }
+
+                                $max = max($amounts);
+                                $normalized = array_map(fn($a) => $max ? (($a - $plan->min_amount) / $max) : 0, $amounts);
+                                $plan->sparkline = $normalized;
+
+                                $vals = $plan->sparkline;
+                                $count = count($vals);
+                                $points = [];
+
                                 $maxv = max($vals);
                                 $points = [];
                                 foreach ($vals as $i => $v) {
-                                    $x = 2 + ($i * (100 / 11));
-                                    $y = 26 - (($v / $maxv) * 20);
+                                    $x = ($i / max(1, $count - 1)) * 100;
+                                    $y = 26 - ($v * 20);
                                     $points[] = $x . ',' . $y;
                                 }
                             @endphp
@@ -163,7 +175,7 @@
 
                         {{-- utilization bar --}}
                         @php
-                            $util = optional($plan->meta)['utilization'] ?? (50 + ($plan->id % 40));
+                            $util = $plan->utilization ?? 0;
                             $util = (int) min(100, max(0, $util));
                         @endphp
                         <div class="halpha-w-full halpha-bg-gray-800 halpha-rounded halpha-h-2">
@@ -178,6 +190,7 @@
 
                     {{-- actions --}}
                     <div class="halpha-mt-4 halpha-flex halpha-gap-3">
+
                         <button 
                             wire:click="openStakeModal({{ $plan->id }})"
                             class="halpha-flex-1 halpha-py-2 halpha-rounded-lg halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-max-h-10 halpha-flex halpha-justify-center halpha-items-center"
@@ -186,6 +199,7 @@
                             <span wire:loading.remove wire:target="openStakeModal">Stake</span>
                             <x-ri-loader-4-fill wire:target="openStakeModal" wire:loading class="halpha-w-6 halpha-h-6 halpha-animate-spin" />
                         </button>
+
                         <button 
                             type="button" 
                             class="halpha-py-2 halpha-px-4 halpha-rounded-lg halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300" 
@@ -210,7 +224,7 @@
         @endif
 
         <livewire:stake-modal />
-
+        <x-dashboard.quick-stake-view :quickView="$quickView" />
     </div>
 
     <script>

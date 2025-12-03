@@ -19,7 +19,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/staking/stake', PlansList::class)->name('staking.stake');
     Route::get('/staking/earnings', EarningsPage::class)->name('staking.earnings');
 
-     Route::get('/stakes', StakesIndex::class)->name('stakes.index');
+    Route::get('/stakes', StakesIndex::class)->name('stakes.index');
+
+
+    Route::get('/stakes/item/{id}', StakesIndex::class)->name('stakes.item');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -39,7 +39,7 @@
                 >
                     @foreach($nav['children'] ?? [] as $child)
                         @php
-                            $activeDashboard = route(Route::currentRouteName()) === $child['url'];
+                            $activeDashboard = url()->current() === url($child['url']);
                         @endphp
                         <li>
                             <a href="{{ $child['url'] }}"

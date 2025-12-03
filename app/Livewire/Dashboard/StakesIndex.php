@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +24,11 @@ class StakesIndex extends Component {
         'refreshStakes' => '$refresh'
     ];
 
-    public function mount()
-    {
-        //
+    public function mount($id = null){
+        if($id) {
+            $this->selectedStakeId = $id;
+            $this->tab = 'details';
+        }
     }
 
     public function openPanel() {
@@ -34,10 +37,15 @@ class StakesIndex extends Component {
         $this->dispatchBrowserEvent('open-stakes-panel');
     }
 
-    public function viewStake($id)
-    {
+    #[On('openStakeDetails')]
+    public function viewStake($id) {
         $this->selectedStakeId = $id;
         $this->tab = 'details';
+    }
+
+    #[On('goBack')]
+    public function back($tab) {
+        $this->tab = $tab;
     }
 
     public function switchTab($tab)
@@ -45,8 +53,7 @@ class StakesIndex extends Component {
         $this->tab = $tab;
     }
 
-    public function exportCsv()
-    {
+    public function exportCsv() {
         $userId = Auth::id();
         $rows = \App\Models\Stake::with('plan')
             ->where('user_id', $userId)
@@ -80,8 +87,7 @@ class StakesIndex extends Component {
         ]);
     }
 
-    public function render()
-    {
+    public function render() {
         $userId = Auth::id();
         $query = \App\Models\Stake::with('plan')->where('user_id', $userId);
 

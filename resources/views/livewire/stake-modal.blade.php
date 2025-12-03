@@ -15,14 +15,14 @@
 
                     <div class="halpha-flex halpha-items-center halpha-gap-3">
                         <div>
-                            <p class="halpha-text-xs halpha-text-gray-400">APY</p>
+                            <p class="halpha-text-xs halpha-text-gray-400">ROI</p>
                             <p class="halpha-text-lg halpha-font-semibold halpha-text-white">
 								{{ rtrim((string)$this->plan->daily_roi,'.') }}%
 							</p>
                         </div>
                         <div>
                             <p class="halpha-text-xs halpha-text-gray-400">Min Stake</p>
-                            <p class="halpha-text-lg halpha-font-semibold halpha-text-white">{{ number_format($this->plan->min_amount, 2) }}</p>
+                            <p class="halpha-text-lg halpha-font-semibold halpha-text-white">${{ number_format($this->plan->min_amount, 2) }}</p>
                         </div>
                         <div>
                             <p class="halpha-text-xs halpha-text-gray-400">Compound</p>
@@ -32,7 +32,7 @@
 
                     <div class="halpha-mt-4">
                         <p class="halpha-text-xs halpha-text-gray-400">Duration</p>
-                        <p class="halpha-text-sm halpha-text-white">{{ $this->plan->duration_days ? $this->plan->duration_days . ' days' : 'Flexible' }}</p>
+                        <p class="halpha-text-sm halpha-text-white">{{ $this->plan->duration ? $this->plan->duration . ' days' : 'Flexible' }}</p>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                             <input 
                                 type="number" 
                                 step="0.00000001" 
-                                wire:model.defer="amount" 
+                                wire:model.live.defer="amount" 
                                 inputmode="decimal"
                                 class="halpha-w-full halpha-pl-7 halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-gray-800 halpha-text-white halpha-outline-none no-spinner focus:halpha-ring-gray-600 focus:halpha-border-gray-600" 
                             />
@@ -54,21 +54,19 @@
                         @error('amount') <div class="halpha-text-xs halpha-text-red-400 mt-1">{{ $message }}</div> @enderror
                     </div>
 
-                    {{-- Auto-compound --}}
-                    @if($this->plan->compound_allowed)
-                    <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-text-xs !halpha-hidden">
-                        <input type="checkbox" wire:model="autoCompound" id="autoCompound" class="halpha-checked:halpha-ring" />
-                        <label for="autoCompound" class="halpha-text-gray-300">Auto-compound rewards</label>
-                    </div>
-                    @endif
-
                     {{-- Estimated rewards --}}
                     <div class="halpha-bg-gray-800 halpha-p-3 halpha-rounded halpha-text-xs halpha-text-gray-300">
-                        <p><strong>Estimated daily reward:</strong>
-                        <span>$43.23</span>
+                        <p>
+                            <strong>Estimated daily reward:</strong>
+                            <span>
+                                ${{ number_format($amount * 0.01 * $this->plan->daily_roi) }}
+                            </span>
                         </p>
-                        <p><strong>Estimated weekly reward:</strong>
-                        <span>$454.33</span>
+                        <p>
+                            <strong>Estimated total reward:</strong>
+                            <span>
+                                ${{ number_format($amount * 0.01 * $this->plan->daily_roi * $this->plan->duration) }}
+                            </span>
                         </p>
                     </div>
 

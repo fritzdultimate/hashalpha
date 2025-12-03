@@ -260,6 +260,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/count-up.js') }}"></script>
     <script>
         function hashAlphaLayout() {
             return {

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Stake;
 use App\Models\StakingPlan;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
@@ -10,12 +11,13 @@ use Livewire\Component;
 
 #[Layout('layouts.app')]
 class PlansList extends Component {
-    public string $sortDir = 'desc'; 
+    public string $sortDir = 'asc'; 
     public ?int $durationFilter = null;
     public int $perPage = 6;
     public bool $loading = true;
     public string $search = '';
-    public string $sortBy = 'apy_decimal';
+    public string $sortBy = 'daily_roi';
+    public $quickView = false;
 
     public function updatedSearch() {
         $this->resetPerPage();
@@ -29,7 +31,7 @@ class PlansList extends Component {
         $this->resetPerPage();
     }
 
-    public function updatedSortDir() {
+    public function updatedSortDir($value) {
         $this->resetPerPage();
     }
 
@@ -41,6 +43,10 @@ class PlansList extends Component {
     public function refresh() {
         $this->plans = StakingPlan::orderBy('apy_decimal', 'desc')->get();
         $this->dispatch('refreshDashboard');
+    }
+
+    public function toggleSortDir() {
+        $this->sortDir = $this->sortDir === 'asc' ? 'desc' : 'asc';
     }
 
     public function openStakeModal($planId) {
@@ -62,7 +68,10 @@ class PlansList extends Component {
     }
 
      protected function query() {
-        $q = StakingPlan::query();
+        $q = StakingPlan::query()
+            ->withSum(['stakes as active_staked_amount' => function ($q) {
+                $q->where('status', 'active');
+            }], 'amount');
 
         if ($this->search) {
             $q->where(function($sub) {
@@ -72,21 +81,30 @@ class PlansList extends Component {
         }
 
         if ($this->durationFilter) {
-            $q->where('duration_days', $this->durationFilter);
+            $q->where('duration', $this->durationFilter);
         }
 
         // safe sorting
-        if (in_array($this->sortBy, ['apy_decimal','min_amount_decimal','duration_days'])) {
+        if (in_array($this->sortBy, ['daily_roi','min_amount','duration'])) {
             $q->orderBy($this->sortBy, $this->sortDir);
         } else {
-            $q->orderBy('apy_decimal', 'desc');
+            $q->orderBy('daily_roi', 'desc');
         }
 
         return $q;
     }
 
     public function getPlansProperty(): Collection {
-        return $this->query()->limit($this->perPage)->get();
+        $totalActive = Stake::where('status', 'active')->sum('amount');
+        $plans = $this->query()->limit($this->perPage)->get();
+
+        $plans->each(function ($plan) use ($totalActive) {
+            $plan->utilization = $totalActive > 0
+            ? round(($plan->active_staked_amount / $totalActive) * 100, 1)
+            : 0;
+        });
+        
+        return $plans;
     }
 
 

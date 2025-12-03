@@ -54,4 +54,8 @@ class StakingPlan extends Model {
     public function getDailyRoiAttribute($value) {
         return $value * 100;
     }
+
+    public function stakes() {
+        return $this->hasMany(Stake::class, 'plan_id');
+    }
 }
