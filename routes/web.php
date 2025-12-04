@@ -74,4 +74,4 @@ Route::get('/terms', function() {
 Route::view('email-template', 'emaim-template');
 
 require __DIR__.'/auth.php';
-require __DIR__.'/dashboard.php';
+require __DIR__.'/dashboard.php'; 
