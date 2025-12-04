@@ -53,7 +53,7 @@
 
                     <tr>
                         <td style="color:#8d8d95; font-size: 12px;">
-                            <p>This code will expire in 10 minutes.</p>
+                            <p style="color:#8d8d95; font-size: 12px;">This code will expire in 10 minutes.</p>
                             <p>Do not share this code with anyone — not even our support team.</p>
 
                             <p>If you didn’t request this code, please secure your account immediately.</p>
