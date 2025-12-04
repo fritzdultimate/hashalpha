@@ -54,16 +54,16 @@
                     <tr>
                         <td style="color:#8d8d95; font-size: 12px;">
                             <p style="color:#8d8d95; font-size: 12px;">This code will expire in 10 minutes.</p>
-                            <p>Do not share this code with anyone — not even our support team.</p>
+                            <p style="color:#8d8d95; font-size: 12px;">Do not share this code with anyone — not even our support team.</p>
 
-                            <p>If you didn’t request this code, please secure your account immediately.</p>
+                            <p style="color:#8d8d95; font-size: 12px;">If you didn’t request this code, please secure your account immediately.</p>
                         </td>
                     </tr>
 
                     <tr>
                         <td style="font-size: 11px; font-weight: 500;">
-                            <p>Thank you,</p>
-                            <p>{{ env('APP_NAME') }} Team</p>
+                            <p style="color:#8d8d95; font-size: 12px;">Thank you,</p>
+                            <p style="color:#8d8d95; font-size: 12px;">{{ env('APP_NAME') }} Team</p>
                         </td>
                     </tr>
 
