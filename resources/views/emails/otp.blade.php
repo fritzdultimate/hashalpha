@@ -52,7 +52,7 @@
                     </tr>
 
                     <tr>
-                        <td style="color:#8d8d95; font-size: 14px;">
+                        <td style="color:#8d8d95; font-size: 12x;">
                             <p>This code will expire in 10 minutes.</p>
                             <p>Do not share this code with anyone — not even our support team.</p>
 
@@ -61,7 +61,7 @@
                     </tr>
 
                     <tr>
-                        <td style="font-size: 13px; font-weight: 600;">
+                        <td style="font-size: 11px; font-weight: 600;">
                             <p>Thank you,</p>
                             <p>{{ env('APP_NAME') }} Team</p>
                         </td>
@@ -92,7 +92,7 @@
                     <!-- Footer -->
                     <tr>
                         <td align="center"
-                            style="padding:30px 20px 20px; color:#9CA3AF; font-size:12px; line-height:18px; font-family:Arial, sans-serif;">
+                            style="padding:30px 20px 20px; color:#9CA3AF; font-size:11px; font-family:Arial, sans-serif;">
 
                             <p style="margin:0; padding:0; color:#9CA3AF;">
                                 You are receiving this email because you have an account with <strong
@@ -112,7 +112,7 @@
                                 100% Secure • Powered by {{ env('APP_NAME') }} Infrastructure
                             </p>
 
-                            <p style="margin:15px 0 0; padding:0; color:#9CA3AF; font-size:12px;">
+                            <p style="margin:15px 0 0; padding:0; color:#9CA3AF; font-size:10px;">
                                 <a href="#" style="color:#4B82F2; text-decoration:none;">Privacy Policy</a>
                                 &nbsp;•&nbsp;
                                 <a href="#" style="color:#4B82F2; text-decoration:none;">Support</a> &nbsp;•&nbsp;
