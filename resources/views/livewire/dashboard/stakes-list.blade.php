@@ -38,7 +38,7 @@
 
                 <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-right">
                     <div class="halpha-text-sm halpha-font-semibold halpha-text-white">
-                        ${{ number_format($stake->earned_total ?? 0, 2) }}
+                        ${{ number_format($stake->total_claimed ?? 0, 2) }}
                     </div>
                     @if (!$fixedPage)
                         <button 

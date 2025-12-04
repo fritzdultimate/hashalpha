@@ -71,5 +71,7 @@ Route::get('/terms', function() {
     return 'Our Terms';
 })->name('terms');
 
+Route::view('email-template', 'emaim-template');
+
 require __DIR__.'/auth.php';
 require __DIR__.'/dashboard.php';

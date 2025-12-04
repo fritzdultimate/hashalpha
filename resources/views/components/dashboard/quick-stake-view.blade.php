@@ -8,7 +8,7 @@
     <div 
         x-show="open" 
         x-transition.origin.top.duration.300ms
-        class="halpha-fixed halpha-inset-0 halpha-left-1/2 halpha-transform halpha--translate-x-1/2 halpha-w-full halpha-max-w-md md:halpha-max-w-2xl halpha-rounded-xl halpha-bg-gray-900 halpha-border halpha-border-gray-800 halpha-shadow-lg halpha-z-50"
+        class="halpha-fixed halpha-inset-0 halpha-left-1/2 halpha-transform halpha--translate-x-1/2 halpha-w-full halpha-max-w-md md:halpha-max-w-2xl halpha-rounded-xl halpha-bg-[#121212] halpha-border halpha-border-gray-800 halpha-shadow-lg halpha-z-50"
         style="display: none;" 
         role="dialog" 
         aria-modal="true" 

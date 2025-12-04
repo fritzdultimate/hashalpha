@@ -13,12 +13,14 @@ class OtpNotification extends Mailable {
     use Queueable, SerializesModels;
 
     public $otp;
+    public $subject;
 
     /**
      * Create a new message instance.
      */
     public function __construct($otp) {
         $this->otp = $otp;
+        $this->subject = 'Your OTP Code for Secure Verification';
     }
 
     /**
@@ -26,7 +28,7 @@ class OtpNotification extends Mailable {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'OTP Notification',
+            subject: $this->subject
         );
     }
 
@@ -37,6 +39,10 @@ class OtpNotification extends Mailable {
     {
         return new Content(
             markdown: 'emails.otp',
+            with: [
+                'otp' => $this->otp,
+                'subject' => $this->subject
+            ]
         );
     }
 

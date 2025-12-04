@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $subject }}</title>
+    <title>Title</title>
 </head>
 
 <body style="margin:0; padding:0; background:#0f0f11; font-family:Arial, Helvetica, sans-serif;">
@@ -30,7 +30,7 @@
                     <tr>
                         <td
                             style="font-size:20px; font-weight:bold; text-align:center; padding-bottom:10px; color:#ffffff;">
-                            {{ $subject }}
+                            Your OTP Code for Secure Verification
                         </td>
                     </tr>
 
@@ -38,7 +38,7 @@
                     <tr>
                         <td
                             style="font-size:14px; line-height:22px; color:#d1d1d6; text-align:center; padding:10px 0 20px;">
-                            Your One-Time Password (OTP) for completing your activity:
+                            Your One-Time Password (OTP) for completing your action__ is:
                         </td>
                     </tr>
 
@@ -46,8 +46,7 @@
                         <td>
                             <div
                                 style="text-align: center; padding: 20px 0; font-size: 35px; font-weight: 600; color: #22d3ee;">
-                                {{ $otp }}
-                            </div>
+                                645328</div>
                         </td>
                     </tr>
 

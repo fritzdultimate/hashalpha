@@ -37,9 +37,9 @@
             </div>
         </div>
         <div class="halpha-card halpha-p-4 halpha-bg-gray-900 halpha-border halpha-border-gray-800">
-            <div class="halpha-text-xs halpha-text-gray-400">Total Earned</div>
+            <div class="halpha-text-xs halpha-text-gray-400">Total Claimable</div>
             <div class="halpha-text-lg halpha-font-semibold halpha-text-white">
-                ${{ number_format($totalEarned, 2) }}
+                ${{ number_format($totalClaimable, 2) }}
             </div>
         </div>
         <div class="halpha-card halpha-p-4 halpha-bg-gray-900 halpha-border halpha-border-gray-800">

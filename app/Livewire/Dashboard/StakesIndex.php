@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Models\Reward;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -104,8 +105,11 @@ class StakesIndex extends Component {
         $stakes = $query->latest()->paginate($this->perPage);
 
         $totalActive = \App\Models\Stake::where('user_id', $userId)->where('status', 'active')->sum('amount');
-        $totalEarned = \App\Models\Stake::where('user_id', $userId)->sum('earned_total');
+        $totalClaimable = Reward::where([
+            'user_id' => $userId,
+            'status' => 'pending'
+        ])->sum('amount');
 
-        return view('livewire.dashboard.stakes-index', compact('stakes','totalActive','totalEarned'));
+        return view('livewire.dashboard.stakes-index', compact('stakes','totalActive','totalClaimable'));
     }
 }

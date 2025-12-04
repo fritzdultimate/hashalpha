@@ -4,8 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stake extends Model
-{
+class Stake extends Model {
     use HasFactory;
     protected $guarded = [];
     protected $casts = [
@@ -19,5 +18,21 @@ class Stake extends Model
     }
     public function plan() {
         return $this->belongsTo(StakingPlan::class, 'plan_id');
+    }
+
+    public function rewards() {
+        return $this->hasMany(Reward::class);
+    }
+
+    public function getTotalClaimedAttribute() {
+        return $this->rewards()
+            ->where('status', 'claimed')
+            ->sum('amount');
+    }
+
+    public function getTotalClaimableAttribute() {
+        return $this->rewards()
+            ->where('status', 'pending')
+            ->sum('amount');
     }
 }

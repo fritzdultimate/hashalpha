@@ -21,6 +21,7 @@
         "owenvoke/blade-fontawesome": "^3.0",
         "predis/predis": "^3.2",
         "saade/blade-iconsax": "^1.2",
+        "secondnetwork/blade-tabler-icons": "^3.35",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-permission": "^6.21"
     },
