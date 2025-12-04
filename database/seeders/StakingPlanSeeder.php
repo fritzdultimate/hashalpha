@@ -16,10 +16,10 @@ class StakingPlanSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!app()->environment(['local', 'testing', 'development'])) {
-            $this->command->info('Skipping in non-dev environment.');
-            return;
-        }
+        // if (!app()->environment(['local', 'testing', 'development'])) {
+        //     $this->command->info('Skipping in non-dev environment.');
+        //     return;
+        // }
 
         $tx = StakingPlan::factory()->make([
             'name' => 'Standard',
