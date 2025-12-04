@@ -40,7 +40,7 @@ class OtpNotification extends Mailable {
             markdown: 'emails.otp',
             with: [
                 'otp' => $this->otp,
-                'subject' => $this->subject
+                'subject' => $this->subject 
             ]
         );
     }
