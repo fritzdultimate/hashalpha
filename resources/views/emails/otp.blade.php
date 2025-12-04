@@ -92,7 +92,7 @@
                     <!-- Footer -->
                     <tr>
                         <td align="center"
-                            style="padding:30px 20px 20px; color:#9CA3AF; font-family:Arial, sans-serif;">
+                            style="padding:30px 0 20px 0; color:#9CA3AF; font-family:Arial, sans-serif;">
 
                             <p style="margin:0; padding:0; color:#9CA3AF; font-size:11px;">
                                 You are receiving this email because you have an account with <strong
