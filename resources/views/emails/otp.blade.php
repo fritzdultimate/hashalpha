@@ -62,8 +62,8 @@
 
                     <tr>
                         <td style="font-size: 11px; font-weight: 500;">
-                            <p style="color:#8d8d95; font-size: 12px;">Thank you,</p>
-                            <p style="color:#8d8d95; font-size: 12px;">{{ env('APP_NAME') }} Team</p>
+                            <p style="font-size: 12px;">Thank you,</p>
+                            <p style="font-size: 12px;">{{ env('APP_NAME') }} Team</p>
                         </td>
                     </tr>
 
@@ -92,15 +92,15 @@
                     <!-- Footer -->
                     <tr>
                         <td align="center"
-                            style="padding:30px 20px 20px; color:#9CA3AF; font-size:11px; font-family:Arial, sans-serif;">
+                            style="padding:30px 20px 20px; color:#9CA3AF; font-family:Arial, sans-serif;">
 
-                            <p style="margin:0; padding:0; color:#9CA3AF;">
+                            <p style="margin:0; padding:0; color:#9CA3AF; font-size:11px;">
                                 You are receiving this email because you have an account with <strong
                                     style="color:#E5E7EB;">{{ env('APP_NAME') }}</strong>
                                 or recently performed an action that requires notification.
                             </p>
 
-                            <p style="margin:15px 0 0; padding:0; color:#9CA3AF;">
+                            <p style="margin:15px 0 0; padding:0; color:#9CA3AF; font-size:11px;">
                                 If you did not request this email, you can safely ignore it.
                             </p>
 
@@ -131,7 +131,7 @@
                                 <tr>
                                     <td style="padding:0 6px;">
                                         <a href="#" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg"
+                                            <img src="{{ asset('svgs/socials/instagram.svg')}}"
                                                 width="24" height="24" alt="Instagram"
                                                 style="display:block; filter: invert(40%);">
                                         </a>
@@ -139,7 +139,7 @@
 
                                     <td style="padding:0 6px;">
                                         <a href="https://www.facebook.com/" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg"
+                                            <img src="{{ asset('svgs/socials/facebook.svg') }}"
                                                 width="24" height="24" alt="Facebook"
                                                 style="display:block; filter: invert(40%);">
                                         </a>
@@ -147,7 +147,7 @@
 
                                     <td style="padding:0 6px;">
                                         <a href="#" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg"
+                                            <img src="{{ asset('svgs/socials/x.svg') }}"
                                                 width="24" height="24" alt="Twitter/X"
                                                 style="display:block; filter: invert(40%);">
                                         </a>
@@ -155,7 +155,7 @@
 
                                     <td style="padding:0 6px;">
                                         <a href="#" target="_blank">
-                                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg"
+                                            <img src="{{ asset('svgs/socials/linkedin.svg') }}"
                                                 width="24" height="24" alt="LinkedIn"
                                                 style="display:block; filter: invert(40%);">
                                         </a>
