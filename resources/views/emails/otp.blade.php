@@ -52,7 +52,7 @@
                     </tr>
 
                     <tr>
-                        <td style="color:#8d8d95; font-size: 12x;">
+                        <td style="color:#8d8d95; font-size: 12px;">
                             <p>This code will expire in 10 minutes.</p>
                             <p>Do not share this code with anyone — not even our support team.</p>
 
@@ -61,7 +61,7 @@
                     </tr>
 
                     <tr>
-                        <td style="font-size: 11px; font-weight: 600;">
+                        <td style="font-size: 11px; font-weight: 500;">
                             <p>Thank you,</p>
                             <p>{{ env('APP_NAME') }} Team</p>
                         </td>
