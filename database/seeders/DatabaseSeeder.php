@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             // TransactionsTableSeeder::class,
-            // StakingPlanSeeder::class
+            StakingPlanSeeder::class
             // StakeSeeder::class
-            RewardSeeder::class
+            // RewardSeeder::class
         ]);
     }
 }
