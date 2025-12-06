@@ -23,6 +23,14 @@
                                 
                                 <div class="btn-primary-border"></div>
                             </div>
+
+                            <div data-w-id="94b66ed0-3a57-7602-7036-6692c6d028ea" class="btn-primary-wrapper">
+                                <a href="{{ route('register') }}" class="btn-primary w-button">
+                                    Login
+                                </a>
+                                
+                                <div class="btn-primary-border"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
