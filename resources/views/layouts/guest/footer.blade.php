@@ -32,39 +32,98 @@
 
             <div class="divider mg-0" style="opacity: 1; filter: blur(0px);"></div>
             
-            <div class="footer-middle">
+            <div class="footer-middle- !halpha-mt-5 halpha-grid halpha-grid-cols-2 md:halpha-grid-cols-4">
                 
                 
                 <div id="w-node-_59a0c9f7-296b-773a-326e-b1cc37aba373-37aba35b" data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba373" style="opacity: 1; filter: blur(0px);">
-                    <div class="text-300 footer-column-title">Main pages</div>
+                    <div class="text-300 footer-column-title">Company</div>
                     <div class="grid-3-columns footer-main-pages-grid">
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="{{ route('home') }}" aria-current="page" class="footer-link w--current">Home</a>
+                                <a href="{{ route('about') }}" aria-current="page" class="footer-link w--current halpha-text-sm">About {{ env('APP_NAME') }}</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="{{ route('resources.roadmap') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Roadmap</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="{{ route('support.contact') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Contact</a>
                             </li>
                         </ul>
-                        
+                    </div>
+                </div>
+
+                <div id="w-node-_59a0c9f7-296b-773a-326e-b1cc37aba373-37aba35b" data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba373" style="opacity: 1; filter: blur(0px);">
+                    <div class="text-300 footer-column-title">Ecosystem</div>
+                    <div class="grid-3-columns footer-main-pages-grid">
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="{{ route('about') }}" class="footer-link">About</a>
+                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">V-NFTs (Validator NFTs)</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">$HASH Token (Coming Soon)</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="{{ route('affiliate.index') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Affiliate Program</a>
                             </li>
                         </ul>
-                        
+                    </div>
+                </div>
+
+                <div id="w-node-_59a0c9f7-296b-773a-326e-b1cc37aba373-37aba35b" data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba373" style="opacity: 1; filter: blur(0px);">
+                    <div class="text-300 footer-column-title">Resources</div>
+                    <div class="grid-3-columns footer-main-pages-grid">
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="{{ route('affiliate.index') }}" class="footer-link">
-                                    Affiliate
-                                </a>
+                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">GitBook</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="{{ route('support.faq') }}" aria-current="page" class="footer-link w--current halpha-text-sm">FAQ</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="{{ route('support.index') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Support Center</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="w-node-_59a0c9f7-296b-773a-326e-b1cc37aba373-37aba35b" data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba373" style="opacity: 1; filter: blur(0px);">
+                    <div class="text-300 footer-column-title">Legal</div>
+                    <div class="grid-3-columns footer-main-pages-grid">
+                        <ul role="list" class="footer-list-wrapper">
+                            <li class="footer-list-item">
+                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Terms & Conditions</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Privacy Policy</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Risk Disclosure</a>
+                            </li>
+
+                            <li class="footer-list-item">
+                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Compliance & Regulation</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 
                 <div id="w-node-_59a0c9f7-296b-773a-326e-b1cc37aba3b6-37aba35b" data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba3b6" style="opacity: 0; filter: blur(10px);">
-                    <div class="text-300 footer-column-title">Others</div>
+                    <div class="text-300 footer-column-title">Connect</div>
                     <ul role="list" class="footer-list-wrapper">
                         <li class="footer-list-item">
-                            <a href="#" class="footer-link">Privacy Policy</a>
+                            <a href="#" class="footer-link">Telegram</a>
+                        </li>
+
+                        <li class="footer-list-item">
+                            <a href="#" class="footer-link">Youtube</a>
                         </li>
                     </ul>
                 </div>
