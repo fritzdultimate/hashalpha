@@ -78,17 +78,12 @@
             <div class="header-right-side">
                 <!-- Social medial links -->
                 <div class="social-media-links-container hidden-on-mbl">
-                    <a href="https://www.facebook.com/" target="_blank" class="social-link-single w-inline-block halpha-hidden">
-                        <div></div>
+                    <a href="https://www.t.me/hashalphaofficial" target="_blank" class="social-link-single w-inline-block">
+                        <x-ri-telegram-2-fill />
                     </a>
-                    <a href="https://www.twitter.com/" target="_blank" class="social-link-single w-inline-block halpha-hidden">
-                        <div></div>
-                    </a>
-                    <a href="https://www.instagram.com/" target="_blank" class="social-link-single w-inline-block halpha-hidden">
-                        <div></div>
-                    </a>
-                    <a href="https://www.linkedin.com/" target="_blank" class="social-link-single w-inline-block halpha-hidden">
-                        <div></div>
+
+                    <a href="https://www.youtube.com/@hashalphaglobal" target="_blank" class="social-link-single w-inline-block">
+                        <x-ri-youtube-fill />
                     </a>
                 </div>
                 

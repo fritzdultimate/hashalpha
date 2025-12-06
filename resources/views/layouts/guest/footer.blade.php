@@ -119,11 +119,11 @@
                     <div class="text-300 footer-column-title">Connect</div>
                     <ul role="list" class="footer-list-wrapper">
                         <li class="footer-list-item">
-                            <a href="#" class="footer-link">Telegram</a>
+                            <a href="https://www.t.me/hashalphaofficial" class="footer-link">Telegram</a>
                         </li>
 
                         <li class="footer-list-item">
-                            <a href="#" class="footer-link">Youtube</a>
+                            <a href="https://www.youtube.com/@hashalphaglobal" class="footer-link">Youtube</a>
                         </li>
                     </ul>
                 </div>
@@ -137,17 +137,12 @@
                 </div>
                 
                 <div data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba3d5" class="social-media-links-container" style="opacity: 0; filter: blur(10px);">
-                    <a href="https://www.facebook.com/" target="_blank" class="social-link-single w-inline-block">
-                        <div></div>
+                    <a href="https://www.t.me/hashalphaofficial" target="_blank" class="social-link-single w-inline-block">
+                        <x-ri-telegram-2-fill />
                     </a>
-                    <a href="https://www.twitter.com/" target="_blank" class="social-link-single w-inline-block">
-                        <div></div>
-                    </a>
-                    <a href="https://www.instagram.com/" target="_blank" class="social-link-single w-inline-block">
-                        <div></div>
-                    </a>
-                    <a href="https://www.linkedin.com/" target="_blank" class="social-link-single w-inline-block">
-                        <div></div>
+
+                    <a href="https://www.youtube.com/@hashalphaglobal" target="_blank" class="social-link-single w-inline-block">
+                        <x-ri-youtube-fill />
                     </a>
                 </div>
             </div>
