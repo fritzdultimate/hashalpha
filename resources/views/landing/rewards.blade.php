@@ -16,7 +16,7 @@
                 <p class="!halpha-text-gray-400">We combine protocol block rewards, MEV revenue and an operational model to deliver regular payouts. Below is an example schedule and sample calculation.</p>
             </div>
 
-            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-mt-6">
+            <div class="halpha-grid halpha-grid-cols-1 halpha-gap-6 halpha-mt-6">
                 <div>
                     <h4 class="halpha-text-white halpha-font-semibold">Payout cadence</h4>
                     <ul class="halpha-list-none halpha-space-y-2 halpha-text-sm halpha-text-gray-300">
@@ -38,7 +38,7 @@ Notes:
                     </pre>
                 </div>
 
-                <div class="halpha-mt-10 md:halpha-mt-0">
+                <div class="halpha-mt-10 md:halpha-mt-0 halpha-hidden">
                     <!-- Chart placeholder: integrate chart library or image -->
                     <div class="halpha-bg-[#07121a] halpha-rounded-[12px] halpha-p-4 halpha-h-60 halpha-flex halpha-items-center halpha-justify-center">
                         <img 
@@ -94,6 +94,5 @@ Notes:
         </div>
     </section>
 
-    @include('components.guest.faqs')
 
 @endsection

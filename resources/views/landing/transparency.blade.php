@@ -66,5 +66,4 @@
         </div>
     </section>
 
-    @include('components.guest.faqs')
 @endsection

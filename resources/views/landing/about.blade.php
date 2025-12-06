@@ -73,7 +73,7 @@
 
     @include('components.guest.our-story')
     @include('components.guest.our-values')
-    @include('components.guest.why-us')
+    <!-- @include('components.guest.why-us') -->
     <!-- @include('components.guest.our-team') -->
     <!-- @include('components.guest.testimonies') -->
 

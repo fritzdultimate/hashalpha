@@ -81,7 +81,7 @@
                     
                     <div class="halpha-mt-3 md:halpha-mt-[6px] halpha-absolute halpha-right-[30%] md:halpha-right-[46%]">
                         <span class="halpha-inline-block halpha-bg-[#07121a] halpha-text-[#e6f7f0] halpha-px-4 md:halpha-py-1 halpha-rounded-full halpha-border halpha-border-[#2b3944] halpha-text-base md:halpha-text-xl">
-                            Commission %
+                            Commission 20%
                         </span>
                     </div>
                 </div> {{-- card --}}
@@ -106,7 +106,7 @@
     <script>
         function referralLevelsComponent() {
             return {
-                levels: [4, 2, 1, 1, 0.5, 0.5, 0.5, 0.25, 0.15, 0.10],
+                levels: [8, 3.5, 2.5, 2, 1.5, 1, 0.75, 0.45, 0.2, 0.10],
                 // displayed text (animated)
                 displayValues: [],
                 // animation state

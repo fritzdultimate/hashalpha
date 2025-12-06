@@ -173,6 +173,6 @@
         </div>
     </section>
 
-    @include('components.guest.faqs')
+    <!-- @include('components.guest.faqs') -->
 
 @endsection
