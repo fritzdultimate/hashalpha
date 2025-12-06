@@ -23,8 +23,8 @@
                             </a>
                         </li>
                         <li class="header-nav-list-item">
-                            <a href="{{ route('rewards') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
-                                Rewards
+                            <a href="{{ route('affiliate.index') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
+                                Affiliate Program
                             </a>
                         </li>
                         <li class="header-nav-list-item">
@@ -47,7 +47,7 @@
                                                 <div class="text-200 dropdown-column-title">Exploring</div>
                                                 <div class="grid-3-columns dropdown-main-pages-grid">
                                                     <div class="w-layout-grid grid-1-column dropdown-link-column">
-                                                        <a href="{{ route('affiliate.index') }}" class="dropdown-link w-dropdown-link" tabindex="0">
+                                                        <a href="{{ route('affiliate.index') }}" class="dropdown-link w-dropdown-link halpha-hidden" tabindex="0">
                                                             Affliate Program
                                                         </a>
                                                         <a href="{{ route('resources.index') }}" class="dropdown-link w-dropdown-link" tabindex="0">

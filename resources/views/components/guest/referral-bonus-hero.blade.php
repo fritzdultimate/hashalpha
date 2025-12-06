@@ -1,4 +1,4 @@
-<section class="top-section !halpha-pt-5">
+<section class="top-section !halpha-mt-5">
     <div class="w-layout-blockcontainer container-default w-container">
         <div class="text-center mg-bottom-80px">
             <div data-w-id="11da54f3-77ca-5b1a-b443-f27213ceca2e" style="opacity: 1; filter: blur(0px);"

@@ -3,6 +3,10 @@
 @section('title', 'Affiliate Program')
 
 @section('content')
+    @include('components.guest.referral-bonus-hero')
+    @include('components.guest.referral-bonus-distribution')
+    @include('components.guest.team-performance')
+
     <div class="halpha-px-3 md:halpha-px-6 halpha-py-12 halpha-bg-[#070707] halpha-text-white">
         <div class="halpha-max-w-6xl halpha-mx-auto">
             <header class="halpha-mb-8">
@@ -79,5 +83,7 @@
                 @include('landing.affiliate._rank-table', ['ranks' => $ranks, 'compact' => true])
             </section>
         </div>
+
     </div>
+    @include('components.guest.faqs')
 @endsection
