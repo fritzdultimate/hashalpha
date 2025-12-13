@@ -118,10 +118,18 @@
 
                     <h4 class="halpha-text-white halpha-font-semibold halpha-mt-4">Sample calculation</h4>
                     <pre class="halpha-bg-[#07121a] halpha-p-3 halpha-rounded-[8px] halpha-text-sm halpha-text-gray-300">
-    Example: $1,000 in Pro (9% APY)
-    Daily reward ≈ (0.09 / 365) * 1000 = $0.25/day (before fees & MEV)
-    Net to user after fees & splits = ~$0.18/day (illustrative)
-                        </pre>
+    Example Yield Calculation — $20,000 Stake at Up to 1.3% Daily
+
+    Stake Amount: $20,000
+    Daily Reward Rate: Up to 1.3%
+    Lockup Period: 150 days
+
+    Daily Earnings
+    $20,000 × 1.3% = $260 per day
+
+    Total Rewards Over 150 Days
+    $260 × 150 days = $39,000 earned
+                    </pre>
                 </div>
 
                 <div>

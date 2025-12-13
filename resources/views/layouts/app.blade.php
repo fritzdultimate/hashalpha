@@ -142,28 +142,28 @@
 
                     ],
                     [
-                        "url" => route('withdrawal'),
-                        "label" => "Affliate",
+                        "url" => '',
+                        "label" => "Affiliate",
                         'icon' => 'iconsax-bul-driver-refresh',
                         "children" => [
                             [
-                                "url" => "",
+                                "url" => route('referral.center'),
                                 "label" => "Referral Center"
                             ],
                             [
-                                "url" => "",
+                                "url" => route('referral.team'),
                                 "label" => 'Team Dashboard'
                             ],
                             [
-                                "url" => "",
+                                "url" => route('referral.bonus'),
                                 "label" => 'Bonuses'
                             ],
                             [
-                                "url" => "",
+                                "url" => route('referral.progress'),
                                 "label" => 'Rank Progress'
                             ]
                         ],
-                        'route' => 'withdrawal'
+                        'route' => 'referral'
 
                     ],
                     [

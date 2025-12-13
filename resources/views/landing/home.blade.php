@@ -74,7 +74,7 @@
         <div class="container-default w-container">
             <div class="heading-and-content-grid mg-bottom-24px">
                 <div class="inner-container _564px _100-tablet">
-                    <h2 class="display-2 heading-color-gradient mg-bottom-0">Transparency & Proof</h2>
+                    <h2 class="display-2 heading-color-gradient mg-bottom-0">Ecosystem Metrics</h2>
                     <p class="color-neutral-100 mg-bottom-16px !halpha-text-gray-400">
                         Real-time validator telemetry and monthly operations reports.
                     </p>

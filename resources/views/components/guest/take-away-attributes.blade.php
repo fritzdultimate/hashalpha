@@ -10,51 +10,53 @@
                 alt="" 
                 class="bg-gradient-top height-26"
             >
-            <div class="grid-2-columns _1-col-tablet gap-row-64px">
-                <img
-                    src="{{ asset('images/landing/crypto-wallet-from-the-future-image.png') }}"
-                    alt="A Crypto Wallet From The Future - Cryptomatic X Webflow Template"
+            <div class="grid-1-columns _1-col-tablet gap-row-64px halpha-w-full">
+                <div 
+                    id="w-node-cab063ba-de9b-9602-7315-1c907aaafdf5-04e3ff82"
+                    data-w-id="cab063ba-de9b-9602-7315-1c907aaafdf5" 
                     style="opacity: 1; filter: blur(0px);"
-                    sizes="(max-width: 479px) 100vw, (max-width: 767px) 86vw, (max-width: 991px) 84vw, (max-width: 1439px) 40vw, 540px"
-                    data-w-id="d9e12617-ce03-f00c-c812-d3cd9504d396" loading="eager">
-                <div id="w-node-cab063ba-de9b-9602-7315-1c907aaafdf5-04e3ff82"
-                    data-w-id="cab063ba-de9b-9602-7315-1c907aaafdf5" style="opacity: 1; filter: blur(0px);"
-                    class="inner-container _466px _100-tablet">
-                    <h2 class="display-2 heading-color-gradient mg-bottom-0">
-                        Protocol-Level Visibility
-                    </h2>
-                    <p class="mg-bottom-24px halpha-text-gray-300">
-                        All validation activity operates within Ethereum’s public consensus layer, allowing on-chain verification of infrastructure performance.
-                    </p>
-                    <div class="grid-1-column gap-row-20px">
-                        <div id="w-node-eeeea74f-45e3-d157-c1cb-612e32195e1a-04e3ff82"
-                            class="flex align-start gap-column-12px">
-                            <img
-                                src="{{ asset('images/landing/checkmark-circle.png') }}"
-                                loading="eager" alt="" class="max-w-24px">
-                            <div class="mg-top-2px">
-                                <div class="text-200 medium color-neutral-100">
-                                    Seamless blockchain investing
+                    class="!halpha-w-full"
+                >
+                    <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3 halpha-w-full">
+                        <div>
+                            <h2 class="display-2 heading-color-gradient mg-bottom-0">
+                                Protocol-Level Visibility
+                            </h2>
+                            <p class="mg-bottom-24px halpha-text-gray-300">
+                                All validation activity operates within Ethereum’s public consensus layer, allowing on-chain verification of infrastructure performance.
+                            </p>
+                        </div>
+
+                        <div class="grid-1-column gap-row-20px">
+                            <div id="w-node-eeeea74f-45e3-d157-c1cb-612e32195e1a-04e3ff82"
+                                class="flex align-start gap-column-12px">
+                                <img
+                                    src="{{ asset('images/landing/checkmark-circle.png') }}"
+                                    loading="eager" alt="" class="max-w-24px">
+                                <div class="mg-top-2px">
+                                    <div class="text-200 medium color-neutral-100">
+                                        Seamless blockchain investing
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="w-node-_54e3bb24-a139-4870-b2c5-323aaf8892d6-04e3ff82"
-                            class="flex align-start gap-column-12px"><img
-                                src="{{ asset('images/landing/checkmark-circle.png') }}"
-                                loading="eager" alt="" class="max-w-24px">
-                            <div class="mg-top-2px">
-                                <div class="text-200 medium color-neutral-100">
-                                    Trusted validator network
+                            <div id="w-node-_54e3bb24-a139-4870-b2c5-323aaf8892d6-04e3ff82"
+                                class="flex align-start gap-column-12px"><img
+                                    src="{{ asset('images/landing/checkmark-circle.png') }}"
+                                    loading="eager" alt="" class="max-w-24px">
+                                <div class="mg-top-2px">
+                                    <div class="text-200 medium color-neutral-100">
+                                        Trusted validator network
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="w-node-cdeee600-bb00-e114-7f3f-624dfc40fd6a-04e3ff82"
-                            class="flex align-start gap-column-12px"><img
-                                src="{{ asset('images/landing/checkmark-circle.png') }}"
-                                loading="eager" alt="" class="max-w-24px">
-                            <div class="mg-top-2px">
-                                <div class="text-200 medium color-neutral-100">
-                                    Enterprise-grade security
+                            <div id="w-node-cdeee600-bb00-e114-7f3f-624dfc40fd6a-04e3ff82"
+                                class="flex align-start gap-column-12px"><img
+                                    src="{{ asset('images/landing/checkmark-circle.png') }}"
+                                    loading="eager" alt="" class="max-w-24px">
+                                <div class="mg-top-2px">
+                                    <div class="text-200 medium color-neutral-100">
+                                        Enterprise-grade security
+                                    </div>
                                 </div>
                             </div>
                         </div>

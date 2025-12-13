@@ -1,6 +1,10 @@
 <?php
 use App\Http\Controllers\ProfileController;
 
+use App\Livewire\Dashboard\Affiliate\Bonuses;
+use App\Livewire\Dashboard\Affiliate\RankProgress;
+use App\Livewire\Dashboard\Affiliate\ReferralCenter;
+use App\Livewire\Dashboard\Affiliate\TeamDashboard;
 use App\Livewire\Dashboard\StakesIndex;
 use App\Livewire\EarningsPage;
 use App\Livewire\PlansList;
@@ -23,6 +27,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/stakes/item/{id}', StakesIndex::class)->name('stakes.item');
+});
+
+// Affiliate
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/affiliate/center', ReferralCenter::class)->name('referral.center');
+    Route::get('/affiliate/team', TeamDashboard::class)->name('referral.team');
+    Route::get('/affiliate/bonus', Bonuses::class)->name('referral.bonus');
+    Route::get('/affiliate/rank-progress', RankProgress::class)->name('referral.progress');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

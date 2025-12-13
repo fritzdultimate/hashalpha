@@ -30,21 +30,21 @@
             </div>
 
             <!-- Cards -->
-            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-6 halpha-mt-8">
-            <a href="{{ route('validator-explorer') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
-                <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Validator Explorer</h3>
-                <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">Live keys & performance stats. Search validators or inspect a validator timeline.</p>
-            </a>
+            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-mt-8">
+                <a href="{{ route('validator-explorer') }}" class=" halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a] halpha-hidden">
+                    <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Validator Explorer</h3>
+                    <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">Live keys & performance stats. Search validators or inspect a validator timeline.</p>
+                </a>
 
-            <a href="{{ route('proof-of-stake-rewards') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
-                <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Proof of Stake Rewards</h3>
-                <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">On-chain transaction proof for all reward distributions and per-plan breakdowns.</p>
-            </a>
+                <a href="{{ route('proof-of-stake-rewards') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
+                    <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Proof of Stake Rewards</h3>
+                    <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">On-chain transaction proof for all reward distributions and per-plan breakdowns.</p>
+                </a>
 
-            <a href="{{ route('operation-reports') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
-                <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Operations Reports</h3>
-                <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">Monthly operational reports: uptime, incidents, capacity and plans (downloadable PDFs).</p>
-            </a>
+                <a href="{{ route('operation-reports') }}" class="halpha-block halpha-rounded-[12px] halpha-p-6 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a] halpha-border halpha-border-[#11161a]">
+                    <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white">Operations Reports</h3>
+                    <p class="halpha-text-sm halpha-text-gray-300 halpha-mt-2">Monthly operational reports: uptime, incidents, capacity and plans (downloadable PDFs).</p>
+                </a>
             </div>
 
             <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-mt-6">
