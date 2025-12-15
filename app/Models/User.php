@@ -77,4 +77,8 @@ class User extends Authenticatable {
     public function rewards() {
         return $this->hasMany(Reward::class);
     }
+
+    public function wallets() {
+        return $this->hasMany(Wallet::class);
+    }
 }
