@@ -8,6 +8,8 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class Settings extends Component {
     public $twoFactor;
+    public $loginAlerts;
+    public $withdrawalConfirmation;
 
 
     public function mount()
