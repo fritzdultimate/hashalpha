@@ -68,6 +68,14 @@
     display: none;                /* Chrome, Safari */
 }
 
+.halpha-input {
+    @apply halpha-w-full halpha-border-gray-600 halpha-bg-gray-700 halpha-border halpha-rounded halpha-px-3 halpha-py-2 halpha-text-sm halpha-text-white focus:halpha-outline-none focus:halpha-ring-1 focus:halpha-ring-accent-2;
+}
+
+.halpha-input option {
+    @apply halpha-bg-gray-900 halpha-text-white;
+}
+
 .halpha-toast-container {
     position: fixed;
     top: 0;

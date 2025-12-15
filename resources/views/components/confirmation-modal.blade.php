@@ -1,4 +1,4 @@
-<div x-data="{show:true}" x-on:{{ $event }}.window="show=true">
+<div x-data="{show:false}" x-on:{{ $event }}.window="show=true">
     <div x-show="show"
         class="halpha-fixed halpha-inset-0 halpha-bg-black/60 halpha-flex halpha-items-center halpha-justify-center">
         <div class="halpha-card halpha-p-4 halpha-max-w-sm">
