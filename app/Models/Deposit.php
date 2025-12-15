@@ -20,8 +20,7 @@ class Deposit extends Model
         'processed_at' => 'datetime',
     ];
 
-    public function wallet()
-    {
+    public function wallet() {
         return $this->belongsTo(Wallet::class);
     }
     public function user() {

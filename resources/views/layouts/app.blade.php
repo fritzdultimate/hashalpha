@@ -188,24 +188,24 @@
 
                     ],
                     [
-                        "url" => route('withdrawal'),
+                        "url" => '',
                         "label" => "Account",
                         'icon' => 'ri-settings-3-fill',
                         "children" => [
                             [
-                                "url" => "",
+                                "url" => route('account.wallets'),
                                 "label" => "Wallets"
                             ],
                             [
-                                "url" => "",
+                                "url" => route('account.withdrawal'),
                                 "label" => 'Withdrawal'
                             ],
                             [
-                                "url" => "",
+                                "url" => route('account.settings'),
                                 "label" => 'Settings'
                             ],
                             [
-                                "url" => "",
+                                "url" => route('account.support'),
                                 "label" => 'Support'
                             ],
                             [
@@ -213,7 +213,7 @@
                                 "label" => 'Logout'
                             ],
                         ],
-                        'route' => 'withdrawal'
+                        'route' => 'account'
 
                     ],
                     // [

@@ -1,6 +1,10 @@
 <?php
 use App\Http\Controllers\ProfileController;
 
+use App\Livewire\Dashboard\Account\Settings;
+use App\Livewire\Dashboard\Account\Support;
+use App\Livewire\Dashboard\Account\Wallets;
+use App\Livewire\Dashboard\Account\Withdrawal;
 use App\Livewire\Dashboard\Affiliate\Bonuses;
 use App\Livewire\Dashboard\Affiliate\RankProgress;
 use App\Livewire\Dashboard\Affiliate\ReferralCenter;
@@ -35,6 +39,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/affiliate/team', TeamDashboard::class)->name('referral.team');
     Route::get('/affiliate/bonus', Bonuses::class)->name('referral.bonus');
     Route::get('/affiliate/rank-progress', RankProgress::class)->name('referral.progress');
+});
+
+// Account
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/account/wallet', Wallets::class)->name('account.wallets');
+    Route::get('/account/withdrawal', Withdrawal::class)->name('account.withdrawal');
+    Route::get('/account/settings', Settings::class)->name('account.settings');
+    Route::get('/account/support', Support::class)->name('account.support');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
