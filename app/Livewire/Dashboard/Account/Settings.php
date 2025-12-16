@@ -12,15 +12,27 @@ class Settings extends Component {
     public $withdrawalConfirmation;
 
 
-    public function mount()
-    {
-        $this->twoFactor = auth()->user()->two_factor_enabled;
+    public function mount() {
+        $user = auth()->user();
+
+        $this->twoFactor = $user->two_factor_enabled;
+        $this->loginAlerts = $user->login_alerts;
+        $this->withdrawalConfirmation = $user->withdrawal_confirmation;
+    }
+
+    public function logoutAll() {
+        dd('logout');
     }
 
 
-    public function save()
-    {
-        auth()->user()->update(['two_factor_enabled' => $this->twoFactor]);
+    public function save() {
+        auth()->user()->update([
+            'two_factor_enabled' => $this->twoFactor,
+            'login_alerts' => $this->loginAlerts,
+            'withdrawal_confirmation' => $this->withdrawalConfirmation,
+        ]);
+
+        $this->dispatch('toast', type: 'success', message: 'Security settings updated');
     }
 
 

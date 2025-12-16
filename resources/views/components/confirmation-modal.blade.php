@@ -5,7 +5,7 @@
             <p class="halpha-text-sm halpha-text-white">Are you sure?</p>
             <div class="halpha-flex halpha-gap-2 halpha-mt-4">
                 <button @click="show=false" class="halpha-btn-secondary">Cancel</button>
-                <button wire:click="confirm" class="halpha-btn-danger">Confirm</button>
+                <button wire:click="{{ $wireConfirm }}" class="halpha-btn-danger">Confirm</button>
             </div>
         </div>
     </div>

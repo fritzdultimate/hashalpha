@@ -10,6 +10,8 @@
         </p>
     </div>
 
+    @include('layouts.dashboard.settings._nav')
+
     {{-- Info cards --}}
     <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-3">
         <div class="halpha-card halpha-p-3">

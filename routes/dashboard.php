@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ProfileController;
 
+use App\Livewire\Dashboard\Account\Details;
 use App\Livewire\Dashboard\Account\Settings;
 use App\Livewire\Dashboard\Account\Support;
 use App\Livewire\Dashboard\Account\Wallets;
@@ -47,6 +48,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/account/withdrawal', Withdrawal::class)->name('account.withdrawal');
     Route::get('/account/settings', Settings::class)->name('account.settings');
     Route::get('/account/support', Support::class)->name('account.support');
+
+    Route::get('/account/settings/dtails', Details::class)->name('account.details');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
