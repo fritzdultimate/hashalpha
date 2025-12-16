@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Dashboard\Account;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -12,6 +14,9 @@ class Details extends Component {
     public $phone;
     public $country;
     public $timezone;
+    public $currentPassword;
+    public $newPassword;
+    public $newPassword_confirmation;
 
     public function mount() {
         $user = auth()->user();
@@ -49,6 +54,31 @@ class Details extends Component {
             'timeout' => 5000,
         ]);
     }
+
+    public function updatePassword() {
+        $this->validate([
+            'currentPassword' => 'required',
+            'newPassword' => 'required|min:8|confirmed',
+        ]);
+
+        if (! Hash::check($this->currentPassword, auth()->user()->password)) {
+            throw ValidationException::withMessages([
+                'currentPassword' => 'Current password is incorrect',
+            ]);
+        }
+
+        auth()->user()->update([
+            'password' => Hash::make($this->newPassword),
+        ]);
+
+        $this->reset('currentPassword', 'newPassword', 'newPassword_confirmation');
+
+        $this->dispatch('toast', payload: [
+            'message' => 'Password updated successfully',
+            'timeout' => 5000,
+        ]);
+    }
+
 
     public function render()
     {
