@@ -27,11 +27,17 @@
                                 Rewards
                             </a>
                         </li>
-                        <!-- <li class="header-nav-list-item">
-                            <a href="{{ route('transparency') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
-                                Transparency
+                        <li class="header-nav-list-item">
+                            <a href="{{ route('nfts') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
+                                NFTs
                             </a>
-                        </li> -->
+                        </li>
+
+                        <li class="header-nav-list-item">
+                            <a href="{{ route('hash-token') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
+                                $Hash Token
+                            </a>
+                        </li>
                         <li class="header-nav-list-item">
                             <div data-hover="true" data-delay="0" data-w-id="c1146e3a-416f-ff8e-14ce-0f478e33d7d1" class="dropdown-wrapper w-dropdown" style="max-width: 1316px;">
                                 <div class="dropdown-toggle w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0">

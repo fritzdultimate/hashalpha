@@ -11,6 +11,8 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 Route::view('/about', 'landing.about')->name('about');
 Route::view('/staking', 'landing.staking')->name('staking');
 Route::view('/rewards', 'landing.rewards')->name('rewards');
+Route::view('/nfts', 'landing.nfts')->name('nfts');
+Route::view('/$hash/token', 'landing.hash-token')->name('hash-token');
 // Transparency
 Route::view('/transparency', 'landing.transparency')->name('transparency');
 Route::view('/transparency/explorer', 'landing.transparency.validator-explorer')->name('validator-explorer');
