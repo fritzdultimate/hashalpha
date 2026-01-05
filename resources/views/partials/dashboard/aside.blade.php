@@ -9,8 +9,7 @@
     <div
         class="halpha-flex halpha-items-center halpha-justify-between halpha-px-6 halpha-py-3 halpha-border-b halpha-border-black/10">
         <div class="halpha-flex halpha-items-center halpha-gap-3">
-            <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/6616b1c13ffb5841a23a15ea_logo-cryptoverse-x-webflow-template.png"
-                alt="HashAlpha" class="halpha-w-[190px] halpha-h-auto" />
+            <img src="{{ asset('img/logo/logo-side.png') }}" alt="HashAlpha" class="halpha-w-[190px] halpha-h-auto" />
             <span class="halpha-text halpha-font-semibold halpha-text-sm halpha-sr-only"
                 x-show="!sidebarCollapsed">HashAlpha</span>
         </div>
