@@ -24,7 +24,7 @@
         <div id="total-balance-chart" style="height:120px;"></div>
     </div>
 
-    <x-dashboard.stat title="Total Earned" value="${{ number_format($totalEarned, 2) }}" delta="2.32%">
+    <x-dashboard.stat title="Total Earned" value="${{ number_format($totalEarned, 2) }}" :delta="$totalEarnedDelta">
         <div id="daily-earnings"></div>
     </x-dashboard.stat>
 </div>

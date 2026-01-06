@@ -19,6 +19,7 @@ class Overview extends Component
     public $activeStakes = 0;
     public $balance;
     public $totalEarned;
+    public $totalEarnedDelta;
     public $chartData;
     public $dailyEstimatedReward;
 
@@ -69,6 +70,21 @@ class Overview extends Component
 
         
         $this->dailyEstimatedReward = $dailyEstimatedReward ? round($dailyEstimatedReward, 2) : 0;
+
+
+        $currentRewards = DB::table('rewards')
+            ->where('user_id', $userId)
+            // ->where('reward_type', 'staking')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->sum('amount');
+
+        $previousRewards = DB::table('rewards')
+            ->where('user_id', $userId)
+            // ->where('reward_type', 'staking')
+            ->whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])
+            ->sum('amount');
+
+        $this->totalEarnedDelta = $previousRewards > 0 ? round((($currentRewards - $previousRewards) / $previousRewards) * 100, 2) : null;
     }
 
 

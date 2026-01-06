@@ -1,6 +1,6 @@
 <div class="halpha-flex halpha-flex-col halpha-gap-5">
 
-    <x-dashboard.total-balance-card :balance="$balance" :totalEarned="$totalEarned" :chartData="$chartData" :dailyEstimatedReward="$dailyEstimatedReward" />
+    <x-dashboard.total-balance-card :balance="$balance" :totalEarned="$totalEarned" :chartData="$chartData" :dailyEstimatedReward="$dailyEstimatedReward" :totalEarnedDelta="$totalEarnedDelta" />
 
 
     <section

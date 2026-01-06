@@ -2,11 +2,12 @@
     'title' => 'Metric',
     'value' => '',
     'chartId' => null,
-    'delta' => '70.5%'
+    'delta' => null
 ])
 
 @php
     $chartId = $chartId ?? 'chart-' . substr(md5((string) now() . rand()), 0, 6);
+    $delta = $delta < 0 ? 0 : $delta;
 @endphp
 
 <div {{ $attributes->merge(['class' => 'halpha-flex halpha-flex-col halpha-gap-2 halpha-bg-card-bg halpha-rounded halpha-border halpha-border-white/5']) }}>
@@ -18,11 +19,14 @@
                 {{ $value }}
             </h4>
 
-            <div
-                class="halpha-flex halpha-gap-2 halpha-items-center halpha-border halpha-rounded halpha-px-2 halpha-text-ellipsis halpha-text-sm halpha-text-accent-2 halpha-border-accent-3 halpha-py-0.5 halpha-bg-accent-2-darker">
-                <x-heroicon-c-arrow-trending-up class="halpha-w-4 halpha-h-4" />
-                <span>{{ $delta }}</span>
-            </div>
+            @if ($delta)
+                <div
+                    class="halpha-flex halpha-gap-2 halpha-items-center halpha-border halpha-rounded halpha-px-2 halpha-text-ellipsis halpha-text-sm halpha-text-accent-2 halpha-border-accent-3 halpha-py-0.5 halpha-bg-accent-2-darker">
+                   
+                    <x-heroicon-c-arrow-trending-up class="halpha-w-4 halpha-h-4" />
+                    <span>{{ $delta }}%</span>
+                </div>
+            @endif
         </div>
     </div>
 
