@@ -6,7 +6,7 @@
 
                 <div class="halpha-flex halpha-items-center halpha-gap-3">
                     <h4 class="halpha-text-xl halpha-font-semibold halpha-text-accent halpha-font-sans">
-                        $94,589.34
+                        ${{ number_format($balance, 2) }}
                     </h4>
                 </div>
             </div>
@@ -16,15 +16,15 @@
 
                 <div class="halpha-flex halpha-items-center halpha-gap-3">
                     <h4 class="halpha-text-xl halpha-font-semibold halpha-text-accent halpha-font-sans">
-                        $108.25
+                        ${{ number_format($dailyEstimatedReward, 2) }}
                     </h4>
                 </div>
             </div>
         </div>
-        <div id="deposit-chart" style="height:120px;"></div>
+        <div id="total-balance-chart" style="height:120px;"></div>
     </div>
 
-    <x-dashboard.stat title="Total Earned" value="$8,250" delta="2.32%">
+    <x-dashboard.stat title="Total Earned" value="${{ number_format($totalEarned, 2) }}" delta="2.32%">
         <div id="daily-earnings"></div>
     </x-dashboard.stat>
 </div>
@@ -32,11 +32,17 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         (function () {
-            const depositChartEl = document.getElementById('deposit-chart');
-            if (!depositChartEl) return;
+            window.rewardChartData = @json($chartData);
+            const totalBalanceChartEl = document.getElementById('total-balance-chart');
+            if (!totalBalanceChartEl) return;
+
+            if (!window.rewardChartData.length) {
+                totalBalanceChartEl.innerHTML = '<p class="halpha-text-xs halpha-text-muted halpha-p-4">No reward data within the last 12 days yet</p>';
+                return;
+            }
 
             const options = {
-                series: [{ name: 'Deposits', data: [1200, 1800, 1300, 1600, 2200, 2500, 1900, 2700, 2300, 3100, 2900, 3300] }],
+                series: [{ name: 'Daily Rewards', data: window.rewardChartData ?? [] }],
                 chart: { type: 'area', height: 120, sparkline: { enabled: true } },
                 stroke: { curve: 'smooth', width: 2 },
                 fill: { type: 'gradient', gradient: { opacityFrom: 0.45, opacityTo: 0.05 } },
@@ -54,7 +60,7 @@
                 }
             };
 
-            new ApexCharts(depositChartEl, options).render();
+            new ApexCharts(totalBalanceChartEl, options).render();
         })();
     </script>
 @endonce
