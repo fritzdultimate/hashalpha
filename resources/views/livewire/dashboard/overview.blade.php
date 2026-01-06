@@ -103,6 +103,11 @@
         const depositChartEl = document.getElementById('referral-bonus');
         if (!depositChartEl) return;
 
+        if(!window.referralRewardschartData.length) {
+            depositChartEl.innerHTML = '<p class="halpha-text-xs halpha-text-muted halpha-p-4">No bonus earned yet</p>';
+            return;
+        }
+
         const options = {
             series: [{ name: 'Referral Bonus', data: window.referralRewardschartData ?? [] }],
             chart: { type: 'area', height: 120, sparkline: { enabled: true } },
