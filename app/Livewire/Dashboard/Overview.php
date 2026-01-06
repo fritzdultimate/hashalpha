@@ -4,6 +4,7 @@
 namespace App\Livewire\Dashboard;
 
 
+use App\Models\ReferralReward;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -22,10 +23,13 @@ class Overview extends Component
     public $totalEarnedDelta;
     public $chartData;
     public $dailyEstimatedReward;
+    public $earningchartData;
+    public $totalReferralBonus;
+    public $totalReferralDelta;
+    public $referralRewardschartData;
 
 
-    public function mount()
-    {
+    public function mount() {
         $user = Auth::user();
         $userId = auth()->id();
         $this->totalDeposited = (float) ($user->deposits()->sum('amount') ?? 0);
@@ -33,20 +37,9 @@ class Overview extends Component
         $this->activeStakes = (int) ($user->stakes()->count() ?? 0);
         $this->balance = $user->balance;
 
-        $this->totalEarned = Cache::remember(
-            "user:{$userId}:total_earned",
-            300,
-            function () use ($userId) {
-                return DB::table('rewards')
-                    ->where('user_id', auth()->id())
-                    ->where('reward_type', 'staking')
-                    ->sum('amount');
-            }
-        );
-
         $dailyRewards = Cache::remember(
             "user:{$userId}:daily_rewards",
-            300, // 5 minutes
+            300,
             function () use ($userId) {
 
                 return DB::table('rewards')
@@ -68,9 +61,20 @@ class Overview extends Component
             ->selectRaw('SUM(s.amount * p.daily_roi / 100) as daily_reward')
             ->value('daily_reward');
 
-        
+
         $this->dailyEstimatedReward = $dailyEstimatedReward ? round($dailyEstimatedReward, 2) : 0;
 
+        // Second card on overview
+        $this->totalEarned = Cache::remember(
+            "user:{$userId}:total_earned",
+            300,
+            function () use ($userId) {
+                return DB::table('rewards')
+                    ->where('user_id', auth()->id())
+                    ->where('reward_type', 'staking')
+                    ->sum('amount');
+            }
+        );
 
         $currentRewards = DB::table('rewards')
             ->where('user_id', $userId)
@@ -85,6 +89,56 @@ class Overview extends Component
             ->sum('amount');
 
         $this->totalEarnedDelta = $previousRewards > 0 ? round((($currentRewards - $previousRewards) / $previousRewards) * 100, 2) : null;
+
+        $earnings = Cache::remember(
+            "user:{$userId}:last_12_rewards",
+            300,
+            function () use ($userId) {
+                return DB::table('rewards')
+                    ->where('user_id', $userId)
+                    ->orderByDesc('created_at')
+                    ->limit(12)
+                    ->get(['amount', 'created_at', 'level', 'reward_type', 'stake_id', 'source_user_id']);
+            }
+        );
+
+        $this->earningchartData = $earnings->pluck('amount')->map(fn($v) => round($v, 2));
+
+        // Referral Bonus Section
+        $this->totalReferralBonus = Cache::remember(
+            "user:{$userId}:total_referral_bonus",
+            300,
+            function () use ($userId) {
+
+                return ReferralReward::where('user_id', $userId)->sum('amount');
+            }
+        );
+
+        $currentReferrals = DB::table('referral_rewards')
+            ->where('user_id', $userId)
+            ->where('created_at', '>=', now()->subDays(30))
+            ->sum('amount');
+
+        $previousReferrals = DB::table('referral_rewards')
+            ->where('user_id', $userId)
+            ->whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])
+            ->sum('amount');
+
+        $this->totalReferralDelta = $previousReferrals > 0 ? round((($currentReferrals - $previousReferrals) / $previousReferrals) * 100, 2) : null;
+
+        $referral_rewards = Cache::remember(
+            "user:{$userId}:last_12_referrals_reward",
+            300,
+            function () use ($userId) {
+                return DB::table('referral_rewards')
+                    ->where('user_id', $userId)
+                    ->orderByDesc('created_at')
+                    ->limit(12)
+                    ->get(['amount']);
+            }
+        );
+
+        $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
     }
 
 

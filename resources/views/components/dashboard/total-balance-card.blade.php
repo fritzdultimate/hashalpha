@@ -1,4 +1,4 @@
-<div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 lg:halpha-grid-cols-2 halpha-gap-5">
+<div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 lg:halpha-grid-cols-3 halpha-gap-5">
     <div class="halpha-bg-card-bg halpha-rounded halpha-border halpha-border-white/5">
         <div class="halpha-flex halpha-justify-between halpha-gap-2">
             <div class="halpha-flex halpha-flex-col halpha-gap-2 halpha-p-4">
@@ -26,6 +26,10 @@
 
     <x-dashboard.stat title="Total Earned" value="${{ number_format($totalEarned, 2) }}" :delta="$totalEarnedDelta">
         <div id="daily-earnings"></div>
+    </x-dashboard.stat>
+
+    <x-dashboard.stat title="Referral Bonus" value="${{ number_format($totalReferralBonus, 2) }}" :delta="$totalReferralDelta">
+        <div id="referral-bonus"></div>
     </x-dashboard.stat>
 </div>
 @once
@@ -61,6 +65,34 @@
             };
 
             new ApexCharts(totalBalanceChartEl, options).render();
+        })();
+
+
+        (function () {
+            window.earningchartData = @json($earningchartData);
+            const earningsChartEl = document.getElementById('daily-earnings');
+            if (!earningsChartEl) return;
+
+            const options = {
+                series: [{ name: 'Referral Bonus', data: window.earningchartData ?? [] }],
+                chart: { type: 'area', height: 120, sparkline: { enabled: true } },
+                stroke: { curve: 'smooth', width: 2 },
+                fill: { type: 'gradient', gradient: { opacityFrom: 0.45, opacityTo: 0.05 } },
+                colors: ['#3b82f6'],
+                tooltip: {
+                    enabled: true,
+                    theme: false,
+                    style: {
+                        fontSize: '12px',
+                        fontFamily: 'Public Sans, sans-serif'
+                    },
+                    y: { formatter: v => '$' + Number(v).toLocaleString() },
+                    x: { show: false },
+                    marker: { show: false }
+                }
+            };
+
+            new ApexCharts(earningsChartEl, options).render();
         })();
     </script>
 @endonce

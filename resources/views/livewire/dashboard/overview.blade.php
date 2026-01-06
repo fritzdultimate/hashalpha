@@ -1,15 +1,15 @@
 <div class="halpha-flex halpha-flex-col halpha-gap-5">
 
-    <x-dashboard.total-balance-card :balance="$balance" :totalEarned="$totalEarned" :chartData="$chartData" :dailyEstimatedReward="$dailyEstimatedReward" :totalEarnedDelta="$totalEarnedDelta" />
+    <x-dashboard.total-balance-card :balance="$balance" :totalEarned="$totalEarned" :chartData="$chartData" :dailyEstimatedReward="$dailyEstimatedReward" :totalEarnedDelta="$totalEarnedDelta" :earningchartData="$earningchartData" :totalReferralBonus="$totalReferralBonus" :totalReferralDelta="$totalReferralDelta" />
 
 
     <section
         class="halpha-grid halpha-grid-cols-1 sm:halpha-grid-cols-2 md:halpha-grid-cols-3 lg:halpha-grid-cols-3 halpha-gap-5">
-        <x-dashboard.stat title="Referral Bonus" value="$83,250" delta="22.32%">
+        <x-dashboard.stat :show="false" title="Referral Bonus" value="${{ number_format($totalReferralBonus, 2) }}" delta="22.32%">
             <div id="referral-bonus"></div>
         </x-dashboard.stat>
 
-        <x-dashboard.stat title="Team Performance" value="$833,250" delta="22.32%">
+        <x-dashboard.stat :show="false" title="Team Performance" value="$833,250" delta="22.32%">
             <div id="team-performance-bonus"></div>
         </x-dashboard.stat>
     </section>
@@ -99,44 +99,12 @@
 <script>
 
     (function () {
-        var options = {
-            series: [{
-                name: 'Earnings',
-                data: [45, 60, 80, 55, 70, 90, 100, 120, 130, 125, 110, 95]
-            }],
-            chart: {
-                type: 'bar',
-                height: 120,
-                sparkline: { enabled: true },
-            },
-            plotOptions: {
-                bar: {
-                    columnWidth: '70%',
-                    borderRadius: 3,
-                }
-            },
-            colors: ['#3b82f6'],
-            tooltip: {
-                enabled: true,
-                theme: 'dark',
-                y: {
-                    formatter: (val) => `$${val}`,
-                },
-                x: { show: false }
-            }
-        };
-
-        var chart = new ApexCharts(document.querySelector("#daily-earnings"), options);
-        chart.render();
-    })();
-
-
-    (function () {
+        window.referralRewardschartData = @json($referralRewardschartData);
         const depositChartEl = document.getElementById('referral-bonus');
         if (!depositChartEl) return;
 
         const options = {
-            series: [{ name: 'Referral Bonus', data: [1200, 1800, 1300, 1600, 2200, 2500, 1900, 2700, 2300, 3100, 2900, 3300] }],
+            series: [{ name: 'Referral Bonus', data: window.referralRewardschartData ?? [] }],
             chart: { type: 'area', height: 120, sparkline: { enabled: true } },
             stroke: { curve: 'smooth', width: 2 },
             fill: { type: 'gradient', gradient: { opacityFrom: 0.45, opacityTo: 0.05 } },
