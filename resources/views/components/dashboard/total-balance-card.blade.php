@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div id="total-balance-chart" style="height:120px;"></div>
+        <div id="total-balance-chart" class="halpha-flex halpha-items-end" style="height:120px;"></div>
     </div>
 
     <x-dashboard.stat title="Total Earned" value="${{ number_format($totalEarned, 2) }}" :delta="$totalEarnedDelta">
