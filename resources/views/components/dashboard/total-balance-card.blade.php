@@ -25,11 +25,11 @@
     </div>
 
     <x-dashboard.stat title="Total Earned" value="${{ number_format($totalEarned, 2) }}" :delta="$totalEarnedDelta">
-        <div id="daily-earnings"></div>
+        <div id="daily-earnings" class="halpha-flex halpha-items-end"></div>
     </x-dashboard.stat>
 
     <x-dashboard.stat title="Referral Bonus" value="${{ number_format($totalReferralBonus, 2) }}" :delta="$totalReferralDelta">
-        <div id="referral-bonus"></div>
+        <div id="referral-bonus" class="halpha-flex halpha-items-end"></div>
     </x-dashboard.stat>
 </div>
 @once
@@ -73,8 +73,13 @@
             const earningsChartEl = document.getElementById('daily-earnings');
             if (!earningsChartEl) return;
 
+            if (!window.earningchartData.length) {
+                earningsChartEl.innerHTML = '<p class="halpha-text-xs halpha-text-muted halpha-p-4">No earning data within the last 12 days yet</p>';
+                return;
+            }
+
             const options = {
-                series: [{ name: 'Referral Bonus', data: window.earningchartData ?? [] }],
+                series: [{ name: 'Earning', data: window.earningchartData ?? [] }],
                 chart: { type: 'area', height: 120, sparkline: { enabled: true } },
                 stroke: { curve: 'smooth', width: 2 },
                 fill: { type: 'gradient', gradient: { opacityFrom: 0.45, opacityTo: 0.05 } },
