@@ -48,34 +48,37 @@
 
     <div class="halpha-grid halpha-gap-4 halpha-grid-cols-2 lg:halpha-grid-cols-4">
         <!-- Deposit Button -->
-        <button
+        <a
+            href="{{ route('deposit.create') }}"
             class="halpha-relative halpha-w-full halpha-py-2 md:halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#0ea5a4] halpha-to-[#22d3ee] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-2">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
                 <x-fas-plus class="halpha-w-4 halpha-h-4" />
                 Deposit
             </div>
-        </button>
+        </a>
 
         <!-- Stake Button -->
-        <button
+        <a
+            href="{{ route('staking.stake') }}"
             class="halpha-relative halpha-w-full halpha-py-2 md:halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#10b981] halpha-to-[#34d399] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-success">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
                 <x-fas-coins class="halpha-w-4 halpha-h-4" />
                 Stake
             </div>
-        </button>
+        </a>
 
         <!-- Withdraw Button -->
-        <button
+        <a
+            href="{{ route('account.withdrawal') }}"
             class="halpha-relative halpha-w-full halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#ef4444] halpha-to-[#f87171] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-danger halpha-hidden md:halpha-block">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
                 <x-fas-arrow-down class="halpha-w-4 halpha-h-4" />
                 Withdraw
             </div>
-        </button>
+        </a>
 
         <!-- Referrals Button -->
         <button

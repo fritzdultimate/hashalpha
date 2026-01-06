@@ -491,6 +491,7 @@
             }
         })();
     </script>
+    @include('layouts.live-chat')
 </body>
 
 </html>
