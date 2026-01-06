@@ -125,20 +125,20 @@
 
                     ],
                     [
-                        "url" => route('withdrawal'),
+                        "url" => '',
                         "label" => "V-NFT & Token",
                         'icon' => 'ri-secure-payment-line',
                         "children" => [
                             [
-                                "url" => "",
-                                "label" => "My V-NFTs"
+                                "url" => "#",
+                                "label" => "My V-NFTs (Coming Soon)"
                             ],
                             [
-                                "url" => "",
+                                "url" => "#",
                                 "label" => '$HASH (Coming Soon)'
                             ]
                         ],
-                        'route' => 'withdrawal'
+                        'route' => 'vnft'
 
                     ],
                     [

@@ -8,13 +8,13 @@
         ];
     @endphp
     <div
-        class="halpha-w-full halpha-max-w-[900px] halpha-shadow halpha-shadow-white/10 halpha-bg-gray-900 halpha-rounded-xl md:halpha-p-4 halpha-space-y-4">
+        class="halpha-w-full halpha-max-w-[900px] halpha-rounded-xl md:halpha-p-4 halpha-space-y-4">
 
         <header class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-4">
             <h1 class="halpha-text-lg halpha-font-semibold halpha-text-white">Transaction history</h1>
             <div class="halpha-text-sm halpha-text-gray-400 halpha-whitespace-nowrap">
                 Total: <span
-                    class="halpha-font-medium halpha-text-white">{{ number_format($totalAmount ?? 0, 2) }}</span>
+                    class="halpha-font-medium halpha-text-white">${{ number_format($totalAmount ?? 0, 2) }}</span>
             </div>
         </header>
 
@@ -133,11 +133,13 @@
 
 
         {{-- Pagination --}}
+
         <div
-            class="halpha-flex halpha-flex-col sm:halpha-flex-row halpha-justify-between halpha-items-center halpha-text-sm halpha-text-gray-400 halpha-gap-2">
-            <div>Showing <span class="halpha-font-medium halpha-text-white">{{ $transactions->count() }}</span> items
-            </div>
-            <div class="halpha-w-full sm:halpha-w-auto">{{ $transactions->links() }}</div>
+            class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-items-center halpha-justify-between halpha-gap-3 halpha-p-4 halpha-border-t halpha-border-white/5 halpha-border-red-600 halpha-border"
+        >
+            <div class="halpha-text-xs halpha-text-muted">Showing {{ $transactions->firstItem() ?? 0 }} to
+                {{ $transactions->lastItem() ?? 0 }} of {{ $transactions->total() ?? count($transactions) }}</div>
+            <div class="halpha-text-sm halpha-pagination halpha-flex halpha-items-center halpha-gap-2 halpha-w-full">{{ $transactions->links() }}</div>
         </div>
 
         {{-- Details modal (Livewire-driven) --}}
