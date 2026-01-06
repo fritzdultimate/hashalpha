@@ -15,12 +15,12 @@
         x-transition:leave-end="halpha--translate-x-full"
         class="halpha-relative halpha-w-72 halpha-h-screen halpha-overflow-y-auto halpha-bg-[#1e1e1e] halpha-text-[var(--halpha-sidebar-text)] halpha-border-r halpha-border-r-[#343434]"
         style="-webkit-overflow-scrolling: touch;">
-        <div class="halpha-px-4">
+        <div class="halpha-p-4">
 
             <div class="halpha-flex halpha-items-center halpha-justify-between">
                 <div class="halpha-flex halpha-items-center halpha-gap-3">
-                    <img src="{{ asset('img/logo/logo-bottom.png') }}"
-                        alt="HashAlpha" class="halpha-w-[190px] halpha-h-auto" />
+                    <img src="{{ asset('img/logo/logo-white.png') }}"
+                        alt="HashAlpha" class="halpha-w-[50px] halpha-h-auto" />
                     <span class="halpha-text halpha-font-semibold halpha-sr-only">HashAlpha</span>
                 </div>
             </div>
