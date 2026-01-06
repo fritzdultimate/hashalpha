@@ -2,7 +2,6 @@
     <x-dashboard.halpha-table 
         :columns="[
             ['key' => 'id', 'label' => 'ID', 'width' => 'w-14'],
-            ['key' => 'user.name', 'label' => 'User'],
             ['key' => 'type', 'label' => 'Type', 'width' => 'w-24'],
             ['key' => 'amount', 'label' => 'Amount', 'width' => 'w-28', 'render' => function ($row) {
             return number_format($row->amount, 2); }],
@@ -11,11 +10,11 @@
             return $row->created_at->diffForHumans(); }],
         ]" 
         :rows="$rows"
-        row-actions-view="components.dashboard.row-actions"
+        rrow-actions-view="components.dashboard.row-actions"
         class="halpha-shadow-sm"
     >
         @slot('actions')
-            <div class="halpha-flex halpha-items-center halpha-gap-2">
+            <div class="halpha-flex halpha-items-center halpha-gap-2 !halpha-hidden">
                 <a href="#" class="halpha-text-sm halpha-bg-accent-3 halpha-py-1 halpha-px-2 halpha-rounded">New</a>
             </div>
         @endslot

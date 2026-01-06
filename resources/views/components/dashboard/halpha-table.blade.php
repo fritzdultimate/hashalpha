@@ -5,7 +5,8 @@
     'showPagination' => true,
     'perPageOptions' => [10, 25, 50],
     'responsiveCollapse' => true,
-    'title' => 'Latest Transactions'
+    'title' => 'Latest Transactions',
+    'rowActionsView' => null
 ])
 
 
@@ -23,8 +24,10 @@
 
 
                 <div class="halpha-flex halpha-items-center halpha-gap-2">
-                    <select x-on:change="$dispatch('table-perpage', {value: $event.target.value})"
-                        class="halpha-text-sm halpha-py-1 halpha-px-2 halpha-rounded halpha-border halpha-border-white/5">
+                    <select 
+                        x-on:change="$dispatch('table-perpage', {value: $event.target.value})"
+                        class="halpha-text-sm halpha-py-1 halpha-px-2 halpha-rounded halpha-border halpha-border-white/5 halpha-bg-transparent halpha-appearance-none no-arrow"
+                    >
                         @foreach($perPageOptions as $opt)
                             <option value="{{ $opt }}">{{ $opt }}</option>
                         @endforeach
@@ -111,8 +114,12 @@
                         @endforeach
                     @else
                         <tr>
-                            <td class="halpha-py-6 halpha-px-4 halpha-text-center"
-                                colspan="{{ count($columns) + (isset($rowActions) ? 1 : 0) }}">{{ $empty }}</td>
+                            <td 
+                                class="halpha-py-6 halpha-px-4 halpha-text-center"
+                                colspan="{{ count($columns) + (isset($rowActions) ? 1 : 0) }}"
+                            >
+                                {{ $empty }}
+                            </td>
                         </tr>
                     @endif
                 </tbody>

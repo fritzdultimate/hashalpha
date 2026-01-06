@@ -51,6 +51,7 @@ class LatestTransactionsTable extends Component
 
     public function render() {
         $query = Transaction::with('user')
+            ->where('user_id', auth()->id())
             ->when($this->search, function ($q) {
                 $q->where(function ($sub) {
                     $sub->where('id', 'like', "%{$this->search}%")
