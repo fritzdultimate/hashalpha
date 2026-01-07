@@ -4,14 +4,19 @@ namespace App\Livewire\Dashboard\Affiliate;
 
 use App\Models\Referral;
 use App\Models\ReferralReward;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
 class ReferralCenter extends Component {
+    use WithPagination;
+    protected $paginationTheme = 'tailwind';
+    public int $levelFilter = 0;
 
     public $referralLink;
     public int $totalReferrals = 0;
@@ -19,6 +24,9 @@ class ReferralCenter extends Component {
     public float $totalEarnings = 0;
     public float $thisMonth = 0;
     public $referrals = [];
+
+    public $tree = [];
+    public $showTree = false;
 
     public function mount() {
         $user = Auth::user();
@@ -58,8 +66,11 @@ class ReferralCenter extends Component {
                   ->orWhere('level_9_id', $userId)
                   ->orWhere('level_10_id', $userId);
             })
+            ->when($this->levelFilter > 0, function ($q) use ($userId) {
+                $q->where("level_{$this->levelFilter}_id", $userId);
+            })
             ->latest()
-            ->get();
+            ->paginate(10);
 
         $this->referrals = $rawReferrals->map(function ($referral) use ($userId) {
             return [
@@ -68,6 +79,7 @@ class ReferralCenter extends Component {
                 'active' => $referral->user?->stakes
                     ?->where('status', 'active')
                     ->count() > 0,
+                // 'earnings' => Transaction::where('user_id', auth()->id())
             ];
         });
     }
@@ -80,6 +92,14 @@ class ReferralCenter extends Component {
         }
 
         return 0;
+    }
+
+    public function viewTree($userId) {
+        $this->tree = Referral::where('referred_by_id', $userId)
+        ->with('user')
+        ->get();
+
+        $this->showTree = true;
     }
 
     public function render() {

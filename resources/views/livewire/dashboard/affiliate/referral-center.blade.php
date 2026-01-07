@@ -32,15 +32,31 @@
     </div>
 
     <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-        <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
-            Recent referrals
-        </h3>
+        <div class="halpha-flex halpha-justify-between halpha-items-center">
+            <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
+                Recent referrals
+            </h3>
+
+            @if (count($referrals))
+                <select 
+                    wire:model="levelFilter"
+                    class="halpha-bg-gray-800 halpha-text-xs halpha-rounded halpha-px-3 halpha-py-2"
+                >
+                    <option value="0">All Levels</option>
+                    @for($i = 1; $i <= 10; $i++)
+                        <option value="{{ $i }}">Level {{ $i }}</option>
+                    @endfor
+                </select>
+            @endif
+        </div>
+
+       
 
         @if(count($referrals))
             <div class="halpha-space-y-3">
                 @foreach($referrals as $ref)
                     <div class="halpha-flex halpha-justify-between halpha-text-xs">
-                        <span class="halpha-text-gray-300">
+                        <span class="halpha-text-gray-300 halpha-cursor-pointer hover:halpha-underline" wire:click="viewTree({{ $ref['user']->id }})">
                             {{ Str::mask($ref['user']->email, '*', 3) }}
                             <span class="halpha-text-gray-500">
                                 (Level {{ $ref['level'] }})
@@ -61,6 +77,21 @@
             </div>
         @endif
     </div>
+
+    @if($showTree)
+        <div class="halpha-card halpha-p-4 halpha-mt-4">
+            <h4 class="halpha-text-sm halpha-font-semibold mb-2">Referral Tree</h4>
+
+            @forelse($tree as $node)
+                <div class="halpha-text-xs text-gray-400">
+                    {{ $node->user->email }}
+                </div>
+            @empty
+                <div class="text-gray-500 text-xs">No downlines</div>
+            @endforelse
+        </div>
+    @endif
+
 
 
 
