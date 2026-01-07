@@ -13,12 +13,13 @@
     {{-- PLATFORM STATUS --}}
     <div class="halpha-card halpha-p-4 halpha-rounded-xl halpha-bg-gray-900 halpha-border halpha-border-gray-800">
         <div class="halpha-flex halpha-items-center halpha-gap-2">
-            <div class="halpha-flex halpha-text-sm halpha-font-semibold halpha-text-white halpha-gap-2">
-                <span>
-                    <x-heroicon-s-check-circle class="halpha-w-4 halpha-h-4" />
-                    <span>Operational Status:</span>
+            <div class="halpha-flex halpha-items-center halpha-text-sm halpha-font-semibold halpha-text-white halpha-gap-2">
+                <span class="halpha-flex halpha-items-center halpha-gap-0.5">
+                    <x-heroicon-s-check-circle class="halpha-w-5 halpha-h-5 halpha-text-green-300" />
+                    <span class="halpha-text-base">Operational Status:</span>
                 </span>
-                <span>
+                <span class="halpha-flex halpha-items-center halpha-gap-1">
+                    <x-heroicon-s-check-circle class="halpha-w-3 halpha-h-3 halpha-text-green-300" />
                     <span>Operational</span>
                 </span>
             </div>
