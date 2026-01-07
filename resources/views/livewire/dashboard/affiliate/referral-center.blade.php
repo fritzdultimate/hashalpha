@@ -41,7 +41,7 @@
                 @foreach($referrals as $ref)
                     <div class="halpha-flex halpha-justify-between halpha-text-xs">
                         <span class="halpha-text-gray-300">
-                            {{ $ref['user']->email ?? 'Unknown User' }}
+                            {{ Str::mask($ref['user']->email, '*', 3) }}
                             <span class="halpha-text-gray-500">
                                 (Level {{ $ref['level'] }})
                             </span>
