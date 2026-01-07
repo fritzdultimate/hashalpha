@@ -13,11 +13,11 @@
             <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-mt-2">
                 <input 
                     readonly 
-                    value="https://"
+                    value="{{ $referralLink  }}"
                     class="halpha-flex-1 halpha-bg-gray-800 halpha-text-xs halpha-text-white halpha-rounded halpha-px-3 halpha-py-2" 
                 />
 
-                <button class="halpha-px-3 halpha-py-2 halpha-bg-accent-2 halpha-text-white halpha-rounded halpha-text-xs hover:halpha-bg-accent-3">
+                <button onclick="copyToClipboard('{{ $referralLink }}', 'Referral link copied.')" class="halpha-px-3 halpha-py-2 halpha-bg-accent-2 halpha-text-white halpha-rounded halpha-text-xs hover:halpha-bg-accent-3">
                     Copy
                 </button>
             </div>
@@ -49,3 +49,6 @@
 
     <!-- Main content -->
 </div>
+@push('scripts')
+    <script src="{{ asset('js/fn.js') }}"></script>
+@endpush

@@ -39,12 +39,19 @@ class User extends Authenticatable {
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    protected static function booted() {
+        static::creating(function ($user) {
+            if (!$user->affiliate_code) {
+                $user->affiliate_code = generateReferralCode($user->email);
+            }
+        });
     }
 
     public function hasUnsettledDeposit(): bool {

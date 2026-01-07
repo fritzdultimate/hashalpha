@@ -437,24 +437,19 @@
 
             function showToast(message, options = {}) {
                 const toastEl = createToastElement(message, options);
-                // append at top of stack (newest on top)
                 if (container.firstChild) container.insertBefore(toastEl, container.firstChild);
                 else container.appendChild(toastEl);
 
-                // Force a reflow then add show class to trigger transition
                 requestAnimationFrame(() => {
                     toastEl.classList.add('halpha-toast--show');
                 });
 
-                // return element for further control if needed
                 return toastEl;
             }
 
             function removeToast(el) {
                 if (!el) return;
-                // clear timeout if exists
                 if (el._halpha_timer) clearTimeout(el._halpha_timer);
-                // animate out (slide slightly up and fade)
                 el.style.transition = 'transform 260ms ease, opacity 260ms ease';
                 el.style.transform = 'translateY(-18px)';
                 el.style.opacity = '0';
@@ -476,6 +471,7 @@
 
             if (window.Livewire) {
                 Livewire.on('toast', ({ payload }) => {
+                    console.log('toasted')
                     let message = '';
                     let opts = {};
                     if (typeof payload === 'string') {
@@ -485,6 +481,7 @@
                         if (payload.variant) opts.variant = payload.variant;
                         if (payload.timeout) opts.timeout = Number(payload.timeout) || 3500;
                     }
+                    console.log(payload)
                     if (!message) return;
                     showToast(message, opts);
                 });

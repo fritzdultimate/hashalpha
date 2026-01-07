@@ -49,3 +49,12 @@ if (!function_exists('remaining_time_until')) {
         }
     }
 }
+
+function generateReferralCode(string $email, int $length = 8): string {
+    $base = strtolower(trim($email)) . config('app.key');
+
+    // Create deterministic hash
+    $hash = hash('sha256', $base);
+
+    return strtoupper(substr(base_convert(substr($hash, 0, 16), 16, 36), 0, $length));
+}
