@@ -155,7 +155,7 @@
 
                         <div class="halpha-flex halpha-flex-col halpha-items-end halpha-gap-2">
                             <div class="halpha-flex halpha-items-center halpha-gap-2">
-                                <button onclick="copyRef('{{ $tx->id }}')"
+                                <button onclick="copyToClipboard('{{ $tx->id }}', 'Copied id')"
                                     title="Copy reward id"
                                     class="halpha-text-xs halpha-text-gray-300 halpha-border halpha-border-gray-700 halpha-px-2 halpha-py-1 halpha-rounded">
                                     Copy
@@ -186,32 +186,6 @@
     </div>
 </div>
 
-<script>
-    function copyRef(id) {
-        if (!navigator.clipboard) {
-            // fallback
-            const ta = document.createElement('textarea');
-            ta.value = id;
-            document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand('copy'); } catch(e) {}
-            ta.remove();
-            window.dispatchEvent(new CustomEvent('toast', { detail: { message: 'Copied id' } }));
-            return;
-        }
-
-        navigator.clipboard.writeText(id).then(() => {
-            // Use Livewire-friendly browser event name so Livewire dispatchBrowserEvent('toast') also works elsewhere
-            window.dispatchEvent(new CustomEvent('toast', { payload: { message: 'Copied id' } }));
-        }).catch(() => {
-            window.dispatchEvent(new CustomEvent('toast', { detail: { message: 'Copy failed' } }));
-        });
-    }
-
-    // Optional: re-run small UI behaviors after Livewire updates
-    document.addEventListener('livewire:load', () => {
-        Livewire.hook('message.processed', (message, component) => {
-            // you could re-run any JS initializers here if needed
-        });
-    });
-</script>
+@push('scripts')
+    <script src="{{ asset('js/fn.js') }}"></script>
+@endpush

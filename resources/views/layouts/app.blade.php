@@ -471,7 +471,6 @@
 
             if (window.Livewire) {
                 Livewire.on('toast', ({ payload }) => {
-                    console.log('toasted')
                     let message = '';
                     let opts = {};
                     if (typeof payload === 'string') {
@@ -481,7 +480,6 @@
                         if (payload.variant) opts.variant = payload.variant;
                         if (payload.timeout) opts.timeout = Number(payload.timeout) || 3500;
                     }
-                    console.log(payload)
                     if (!message) return;
                     showToast(message, opts);
                 });
