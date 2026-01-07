@@ -33,30 +33,35 @@
 
     {{-- VALIDATOR NETWORK STATUS --}}
     <div class="halpha-card halpha-rounded-xl">
-        <h3 class="halpha-text-sm md:halpha-text-base halpha-leading-loose halpha-tracking-wider halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
+        <h3
+            class="halpha-text-sm halpha-leading-relaxed halpha-tracking-normal halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
             Validator Network Status
         </h3>
 
-        <div class="halpha-p-4">
+        <div class="halpha-p-4 halpha-space-y-4">
+            <h4 class="halpha-text-gray-300 halpha-text-base halpha-font-medium">
+                Validator Cluster Health
+            </h4>
+
             <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4 halpha-text-xs">
-                <div>
+                <div class="halpha-flex halpha-flex-col halpha-gap-2">
                     <div class="halpha-text-gray-400">Active Validators</div>
-                    <div class="halpha-text-white halpha-font-semibold">145</div>
+                    <div class="halpha-text-white halpha-font-semibold halpha-text-base">145</div>
                 </div>
 
-                <div>
+                <div class="halpha-flex halpha-flex-col halpha-gap-2">
                     <div class="halpha-text-gray-400">Validators in Rotation</div>
-                    <div class="halpha-text-white halpha-font-semibold">12</div>
+                    <div class="halpha-text-white halpha-font-semibold halpha-text-base">12</div>
                 </div>
 
-                <div>
+                <div class="halpha-flex halpha-flex-col halpha-gap-2">
                     <div class="halpha-text-gray-400">Syncing / Maintenance</div>
-                    <div class="halpha-text-white halpha-font-semibold">3</div>
+                    <div class="halpha-text-white halpha-font-semibold halpha-text-base">3</div>
                 </div>
             </div>
 
-            <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-mt-3">
-                <span class="halpha-text-green-400">✔</span>
+            <div class="halpha-flex halpha-items-center halpha-gap-1 halpha-mt-3">
+                <x-heroicon-s-check-circle class="halpha-w-4 halpha-h-4 halpha-text-green-300" />
                 <span class="halpha-text-xs halpha-text-gray-400">
                     Cluster operating within normal parameters
                 </span>
@@ -69,70 +74,82 @@
     </div>
 
     {{-- NETWORK PARTICIPATION --}}
-    <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-        <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
+    <div class="halpha-card halpha-rounded-xl">
+        <h3
+            class="halpha-text-sm halpha-leading-relaxed halpha-tracking-normal halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
             Network Participation Status
         </h3>
 
-        <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4 halpha-text-xs">
-            <div>
-                <div class="halpha-text-gray-400">Ethereum Network</div>
-                <div class="halpha-text-green-400 halpha-font-semibold">Connected</div>
+        <div class="halpha-p-4">
+            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4 halpha-text-xs">
+                <div>
+                    <div class="halpha-text-gray-400">Ethereum Network</div>
+                    <div class="halpha-text-green-400 halpha-font-semibold">Connected</div>
+                </div>
+
+                <div>
+                    <div class="halpha-text-gray-400">Finality</div>
+                    <div class="halpha-text-white halpha-font-semibold">Normal</div>
+                </div>
+
+                <div>
+                    <div class="halpha-text-gray-400">Missed Proposals (24h)</div>
+                    <div class="halpha-text-white halpha-font-semibold">Within tolerance</div>
+                </div>
             </div>
 
-            <div>
-                <div class="halpha-text-gray-400">Finality</div>
-                <div class="halpha-text-white halpha-font-semibold">Normal</div>
-            </div>
-
-            <div>
-                <div class="halpha-text-gray-400">Missed Proposals (24h)</div>
-                <div class="halpha-text-white halpha-font-semibold">Within tolerance</div>
+            <div class="halpha-text-xs halpha-text-gray-500 halpha-mt-2">
+                Penalty events: None
             </div>
         </div>
 
-        <div class="halpha-text-xs halpha-text-gray-500 halpha-mt-2">
-            Penalty events: None
-        </div>
+
     </div>
 
     {{-- PERFORMANCE & RELIABILITY --}}
     <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-4">
 
-        <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-            <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
+        <div class="halpha-card halpha-rounded-xl">
+
+            <h3
+                class="halpha-text-sm halpha-leading-relaxed halpha-tracking-normal halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
                 Performance & Reliability
             </h3>
 
-            <div class="halpha-space-y-2 halpha-text-xs">
-                <div class="halpha-flex halpha-justify-between">
-                    <span class="halpha-text-gray-400">Network uptime (rolling)</span>
-                    <span class="halpha-text-white">30.9%</span>
+            <div class="halpha-p-4">
+                <div class="halpha-space-y-2 halpha-text-xs">
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">Network uptime (rolling)</span>
+                        <span class="halpha-text-white">30.9%</span>
+                    </div>
+
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">90-day uptime</span>
+                        <span class="halpha-text-white">99.8%</span>
+                    </div>
+
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">Slashing events</span>
+                        <span class="halpha-text-green-400">None</span>
+                    </div>
                 </div>
 
-                <div class="halpha-flex halpha-justify-between">
-                    <span class="halpha-text-gray-400">90-day uptime</span>
-                    <span class="halpha-text-white">99.8%</span>
-                </div>
 
-                <div class="halpha-flex halpha-justify-between">
-                    <span class="halpha-text-gray-400">Slashing events</span>
-                    <span class="halpha-text-green-400">None</span>
-                </div>
             </div>
-
-            <p class="halpha-text-[11px] halpha-text-gray-500 halpha-mt-3">
+            <p class="halpha-text-xs halpha-font-medium halpha-text-gray-400 halpha-bg-card-soft halpha-p-4">
                 Metrics reflect network-level participation, not individual accounts.
             </p>
+
         </div>
 
         {{-- REWARD DISTRIBUTION --}}
-        <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-            <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
+        <div class="halpha-card halpha-rounded-xl">
+            <h3
+                class="halpha-text-sm halpha-leading-relaxed halpha-tracking-normal halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
                 Reward Distribution Status
             </h3>
 
-            <div class="halpha-space-y-2 halpha-text-xs">
+            <div class="halpha-space-y-2 halpha-text-xs halpha-p-4">
                 <div class="halpha-flex halpha-justify-between">
                     <span class="halpha-text-gray-400">Reward accrual</span>
                     <span class="halpha-text-green-400">Active</span>
@@ -153,29 +170,36 @@
     </div>
 
     {{-- INFRASTRUCTURE UPDATES --}}
-    <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-        <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
+    <div class="halpha-card halpha-rounded-xl">
+
+        <h3
+            class="halpha-text-sm halpha-leading-relaxed halpha-tracking-normal halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
             Infrastructure Updates
         </h3>
 
-        <ul class="halpha-space-y-2 halpha-text-xs halpha-text-gray-400">
-            <li>April 24, 2024 — Validator cluster maintenance concluded</li>
-            <li>April 20, 2024 — Routine key rotation completed</li>
-            <li>April 17, 2024 — Validator cluster upgrade completed</li>
-        </ul>
+        <div class="halpha-p-4">
+            <ul class="halpha-space-y-2 halpha-text-xs halpha-text-gray-400">
+                <li>April 24, 2024 — Validator cluster maintenance concluded</li>
+                <li>April 20, 2024 — Routine key rotation completed</li>
+                <li>April 17, 2024 — Validator cluster upgrade completed</li>
+            </ul>
 
-        <a href="#" class="halpha-text-xs halpha-text-accent-2 hover:underline halpha-mt-3 inline-block">
-            View public validator keys →
-        </a>
+            <a href="#" class="halpha-text-xs halpha-text-accent-2 hover:underline halpha-mt-3 inline-block">
+                View public validator keys →
+            </a>
+        </div>
+
     </div>
 
     {{-- INCIDENT HISTORY --}}
-    <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-        <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
+    <div class="halpha-card halpha-rounded-xl">
+
+        <h3
+            class="halpha-text-sm halpha-leading-relaxed halpha-tracking-normal halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
             Incident History
         </h3>
 
-        <div class="halpha-text-xs halpha-text-gray-400 halpha-space-y-1">
+        <div class="halpha-text-xs halpha-text-gray-400 halpha-space-y-1 halpha-p-4">
             <div>Incident ID: <span class="halpha-text-white">INC-2026-001</span></div>
             <div>Status: <span class="halpha-text-green-400">Resolved</span></div>
             <div>Impact: Temporary delay in reward settlement</div>
