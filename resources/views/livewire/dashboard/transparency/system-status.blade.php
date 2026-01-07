@@ -27,7 +27,7 @@
         </div>
 
         <div class="halpha-text-xs halpha-text-gray-500 halpha-mt-1">
-            Last updated: April 27, 2024, 10:23 UTC
+            Last updated: December 27, 2025, 10:23 UTC
         </div>
     </div>
 
