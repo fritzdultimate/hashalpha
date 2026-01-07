@@ -167,7 +167,7 @@
 
                     ],
                     [
-                        "url" => route('withdrawal'),
+                        "url" => '',
                         "label" => "Transparency",
                         'icon' => 'hugeicons-blockchain-04',
                         "children" => [
@@ -183,8 +183,12 @@
                                 "url" => "",
                                 "label" => 'Reports'
                             ],
+                            [
+                                "url" => route('transparency.status'),
+                                "label" => 'System Status'
+                            ]
                         ],
-                        'route' => 'withdrawal'
+                        'route' => 'transparency'
 
                     ],
                     [
