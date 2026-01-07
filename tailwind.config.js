@@ -36,6 +36,7 @@ export default {
                 'danger': 'var(--halpha-danger)',
 
                 'card-bg': 'var(--halpha-card-bg)',
+                'card-soft': 'var(--bg-card-soft)',
 
                 'card-bg-deeper': 'var(--halpha-card-bg-deeper)',
                 'card-deeper': 'var(--halpha-card-bg-deeper)',

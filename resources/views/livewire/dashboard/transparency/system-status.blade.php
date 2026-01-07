@@ -13,7 +13,8 @@
     {{-- PLATFORM STATUS --}}
     <div class="halpha-card halpha-p-4 halpha-rounded-xl halpha-bg-gray-900 halpha-border halpha-border-gray-800">
         <div class="halpha-flex halpha-items-center halpha-gap-2">
-            <div class="halpha-flex halpha-items-center halpha-text-sm halpha-font-semibold halpha-text-white halpha-gap-2">
+            <div
+                class="halpha-flex halpha-items-center halpha-text-sm halpha-font-semibold halpha-text-white halpha-gap-2">
                 <span class="halpha-flex halpha-items-center halpha-gap-0.5">
                     <x-heroicon-s-check-circle class="halpha-w-5 halpha-h-5 halpha-text-green-300" />
                     <span class="halpha-text-base">Operational Status:</span>
@@ -31,34 +32,40 @@
     </div>
 
     {{-- VALIDATOR NETWORK STATUS --}}
-    <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-        <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
+    <div class="halpha-card halpha-rounded-xl">
+        <h3 class="halpha-text-sm md:halpha-text-base halpha-leading-loose halpha-tracking-wider halpha-font-semibold halpha-text-gray-400 halpha-mb-3 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
             Validator Network Status
         </h3>
 
-        <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4 halpha-text-xs">
-            <div>
-                <div class="halpha-text-gray-400">Active Validators</div>
-                <div class="halpha-text-white halpha-font-semibold">145</div>
+        <div class="halpha-p-4">
+            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4 halpha-text-xs">
+                <div>
+                    <div class="halpha-text-gray-400">Active Validators</div>
+                    <div class="halpha-text-white halpha-font-semibold">145</div>
+                </div>
+
+                <div>
+                    <div class="halpha-text-gray-400">Validators in Rotation</div>
+                    <div class="halpha-text-white halpha-font-semibold">12</div>
+                </div>
+
+                <div>
+                    <div class="halpha-text-gray-400">Syncing / Maintenance</div>
+                    <div class="halpha-text-white halpha-font-semibold">3</div>
+                </div>
             </div>
 
-            <div>
-                <div class="halpha-text-gray-400">Validators in Rotation</div>
-                <div class="halpha-text-white halpha-font-semibold">12</div>
-            </div>
-
-            <div>
-                <div class="halpha-text-gray-400">Syncing / Maintenance</div>
-                <div class="halpha-text-white halpha-font-semibold">3</div>
+            <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-mt-3">
+                <span class="halpha-text-green-400">✔</span>
+                <span class="halpha-text-xs halpha-text-gray-400">
+                    Cluster operating within normal parameters
+                </span>
             </div>
         </div>
 
-        <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-mt-3">
-            <span class="halpha-text-green-400">✔</span>
-            <span class="halpha-text-xs halpha-text-gray-400">
-                Cluster operating within normal parameters
-            </span>
-        </div>
+        <p class="halpha-text-sm halpha-text-gray-400 halpha-bg-card-soft halpha-p-4">
+            Performance metrics reflect network-level participation, not individual account outcomes.
+        </p>
     </div>
 
     {{-- NETWORK PARTICIPATION --}}
