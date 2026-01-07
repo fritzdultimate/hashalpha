@@ -25,24 +25,41 @@
     </div>
 
     <div class="halpha-grid halpha-grid-cols-2 md:halpha-grid-cols-4 halpha-gap-3">
-        <x-affiliate.stat label="Total Referrals" :value="100" />
-        <x-affiliate.stat label="Active Referrals" :value="800" />
-        <x-affiliate.stat label="Total Earnings" :value="900" prefix="$" />
-        <x-affiliate.stat label="This Month" :value="857" prefix="$" />
+        <x-affiliate.stat label="Total Referrals(Direct)" :value="$totalReferrals" />
+        <x-affiliate.stat label="Active Referrals" :value="$activeReferrals" />
+        <x-affiliate.stat label="Total Earnings" :value="number_format($totalEarnings, 2)" prefix="$" />
+        <x-affiliate.stat label="This Month" :value="number_format($thisMonth, 2)" prefix="$" />
     </div>
 
     <div class="halpha-card halpha-p-4 halpha-rounded-xl">
-        <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white mb-3">
+        <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-mb-3">
             Recent referrals
         </h3>
 
-        <div class="halpha-space-y-3">
-            <!-- each row -->
-            <div class="halpha-flex halpha-justify-between halpha-text-xs">
-                <span class="halpha-text-gray-300">User #A92K</span>
-                <span class="halpha-text-accent-2 hover:halpha-text-accent-3">Active</span>
+        @if(count($referrals))
+            <div class="halpha-space-y-3">
+                @foreach($referrals as $ref)
+                    <div class="halpha-flex halpha-justify-between halpha-text-xs">
+                        <span class="halpha-text-gray-300">
+                            {{ $ref['user']->email ?? 'Unknown User' }}
+                            <span class="halpha-text-gray-500">
+                                (Level {{ $ref['level'] }})
+                            </span>
+                        </span>
+
+                        @if($ref['active'])
+                            <span class="halpha-text-green-400">Active</span>
+                        @else
+                            <span class="halpha-text-gray-500">Inactive</span>
+                        @endif
+                    </div>
+                @endforeach
             </div>
-        </div>
+        @else
+            <div class="halpha-text-xs halpha-text-gray-500 text-center py-6">
+                No referrals yet. Share your referral link to start earning.
+            </div>
+        @endif
     </div>
 
 
