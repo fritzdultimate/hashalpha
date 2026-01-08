@@ -1,3 +1,4 @@
+
 <div class="halpha-space-y-6">
 
     {{-- Header --}}
@@ -8,6 +9,27 @@
         <p class="halpha-text-xs md:halpha-text-sm halpha-text-gray-400">
             Active validators participating in the HashAlpha infrastructure
         </p>
+    </div>
+
+    {{-- FILTERS --}}
+    <div class="halpha-flex halpha-flex-wrap halpha-gap-3">
+        <input
+            wire:model.debounce.300ms.live="search"
+            placeholder="Search validator…"
+            class="halpha-bg-card-soft halpha-border halpha-border-gray-800 halpha-rounded halpha-px-3 halpha-py-2 halpha-text-xs halpha-text-white"
+        />
+
+        <select wire:model.live="status" class="halpha-bg-card-soft halpha-text-xs halpha-rounded halpha-px-3 halpha-py-2">
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="maintenance">Maintenance</option>
+        </select>
+
+        <select wire:model.live="region" class="halpha-bg-card-soft halpha-text-xs halpha-rounded halpha-px-3 halpha-py-2">
+            <option value="all">All Regions</option>
+            <option value="EU">EU</option>
+            <option value="US">US</option>
+        </select>
     </div>
 
     {{-- SUMMARY --}}
@@ -28,9 +50,8 @@
         </div>
     </div>
 
-    {{-- VALIDATOR TABLE --}}
+    {{-- TABLE --}}
     <div class="halpha-card halpha-rounded-xl">
-
         <h3 class="halpha-text-sm halpha-font-semibold halpha-text-gray-400 halpha-bg-card-soft halpha-p-4 halpha-uppercase">
             Validators
         </h3>
@@ -39,38 +60,89 @@
             <table class="halpha-w-full halpha-text-xs">
                 <thead class="halpha-bg-card-soft halpha-text-gray-400">
                     <tr>
-                        <th class="halpha-text-left halpha-p-3">Validator</th>
-                        <th class="halpha-text-left halpha-p-3">Status</th>
-                        <th class="halpha-text-left halpha-p-3">Uptime</th>
-                        <th class="halpha-text-left halpha-p-3">Region</th>
-                        <th class="halpha-text-left halpha-p-3">Risk</th>
+                        <th class="halpha-p-3 halpha-text-left">Validator</th>
+                        <th class="halpha-p-3">Status</th>
+                        <th class="halpha-p-3">Uptime</th>
+                        <th class="halpha-p-3">Region</th>
+                        <th class="halpha-p-3">Actions</th>
                     </tr>
                 </thead>
 
                 <tbody class="divide-y divide-gray-800">
-                    @foreach(range(1,5) as $i)
-                        <tr class="hover:halpha-bg-card-soft halpha-cursor-pointer">
+                    @foreach($this->validators as $v)
+                        <tr class="hover:halpha-bg-card-soft">
                             <td class="halpha-p-3 halpha-text-white">
-                                Validator #{{ $i }}
+                                {{ $v['name'] }}
                             </td>
+
                             <td class="halpha-p-3 halpha-text-green-400">
-                                Active
+                                {{ ucfirst($v['status']) }}
                             </td>
+
                             <td class="halpha-p-3 halpha-text-white">
-                                99.8%
+                                {{ $v['uptime'] }}
                             </td>
+
                             <td class="halpha-p-3 halpha-text-gray-400">
-                                EU
+                                {{ $v['region'] }}
                             </td>
-                            <td class="halpha-p-3 halpha-text-green-400">
-                                Low
+
+                            <td class="halpha-p-3">
+                                <button
+                                    wire:click="viewValidator({{ json_encode($v) }})"
+                                    class="halpha-text-accent-2 hover:underline"
+                                >
+                                    View details
+                                </button>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-
     </div>
+
+    {{-- DETAILS MODAL --}}
+    @if($showDetails && $selectedValidator)
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div class="halpha-card halpha-rounded-xl halpha-w-full max-w-lg">
+
+                <div class="halpha-flex halpha-justify-between halpha-items-center halpha-bg-card-soft halpha-p-4">
+                    <h3 class="halpha-text-sm halpha-font-semibold halpha-text-white">
+                        {{ $selectedValidator['name'] }}
+                    </h3>
+
+                    <button wire:click="closeModal" class="halpha-text-gray-400 hover:text-white">
+                        ✕
+                    </button>
+                </div>
+
+                <div class="halpha-p-4 halpha-space-y-2 halpha-text-xs">
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">Public Key</span>
+                        <span class="halpha-text-white">{{ $selectedValidator['pubkey'] }}</span>
+                    </div>
+
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">Client</span>
+                        <span class="halpha-text-white">{{ $selectedValidator['client'] }}</span>
+                    </div>
+
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">Risk Level</span>
+                        <span class="halpha-text-green-400">{{ $selectedValidator['risk'] }}</span>
+                    </div>
+
+                    <a
+                        href="https://beaconcha.in/validator/{{ $selectedValidator['pubkey'] }}"
+                        target="_blank"
+                        class="halpha-text-accent-2 text-xs hover:underline mt-3 inline-block"
+                    >
+                        View on Beacon Explorer →
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
 
 </div>
