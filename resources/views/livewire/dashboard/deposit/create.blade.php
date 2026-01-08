@@ -19,6 +19,32 @@
             <a href="{{ route('deposit.history') }}" class="halpha-text-xs halpha-text-accent-2 halpha-font-medium hover:halpha-text-accent-3 halpha-transition-all halpha-duration-300">History</a>
         </div>
 
+        {{-- Deposit Disclaimer --}}
+        <div class="halpha-card halpha-rounded-lg halpha-bg-card-soft halpha-p-3 halpha-text-[11px] halpha-text-gray-400 halpha-leading-relaxed">
+            <p class="halpha-font-medium halpha-text-gray-300 halpha-mb-1">
+                Important Deposit Information
+            </p>
+
+            <ul class="halpha-list-disc halpha-pl-4 halpha-space-y-1">
+                <li>
+                    Ensure you are sending funds to the <span class="halpha-text-gray-200">correct network and address</span>. Sending assets on the wrong network may result in permanent loss.
+                </li>
+                <li>
+                    Deposits below the minimum required amount may not be credited to your account.
+                </li>
+                <li>
+                    Deposits require network confirmations before becoming available. Processing times depend on blockchain conditions.
+                </li>
+                <li>
+                    Blockchain transactions are <span class="halpha-text-gray-200">irreversible</span>. Once confirmed, they cannot be canceled or refunded.
+                </li>
+                <li>
+                    You are solely responsible for verifying all transaction details before submitting a deposit.
+                </li>
+            </ul>
+        </div>
+
+
         <x-dashboard.currency-listing :wallets="$wallets" :groupedWallets="$groupedWallets" />
 
     </div>

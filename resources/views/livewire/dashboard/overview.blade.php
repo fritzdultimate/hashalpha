@@ -18,22 +18,22 @@
         <div class="halpha-grid halpha-grid-cols-2">
             <div
                 class="halpha-bg-card-bg halpha-rounded-l halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
-                <h6 class="halpha-text-muted">ETH Staked</h6>
-                <span class="count-up" data-value="12.85" data-suffix=" ETH">12.85 ETH</span>
+                <h6 class="halpha-text-muted">Blocks Validated</h6>
+                <span class="count-up" data-value="129392">129,392</span>
             </div>
 
             <div
                 class="halpha-bg-card-bg halpha-rounded-r halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
-                <h6 class="halpha-text-muted">Uptime</h6>
-                <span class="count-up" data-value="99.98" data-suffix="%">99.98%</span>
+                <h6 class="halpha-text-muted">Plan Type</h6>
+                <span class="">Exclusive</span>
             </div>
         </div>
 
         <div class="halpha-grid halpha-grid-cols-2">
             <div
                 class="halpha-bg-card-bg halpha-rounded-l halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
-                <h6 class="halpha-text-muted">Active Nodes</h6>
-                <span class="count-up" data-value="128">128</span>
+                <h6 class="halpha-text-muted">Network Status</h6>
+                <span >Active</span>
             </div>
 
             <div

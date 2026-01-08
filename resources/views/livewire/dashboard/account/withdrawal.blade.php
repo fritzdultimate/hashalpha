@@ -18,6 +18,33 @@
         </p>
     </div>
 
+    {{-- Withdrawal Disclaimer --}}
+    <div class="halpha-card halpha-rounded-lg halpha-bg-card-soft halpha-p-3 halpha-text-[11px] halpha-text-gray-400 halpha-leading-relaxed">
+        <p class="halpha-font-medium halpha-text-gray-300 halpha-mb-1">
+            Important Withdrawal Information
+        </p>
+
+        <ul class="halpha-list-disc halpha-pl-4 halpha-space-y-1">
+            <li>
+                Ensure the <span class="halpha-text-gray-200">destination address and network</span> are correct before submitting your withdrawal. Funds sent to an incorrect address or network cannot be recovered.
+            </li>
+            <li>
+                Withdrawals are processed on-chain and are <span class="halpha-text-gray-200">irreversible</span> once broadcast to the network.
+            </li>
+            <li>
+                Processing times may vary depending on network congestion and blockchain conditions.
+            </li>
+            <li>
+                Withdrawal requests may be subject to security checks, compliance reviews, or temporary delays to protect your account.
+            </li>
+            <li>
+                You are fully responsible for verifying all withdrawal details prior to confirmation.
+            </li>
+        </ul>
+    </div>
+
+
+
     {{-- Form --}}
     <form wire:submit.prevent="confirm" class="halpha-card halpha-p-4 halpha-space-y-5">
 
