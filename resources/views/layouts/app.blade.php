@@ -172,15 +172,15 @@
                         'icon' => 'hugeicons-blockchain-04',
                         "children" => [
                             [
-                                "url" => "",
+                                "url" => route('transparency.validator'),
                                 "label" => "Validators"
                             ],
                             [
-                                "url" => "",
+                                "url" => route('transparency.rewards'),
                                 "label" => 'Proof of Rewards'
                             ],
                             [
-                                "url" => "",
+                                "url" => route('transparency.reports'),
                                 "label" => 'Reports'
                             ],
                             [

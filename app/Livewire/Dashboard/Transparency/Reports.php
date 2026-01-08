@@ -10,11 +10,11 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 #[Layout('layouts.app')]
-class Validator extends Component {
+class Reports extends Component {
 
     public $claimable = 100;
 
     public function render() {
-        return view('livewire.dashboard.transparency.validator');
+        return view('livewire.dashboard.transparency.reports');
     }
 }

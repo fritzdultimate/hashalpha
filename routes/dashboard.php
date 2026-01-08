@@ -11,7 +11,10 @@ use App\Livewire\Dashboard\Affiliate\RankProgress;
 use App\Livewire\Dashboard\Affiliate\ReferralCenter;
 use App\Livewire\Dashboard\Affiliate\TeamDashboard;
 use App\Livewire\Dashboard\StakesIndex;
+use App\Livewire\Dashboard\Transparency\ProofOfRewards;
+use App\Livewire\Dashboard\Transparency\Reports;
 use App\Livewire\Dashboard\Transparency\SystemStatus;
+use App\Livewire\Dashboard\Transparency\Validator;
 use App\Livewire\EarningsPage;
 use App\Livewire\PlansList;
 use App\Livewire\Dashboard\Deposit\Create as CreateDeposit;
@@ -45,9 +48,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('transparency')->middleware(['auth'])->group(function () {
-        // Route::get('/validator', ValidatorPage::class)->name('transparency.validator');
-        // Route::get('/rewards', ProofOfRewardsPage::class)->name('transparency.rewards');
-        // Route::get('/reports', ReportsPage::class)->name('transparency.reports');
+        Route::get('/validator', Validator::class)->name('transparency.validator');
+        Route::get('/rewards', ProofOfRewards::class)->name('transparency.rewards');
+        Route::get('/reports', Reports::class)->name('transparency.reports');
         Route::get('/system-status', SystemStatus::class)->name('transparency.status');
     });
 });
