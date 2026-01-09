@@ -130,11 +130,11 @@
                         'icon' => 'ri-secure-payment-line',
                         "children" => [
                             [
-                                "url" => "#",
+                                "url" => route('coming-soon'),
                                 "label" => "My V-NFTs (Coming Soon)"
                             ],
                             [
-                                "url" => "#",
+                                "url" => route('coming-soon'),
                                 "label" => '$HASH (Coming Soon)'
                             ]
                         ],
