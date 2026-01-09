@@ -143,7 +143,7 @@
                     ],
                     [
                         "url" => '',
-                        "label" => "Affiliate",
+                        "label" => "My Team",
                         'icon' => 'iconsax-bul-driver-refresh',
                         "children" => [
                             [
