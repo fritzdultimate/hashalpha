@@ -10,6 +10,7 @@ use App\Livewire\Dashboard\Affiliate\Bonuses;
 use App\Livewire\Dashboard\Affiliate\RankProgress;
 use App\Livewire\Dashboard\Affiliate\ReferralCenter;
 use App\Livewire\Dashboard\Affiliate\TeamDashboard;
+use App\Livewire\Dashboard\Extras\ComingSoon;
 use App\Livewire\Dashboard\StakesIndex;
 use App\Livewire\Dashboard\Transparency\ProofOfRewards;
 use App\Livewire\Dashboard\Transparency\Reports;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', Overview::class)->name('dashboard');
+    Route::get('/extras/coming-soon', ComingSoon::class)->name('coming-soon');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
