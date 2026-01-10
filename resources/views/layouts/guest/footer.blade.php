@@ -127,6 +127,18 @@
             </div>
             
             <div class="divider mg-0" style="opacity: 0; filter: blur(10px);"></div>
+
+            {{-- Regulatory / Risk Disclaimer --}}
+            <div class="halpha-mt-6 halpha-px-4">
+                <p class="halpha-text-[11px] halpha-text-gray-500 halpha-leading-relaxed halpha-text-center max-w-4xl mx-auto">
+                    <span class="halpha-text-gray-400 halpha-font-medium">{{ env('APP_NAME') }}</span>
+                    provides blockchain infrastructure access and validator participation services.
+                    Information on this website is for informational purposes only and does not constitute
+                    financial or investment advice. Participation involves risk, and rewards are not guaranteed.
+                    Users are responsible for compliance with applicable laws and regulations in their jurisdiction.
+                </p>
+            </div>
+
             
             <div class="footer-bottom">
                 <div data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba3ce" style="opacity: 0; filter: blur(10px);" class="!halpha-text-gray-300">
