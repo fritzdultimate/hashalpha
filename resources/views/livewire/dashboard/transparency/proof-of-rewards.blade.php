@@ -185,7 +185,7 @@
                             ], 
                             [
                                 'amount' => 3.1700,
-                                'April 25, 2022 UTC'
+                                'date' => 'April 25, 2022 UTC'
                             ]
                         ]
                     @endphp
