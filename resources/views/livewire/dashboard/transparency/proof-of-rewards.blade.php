@@ -149,9 +149,60 @@
 
             <div class="halpha-flex halpha-gap-2 halpha-text-sm halpha-text-gray-600">
                 <span class="halpha-hidden md:halpha-block">Cumulative Rewards Earned:</span>
-             <span class="halpha-text-white">8.4763 ETH</span>
+                <span class="halpha-text-white">8.4763 ETH</span>
             </div>
         </h3>
+
+        <div class="halpha-overflow-x-auto">
+            <table class="halpha-w-full halpha-text-left halpha-min-w-full">
+                <thead
+                    class="halpha-text-xs halpha-text-muted halpha-uppercase halpha-tracking-wide halpha-border-b halpha-border-white/5">
+                    <tr>
+                        <th class="halpha-py-3 halpha-px-4 halpha-text-white">Date</th>
+                        <th class="halpha-py-3 halpha-px-4 halpha-text-white">Amount</th>
+                        <th class="halpha-py-3 halpha-px-4 halpha-text-white">Reward Status</th>
+                        <th class="halpha-py-3 halpha-px-4 halpha-text-white">Source</th>
+                    </tr>
+
+
+                </thead>
+
+                <tbody class="halpha-text-sm halpha-font-normal halpha-capitalize halpha-font-sans">
+                    
+                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
+                            
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 26, 2022 UTC</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.0623 ETH</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
+                    </tr>
+
+                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
+                            
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 26, 2022 UTC</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.3521 ETH</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
+                    </tr>
+
+                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
+                            
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 25, 2022 UTC</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.2520 ETH</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
+                    </tr>
+
+                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
+                            
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 25, 2022 UTC</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.1700 ETH</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
+                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
 
     </div>
