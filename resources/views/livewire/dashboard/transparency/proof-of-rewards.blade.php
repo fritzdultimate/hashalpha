@@ -5,7 +5,7 @@
         <h1 class="halpha-text-xl md:halpha-text-3xl halpha-font-semibold halpha-text-white">
             Proof of Rewards
         </h1>
-        <p class="halpha-text-xs md:halpha-text-sm halpha-text-gray-400 halpha-w-3/5 halpha-leading-loose">
+        <p class="halpha-text-xs md:halpha-text-sm halpha-text-gray-400 md:halpha-w-3/5 halpha-leading-loose">
             This page provides visibility into how network rewards are generated and distributed through {{ env('APP_NAME') }}'s validator infrastructure.
         </p>
     </div>
