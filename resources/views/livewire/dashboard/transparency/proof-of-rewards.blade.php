@@ -159,17 +159,17 @@
     <div class="halpha-space-y-4">
         <div class="halpha-flex halpha-items-center halpha-gap-2">
             <x-heroicon-s-check-circle class="halpha-w-4 halpha-h-4 halpha-text-green-300 halpha-opacity-80" />
-            <span>Validator monitoring active</span>
+            <span class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Validator monitoring active</span>
         </div>
 
         <div class="halpha-flex halpha-items-center halpha-gap-2">
             <x-heroicon-s-check-circle class="halpha-w-4 halpha-h-4 halpha-text-green-300 halpha-opacity-80" />
-            <span>Distribution engine operational</span>
+            <span class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Distribution engine operational</span>
         </div>
 
         <div class="halpha-flex halpha-items-center halpha-gap-2">
             <x-heroicon-s-check-circle class="halpha-w-4 halpha-h-4 halpha-text-green-300 halpha-opacity-80" />
-            <span>No reward processing incidents reported</span>
+            <span class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">No reward processing incidents reported</span>
         </div>
     </div>
 
