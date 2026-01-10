@@ -10,14 +10,26 @@
         </p>
     </div>
 
-    <div class="halpha-card !halpha-rounded-md halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
-        <h3 class="halpha-text-sm md:halpha-text-base halpha-font-semibold halpha-text-gray-100 halpha-p-4 halpha-border-b halpha-border-b-gray-600 halpha-flex halpha-justify-between">
-            Rewards Overview
+    <div 
+        x-data="{ open: true }"   
+        class="halpha-card !halpha-rounded-md halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2"
+        @click="open = !open"
+    >
 
-            <x-heroicon-s-chevron-right class="halpha-w-5 halpha-h-5" />
-        </h3>
+    <h3 class="halpha-text-sm md:halpha-text-base halpha-font-semibold halpha-text-gray-100 halpha-p-4 halpha-border-b-gray-600 halpha-flex halpha-justify-between items-center halpha-cursor-pointer" x-bind:class="open ? 'halpha-border-b' : ''">
+        Rewards Overview
 
-        <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-3 halpha-p-4">
+        <div class="halpha-flex halpha-gap-2">
+            <x-heroicon-s-chevron-right x-show="open" class="halpha-w-5 halpha-h-5" />
+            <x-heroicon-s-chevron-down x-show="!open" class="halpha-w-5 halpha-h-5" />
+        </div>
+    </h3>
+
+        <div 
+            class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-3 halpha-p-4"
+            x-show="open"
+            x-transition
+        >
             <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
                 <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Total Reward Distributed</h4>
                 <span class="halpha-text-xl halpha-text-white halpha-font-semibold">2,451.89 ETH</span>
@@ -46,6 +58,7 @@
             </div>
         </div>
     </div>
+
 
     {{-- REWARD ENGINE --}}
     <div class="halpha-card halpha-rounded-xl">
