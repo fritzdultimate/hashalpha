@@ -153,56 +153,61 @@
             </div>
         </h3>
 
-        <div class="halpha-overflow-x-auto">
-            <table class="halpha-w-full halpha-text-left halpha-min-w-full">
+        <div class="halpha-overflow-x-auto halpha-w-full">
+            <table class="halpha-w-full halpha-min-w-[640px] halpha-text-left">
                 <thead
-                    class="halpha-text-xs halpha-text-muted halpha-uppercase halpha-tracking-wide halpha-border-b halpha-border-white/5">
+                    class="halpha-hidden md:halpha-table-header-group
+                        halpha-text-xs halpha-uppercase halpha-tracking-wide
+                        halpha-border-b halpha-border-white/10"
+                >
                     <tr>
                         <th class="halpha-py-3 halpha-px-4 halpha-text-white">Date</th>
                         <th class="halpha-py-3 halpha-px-4 halpha-text-white">Amount</th>
                         <th class="halpha-py-3 halpha-px-4 halpha-text-white">Reward Status</th>
                         <th class="halpha-py-3 halpha-px-4 halpha-text-white">Source</th>
                     </tr>
-
-
                 </thead>
 
-                <tbody class="halpha-text-sm halpha-font-normal halpha-capitalize halpha-font-sans">
-                    
-                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
-                            
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 26, 2022 UTC</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.0623 ETH</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
-                    </tr>
+                <tbody class="halpha-text-sm halpha-font-sans">
+                    @php
+                        $rewards = [[], [], [], []]
+                    @endphp
 
-                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
-                            
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 26, 2022 UTC</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.3521 ETH</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
-                    </tr>
+                    @foreach ($rewards as $reward)
+                        <tr
+                            class="halpha-border-b halpha-border-gray-700
+                                hover:halpha-bg-white/10
+                                halpha-grid halpha-grid-cols-1 md:halpha-table-row
+                                halpha-gap-2 md:halpha-gap-0
+                                halpha-p-3 md:halpha-p-0"
+                        >
+                            <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
+                                <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Date</span>
+                                April 26, 2022 UTC
+                            </td>
 
-                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
-                            
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 25, 2022 UTC</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.2520 ETH</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
-                    </tr>
+                            <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
+                                <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Amount</span>
+                                3.0623 ETH
+                            </td>
 
-                    <tr class="halpha-border-b halpha-border-gray-700 hover:halpha-bg-white/20">
-                            
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">April 25, 2022 UTC</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">3.1700 ETH</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Credited</td>
-                        <td class="halpha-py-3.5 halpha-px-4 halpha-align-middle halpha-text-[#f0f0f0]">Validator Rewards</td>
-                    </tr>
+                            <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
+                                <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Reward Status</span>
+                                Credited
+                            </td>
+
+                            <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
+                                <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Source</span>
+                                Validator Rewards
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    <!-- Duplicate rows as needed -->
                 </tbody>
             </table>
         </div>
+
 
 
     </div>
