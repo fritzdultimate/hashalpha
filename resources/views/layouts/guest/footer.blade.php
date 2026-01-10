@@ -108,9 +108,6 @@
                                 <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Risk Disclosure</a>
                             </li>
 
-                            <li class="footer-list-item">
-                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Compliance & Regulation</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
