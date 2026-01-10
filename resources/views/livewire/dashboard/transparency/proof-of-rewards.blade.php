@@ -147,7 +147,7 @@
         <h3 class="halpha-text-sm md:halpha-text-base halpha-font-semibold halpha-text-gray-100 halpha-p-4 halpha-border-b-gray-600 halpha-flex halpha-justify-between items-center halpha-cursor-pointer halpha-border-b">
             Reward History
 
-            <div class="halpha-flex halpha-gap-2 halpha-text-sm halpha-text-gray-600">
+            <div class="halpha-flex halpha-gap-2 halpha-text-sm halpha-text-gray-400">
                 <span class="halpha-hidden md:halpha-block">Cumulative Rewards Earned:</span>
                 <span class="halpha-text-white">8.4763 ETH</span>
             </div>
