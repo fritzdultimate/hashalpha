@@ -18,7 +18,7 @@
     @include('partials.dashboard.navigation', $navs)
 
 
-    <div class="halpha-p-3 halpha-border-t halpha-border-black/10">
+    <div class="halpha-p-3 halpha-border-t halpha-border-black/10 halpha-hidden">
         <button @click="logout()"
             class="halpha-w-full halpha-flex halpha-items-center halpha-justify-center halpha-gap-2 halpha-py-2 halpha-rounded halpha-text-sm hover:halpha-bg-black/10">
             <svg class="halpha-h-4 halpha-w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"

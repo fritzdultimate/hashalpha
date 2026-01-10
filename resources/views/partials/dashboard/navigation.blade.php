@@ -41,16 +41,26 @@
                         @php
                             $activeDashboard = url()->current() === url($child['url']);
                         @endphp
-                        <li>
-                            <a href="{{ $child['url'] }}"
-                                class="halpha-flex halpha-items-center halpha-gap-3 halpha-px-3 halpha-py-5 halpha-text-sm hover:halpha-bg-[#292929] halpha-w-full halpha-pl-10"
-                                :class="{
-                                    'halpha-bg-[#292929] halpha-text-[#bababa] halpha-border-r halpha-border-accent-2': {{ $activeDashboard ? 'true' : 'false' }}
-                                }"
-                            >
-                                {{ $child['label'] }}
-                            </a>
-                        </li>
+
+                        @if ($child['label'] === 'Logout')
+                            <form class="halpha-flex halpha-justify-center halpha-px-3" method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="halpha-bg-accent-2 hover:halpha-opacity-80 halpha-text-white halpha-rounded halpha-px-3 halpha-py-3 halpha-w-full halpha-pl-10 halpha-mt-10">
+                                    Logout
+                                </button>
+                            </form>
+                        @else
+                            <li>
+                                <a href="{{ $child['url'] }}"
+                                    class="halpha-flex halpha-items-center halpha-gap-3 halpha-px-3 halpha-py-5 halpha-text-sm hover:halpha-bg-[#292929] halpha-w-full halpha-pl-10"
+                                    :class="{
+                                        'halpha-bg-[#292929] halpha-text-[#bababa] halpha-border-r halpha-border-accent-2': {{ $activeDashboard ? 'true' : 'false' }}
+                                    }"
+                                >
+                                    {{ $child['label'] }}
+                                </a>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>

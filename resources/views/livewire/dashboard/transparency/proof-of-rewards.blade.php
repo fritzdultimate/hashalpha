@@ -5,9 +5,46 @@
         <h1 class="halpha-text-xl md:halpha-text-3xl halpha-font-semibold halpha-text-white">
             Proof of Rewards
         </h1>
-        <p class="halpha-text-xs md:halpha-text-sm halpha-text-gray-400">
-            Transparent reward generation and distribution verification
+        <p class="halpha-text-xs md:halpha-text-sm halpha-text-gray-400 halpha-w-3/5 halpha-leading-loose">
+            This page provides visibility into how network rewards are generated and distributed through {{ env('APP_NAME') }}'s validator infrastructure.
         </p>
+    </div>
+
+    <div class="halpha-card !halpha-rounded-md halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-4">
+        <h3 class="halpha-text-sm md:halpha-text-base halpha-font-semibold halpha-text-gray-100 halpha-p-4 halpha-border-b halpha-border-b-gray-600 halpha-flex halpha-justify-between">
+            Rewards Overview
+
+            <x-heroicon-s-chevron-right class="halpha-w-5 halpha-h-5" />
+        </h3>
+
+        <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-5 halpha-p-4">
+            <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
+                <h4 class="halpha-text-sm halpha-text-gray-300">Total Reward Distributed</h4>
+                <span class="halpha-text-xl halpha-text-white halpha-font-semibold">2,451.89 ETH</span>
+            </div>
+
+            <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
+                <h4 class="halpha-text-sm halpha-text-gray-300">Last Distribution</h4>
+                <span class="halpha-text-base halpha-text-white">April 26, 2024, 10:42 UTC</span>
+            </div>
+
+            <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
+                <h4 class="halpha-text-sm halpha-text-gray-300">Reward Source</h4>
+                <span class="halpha-text-base halpha-text-white">ValidatorNetwork Participation</span>
+            </div>
+
+            <div class="halpha-grid halpha-grid-cols-2 halpha-gap-5">
+                <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
+                    <h4 class="halpha-text-sm halpha-text-gray-300">Reward Asset</h4>
+                    <span class="halpha-text-base halpha-text-white" title="Ethereum">ETH</span>
+                </div>
+
+                <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
+                    <h4 class="halpha-text-sm halpha-text-gray-300">Distribution Frequency</h4>
+                    <span class="halpha-text-base halpha-text-white" title="Ethereum">Hourly</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- REWARD ENGINE --}}

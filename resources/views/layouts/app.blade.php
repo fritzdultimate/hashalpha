@@ -220,19 +220,6 @@
                         'route' => 'account'
 
                     ],
-                    // [
-                    //     "url" => route('withdrawal'),
-                    //     "label" => "Ranking",
-                    //     'icon' => 'iconsax-bul-ranking-1',
-                    //     "children" => [
-                    //         [
-                    //             "url" => "",
-                    //             "label" => "Pending"
-                    //         ]
-                    //     ],
-                    //     'route' => 'withdrawal'
-
-                    // ],
                 ]
             @endphp
             <!-- SIDEBAR -->

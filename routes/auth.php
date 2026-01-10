@@ -27,4 +27,4 @@ Route::middleware('guest')->group(function () {
 });
 Route::get('/2fa', TwoFactor::class)->name('2fa');
 
-Route::get('logout', [AuthController::class,'logout'])->middleware('auth')->name('logout');
+Route::post('logout', [AuthController::class,'logout'])->middleware('auth')->name('logout');
