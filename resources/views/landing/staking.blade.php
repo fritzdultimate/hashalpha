@@ -13,8 +13,8 @@
                     </p>
 
                     <div class="halpha-flex halpha-gap-3 halpha-mt-6">
-                        <a href="/register" class="btn-primary w-button">Join & Stake</a>
-                        <a href="#plans" class="btn-secondary w-button">See Plans</a>
+                        <a href="{{ route('register') }}" class="btn-primary w-button">Join & Stake</a>
+                        <a href="{{ route('register') }}" class="btn-secondary w-button">See Plans</a>
                     </div>
                 </div>
 
