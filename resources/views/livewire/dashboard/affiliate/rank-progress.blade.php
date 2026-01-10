@@ -39,6 +39,21 @@
         @endforeach
     </div>
 
+    {{-- Ranking Information --}}
+    <div class="halpha-card halpha-rounded-lg halpha-bg-card-soft halpha-p-3 halpha-text-[11px] halpha-text-gray-400 halpha-leading-relaxed">
+        <p class="halpha-font-medium halpha-text-gray-300 halpha-mb-1">
+            Rank Qualification Rules
+        </p>
+
+        <ul class="halpha-list-disc halpha-pl-4 halpha-space-y-1">
+            <li>Ranks are determined by total team volume, active referrals, and earned rewards.</li>
+            <li>Rank upgrades occur automatically once all requirements are met.</li>
+            <li>Higher ranks unlock increased bonus eligibility and platform privileges.</li>
+            <li>Rank status is permanent and will not downgrade once achieved.</li>
+            <li>All calculations are performed system-wide and cannot be manually altered.</li>
+        </ul>
+    </div>
+
 
 
 
