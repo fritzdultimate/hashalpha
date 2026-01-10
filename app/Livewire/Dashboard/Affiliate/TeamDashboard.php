@@ -25,16 +25,15 @@ class TeamDashboard extends Component
         $this->loadLevel(1);
     }
 
-    public function loadLevel(int $level): void {
+    public function loadLevel(int $level): void { 
         $this->activeLevel = $level;
+        $user = auth()->user();
+        $levelColumn = "level_{$level}_id";
 
-        // Get referrals on this level
-        $referrals = Referral::with('user')
-            ->where('referrer_id', auth()->id())
-            ->where('level', $level)
-            ->get();
-
-        $this->team = $referrals
+        $this->team = $user->referrals()
+            ->where($levelColumn, $user->id)
+            ->with('user')
+            ->get()
             ->pluck('user')
             ->filter()
             ->values();
@@ -51,7 +50,7 @@ class TeamDashboard extends Component
             $this->team->pluck('id')
         )->sum('amount');
 
-        $this->earnings = ReferralReward::where('user_id', auth()->id())->sum('amount');
+        $this->earnings = ReferralReward::where('user_id', auth()->id())->where('level', $level)->sum('amount');
     }
 
     public function render()

@@ -61,6 +61,10 @@ class User extends Authenticatable {
             ->exists();
     }
 
+    public function referrer() {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
+
     public function referral() {
         return $this->hasOne(Referral::class);
     }

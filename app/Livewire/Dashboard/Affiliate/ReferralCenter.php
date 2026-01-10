@@ -30,6 +30,10 @@ class ReferralCenter extends Component {
 
     public function mount() {
         $user = Auth::user();
+        if(!$user->affiliate_code) {
+            $user->affiliate_code = generateReferralCode($user->email);
+            $user->save();
+        }
         $userId = auth()->id();
         $this->referralLink = Cache::remember("user{$user->id}:affiliate_link", 6000, function() use($user)  {
             $code = $user->affiliate_code ?? generateReferralCode($user->email);

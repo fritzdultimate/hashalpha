@@ -1,8 +1,13 @@
 <?php
 namespace App\Livewire\Auth;
 
+use App\Mail\ReferredUserNotice;
+use App\Models\Referral;
+use App\Services\RankEvaluatorService;
+use App\Services\ReferralCreationService;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -20,6 +25,7 @@ class Register extends Component {
     public $remember = false;
     public $statusMessage = null;
     public $userIdToVerify;
+    public ?string $ref = null;
 
     protected $rules = [
         'fullname' => 'required|string|min:3|regex:/^[a-zA-Z]+([\'\-\s][a-zA-Z]+)+$/',
@@ -35,6 +41,10 @@ class Register extends Component {
 
         'terms.accepted' => 'You must agree to the terms and conditions before continuing.'
     ];
+
+    public function mount() {
+        $this->ref = request()->query('ref');
+    }
 
     public function submit() {
         $this->validate();
@@ -71,13 +81,28 @@ class Register extends Component {
                 }
 
                 try {
+                    $referrer = User::where('affiliate_code', $this->ref)->first();
                     $user = User::create([
                         'firstname' => $firstName,
                         'lastname'  => $lastName,
                         'email'     => $this->email,
                         'password'  => Hash::make($this->password),
                         'name'      => $candidate,
+                        'referrer_id' => $referrer?->id,
                     ]);
+                    if($referrer) {
+                        ReferralCreationService::createFor($user, $referrer);
+                        RankEvaluatorService::evaluate($user);
+
+                        Mail::to($referrer->email)->queue(
+                            new ReferredUserNotice(
+                                $referrer,
+                                referredUser: $user,
+                                level: 1
+                            )
+                        );
+                        // send email
+                    }
                     $this->statusMessage = 'Account created! Redirecting…';
                     break;
                 } catch (QueryException $ex) {

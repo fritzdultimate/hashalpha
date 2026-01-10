@@ -25,6 +25,7 @@
 
             <form wire:submit.prevent="submit" class="halpha-w-full">
                 <div class="halpha-space-y-4">
+                    <input type="hidden" wire:model="ref">
                     <input wire:model.defer="fullname" type="text" placeholder="Enter your legal full name"
                         class="halpha-w-full !halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input">
 
