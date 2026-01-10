@@ -59,6 +59,97 @@
         </div>
     </div>
 
+    <div 
+        x-data="{ open: true }"   
+        class="halpha-card !halpha-rounded-md halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2"
+        @click="open = !open"
+    >
+
+        <h3 class="halpha-text-sm md:halpha-text-base halpha-font-semibold halpha-text-gray-100 halpha-p-4 halpha-border-b-gray-600 halpha-flex halpha-justify-between items-center halpha-cursor-pointer" x-bind:class="open ? 'halpha-border-b' : ''">
+            Validator Reward Source
+
+            <div class="halpha-flex halpha-gap-2">
+                <x-heroicon-s-chevron-right x-show="open" class="halpha-w-5 halpha-h-5" />
+                <x-heroicon-s-chevron-down x-show="!open" class="halpha-w-5 halpha-h-5" />
+            </div>
+        </h3>
+
+        <div 
+            class="halpha-grid halpha-grid-cols-1 halpha-gap-3 halpha-p-4"
+            x-show="open"
+            x-transition
+        >
+            <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
+                <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Total Reward Distributed</h4>
+                <span class="halpha-text-xl halpha-text-white halpha-font-semibold">2,451.89 ETH</span>
+            </div>
+
+            <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
+                <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Last Distribution</h4>
+                <span class="halpha-text-sm md:halpha-text-base halpha-text-white">April 26, 2024, 10:42 UTC</span>
+            </div>
+        </div>
+
+        <div 
+            class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-4 halpha-px-4 halpha-py-2"
+            x-show="open"
+            x-transition
+        >
+            <!-- Left Column -->
+            <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-px-2 halpha-py-2">
+                <div class="halpha-flex-1 halpha-border-t halpha-border-gray-600"></div>
+                <div class="halpha-px-2">
+                    <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Total Reward Distributed</h4>
+                    <span class="halpha-text-xl halpha-text-white halpha-font-semibold">2,451.89 ETH</span>
+                </div>
+                <div class="halpha-flex-1 halpha-border-t halpha-border-gray-600"></div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-px-2 halpha-py-2">
+                <div class="halpha-flex-1 halpha-border-t halpha-border-gray-600"></div>
+                <div class="halpha-px-2">
+                    <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Last Distribution</h4>
+                    <span class="halpha-text-sm md:halpha-text-base halpha-text-white">April 26, 2024, 10:42 UTC</span>
+                </div>
+                <div class="halpha-flex-1 halpha-border-t halpha-border-gray-600"></div>
+            </div>
+        </div>
+
+        <div
+    class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-gap-4 halpha-px-4 halpha-py-3"
+    x-show="open"
+    x-transition
+>
+    <!-- Left Column -->
+    <div class="halpha-flex-1 halpha-px-2">
+        <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">
+            Total Reward Distributed
+        </h4>
+        <span class="halpha-text-xl halpha-text-white halpha-font-semibold">
+            2,451.89 ETH
+        </span>
+    </div>
+
+    <!-- Vertical Divider -->
+    <div class="halpha-hidden md:halpha-flex halpha-items-stretch">
+        <div class="halpha-w-px halpha-bg-gray-600"></div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="halpha-flex-1 halpha-px-2">
+        <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">
+            Last Distribution
+        </h4>
+        <span class="halpha-text-sm md:halpha-text-base halpha-text-white">
+            April 26, 2024, 10:42 UTC
+        </span>
+    </div>
+</div>
+
+
+    </div>
+
 
     {{-- REWARD ENGINE --}}
     <div class="halpha-card halpha-rounded-xl">
