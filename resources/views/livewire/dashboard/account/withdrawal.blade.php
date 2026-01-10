@@ -102,6 +102,8 @@
 
     </form>
 
+    <x-dashboard.disclaimer />
+
     {{-- Confirmation --}}
     <x-confirmation-modal event="confirm-withdrawal" wireConfirm="withdraw" title="Confirm Withdrawal"
         message="This transaction cannot be reversed. Proceed only if all details are correct." />

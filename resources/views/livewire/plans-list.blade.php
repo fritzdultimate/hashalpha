@@ -95,6 +95,8 @@
             </ul>
         </div>
 
+        <x-dashboard.disclaimer />
+
 
         {{-- Empty state --}}
         @if($this->plans->isEmpty())

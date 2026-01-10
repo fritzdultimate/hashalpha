@@ -44,6 +44,8 @@
             </ul>
         </div>
 
+        <x-dashboard.disclaimer />
+
 
         <x-dashboard.currency-listing :wallets="$wallets" :groupedWallets="$groupedWallets" />
 
