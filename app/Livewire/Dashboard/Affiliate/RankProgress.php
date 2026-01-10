@@ -57,9 +57,24 @@ class RankProgress extends Component
 
         $volume = Stake::whereIn('user_id', $downlineIds)->sum('amount');
 
+        $activeReferrals = ReferralReward::where('user_id', $user->id)
+            ->whereHas('referralUser', fn($q) => $q->where('is_suspended', false))
+            ->distinct('from_user_id')
+            ->count('from_user_id');
+
+        $earnings = ReferralReward::where('user_id', $user->id)
+            ->where('status', 'claimed')
+            ->sum('amount');
+
+        $refPct = intval(($activeReferrals/$this->nextRank->required_active_referrals) * 100);
+        $earningsPct = intval(($earnings/$this->nextRank->required_earnings) * 100);
+        $volPct = intval(($volume / $this->nextRank->required_volume) * 100);
+
+        $actualPct = intval(($refPct + $earningsPct + $volPct)/3);
+
         $this->progressPercent = min(
             100,
-            intval(($volume / $this->nextRank->required_volume) * 100)
+            intval($actualPct)
         );
     }
 
