@@ -19,7 +19,7 @@
 
         <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-5 halpha-p-4">
             <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
-                <h4 class="halpha-text-sm halpha-text-gray-300">Total Reward Distributed</h4>
+                <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Total Reward Distributed</h4>
                 <span class="halpha-text-xl halpha-text-white halpha-font-semibold">2,451.89 ETH</span>
             </div>
 
