@@ -106,7 +106,7 @@
             x-transition
         >
             <!-- Left Column -->
-            <div class="halpha-flex-1 halpha-px-2 halpha-flex halpha-flex-col halpha-gap-2">
+            <div class="halpha-flex-1 halpha-px-2 halpha-flex halpha-flex-col halpha-gap-4">
                 <div class="halpha-flex halpha-items-center halpha-gap-5">
                     <span class="halpha-text-sm halpha-text-gray-300">Network:</span>
                     <span class="halpha-text-base halpha-text-white">Ethereum</span>
@@ -115,11 +115,21 @@
                 <div >
                     <div class="halpha-flex halpha-items-center halpha-gap-5">
                         <span class="halpha-text-sm halpha-text-gray-300">Reward Type:</span>
-                        <span class="halpha-text-base halpha-text-white">Consensus rewards</span>
+                        <span class="halpha-text-sm md:halpha-text-base halpha-text-white">Consensus rewards</span>
                     </div>
                     <ul class="halpha-list-disc halpha-ml-24">
-                        <li class="halpha-text-white">Transaction fees <span class="halpha-text-gray-300">(if applicable)</span></li>
+                        <li class="halpha-text-white halpha-text-sm md:halpha-text-base">Transaction fees <span class="halpha-text-gray-300">(if applicable)</span></li>
                     </ul>
+                </div>
+
+                <div class="halpha-flex halpha-flex-col halpha-gap-1">
+                    <span class="halpha-text-sm halpha-text-white">Validator Participation Model:</span>
+                    <span class="halpha-text-base halpha-text-white halpha-flex halpha-items-center halpha-gap-1">
+                        <x-heroicon-s-chevron-right x-show="open" class="halpha-w-4 halpha-h-4 halpha-text-gray-500" />
+                        Distributed validator clusters
+                    </span>
+
+                    <p class="halpha-text-xs halpha-text-gray-400 halpha-w-4/5">Rewards are generated from protocol-ie-level validator activity, not from deposits or internal transfers.</p>
                 </div>
             </div>
 
@@ -129,13 +139,26 @@
             </div>
 
             <!-- Right Column -->
-            <div class="halpha-flex-1 halpha-px-2">
-                <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">
-                    Last Distribution
+            <div class="halpha-flex-1 halpha-px-2 halpha-flex halpha-flex-col halpha-gap-4 halpha-justify-start halpha-items-start">
+                <h4 class="halpha-text-sm md:halpha-text-base halpha-text-white">
+                    Validator Audit Trail
                 </h4>
-                <span class="halpha-text-sm md:halpha-text-base halpha-text-white">
-                    April 26, 2024, 10:42 UTC
-                </span>
+                <ul class="halpha-space-y-4 halpha-list-disc halpha-text-gray-400 halpha-text-xs md:halpha-text-sm halpha-ml-5">
+                    <li>
+                        Active Validator Keys: <span class="halpha-text-white">104</span> of 350 active
+                    </li>
+                    <li>
+                        Network uptime: <span class="halpha-text-white">99.9%</span>
+                    </li>
+                    <li>
+                        Average Participation Rate: <span class="halpha-text-white">99.7%</span>
+                    </li>
+                </ul>
+
+                <a class="halpha-bg-card-bg halpha-border halpha-rounded halpha-border-gray-600 halpha-flex halpha-gap-2 halpha-items-center halpha-p-2 halpha-px-6 halpha-text-accent-2 halpha-text-sm hover:halpha-opacity-70" href="#" target="_blank">
+                    <x-heroicon-s-link class="halpha-h-4 halpha-w-4" />
+                    View on Beacon Explorer
+                </a>
             </div>
         </div>
 
