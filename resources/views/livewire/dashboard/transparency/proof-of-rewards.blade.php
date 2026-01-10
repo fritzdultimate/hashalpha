@@ -10,7 +10,7 @@
         </p>
     </div>
 
-    <div class="halpha-card !halpha-rounded-md halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-4">
+    <div class="halpha-card !halpha-rounded-md halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
         <h3 class="halpha-text-sm md:halpha-text-base halpha-font-semibold halpha-text-gray-100 halpha-p-4 halpha-border-b halpha-border-b-gray-600 halpha-flex halpha-justify-between">
             Rewards Overview
 
