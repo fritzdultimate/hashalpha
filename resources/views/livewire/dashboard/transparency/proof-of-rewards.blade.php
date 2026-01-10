@@ -106,7 +106,7 @@
             x-transition
         >
             <!-- Left Column -->
-            <div class="halpha-flex-1 halpha-px-2 halpha-flex halpha-flex-col halpha-gap-3">
+            <div class="halpha-flex-1 halpha-px-2 halpha-flex halpha-flex-col halpha-gap-2">
                 <div class="halpha-flex halpha-items-center halpha-gap-5">
                     <span class="halpha-text-sm halpha-text-gray-300">Network:</span>
                     <span class="halpha-text-base halpha-text-white">Ethereum</span>
