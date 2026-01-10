@@ -25,23 +25,23 @@
 
             <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
                 <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Last Distribution</h4>
-                <span class="halpha-text-base halpha-text-white">April 26, 2024, 10:42 UTC</span>
+                <span class="halpha-text-sm md:halpha-text-base halpha-text-white">April 26, 2024, 10:42 UTC</span>
             </div>
 
             <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
                 <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Reward Source</h4>
-                <span class="halpha-text-base halpha-text-white">ValidatorNetwork Participation</span>
+                <span class="halpha-text-sm md:halpha-text-base halpha-text-white">ValidatorNetwork Participation</span>
             </div>
 
-            <div class="halpha-grid halpha-grid-cols-2 halpha-gap-5">
+            <div class="halpha-grid halpha-grid-cols-2 halpha-gap-2">
                 <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
                     <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Reward Asset</h4>
-                    <span class="halpha-text-base halpha-text-white" title="Ethereum">ETH</span>
+                    <span class="halpha-text-sm md:halpha-text-base halpha-text-white" title="Ethereum">ETH</span>
                 </div>
 
                 <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
                     <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Distribution Frequency</h4>
-                    <span class="halpha-text-base halpha-text-white" title="Ethereum">Hourly</span>
+                    <span class="halpha-text-sm md:halpha-text-base halpha-text-white" title="Ethereum">Hourly</span>
                 </div>
             </div>
         </div>
