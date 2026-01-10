@@ -97,11 +97,11 @@
                     <div class="grid-3-columns footer-main-pages-grid">
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Terms & Conditions</a>
+                                <a href="{{ route('terms') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Terms & Conditions</a>
                             </li>
 
                             <li class="footer-list-item">
-                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Privacy Policy</a>
+                                <a href="{{ route('privacy-policy') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Privacy Policy</a>
                             </li>
 
                             <li class="footer-list-item">

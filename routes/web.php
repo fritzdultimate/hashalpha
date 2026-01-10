@@ -73,6 +73,10 @@ Route::get('/terms', function() {
     return 'Our Terms';
 })->name('terms');
 
+Route::get('/privacy-policy', function() {
+    return 'Privacy Policy';
+})->name('privacy-policy');
+
 Route::view('email-template', 'emaim-template');
 
 require __DIR__.'/auth.php';
