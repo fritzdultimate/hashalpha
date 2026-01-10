@@ -170,7 +170,24 @@
 
                 <tbody class="halpha-text-sm halpha-font-sans">
                     @php
-                        $rewards = [[], [], [], []]
+                        $rewards = [
+                            [
+                                'amount' => 3.0629,
+                                'date' => 'April 26, 2022 UTC'
+                            ], 
+                            [
+                                'amount' => 3.3521,
+                                'date' => 'April 26, 2022 UTC'
+                            ], 
+                            [
+                                'amount' => 3.2520,
+                                'date' => 'April 25, 2022 UTC'
+                            ], 
+                            [
+                                'amount' => 3.1700,
+                                'April 25, 2022 UTC'
+                            ]
+                        ]
                     @endphp
 
                     @foreach ($rewards as $reward)
@@ -183,12 +200,12 @@
                         >
                             <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
                                 <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Date</span>
-                                April 26, 2022 UTC
+                                {{ $reward['date'] }}
                             </td>
 
                             <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
                                 <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Amount</span>
-                                3.0623 ETH
+                                {{ $reward['amount'] }} ETH
                             </td>
 
                             <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
