@@ -24,8 +24,7 @@ class NowPaymentsService {
             'price_amount' => (float) $deposit->amount,
             'price_currency' => 'usd',
             'order_id' => $deposit->id,
-            'pay_currency' => 'usd',
-            // 'pay_currency' => strtoupper($deposit->currency),
+            'pay_currency' => strtoupper($deposit->currency),
             'ipn_callback_url' => route('webhooks.nowpayments'),
             'order_description' => 'By user_id ' . Auth::id()
         ];
