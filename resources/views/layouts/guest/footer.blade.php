@@ -101,14 +101,14 @@
                     <div class="grid-3-columns footer-main-pages-grid">
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="{{ route('terms') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Terms & Conditions</a>
+                                <a href="{{ asset('resources/terms-and-conditions.pdf') }}" target="_blank" aria-current="page" class="footer-link w--current halpha-text-sm">Terms & Conditions</a>
                             </li>
 
                             <li class="footer-list-item">
-                                <a href="{{ route('privacy-policy') }}" aria-current="page" class="footer-link w--current halpha-text-sm">Privacy Policy</a>
+                                <a href="{{ asset('resources/privacy-policy.pdf') }}" target="_blank" aria-current="page" class="footer-link w--current halpha-text-sm">Privacy Policy</a>
                             </li>
 
-                            <li class="footer-list-item">
+                            <li class="footer-list-item !halpha-hidden">
                                 <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">Risk Disclosure</a>
                             </li>
 

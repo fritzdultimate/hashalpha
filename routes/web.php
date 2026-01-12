@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\LegalController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SupportController;
@@ -20,6 +21,9 @@ Route::view('/transparency/rewards', 'landing.transparency.proof-of-stake-reward
 Route::view('/transparency/reports', 'landing.transparency.operation-reports')->name('operation-reports');
 Route::view('/transparency/audits', 'landing.transparency.audit-dashboard')->name('audits');
 Route::view('/transparency/beacon', 'landing.transparency.beacon-data')->name('beacon');
+
+Route::get('/terms-and-conditions', [LegalController::class, 'terms'])->name('terms');
+
 // //////////// //////////////////////
 /////////////////////////////////////
 //////////////////////////////////////
