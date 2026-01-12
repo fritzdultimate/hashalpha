@@ -230,7 +230,7 @@
 
                         <button 
                             type="button" 
-                            class="halpha-py-2 halpha-px-4 halpha-rounded-lg halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300" 
+                            class="halpha-py-2 halpha-px-4 halpha-rounded-lg halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300 halpha-hidden" 
                             aria-label="View details for {{ $plan->name }}"
                             onclick="dispatchEvent(new CustomEvent('openPlanDetails', { detail: {{ $plan->id }} }))"
                         >
