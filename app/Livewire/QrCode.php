@@ -29,7 +29,7 @@ class QrCode extends Component {
         $logoX = intval(($size - $logoSize) / 2);
         $logoY = intval(($size - $logoSize) / 2);
 
-        $dir = storage_path('app/public/qrcodes');
+        $dir = public_path('qrcodes');
         if (! File::exists($dir)) {
             File::makeDirectory($dir, 0755, true);
         }
@@ -59,7 +59,7 @@ class QrCode extends Component {
 
         file_put_contents($outputSvg, $injected);
 
-        return asset("storage/qrcodes/$final_name");
+        return asset("qrcodes/$final_name");
     }
     public function render() {
         return view('livewire.qr-code');
