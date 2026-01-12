@@ -35,30 +35,30 @@
             <div class="stats-container top-section-stats---bottom">
                 <div data-w-id="b96e75cf-9174-8eb9-04d2-e2e1e253228d" style="opacity: 1; filter: blur(0px);"
                     class="text-center pd-24px-mbl pd-0-mbp">
-                    <div class="display-1">$10M+</div>
-                    <div class="halpha-text-gray-300">Revenue</div>
+                    <div class="display-1">99.9%</div>
+                    <div class="halpha-text-gray-300">Infrastructure Uptime</div>
                 </div>
                 <div data-w-id="b96e75cf-9174-8eb9-04d2-e2e1e2532292" style="opacity: 1; filter: blur(0px);"
                     class="divider-vertical mg-0-mbl horizontal-mbp"></div>
                 <div data-w-id="b96e75cf-9174-8eb9-04d2-e2e1e2532293" style="opacity: 1; filter: blur(0px);"
                     class="text-center pd-24px-mbl pd-0-mbp">
-                    <div class="display-1">4.75+</div>
-                    <div class="halpha-text-gray-300">Average review</div>
+                    <div class="display-1">Distributed Validator</div>
+                    <div class="halpha-text-gray-300">Operations</div>
                 </div>
                 <div id="w-node-b96e75cf-9174-8eb9-04d2-e2e1e2532298-75ed753f"
                     data-w-id="b96e75cf-9174-8eb9-04d2-e2e1e2532298" style="opacity: 1; filter: blur(0px);"
                     class="divider-vertical horizontal-mbl"></div>
                 <div data-w-id="b96e75cf-9174-8eb9-04d2-e2e1e2532299" style="opacity: 1; filter: blur(0px);"
                     class="text-center pd-24px-mbl pd-0-mbp">
-                    <div class="display-1">10K+</div>
-                    <div class="halpha-text-gray-300">Active users</div>
+                    <div class="display-1">Protocol-Level Network</div>
+                    <div class="halpha-text-gray-300">Participation</div>
                 </div>
                 <div data-w-id="b96e75cf-9174-8eb9-04d2-e2e1e253229e" style="opacity: 1; filter: blur(0px);"
                     class="divider-vertical mg-0-mbl horizontal-mbp"></div>
                 <div data-w-id="b96e75cf-9174-8eb9-04d2-e2e1e253229f" style="opacity: 1; filter: blur(0px);"
                     class="text-center pd-24px-mbl pd-0-mbp">
-                    <div class="display-1">120+</div>
-                    <div class="halpha-text-gray-300">Validators</div>
+                    <div class="display-1">Multi Region Validator</div>
+                    <div class="halpha-text-gray-300">Coverage</div>
                 </div>
             </div>
             <div data-w-id="c7f7bb0a-2217-b59e-4776-c51e51c2affa" style="opacity: 1; filter: blur(0px);"
