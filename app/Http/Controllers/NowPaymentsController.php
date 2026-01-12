@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Mail;
 
 class NowPaymentsController extends Controller {
     public function webhook(Request $req) {
+        \Log::info('NOWPayments IPN HIT', [
+            'headers' => request()->headers->all(),
+            'body' => request()->all(),
+        ]);
         $payload = $req->getContent();
         $signature = $req->header('x-nowpayments-sig');
 
