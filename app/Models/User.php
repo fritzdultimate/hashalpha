@@ -89,6 +89,10 @@ class User extends Authenticatable {
         return $this->hasMany(Stake::class);
     }
 
+    public function withdrawals() {
+        return $this->hasMany(Withdrawal::class);
+    }
+
     public function rewards() {
         return $this->hasMany(Reward::class);
     }

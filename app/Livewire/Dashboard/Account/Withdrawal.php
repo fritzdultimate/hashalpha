@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard\Account;
 
+use App\Domain\Withdrawal\WithdrawalRules;
 use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +33,13 @@ class Withdrawal extends Component {
     }
 
     protected function prepareWithdrawal() {
-        // if(auth()->user()->hasUnsettledDeposit()) {
-        //     $this->addError('general', 'You have an ongoing deposit transaction. Please finish it before creating a new one.');
-        //     return;
-        // }
+        $user = auth()->user();
+        try {
+            WithdrawalRules::canCreate($user, $this->amount);
+        } catch (\DomainException $e) {
+            $this->addError('amount', $e->getMessage());
+            return;
+        }
 
         TwoFactorService::generateFor(Auth::user(), 'withdrawal', 4, 10);
         $this->showOtpForm = true;
@@ -45,6 +49,19 @@ class Withdrawal extends Component {
 
     public function withdraw() {
         $this->prepareWithdrawal();
+    }
+
+    public function makeAnotherWithdrawal(): void {
+        $this->reset([
+            'amount',
+            'walletId',
+            'address',
+            'otp',
+            'showOtpForm',
+            'withdrawalPlaced',
+        ]);
+
+        $this->resetErrorBag();
     }
 
     public function proceedWithdrawal() {

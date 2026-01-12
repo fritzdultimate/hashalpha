@@ -5,8 +5,7 @@ namespace App\Models;
 use App\Enums\WithdrawalStatus;
 use Illuminate\Database\Eloquent\Model;
 
-class Withdrawal extends Model
-{
+class Withdrawal extends Model {
     protected $fillable = [
         'user_id',
         'wallet_id',
@@ -66,5 +65,9 @@ class Withdrawal extends Model
         $this->update(['status' => $status]);
 
         return $this;
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

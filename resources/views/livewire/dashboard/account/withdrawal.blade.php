@@ -72,7 +72,7 @@
             <div class="halpha-bg-card-soft halpha-border halpha-border-white/5 halpha-rounded-lg halpha-p-3 halpha-text-left halpha-text-xs halpha-text-gray-400 halpha-space-y-1">
                 <div>
                     <span class="halpha-text-gray-300">Status:</span>
-                    <span class="halpha-text-amber-400">{{ $withdrawal?->status ?? '--' }}</span>
+                    <span class="halpha-text-amber-400">{{ $withdrawal?->status ?? 'pending' }}</span>
                 </div>
                 <div>
                     <span class="halpha-text-gray-300">Amount:</span>
@@ -95,7 +95,7 @@
                     View Withdrawal History
                 </a>
 
-                <button wire:click="$refresh"
+                <button wire:click="makeAnotherWithdrawal"
                     class="halpha-text-xs halpha-text-gray-400 hover:halpha-text-gray-300">
                     Make another withdrawal
                 </button>
