@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Domain\Staking\StakeRules;
 use App\Models\StakingPlan;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -62,7 +63,7 @@ class StakeModal extends Component
     public function stake() {
         $this->resetErrorBag();
         if (!$this->plan) {
-            $this->addError('plan', 'Invalid plan selected.');
+            $this->addError('amount', 'Invalid plan selected.');
             return;
         }
 
@@ -71,9 +72,10 @@ class StakeModal extends Component
         $user = auth()->user();
         $amt = (string) number_format((float)$this->amount, 8, '.', '');
 
-        // quick guard
-        if (bccomp($user->balance, $amt, 8) === -1) {
-            $this->addError('amount', 'Insufficient account balance to stake this amount.');
+        try {
+            StakeRules::canCreate($user, $amt);
+        } catch (\DomainException $e) {
+            $this->addError('amount', $e->getMessage());
             return;
         }
 
