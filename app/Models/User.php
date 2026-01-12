@@ -6,10 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -52,6 +54,10 @@ class User extends Authenticatable {
                 $user->affiliate_code = generateReferralCode($user->email);
             }
         });
+    }
+
+    public function canAccessFilament(): bool {
+        return $this->hasRole(['super-admin','admin']);
     }
 
     public function hasUnsettledDeposit(): bool {
@@ -104,4 +110,5 @@ class User extends Authenticatable {
     public function rank() {
         return $this->hasOne(UserRank::class);
     }
+
 }
