@@ -61,7 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->user(fn ($user) => $user instanceof User && $user->canAccessFilament());
+            ]);
+            // ->user(fn ($user) => $user instanceof User && $user->canAccessFilament());
     }
 }
