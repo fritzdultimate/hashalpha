@@ -20,7 +20,6 @@ class NowPaymentsService {
      * Create invoice
      */
     public static function createInvoice($deposit) {
-        dd($deposit->currency);
         $payload = [
             'price_amount' => (float) $deposit->amount,
             'price_currency' => 'usd',
