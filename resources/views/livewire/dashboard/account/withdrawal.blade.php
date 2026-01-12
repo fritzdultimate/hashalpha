@@ -1,4 +1,7 @@
-<div class="halpha-space-y-6 halpha-max-w-xl">
+<div
+    x-data="{showOtpForm: @entangle('showOtpForm')}"
+    class="halpha-space-y-6 halpha-max-w-xl"
+>
 
     {{-- Header --}}
     <div>
@@ -43,65 +46,164 @@
         </ul>
     </div>
 
+    @if ($withdrawalPlaced)
+        <div class="halpha-card halpha-p-6 halpha-rounded-xl halpha-text-center halpha-space-y-4">
 
+            {{-- Success Icon --}}
+            <div class="halpha-flex halpha-justify-center">
+                <div class="halpha-bg-green-500/10 halpha-rounded-full halpha-p-4">
+                    <x-ri-checkbox-circle-fill class="halpha-w-10 halpha-h-10 halpha-text-green-500" />
+                </div>
+            </div>
 
-    {{-- Form --}}
-    <form wire:submit.prevent="confirm" class="halpha-card halpha-p-4 halpha-space-y-5">
+            {{-- Title --}}
+            <h2 class="halpha-text-lg halpha-font-semibold halpha-text-white">
+                Withdrawal Submitted Successfully
+            </h2>
 
-        {{-- Amount --}}
-        <div>
-            <label class="halpha-text-xs halpha-text-gray-400">Amount</label>
-            <input 
-                wire:model.defer="amount" 
-                type="text"
-                x-on:input="
-                    $el.value = $el.value.replace(/[^0-9.]/g, '')
-                "
-                step="0.01" 
-                class="halpha-input"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                placeholder="Enter amount" />
-        </div>
-
-        {{-- Wallet / Currency --}}
-        <div>
-            <label class="halpha-text-xs halpha-text-gray-400">
-                Withdrawal Currency
-            </label>
-
-            <select wire:model="walletId" class="halpha-input">
-                <option value="">Select currency</option>
-                @foreach($wallets as $wallet)
-                    <option value="{{ $wallet->id }}">
-                        {{ strtoupper($wallet->currency) }} — {{ $wallet->network ?? 'Mainnet' }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        {{-- Address --}}
-        <div>
-            <label class="halpha-text-xs halpha-text-gray-400">
-                Recipient Address
-            </label>
-
-            <input wire:model.defer="address" type="text" class="halpha-input"
-                placeholder="Paste destination wallet address" />
-
-            <p class="halpha-text-xs halpha-text-gray-500 halpha-mt-1">
-                Address must match the selected currency and network.
+            {{-- Message --}}
+            <p class="halpha-text-sm halpha-text-gray-400 halpha-leading-relaxed">
+                Your withdrawal request has been received and is currently being processed.
+                For security reasons, withdrawals may undergo additional verification before
+                being broadcast to the blockchain.
             </p>
+
+            {{-- Info Box --}}
+            <div class="halpha-bg-card-soft halpha-border halpha-border-white/5 halpha-rounded-lg halpha-p-3 halpha-text-left halpha-text-xs halpha-text-gray-400 halpha-space-y-1">
+                <div>
+                    <span class="halpha-text-gray-300">Status:</span>
+                    <span class="halpha-text-amber-400">{{ $withdrawal?->status ?? '--' }}</span>
+                </div>
+                <div>
+                    <span class="halpha-text-gray-300">Amount:</span>
+                    <span>${{ number_format($withdrawal?->amount ?? 0, 8) }}</span>
+                </div>
+                <div>
+                    <span class="halpha-text-gray-300">Destination:</span>
+                    <span class="halpha-truncate">{{ $withdrawal?->address ?? '--' }}</span>
+                </div>
+                <div>
+                    <span class="halpha-text-gray-300">Estimated Time:</span>
+                    <span>Depends on network conditions</span>
+                </div>
+            </div>
+
+            {{-- CTA --}}
+            <div class="halpha-flex halpha-flex-col halpha-gap-2">
+                <a href="#"
+                class="halpha-bg-accent-2 halpha-text-white halpha-py-2 halpha-rounded halpha-text-xs">
+                    View Withdrawal History
+                </a>
+
+                <button wire:click="$refresh"
+                    class="halpha-text-xs halpha-text-gray-400 hover:halpha-text-gray-300">
+                    Make another withdrawal
+                </button>
+            </div>
         </div>
+    @else
+        {{-- Form --}}
+        <form x-show="!showOtpForm" wire:submit.prevent="confirm" class="halpha-card halpha-p-4 halpha-space-y-5">
 
-        {{-- CTA --}}
-        <button type="submit"
-            class="halpha-bg-accent-2 halpha-text-white halpha-px-4 halpha-py-2 halpha-rounded halpha-text-xs halpha-w-full">
-            Review Withdrawal
-        </button>
+            {{-- Amount --}}
+            <div>
+                <label class="halpha-text-xs halpha-text-gray-400">Amount</label>
+                <input 
+                    wire:model.defer="amount" 
+                    type="text"
+                    x-on:input="
+                        $el.value = $el.value.replace(/[^0-9.]/g, '')
+                    "
+                    step="0.01" 
+                    class="halpha-input"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    placeholder="Enter amount" 
+                />
+                @error('amount')
+                    <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 
-    </form>
+            {{-- Wallet / Currency --}}
+            <div>
+                <label class="halpha-text-xs halpha-text-gray-400">
+                    Withdrawal Currency
+                </label>
 
+                <select wire:model="walletId" class="halpha-input">
+                    <option value="">Select currency</option>
+                    @foreach($wallets as $wallet)
+                        <option value="{{ $wallet->id }}">
+                            {{ strtoupper($wallet->currency) }} — {{ $wallet->network ?? 'Mainnet' }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('walletId')
+                    <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
+            {{-- Address --}}
+            <div>
+                <label class="halpha-text-xs halpha-text-gray-400">
+                    Recipient Address
+                </label>
+
+                <input wire:model.defer="address" type="text" class="halpha-input"
+                    placeholder="Paste destination wallet address" />
+                @error('address')
+                    <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+                @enderror
+
+                <p class="halpha-text-xs halpha-text-gray-500 halpha-mt-1">
+                    Address must match the selected currency and network.
+                </p>
+            </div>
+
+            {{-- CTA --}}
+            <button 
+                type="submit"
+                class="halpha-bg-accent-2 halpha-text-white halpha-px-4 halpha-py-2 halpha-rounded halpha-text-xs halpha-w-full"
+            >
+                <span wire:loading.remove wire:target="confirm">Review Withdrawal</span>
+                <x-ri-loader-4-fill wire:loading wire:target="confirm" class="halpha-w-4 halpha-h-4 halpha-animate-spin" />
+                
+            </button>
+
+        </form>
+
+        <div x-cloak x-show="showOtpForm">
+            <div class="halpha-space-y-3 halpha-flex halpha-justify-center halpha-items-center halpha-flex-col halpha-w-full">
+                <div class="halpha-py-3">
+                    <x-emoji-inbox-tray class="halpha-text-sky-500 halpha-w-16 halpha-h-16" />
+                </div>
+                <div class="halpha-text-center halpha-space-y-0.5">
+                    <h2 class="halpha-text-base halpha-text-gray-100 halpha-font-medium">Enter verification code</h2>
+                    <div class="halpha-text-sm halpha-text-gray-300">We've sent a code to your phone/email</div>
+                </div>
+
+                <div class="halpha-w-full halpha-px-10 md:halpha-px-40 halpha-py-5">
+                    <livewire:otp-input wire:model="otp" />
+
+                    @error('otp')
+                        <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="halpha-flex halpha-flex-col halpha-w-full halpha-items-center halpha-gap-2">
+                    <button wire:click="proceedWithdrawal" class="halpha-flex-1 halpha-py-2 halpha-rounded halpha-bg-accent-3 halpha-text-white halpha-w-full">
+                        <span wire:loading.remove wire:target="proceedWithdrawal">Verify</span>
+                        <x-ri-loader-4-fill wire:loading wire:target="proceedWithdrawal" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
+                    </button>
+
+                    <button wire:click="cancelProcess"
+                        class="halpha-px-4 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-600 halpha-text-gray-300 halpha-w-full">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    @endif
     <x-dashboard.disclaimer />
 
     {{-- Confirmation --}}

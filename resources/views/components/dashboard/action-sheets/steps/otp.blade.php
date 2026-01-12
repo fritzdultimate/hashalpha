@@ -8,7 +8,7 @@
     </div>
 
     <div class="halpha-w-full halpha-px-10 md:halpha-px-40 halpha-py-5">
-        <livewire:otp-input wire:model="otp" />
+        <livewire:otp-input wire:model.live="otp" />
 
         @error('otp')
             <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
