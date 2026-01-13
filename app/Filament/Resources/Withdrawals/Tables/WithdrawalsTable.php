@@ -21,19 +21,19 @@ class WithdrawalsTable
                     ->color('success')
                     ->description(fn (Withdrawal $record) => ucfirst($record->user->name))
                     ->sortable(),
-                TextColumn::make('wallet_id')
-                    ->numeric()
+                TextColumn::make('user.wallet')
+                    ->label('Wallet')
+                    ->weight('medium')
+                    ->color('success')
+                    ->description(fn (Withdrawal $record) => ucfirst($record->currency))
                     ->sortable(),
                 TextColumn::make('amount')
+                    ->money('usd')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('address')
                     ->searchable(),
-                TextColumn::make('network')
-                    ->searchable(),
                 TextColumn::make('status')
-                    ->searchable(),
-                TextColumn::make('tx_hash')
                     ->searchable(),
                 TextColumn::make('processed_at')
                     ->dateTime()
@@ -41,11 +41,6 @@ class WithdrawalsTable
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
