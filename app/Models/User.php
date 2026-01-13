@@ -56,9 +56,9 @@ class User extends Authenticatable {
         });
     }
 
-    public function canAccessFilament(): bool {
-        return $this->hasRole(['super-admin','admin']);
-    }
+    // public function canAccessFilament(): bool {
+    //     return $this->hasRole(['super-admin','admin']);
+    // }
 
     public function hasUnsettledDeposit(): bool {
 
