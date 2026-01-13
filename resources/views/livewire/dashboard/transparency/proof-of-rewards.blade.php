@@ -37,7 +37,7 @@
 
             <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
                 <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300">Last Distribution</h4>
-                <span class="halpha-text-sm md:halpha-text-base halpha-text-white">April 26, 2024, 10:42 UTC</span>
+                <span class="halpha-text-sm md:halpha-text-base halpha-text-white">January 12, 2026, 10:42 UTC</span>
             </div>
 
             <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
@@ -149,7 +149,7 @@
 
             <div class="halpha-flex halpha-gap-2 halpha-text-sm halpha-text-gray-400">
                 <span class="halpha-hidden md:halpha-block">Cumulative Rewards Earned:</span>
-                <span class="halpha-text-white">8.4763 ETH</span>
+                <span class="halpha-text-white">0 ETH</span>
             </div>
         </h3>
 
@@ -172,19 +172,19 @@
                     @php
                         $rewards = [
                             [
-                                'amount' => 3.0629,
+                                'amount' => 0,
                                 'date' => 'April 26, 2022 UTC'
                             ], 
                             [
-                                'amount' => 3.3521,
+                                'amount' => 0,
                                 'date' => 'April 26, 2022 UTC'
                             ], 
                             [
-                                'amount' => 3.2520,
+                                'amount' => 0,
                                 'date' => 'April 25, 2022 UTC'
                             ], 
                             [
-                                'amount' => 3.1700,
+                                'amount' => 0,
                                 'date' => 'April 25, 2022 UTC'
                             ]
                         ]
