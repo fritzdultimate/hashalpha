@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Deposits;
 
+use App\Enums\DepositStatus;
 use App\Filament\Resources\Deposits\Pages\CreateDeposit;
 use App\Filament\Resources\Deposits\Pages\EditDeposit;
 use App\Filament\Resources\Deposits\Pages\ListDeposits;
@@ -9,16 +10,21 @@ use App\Filament\Resources\Deposits\Schemas\DepositForm;
 use App\Filament\Resources\Deposits\Tables\DepositsTable;
 use App\Models\Deposit;
 use BackedEnum;
+use Filament\Actions\Action;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DepositResource extends Resource
 {
     protected static ?string $model = Deposit::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
+
+
 
     public static function canCreate(): bool
     {
@@ -40,6 +46,8 @@ class DepositResource extends Resource
             //
         ];
     }
+
+    
 
     public static function getPages(): array
     {

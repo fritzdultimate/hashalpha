@@ -12,10 +12,13 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class DepositsTable
 {
+    public string $statusTab = 'all';
+    public array $tabs = [];
     public static function configure(Table $table): Table
     {
         return $table
@@ -67,8 +70,8 @@ class DepositsTable
                     ->sortable(),
             ])
 
+
             ->filters([
-                //
             ])
             ->recordActions([
                 ActionGroup::make([
