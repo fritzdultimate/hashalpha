@@ -36,16 +36,29 @@ class RanksTable
                     ->sortable()
                     ->icon('heroicon-o-chart-bar')
                     ->color('success'),
+
                 TextColumn::make(name: 'required_active_referrals')
+                    ->label('Active Referrals')
                     ->numeric()
-                    ->sortable(),
-                TextColumn::make('required_earnings')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->icon('heroicon-o-users')
+                    ->alignCenter(),
+
+                TextColumn::make('required_earnings')
+                    ->label('Required Earnings')
+                    ->numeric()
+                    ->money('USD')
+                    ->sortable()
+                    ->icon('heroicon-o-banknotes')
+                    ->color('warning'),
+
+                TextColumn::make('created_at')
+                    ->label('Created')
+                    ->dateTime()
+                    ->since()
+                    ->sortable()
+                    ->color('gray'),
+
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -61,6 +74,8 @@ class RanksTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->striped()
+             ->defaultSort('level', 'asc');
     }
 }
