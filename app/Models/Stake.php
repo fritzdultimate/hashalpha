@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Enums\StakeStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +12,7 @@ class Stake extends Model {
         'started_at' => 'datetime',
         'next_payout_at' => 'datetime',
         'meta' => 'array',
+        'status' => StakeStatus::class,
     ];
 
     public function user() {

@@ -4,50 +4,36 @@ namespace App\Enums;
 
 enum StakeStatus: string
 {
-    case WAITING = 'waiting';
-    case PENDING   = 'pending';
-    case CONFIRMED    = 'confirmed';
-    case PARTIALLYPAID = 'partially_paid';
-    case FINISHED = 'finished';
-    case FAILED    = 'failed';
+    case ACTIVE = 'active';
+    case COMPLETED   = 'completed';
     case CANCELLED = 'canceled';
-    case EXPIRED = 'expired';
+    case PAUSED = 'paused';
 
     public function label(): string
     {
         return match ($this) {
-            self::PENDING => 'Pending',
-            self::WAITING => 'waiting',
-            self::PARTIALLYPAID => 'partially_paid',
-            self::CONFIRMED => 'confirmed',
-            self::FAILED => 'Failed',
-            self::CANCELLED => 'Cancelled',
-            self::FINISHED => 'finished',
-            self::EXPIRED => 'expired'
+            self::ACTIVE => 'active',
+            self::COMPLETED => 'completed',
+            self::CANCELLED => 'cancelled',
+            self::PAUSED => 'paused',
         };
     }
 
     public function color(): string
     {
         return match ($this) {
-            self::PENDING => 'warning',
-            self::WAITING => 'warning',
-            self::PARTIALLYPAID => 'info',
-            self::CONFIRMED => 'info',
-            self::FAILED => 'danger',
+            self::ACTIVE => 'success',
+            self::COMPLETED => 'info',
+            self::PAUSED => 'warning',
             self::CANCELLED => 'danger',
-            self::FINISHED => 'success',
-            self::EXPIRED => 'danger'
         };
     }
 
     public function isFinal(): bool
     {
         return in_array($this, [
-            self::FINISHED,
-            self::FAILED,
+            self::COMPLETED,
             self::CANCELLED,
-            self::EXPIRED,
         ], true);
     }
 }

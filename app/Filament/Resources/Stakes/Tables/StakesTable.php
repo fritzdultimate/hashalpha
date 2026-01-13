@@ -35,7 +35,23 @@ class StakesTable
                 
                 TextColumn::make('amount')
                     ->money('usd')
-                    ->sortable()
+                    ->sortable(),
+
+                TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (StakeStatus  $state): string => $state->color())      
+                    ->searchable(),
+
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
+
+                TextColumn::make('last_payout_at')
+                    ->label('Last Payout')
+                    ->placeholder('—')
+                    // ->formatStateUsing(fn ($state) => $state ? $state->format('M d, Y H:i') : 'Not paid yet')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -48,7 +64,7 @@ class StakesTable
                         ->icon('heroicon-o-x-mark')
                         ->requiresConfirmation()
                         ->visible(fn (Stake $record) =>
-                            $record->status !== StakeStatus::FINISHED && $record->status !== StakeStatus::CANCELLED && $record->status !== StakeStatus::FAILED && $record->status !== StakeStatus::EXPIRED
+                            $record->status !== StakeStatus::COMPLETED && $record->status !== StakeStatus::CANCELLED
                         )
                         ->action(function (Stake $record) {
                             $record->status = StakeStatus::CANCELLED;
@@ -56,12 +72,24 @@ class StakesTable
                         }),
 
                     Action::make('approve')
-                        ->label('Approve')
-                        ->color('success')
-                        ->icon('heroicon-o-check')
+                        ->label('Pause')
+                        ->color('warning')
+                        ->icon('heroicon-o-pause')
                         ->requiresConfirmation()
                         ->visible(fn (Stake $record) =>
-                            $record->status !== StakeStatus::FINISHED && $record->status !== StakeStatus::CANCELLED && $record->status !== StakeStatus::FAILED && $record->status !== StakeStatus::EXPIRED
+                            $record->status !== StakeStatus::COMPLETED && $record->status !== StakeStatus::CANCELLED && $record->status !== StakeStatus::PAUSED
+                        )
+                        ->action(function (Stake $record) {
+                            StakeService::markAsFinished($record);
+                        }),
+
+                    Action::make('approve')
+                        ->label('Resume')
+                        ->color('success')
+                        ->icon('heroicon-o-play')
+                        ->requiresConfirmation()
+                        ->visible(fn (Stake $record) =>
+                            $record->status === StakeStatus::PAUSED
                         )
                         ->action(function (Stake $record) {
                             StakeService::markAsFinished($record);
