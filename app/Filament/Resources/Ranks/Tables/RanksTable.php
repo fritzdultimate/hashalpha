@@ -30,9 +30,13 @@ class RanksTable
                     ])
                     ->sortable(),
                 TextColumn::make('required_volume')
+                    ->label('Required Volume')
                     ->numeric()
-                    ->sortable(),
-                TextColumn::make('required_active_referrals')
+                    ->money('USD')
+                    ->sortable()
+                    ->icon('heroicon-o-chart-bar')
+                    ->color('success'),
+                TextColumn::make(name: 'required_active_referrals')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('required_earnings')
