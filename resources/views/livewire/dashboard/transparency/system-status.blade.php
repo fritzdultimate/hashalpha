@@ -27,7 +27,7 @@
         </div>
 
         <div class="halpha-text-xs halpha-text-gray-500 halpha-mt-1">
-            Last updated: December 27, 2025, 10:23 UTC
+            Last updated: January 7, 2026, 10:23 UTC
         </div>
     </div>
 
@@ -46,7 +46,7 @@
             <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4 halpha-text-xs">
                 <div class="halpha-flex halpha-flex-col halpha-gap-2">
                     <div class="halpha-text-gray-400">Active Validators</div>
-                    <div class="halpha-text-white halpha-font-semibold halpha-text-base">145</div>
+                    <div class="halpha-text-white halpha-font-semibold halpha-text-base">125</div>
                 </div>
 
                 <div class="halpha-flex halpha-flex-col halpha-gap-2">
@@ -162,7 +162,7 @@
 
                 <div class="halpha-flex halpha-justify-between">
                     <span class="halpha-text-gray-400">Last cycle processed</span>
-                    <span class="halpha-text-white">Apr 27, 2024 — 09:00 UTC</span>
+                    <span class="halpha-text-white">Dec 27, 2025 — 09:00 UTC</span>
                 </div>
             </div>
         </div>
@@ -203,7 +203,7 @@
             <div>Incident ID: <span class="halpha-text-white">INC-2026-001</span></div>
             <div>Status: <span class="halpha-text-green-400">Resolved</span></div>
             <div>Impact: Temporary delay in reward settlement</div>
-            <div>Resolved: April 27, 2024 — 09:00 UTC</div>
+            <div>Resolved: November 27, 2025 — 09:00 UTC</div>
         </div>
     </div>
 
