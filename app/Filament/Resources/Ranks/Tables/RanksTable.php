@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Ranks\Tables;
 
+use App\Models\Rank;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -68,7 +71,30 @@ class RanksTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ActionGroup::make([
+                    EditAction::make()
+                        ->label('Edit')
+                        ->icon('heroicon-o-pencil-square')
+                        ->color('primary'),
+
+
+                    Action::make('duplicate')
+                        ->label('Duplicate')
+                        ->icon('heroicon-o-document-duplicate')
+                        ->color('gray')
+                        ->requiresConfirmation()
+                        ->modalHeading('Duplicate Rank')
+                        ->modalDescription('A copy of this rank will be created.')
+                        ->action(function (Rank $record) {
+                            $new = $record->replicate();
+                            $new->name = $record->name . ' Copy';
+                            $new->save();
+                        }),
+
+
+                ])
+
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
