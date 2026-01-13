@@ -36,12 +36,12 @@
     <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4">
         <div class="halpha-card halpha-p-4 halpha-rounded-xl">
             <div class="halpha-text-xs halpha-text-gray-400">Total Validators</div>
-            <div class="halpha-text-xl halpha-font-semibold halpha-text-white">145</div>
+            <div class="halpha-text-xl halpha-font-semibold halpha-text-white">128</div>
         </div>
 
         <div class="halpha-card halpha-p-4 halpha-rounded-xl">
             <div class="halpha-text-xs halpha-text-gray-400">Active</div>
-            <div class="halpha-text-xl halpha-font-semibold halpha-text-green-400">142</div>
+            <div class="halpha-text-xl halpha-font-semibold halpha-text-green-400">125</div>
         </div>
 
         <div class="halpha-card halpha-p-4 halpha-rounded-xl">
