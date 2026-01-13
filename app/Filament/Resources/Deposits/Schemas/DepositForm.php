@@ -37,7 +37,7 @@ class DepositForm
                     ->numeric(),
                 TextInput::make('currency')
                     ->required(),
-                TextInput::make('amount_paid')
+                TextInput::make('amount_paid') 
                     ->numeric(),
                 TextInput::make('nowpayments_invoice_id'),
                 TextInput::make('tx_id'),

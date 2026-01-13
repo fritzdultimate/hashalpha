@@ -71,7 +71,7 @@ class StakesTable
                             $record->save();
                         }),
 
-                    Action::make('approve')
+                    Action::make('pause')
                         ->label('Pause')
                         ->color('warning')
                         ->icon('heroicon-o-pause')
@@ -80,7 +80,7 @@ class StakesTable
                             $record->status !== StakeStatus::COMPLETED && $record->status !== StakeStatus::CANCELLED && $record->status !== StakeStatus::PAUSED
                         )
                         ->action(function (Stake $record) {
-                            StakeService::markAsFinished($record);
+                            StakeService::pause($record);
                         }),
 
                     Action::make('approve')
@@ -92,7 +92,7 @@ class StakesTable
                             $record->status === StakeStatus::PAUSED
                         )
                         ->action(function (Stake $record) {
-                            StakeService::markAsFinished($record);
+                            StakeService::resume($record);
                         }),
                     DeleteAction::make(),
                 ])

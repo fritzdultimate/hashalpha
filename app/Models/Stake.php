@@ -37,4 +37,30 @@ class Stake extends Model {
             ->where('status', 'pending')
             ->sum('amount');
     }
+
+    public function pause(): self {
+        return $this->setStatus(StakeStatus::PAUSED);
+    }
+
+    public function resume(): self {
+        return $this->setStatus(StakeStatus::ACTIVE);
+    }
+
+    public function markCompleted(): self {
+        return $this->setStatus(StakeStatus::COMPLETED);
+    }
+
+    public function cancel(): self {
+        return $this->setStatus(StakeStatus::CANCELLED);
+    }
+
+    protected function setStatus(StakeStatus $status): self {
+        if ($this->status->isFinal()) {
+            throw new \LogicException('Cannot change a finalized stake.');
+        }
+
+        $this->update(['status' => $status]);
+
+        return $this;
+    }
 }

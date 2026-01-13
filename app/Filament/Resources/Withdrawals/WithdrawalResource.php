@@ -18,7 +18,7 @@ class WithdrawalResource extends Resource
 {
     protected static ?string $model = Withdrawal::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowRight;
 
     public static function form(Schema $schema): Schema
     {

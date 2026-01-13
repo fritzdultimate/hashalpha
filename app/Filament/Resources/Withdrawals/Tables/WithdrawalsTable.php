@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Withdrawals\Tables;
 
+use App\Models\Withdrawal;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -14,8 +15,11 @@ class WithdrawalsTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->numeric()
+                TextColumn::make('user.email')
+                    ->label('User')
+                    ->weight('medium')
+                    ->color('success')
+                    ->description(fn (Withdrawal $record) => ucfirst($record->user->name))
                     ->sortable(),
                 TextColumn::make('wallet_id')
                     ->numeric()

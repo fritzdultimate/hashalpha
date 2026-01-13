@@ -9,18 +9,27 @@ use App\Models\Stake;
 use Illuminate\Support\Facades\DB;
 
 class StakeService {
-    public static function markAsFinished(Stake $stake) {
-       if ($stake->status === StakeStatus::FINISHED) {
+    public static function pause(Stake $stake) {
+        if ($stake->status === StakeStatus::COMPLETED || $stake->status === StakeStatus::CANCELLED) {
             return;
         }
 
         DB::transaction(function () use ($stake) {
 
-            $stake->markFinished();
+            $stake->pause();
 
-            // 2. Credit user balance
-            $user = $stake->user;
-            $user->increment('balance', $stake->amount);
+            // send email
+        });
+    }
+
+    public static function resume(Stake $stake) {
+        if ($stake->status === StakeStatus::COMPLETED || $stake->status === StakeStatus::CANCELLED) {
+            return;
+        }
+
+        DB::transaction(function () use ($stake) {
+
+            $stake->resume();
 
             // send email
         });
