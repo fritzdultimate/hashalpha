@@ -42,14 +42,7 @@ class DepositsTable
                     ->searchable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->color(fn (DepositStatus  $state): string => match ($state) {
-                        DepositStatus::FINISHED   => 'success',
-                        DepositStatus::PENDING    => 'warning',
-                        DepositStatus::CANCELLED  => 'danger',
-                        DepositStatus::FAILED     => 'danger',
-                        DepositStatus::PARTIALLYPAID => 'info',
-                        default => 'gray',
-                    })      
+                    ->color(fn (DepositStatus  $state): string => $state->color())      
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

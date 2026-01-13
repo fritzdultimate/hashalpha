@@ -27,6 +27,20 @@ enum DepositStatus: string
         };
     }
 
+    public function color(): string
+    {
+        return match ($this) {
+            self::PENDING => 'warning',
+            self::WAITING => 'warning',
+            self::PARTIALLYPAID => 'info',
+            self::CONFIRMED => 'info',
+            self::FAILED => 'danger',
+            self::CANCELLED => 'danger',
+            self::FINISHED => 'success',
+            self::EXPIRED => 'danger'
+        };
+    }
+
     public function isFinal(): bool
     {
         return in_array($this, [
