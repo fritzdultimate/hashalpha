@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Deposits\Tables;
 
+use App\Enums\DepositStatus;
 use App\Models\Deposit;
+use App\Services\DepositService;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -24,8 +26,8 @@ class DepositsTable
                 TextColumn::make('amount')
                     ->money('usd')
                     ->sortable(),
-                TextColumn::make('address')
-                    ->searchable(),
+                // TextColumn::make('address')
+                    // ->searchable(),
                 TextColumn::make('status')
                     ->searchable(),
                 TextColumn::make('created_at')
@@ -47,8 +49,11 @@ class DepositsTable
                     ->color('danger')
                     ->icon('heroicon-o-x-mark')
                     ->requiresConfirmation()
+                    ->visible(fn (Deposit $record) =>
+                        $record->status !== DepositStatus::FINISHED && $record->status !== DepositStatus::CANCELLED && $record->status !== DepositStatus::FAILED
+                    )
                     ->action(function (Deposit $record) {
-                        $record->status = 'canceled';
+                        $record->status = DepositStatus::CANCELLED;
                         $record->save();
                     }),
 
@@ -57,12 +62,17 @@ class DepositsTable
                     ->color('success')
                     ->icon('heroicon-o-check')
                     ->requiresConfirmation()
+                    ->visible(fn (Deposit $record) =>
+                        $record->status !== DepositStatus::FINISHED && $record->status !== DepositStatus::CANCELLED && $record->status !== DepositStatus::FAILED
+                    )
                     ->action(function (Deposit $record) {
-                        $record->status = 'approved';
-                        $record->save();
+                        DepositService::markAsFinished($record);
                     }),
                 DeleteAction::make(),
                 EditAction::make()
+                    ->visible(fn (Deposit $record) =>
+                        $record->status !== DepositStatus::FINISHED && $record->status !== DepositStatus::CANCELLED && $record->status !== DepositStatus::FAILED
+                    )  
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

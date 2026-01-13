@@ -10,7 +10,7 @@ enum DepositStatus: string
     case PARTIALLYPAID = 'partially_paid';
     case FINISHED = 'finished';
     case FAILED    = 'failed';
-    case CANCELLED = 'cancelled';
+    case CANCELLED = 'canceled';
 
     public function label(): string
     {

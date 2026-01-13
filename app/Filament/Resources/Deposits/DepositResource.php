@@ -40,7 +40,7 @@ class DepositResource extends Resource
     {
         return [
             'index' => ListDeposits::route('/'),
-            'create' => CreateDeposit::route('/create'),
+            // 'create' => CreateDeposit::route('/create'),
             'edit' => EditDeposit::route('/{record}/edit'),
         ];
     }
