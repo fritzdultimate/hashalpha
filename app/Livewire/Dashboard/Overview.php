@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard;
 
 
 use App\Models\ReferralReward;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -144,6 +145,7 @@ class Overview extends Component
 
     public function render()
     {
+        dd(User::all());
         return view('livewire.dashboard.overview');
     }
 }
