@@ -131,7 +131,7 @@
                         "children" => [
                             [
                                 "url" => route('vnft'),
-                                "label" => "My V-NFTs (Coming Soon)"
+                                "label" => "My V-NFTs"
                             ],
                             [
                                 "url" => route('coming-soon'),

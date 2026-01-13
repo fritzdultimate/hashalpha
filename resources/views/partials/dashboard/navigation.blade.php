@@ -51,7 +51,7 @@
                             </form>
                         @else
                             <li>
-                                <a href="{{ $child['url'] }}"
+                                <a @if($child['label'] === 'My V-NFTs') target="_blank" @endif href="{{ $child['url'] }}"
                                     class="halpha-flex halpha-items-center halpha-gap-3 halpha-px-3 halpha-py-5 halpha-text-sm hover:halpha-bg-[#292929] halpha-w-full halpha-pl-10"
                                     :class="{
                                         'halpha-bg-[#292929] halpha-text-[#bababa] halpha-border-r halpha-border-accent-2': {{ $activeDashboard ? 'true' : 'false' }}
