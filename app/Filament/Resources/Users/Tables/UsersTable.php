@@ -2,9 +2,12 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -23,6 +26,12 @@ class UsersTable
                     ->weight('medium')
                     ->color('info')
                     ->icon('heroicon-o-user'),
+                TextColumn::make('balance')
+                    ->money('usd')
+                    ->sortable()
+                    ->weight('bold')
+                    ->color('success'),
+
                 IconColumn::make('email_verified_at')
                     ->label('Email')
                     ->boolean()
@@ -44,44 +53,29 @@ class UsersTable
                     ->sortable()
                     ->placeholder('Unranked'),
 
-                TextColumn::make('kyc_status')
-                    ->searchable(),
-                TextColumn::make('kyc_submitted_at')
-                    ->dateTime()
-                    ->sortable(),
-                TextColumn::make('blocked_at')
-                    ->dateTime()
-                    ->sortable(),
-                IconColumn::make('email_verified')
-                    ->boolean(),
-                IconColumn::make('two_factor_enabled')
-                    ->boolean(),
                 IconColumn::make('is_suspended')
-                    ->boolean(),
-                TextColumn::make('suspended_until')
+                    ->label('Suspended')
+                    ->boolean()
+                    ->trueColor('danger')
+                    ->falseColor('success'),
+                TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable(),
-                TextColumn::make('failed_logins')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('last_failed_at')
-                    ->dateTime()
-                    ->sortable(),
-                TextColumn::make('two_factor_channel')
-                    ->searchable(),
-                TextColumn::make('firstname')
-                    ->searchable(),
-                TextColumn::make('lastname')
-                    ->searchable(),
-                TextColumn::make('balance')
-                    ->numeric()
-                    ->sortable(),
+                    ->sortable()
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ViewAction::make()
+                    ->badge(),
+                ActionGroup::make([
+                    Action::make('cancel')
+                        ->label('Cancel')
+                        ->color('danger')
+                        ->icon('heroicon-o-x-mark')
+                        ->requiresConfirmation()
+                ]),
+                
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
