@@ -74,7 +74,7 @@ class DepositsTable
                         ->icon('heroicon-o-x-mark')
                         ->requiresConfirmation()
                         ->visible(fn (Deposit $record) =>
-                            $record->status !== DepositStatus::FINISHED && $record->status !== DepositStatus::CANCELLED && $record->status !== DepositStatus::FAILED
+                            $record->status !== DepositStatus::FINISHED && $record->status !== DepositStatus::CANCELLED && $record->status !== DepositStatus::FAILED && $record->status !== DepositStatus::EXPIRED
                         )
                         ->action(function (Deposit $record) {
                             $record->status = DepositStatus::CANCELLED;
@@ -87,7 +87,7 @@ class DepositsTable
                         ->icon('heroicon-o-check')
                         ->requiresConfirmation()
                         ->visible(fn (Deposit $record) =>
-                            $record->status !== DepositStatus::FINISHED && $record->status !== DepositStatus::CANCELLED && $record->status !== DepositStatus::FAILED
+                            $record->status !== DepositStatus::FINISHED && $record->status !== DepositStatus::CANCELLED && $record->status !== DepositStatus::FAILED && $record->status !== DepositStatus::EXPIRED
                         )
                         ->action(function (Deposit $record) {
                             DepositService::markAsFinished($record);
