@@ -11,6 +11,7 @@ enum DepositStatus: string
     case FINISHED = 'finished';
     case FAILED    = 'failed';
     case CANCELLED = 'canceled';
+    case EXPIRED = 'expired';
 
     public function label(): string
     {
@@ -21,7 +22,8 @@ enum DepositStatus: string
             self::CONFIRMED => 'confirmed',
             self::FAILED => 'Failed',
             self::CANCELLED => 'Cancelled',
-            self::FINISHED => 'finished'
+            self::FINISHED => 'finished',
+            self::EXPIRED => 'expired'
         };
     }
 
@@ -31,6 +33,7 @@ enum DepositStatus: string
             self::FINISHED,
             self::FAILED,
             self::CANCELLED,
+            self::EXPIRED,
         ], true);
     }
 }
