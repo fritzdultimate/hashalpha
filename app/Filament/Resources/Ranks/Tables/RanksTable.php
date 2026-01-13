@@ -15,6 +15,10 @@ class RanksTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Rank')
+                    ->weight('bold')
+                    ->icon('heroicon-o-star')
+                    ->color('primary')
                     ->searchable(),
                 TextColumn::make('level')
                     ->numeric()
