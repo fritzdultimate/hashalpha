@@ -2,8 +2,13 @@
 
 namespace App\Filament\Resources\Withdrawals\Tables;
 
+use App\Enums\WithdrawalStatus;
 use App\Models\Withdrawal;
+use App\Services\WithdrawalService;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -21,22 +26,23 @@ class WithdrawalsTable
                     ->color('success')
                     ->description(fn (Withdrawal $record) => ucfirst($record->user->name))
                     ->sortable(),
-                TextColumn::make('user.wallet')
-                    ->label('Wallet')
-                    ->weight('medium')
-                    ->color('success')
-                    ->description(fn (Withdrawal $record) => ucfirst($record->currency))
-                    ->sortable(),
                 TextColumn::make('amount')
                     ->money('usd')
-                    ->numeric()
                     ->sortable(),
-                TextColumn::make('address')
-                    ->searchable(),
                 TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (WithdrawalStatus  $state): string => $state->color())      
+                    ->searchable(),
+                TextColumn::make('address')
+                    ->copyable()
+                    ->limit(10)
+                    ->copyMessage('Address copied')
+                    ->copyMessageDuration(1500)
+                    ->icon('heroicon-o-clipboard')
                     ->searchable(),
                 TextColumn::make('processed_at')
                     ->dateTime()
+                    ->placeholder('_')
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -46,7 +52,80 @@ class WithdrawalsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ActionGroup::make([
+                    Action::make('cancel')
+                        ->label('Cancel')
+                        ->color('danger')
+                        ->icon('heroicon-o-x-circle')
+                        ->modalHeading('Cancel Withdrawal')
+                        ->modalDescription('This withdrawal will be marked as cancelled. This action cannot be undone.')
+                        ->requiresConfirmation()
+                        ->visible(fn (Withdrawal $record) =>
+                            $record->status !== WithdrawalStatus::COMPLETED && $record->status !== WithdrawalStatus::CANCELLED && $record->status !== WithdrawalStatus::FAILED
+                        )
+                        ->action(function (Withdrawal $record) {
+                            $record->status = WithdrawalStatus::CANCELLED;
+                            $record->save();
+                        }),
+
+                    Action::make('review')
+                        ->label('Review')
+                        ->color('warning')
+                        ->icon('heroicon-o-eye')
+                        ->modalHeading('Mark as Under Review')
+                        ->modalDescription('This withdrawal will be marked as under review.')
+                        ->requiresConfirmation()
+                        ->visible(fn (Withdrawal $record) =>
+                           $record->status === WithdrawalStatus::PENDING
+                        )
+                        ->action(function (Withdrawal $record) {
+                            WithdrawalService::review($record);
+                        }),
+
+                    Action::make('process')
+                        ->label('Process')
+                        ->color('primary')
+                        ->icon('heroicon-o-arrow-path')
+                        ->modalHeading('Start Processing')
+                        ->modalDescription('This withdrawal will be marked as processing.')
+                        ->requiresConfirmation()
+                        ->visible(fn (Withdrawal $record) =>
+                            $record->status === WithdrawalStatus::REVIEW
+                        )
+                        ->action(function (Withdrawal $record) {
+                            WithdrawalService::markAsProcessing($record);
+                        }),
+
+                    Action::make('fail')
+                        ->label('Fail')
+                        ->color('danger')
+                        ->icon('heroicon-o-exclamation-triangle')
+                        ->requiresConfirmation()
+                        ->modalHeading('Fail Withdrawal')
+                        ->modalDescription('This withdrawal will be marked as failed.')
+                        ->visible(fn (Withdrawal $record) =>
+                            $record->status !== WithdrawalStatus::COMPLETED && $record->status !== WithdrawalStatus::CANCELLED && $record->status !== WithdrawalStatus::FAILED
+                        )
+                        ->action(function (Withdrawal $record) {
+                            WithdrawalService::markAsFailed($record);
+                    }),
+
+                    Action::make('approve')
+                        ->label('Aprrove')
+                        ->color('success')
+                        ->icon('heroicon-o-check-circle')
+                        ->modalHeading('Approve Withdrawal')
+                        ->modalDescription('This withdrawal will be approved and completed.')
+                        ->requiresConfirmation()
+                        ->visible(fn (Withdrawal $record) =>
+                            $record->status === WithdrawalStatus::PROCESSING
+                        )
+                        ->action(function (Withdrawal $record) {
+                            WithdrawalService::complete($record);
+                        }),
+                    DeleteAction::make(),
+                ])
+                ->label('Action')
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

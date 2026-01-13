@@ -23,6 +23,18 @@ enum WithdrawalStatus: string
         };
     }
 
+    public function color(): string
+    {
+        return match ($this) {
+            self::PENDING => 'warning',
+            self::COMPLETED => 'success',
+            self::REVIEW => 'warning',
+            self::CANCELLED => 'danger',
+            self::PROCESSING => 'info',
+            self::FAILED => 'danger',
+        };
+    }
+
     public function isFinal(): bool
     {
         return in_array($this, [
