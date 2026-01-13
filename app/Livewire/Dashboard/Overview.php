@@ -145,7 +145,6 @@ class Overview extends Component
 
     public function render()
     {
-        dd(User::with('roles')->get());
         return view('livewire.dashboard.overview');
     }
 }
