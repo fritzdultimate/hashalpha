@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Ranks\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -20,8 +21,13 @@ class RanksTable
                     ->icon('heroicon-o-star')
                     ->color('primary')
                     ->searchable(),
-                TextColumn::make('level')
-                    ->numeric()
+                BadgeColumn::make('level')
+                    ->colors([
+                        'gray' => fn ($state) => $state <= 1,
+                        'info' => fn ($state) => $state >= 2 && $state <= 3,
+                        'warning' => fn ($state) => $state >= 4 && $state <= 6,
+                        'success' => fn ($state) => $state >= 7,
+                    ])
                     ->sortable(),
                 TextColumn::make('required_volume')
                     ->numeric()
