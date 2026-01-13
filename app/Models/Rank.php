@@ -10,4 +10,8 @@ class Rank extends Model {
         'required_active_referrals',
         'required_earnings',
     ];
+
+    public function ranks() {
+        return $this->hasMany(UserRank::class);
+    }
 }
