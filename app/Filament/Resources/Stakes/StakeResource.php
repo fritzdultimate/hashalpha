@@ -18,7 +18,7 @@ class StakeResource extends Resource
 {
     protected static ?string $model = Stake::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowDownTray;
 
     public static function form(Schema $schema): Schema
     {
