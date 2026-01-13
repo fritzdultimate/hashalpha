@@ -1,0 +1,48 @@
+/* HashAlpha - Main Stylesheet */
+/* Designed for V-NFT Integration */
+
+body {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* Sidebar Active State */
+.sidebar-active {
+    border-left: 3px solid #00d4ff;
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.sidebar-item:hover {
+    background-color: #141414;
+}
+
+/* Utility Animations */
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

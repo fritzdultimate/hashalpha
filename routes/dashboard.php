@@ -23,6 +23,12 @@ use App\Livewire\Dashboard\Deposit\History as DepositHistory;
 use App\Livewire\Dashboard\Overview;
 use Illuminate\Support\Facades\Route;
 
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::view('/chain/vnft', 'nft.index')->name('vnft');
+});
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', Overview::class)->name('dashboard');
     Route::get('/extras/coming-soon', ComingSoon::class)->name('coming-soon');
