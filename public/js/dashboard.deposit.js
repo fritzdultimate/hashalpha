@@ -95,9 +95,11 @@ function depositPanel() {
         },
 
         get display() {
-            const m = String(Math.floor(this.time / 60)).padStart(2, '0')
-            const s = String(this.time % 60).padStart(2, '0')
-            return `${m}:${s}`
+            if(this.status === 'pending' || this.status === 'waiting') {
+                const m = String(Math.floor(this.time / 60)).padStart(2, '0')
+                const s = String(this.time % 60).padStart(2, '0')
+                return `${m}:${s}`;
+            }
         },
 
         closePanel() {
