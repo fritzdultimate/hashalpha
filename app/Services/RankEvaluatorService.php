@@ -12,7 +12,7 @@ class RankEvaluatorService {
         $volume = Stake::where('referrer_id', $user->id)->sum('amount');
 
         $activeReferrals = ReferralReward::where('user_id', $user->id)
-            ->whereHas('referralUser', fn($q) => $q->where('is_suspended', false))
+            ->whereHas('fromUser', fn($q) => $q->where('is_suspended', false))
             ->distinct('from_user_id')
             ->count('from_user_id');
 
