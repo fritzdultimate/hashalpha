@@ -11,11 +11,10 @@
                     </h1>
                     <div style="opacity: 1; filter: blur(0px);" class="inner-container _470px _100-tablet">
                         <p class="mg-bottom-32px halpha-text-gray-300">
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit arcu cras posuere
-                            gravida neque felis a.
+                            Have questions or need assistance? Our team is ready to help you with reliable support, clear guidance, and fast responses whenever you need us.
                         </p>
                     </div>
-                    <div style="opacity: 1; filter: blur(0px);" class="social-media-links-container">
+                    <div style="opacity: 1; filter: blur(0px);" class="social-media-links-container halpha-hidden">
                         <a href="https://www.facebook.com/" target="_blank" class="social-link-single w-inline-block">
                             <div></div>
                         </a>
@@ -35,14 +34,14 @@
                     <div style="opacity: 1; filter: blur(0px);" class="divider _48px _32px-tablet"></div>
 
                     <div class="grid-1-column gap-row-32px">
-                        <a href="mailto:contact@cryptoverse.com" class="text-decoration-none w-inline-block">
+                        <a href="mailto:{{ env("SUPPORT_EMAIL") }}" class="text-decoration-none w-inline-block">
                             <div class="flex align-start gap-column-12px">
                                 <img
                                     src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfceea9d8cc458bb66af0f_email-circle-icon-cryptomatic-webflow-ecommerce-template.png"
                                     loading="eager" alt="" class="link-item-dark-image max-w-48px max-w-40px-mbl">
                                 <div class="grid-1-column gap-row-8px">
                                     <div class="text-200 color-neutral-100">Send email</div>
-                                    <div class="text-200 medium">contact@cryptoverse.com</div>
+                                    <div class="text-200 medium">{{ env("SUPPORT_EMAIL") }}</div>
                                 </div>
                             </div>
                         </a>
