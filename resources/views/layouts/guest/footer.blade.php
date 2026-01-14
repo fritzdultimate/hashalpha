@@ -82,10 +82,6 @@
                             </li>
 
                             <li class="footer-list-item">
-                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">GitBook</a>
-                            </li>
-
-                            <li class="footer-list-item">
                                 <a href="{{ route('support.faq') }}" aria-current="page" class="footer-link w--current halpha-text-sm">FAQ</a>
                             </li>
 
