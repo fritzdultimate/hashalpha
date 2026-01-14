@@ -31,21 +31,40 @@ class DepositController extends Controller {
 
     public function cancelDeposit($id) {
         $deposit = Deposit::where([
-            'user_id', auth()->id(),
+            'user_id' => auth()->id(),
             'id' => $id
         ])->first();
 
-        if($deposit->status !== DepositStatus::FINISHED) {
-            $deposit->status = DepositStatus::CANCELLED;
-            $deposit->save();
-
+        if (! $deposit) {
             return response()->json([
-                'success' => true
-            ]);
+                'success' => false,
+                'message' => 'Deposit not found',
+            ], 404);
         }
 
+        if ($deposit->processed_at) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Deposit already processed',
+            ], 422);
+        } 
+        
+        if (! in_array($deposit->status, [
+            DepositStatus::PENDING,
+            DepositStatus::WAITING,
+        ], true)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Deposit cannot be cancelled at this stage',
+            ], 422);
+        }
+
+        $deposit->update([
+            'status' => DepositStatus::CANCELLED,
+        ]);
+
         return response()->json([
-            'success' => false
+            'success' => true,
         ]);
     }
 }
