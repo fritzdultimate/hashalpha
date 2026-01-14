@@ -10,11 +10,9 @@ class ResourceController extends Controller
 {
     public function index() {
         $resources = [
-            ['title'=>'GitBook', 'type'=>'external', 'url'=>'https://halphalpha.gitbook.io', 'description'=>'Full developer & user docs'],
             ['title'=>'Roadmap', 'type'=>'internal', 'url'=>route('resources.roadmap'), 'description'=>'Planned features & delivery timeline'],
             ['title'=>'Whitepaper', 'type'=>'download', 'url'=>route('resources.whitepaper.download'), 'description'=>'In-depth tokenomics & system architecture'],
-            ['title'=>'Media Kit / Brand Assets', 'type'=>'download', 'url'=>route('resources.media.download'), 'description'=>'Logos, fonts, banners and brand guidelines'],
-            ['title'=>'Blog / Announcements', 'type'=>'external', 'url'=>'/blog', 'description'=>'Platform updates and release notes'],
+            // ['title'=>'Blog / Announcements', 'type'=>'external', 'url'=>'/blog', 'description'=>'Platform updates and release notes'],
         ];
 
         return view('landing.resources.index', compact('resources'));
@@ -85,11 +83,11 @@ class ResourceController extends Controller
     }
 
     public function downloadMediaKit() {
-        $path = 'public/resources/media-kit.zip';
+        $path = 'resources/halpha-whitepaper.pdf';
         if (!Storage::exists($path)) {
             abort(404, 'Media kit not found.');
         }
 
-        return Storage::download($path, 'media-kit.zip');
+        return Storage::download($path, 'halpha-whitepaper.zip');
     }
 }

@@ -25,7 +25,7 @@
             <div
                 class="halpha-bg-card-bg halpha-rounded-r halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
                 <h6 class="halpha-text-muted">Plan Type</h6>
-                <span class="">Exclusive</span>
+                <span class="">Staking</span>
             </div>
         </div>
 

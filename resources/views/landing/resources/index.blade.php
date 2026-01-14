@@ -59,7 +59,7 @@
                             <div class="halpha-text-xs halpha-text-gray-400">Sep 12, 2025 — Architecture & tokenomics
                                 explained</div>
                         </div>
-                        <div class="halpha-text-sm halpha-text-gray-400">Read</div>
+                        <div class="halpha-text-sm halpha-text-gray-400">View</div>
                     </li>
                 </ul>
             </section>
