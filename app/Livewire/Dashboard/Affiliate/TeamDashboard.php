@@ -29,7 +29,8 @@ class TeamDashboard extends Component
         $this->activeLevel = $level;
         $user = auth()->user();
         $levelColumn = "level_{$level}_id";
-        dd($user->referrals());
+        // dd($user->referrals());
+        
         $this->team = $user->referrals()
             ->where($levelColumn, $user->id)
             ->with('user')
