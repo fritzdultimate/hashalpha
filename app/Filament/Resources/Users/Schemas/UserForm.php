@@ -20,36 +20,20 @@ class UserForm
                     ->email()
                     ->required(),
                 DateTimePicker::make('email_verified_at'),
-                TextInput::make('password')
-                    ->password()
-                    ->required(),
                 TextInput::make('affiliate_code'),
-                TextInput::make('referrer_id')
-                    ->numeric(),
-                TextInput::make('kyc_status')
-                    ->required()
-                    ->default('unsubmitted'),
-                DateTimePicker::make('kyc_submitted_at'),
-                DateTimePicker::make('blocked_at'),
-                Toggle::make('email_verified')
-                    ->required(),
-                Toggle::make('two_factor_enabled')
-                    ->required(),
+                TextInput::make('referrer.name')
+                    ->label('Referrer')
+                    ->placeholder('_'),
                 Toggle::make('is_suspended')
                     ->required(),
-                DateTimePicker::make('suspended_until'),
                 TextInput::make('failed_logins')
                     ->required()
                     ->numeric()
                     ->default(0),
-                DateTimePicker::make('last_failed_at'),
-                TextInput::make('two_factor_channel'),
+                DateTimePicker::make('last_failed_at')
+                    ->placeholder('_'),
                 TextInput::make('firstname'),
                 TextInput::make('lastname'),
-                TextInput::make('balance')
-                    ->required()
-                    ->numeric()
-                    ->default(505),
             ]);
     }
 }
