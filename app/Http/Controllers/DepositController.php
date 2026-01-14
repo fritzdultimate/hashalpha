@@ -31,14 +31,14 @@ class DepositController extends Controller {
 
     public function cancelDeposit($id) {
         $deposit = Deposit::where([
-            'user_id' => auth()->id(),
+            // 'user_id' => auth()->id(),
             'id' => $id
         ])->first();
 
         if (! $deposit) {
             return response()->json([
                 'success' => false,
-                'message' => 'Deposit not found',
+                'message' => "Deposit not found",
             ], 404);
         }
 
