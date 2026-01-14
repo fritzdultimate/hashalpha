@@ -19,6 +19,7 @@ function depositPanel() {
         time: 0,
         created_at: null,
         loadingAddress: true,
+        cancelling: false,
 
         init() {
             this.$watch('step', (value) => {
@@ -160,6 +161,7 @@ function depositPanel() {
         },
 
         async cancelDeposit() {
+            this.cancelling = true;
             if (!this.depositId) {
                 this.closePanel();
                 return;
@@ -181,6 +183,7 @@ function depositPanel() {
                 } else {
                     this.error = data.message || 'Failed to cancel';
                 }
+                this.cancelling = false;
             } catch (e) {
                 this.error = 'Network error';
                 console.error(e);
