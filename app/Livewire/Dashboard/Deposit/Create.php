@@ -184,6 +184,10 @@ class Create extends Component {
 
             $this->depositId = $deposit->id;
             $this->dispatch('address-created', invoice: $this->invoice, depositId: $this->depositId);
+            $this->dispatch('toast', payload: [
+                'message' => 'Your deposit is on the way! Processing time is subject to network conditions.',
+                'timeout' => 10000,
+            ]);
         });
         
     }
