@@ -171,8 +171,10 @@ function depositPanel() {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
                     }
                 });
+                console.log('cancelled');
                 const data = await res.json();
-                console.log(data)
+                const d = await res.text();
+                console.log(d)
                 if (data.success) {
                     this.status = 'cancelled';
                     this.progress = 0;
