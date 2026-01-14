@@ -31,8 +31,15 @@ class TeamDashboard extends Component
         $levelColumn = "level_{$level}_id";
         // dd($user->referrals());
         
-        $this->team = $user->referrals()
-            ->where($levelColumn, $user->id)
+        // $this->team = $user->referrals()
+        //     ->where($levelColumn, $user->id)
+        //     ->with('user')
+        //     ->get()
+        //     ->pluck('user')
+        //     ->filter()
+        //     ->values();
+
+        $this->team = Referral::where($levelColumn, $user->id)
             ->with('user')
             ->get()
             ->pluck('user')
