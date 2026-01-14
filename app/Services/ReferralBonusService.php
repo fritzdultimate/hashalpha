@@ -2,16 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\Referral;
 use App\Models\ReferralLevel;
 use App\Models\User;
 use App\Models\Stake;
 use App\Models\ReferralReward;
+use Illuminate\Support\Facades\DB;
 
 class ReferralBonusService {
     public static function distribute(User $staker, Stake $stake): void {
-        $levels = config('referrals.levels');
-        $delayDays = config('referrals.claim_delay_days');
-
         $levels = ReferralLevel::where('is_active', true)
             ->orderBy('level')
             ->get()
@@ -21,54 +20,69 @@ class ReferralBonusService {
             return;
         }
 
+        $referralTree = Referral::where('user_id', $staker->id)->first();
 
-        $currentUser = $staker;
-        $level = 1;
-
-        while ($level <= 10 && $currentUser->referred_by_id) {
-            $referrer = User::find($currentUser->referred_by_id);
-
-            if (! $referrer || ! isset($levels[$level])) {
-                break;
-            }
-
-            $bps = (int) $levels[$level]; // basis points
-            $amount = bcmul($stake->amount, bcdiv((string)$bps, '10000', 8), 8);
-
-            if (bccomp($amount, '0', 8) <= 0) {
-                $level++;
-                $currentUser = $referrer;
-                continue;
-            }
-
-            ReferralReward::create([
-                'user_id' => $referrer->id,
-                'from_user_id' => $staker->id,
-                'stake_id' => $stake->id,
-                'level' => $level,
-                'percent_bps' => $bps,
-                'amount' => $amount,
-                'status' => 'pending',
-                'lock_reason' => 'Stake cooling period',
-                'claimable_at' => now()->addDays($delayDays),
-                'calculated_for' => now()->startOfDay(),
-                'meta' => [
-                    'stake_amount' => $stake->amount,
-                    'plan_id' => $stake->plan_id,
-                ],
-            ]);
-
-            // notify referrer
-            // Notification::send($referrer, new ReferralBonusEarned(
-            //     $staker,
-            //     $amount,
-            //     $level,
-            //     $stake
-            // ));
-
-            $currentUser = $referrer;
-            $level++;
+        if (! $referralTree) {
+            return;
         }
+
+        DB::transaction(function () use ($levels, $referralTree, $stake, $staker) {
+            foreach ($levels as $config) {
+                $level = $config->level;
+                if ($level > 10) {
+                    break;
+                }
+
+                $referrerUserId = $referralTree->{"level_{$level}_id"} ?? null;
+
+                if (! $referrerUserId) {
+                    continue;
+                }
+
+                $referrer = User::find($referrerUserId);
+                if (! $referrer) {
+                    continue;
+                }
+
+                if ($referrer->id === $staker->id) {
+                    continue;
+                }
+
+                $amount = bcmul(
+                    $stake->amount,
+                    bcdiv((string) $config->percent_bps, '10000', 8),
+                    8
+                );
+
+                if (bccomp($amount, '0', 8) <= 0) {
+                    continue;
+                }
+
+                if (ReferralReward::where('stake_id', $stake->id)
+                    ->where('level', $level)
+                    ->exists()) {
+                    continue;
+                }
+
+                ReferralReward::create([
+                    'user_id' => $referrer->id,
+                    'from_user_id' => $staker->id,
+                    'stake_id' => $stake->id,
+                    'level' => $level,
+                    'percent_bps' => $config->percent_bps,
+                    'amount' => $amount,
+                    'status' => 'pending',
+                    'lock_reason' => "Level {$level} referral lock",
+                    'claimable_at' => now()->addDays($config->lock_days),
+                    'calculated_for' => now()->startOfDay(),
+                    'meta' => [
+                        'plan_id' => $stake->plan_id,
+                        'stake_amount' => $stake->amount,
+                    ],
+                ]);
+            }
+        });
+
     }
 }
 
