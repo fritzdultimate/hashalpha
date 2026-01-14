@@ -14,7 +14,7 @@
                             Have questions or need assistance? Our team is ready to help you with reliable support, clear guidance, and fast responses whenever you need us.
                         </p>
                     </div>
-                    <div style="opacity: 1; filter: blur(0px);" class="social-media-links-container halpha-hidden">
+                    <div style="opacity: 1; filter: blur(0px);" class="social-media-links-container !halpha-hidden">
                         <a href="https://www.facebook.com/" target="_blank" class="social-link-single w-inline-block">
                             <div></div>
                         </a>
@@ -45,13 +45,13 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="tel:(414)603-9721" class="text-decoration-none w-inline-block">
+                        <a href="tel:(414)603-9721" class="text-decoration-none w-inline-block !halpha-hidden">
                             <div class="flex align-start gap-column-12px">
                                 <img src="https://cdn.prod.website-files.com/64d2cc2d27b51cf1b517c011/64dfceeaa9539c2bbb96f31a_phone-circle-icon-cryptomatic-webflow-ecommerce-template.png"
                                     loading="eager" alt="" class="link-item-dark-image max-w-48px max-w-40px-mbl">
                                 <div class="grid-1-column gap-row-8px">
                                     <div class="text-200 color-neutral-100">Give us a call</div>
-                                    <div class="text-200 medium">(414) 603 - 9721</div>
+                                    <div class="text-200 medium">--</div>
                                 </div>
                             </div>
                         </a>
