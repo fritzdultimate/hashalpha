@@ -80,6 +80,8 @@ class ReferralBonusService {
                         'stake_amount' => $stake->amount,
                     ],
                 ]);
+
+                // send email
             }
         });
 
