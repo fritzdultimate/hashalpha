@@ -49,7 +49,11 @@ class ReferralRewards extends Component {
             ]);
         });
 
-        $this->dispatch('toast', type: 'success', message: 'Reward claimed');
+        $this->dispatch('toast', payload: [
+            'message' => 'Reward claimed',
+            'timeout' => 5000,
+            'type' => 'success'
+        ]);
     }
 
     public function claimAll() {

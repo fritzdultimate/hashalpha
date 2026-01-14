@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\RewardStatus;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -114,5 +115,52 @@ class EarningsPage extends Component
             'totalClaimed' => $totalClaimed,
             'withdrawable' => $withdrawable,
         ]);
+    }
+
+    public function compoundProfit($id) {
+        $earning = Reward::find($id);
+        if(! $earning) {
+            return ;
+        }
+
+        if($earning->status !== RewardStatus::PENDING) {
+            return ;
+        }
+
+        $stake = $earning->stake;
+
+        if (! $stake) {
+            return;
+        }
+
+        DB::transaction(function () use ($earning, $stake) {
+
+            $stake->update([
+                'amount' => bcadd(
+                    (string) $stake->amount,
+                    (string) $earning->amount,
+                    8
+                ),
+                'compounding' => true,
+            ]);
+
+            $earning->update([
+                'status' => RewardStatus::COMPOUNDED,
+                'compounded_at' => now(),
+            ]);
+
+            $this->dispatch('toast', payload: [
+                'message' => 'Reward successfully compounded',
+                'timeout' => 5000,
+                'type' => 'success'
+            ]);
+            $this->dispatch('$refresh');
+        });
+
+        // send email
+
+        
+
+
     }
 }

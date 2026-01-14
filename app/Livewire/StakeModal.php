@@ -93,6 +93,7 @@ class StakeModal extends Component
                 'user_id' => $user->id,
                 'plan_id' => $this->plan->id,
                 'amount' => $amt,
+                'capital' => $amt,
                 'status' => 'active',
                 'started_at' => now(),
                 'wallet_id' => '1',
