@@ -58,7 +58,7 @@
             <div class="halpha-mt-3 halpha-space-y-2 halpha-w-full">
                 <div class="halpha-flex halpha-gap-2 halpha-mt-2">
                     <button @click="cancelDeposit"
-                        class="halpha-flex-1 halpha-py-2 halpha-rounded halpha-border halpha-border-red-600 halpha-text-red-400">Cancel</button>
+                        class="halpha-flex-1 halpha-py-2 halpha-rounded halpha-border halpha-border-red-600 halpha-text-red-400" x-text="cancelling ? 'Please wait' : 'Cancel'">Cancel</button>
                     <button @click="closePanel"
                         class="halpha-flex-1 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-600 halpha-text-gray-300">Done</button>
                 </div>
