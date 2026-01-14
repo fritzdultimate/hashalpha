@@ -15,5 +15,7 @@ class PaymentSetting extends Model {
 
     protected $casts = [
         'is_active' => 'boolean',
+        'api_key' => 'encrypted',
+        'ipn_secret' => 'encrypted',
     ];
 }

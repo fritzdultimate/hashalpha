@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Domain\Staking\StakeRules;
 use App\Models\StakingPlan;
+use App\Services\ReferralBonusService;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -113,6 +114,8 @@ class StakeModal extends Component
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
+
+            ReferralBonusService::distribute($user, $stake);
 
             DB::commit();
         } catch (\Throwable $e) {

@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class PaymentSettingResource extends Resource
 {
@@ -38,6 +39,14 @@ class PaymentSettingResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function canDelete(Model $record): bool {
+        return false;
+    }
+
+    public static function canCreate(): bool {
+        return PaymentSetting::count() === 0;
     }
 
     public static function getPages(): array

@@ -21,6 +21,7 @@ use App\Livewire\PlansList;
 use App\Livewire\Dashboard\Deposit\Create as CreateDeposit;
 use App\Livewire\Dashboard\Deposit\History as DepositHistory;
 use App\Livewire\Dashboard\Overview;
+use App\Livewire\ReferralRewards;
 use Illuminate\Support\Facades\Route;
 
 
@@ -65,6 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Account
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/account/referral-bonuses', ReferralRewards::class)->name('account.referral.rewards');
     Route::get('/account/wallet', Wallets::class)->name('account.wallets');
     Route::get('/account/withdrawal', Withdrawal::class)->name('account.withdrawal');
     Route::get('/account/settings', Settings::class)->name('account.settings');
