@@ -27,9 +27,10 @@ class PaymentSettingForm
                         ->password()
                         ->required(),
                     TextInput::make('webhook_url')
+                        ->default(fn () => route('webhooks.nowpayments'))
                         ->label('Webhook URL')
                         ->disabled()
-                        ->default(fn () => route('webhooks.nowpayments')),
+                        ->dehydrated(),
                     Toggle::make('is_active')
                         ->label('Enable NowPayments'),
                 ]),
