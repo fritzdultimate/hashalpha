@@ -147,9 +147,10 @@
                         <div class="halpha-flex halpha-flex-col halpha-items-end halpha-gap-2">
                             <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-flex-row-reverse">
                                 <button wire:click="compoundProfit({{ $tx->id }})"
+                                    @disabled(! $this->isCompoundable($tx))
                                     wire:loading.attr="disabled"
                                     title="Copy reward id"
-                                    class="halpha-text-xs halpha-text-gray-300 halpha-border halpha-border-gray-700 halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-accent-2 disabled:halpha-opacity-50">
+                                    class="halpha-text-xs halpha-text-gray-300 halpha-border halpha-border-gray-700 halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-accent-2 disabled:halpha-opacity-20">
                                     <span wire:target="compoundProfit" wire:loading.remove>Compound</span>
                                     <span wire:loading wire:target="compoundProfit">waiting...</span>
                                 </button>

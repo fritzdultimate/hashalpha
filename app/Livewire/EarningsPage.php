@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Enums\RewardStatus;
+use App\Enums\StakeStatus;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -25,6 +26,34 @@ class EarningsPage extends Component
     public function mount() {
         $this->loadData();
     }
+
+    public function isCompoundable(Reward $reward): bool {
+        if ($reward->status !== RewardStatus::PENDING) {
+            return false;
+        }
+
+        $stake = $reward->stake;
+        if (! $stake) {
+            return false;
+        }
+
+
+        // if ($stake->status !== StakeStatus::ACTIVE) {
+        //     return false;
+        // }
+
+        if ($stake->ended_at && now()->greaterThanOrEqualTo($stake->ended_at)) {
+            return false;
+        }
+
+        // Optional: lock / claimable date
+        if ($reward->claimable_at && now()->lessThan($reward->claimable_at)) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     public function updatedFilter() {
         $this->resetPage();
@@ -124,6 +153,11 @@ class EarningsPage extends Component
         }
 
         if($earning->status !== RewardStatus::PENDING) {
+            $this->dispatch('toast', payload: [
+                'message' => "This reward has already been {$earning->status->value}",
+                'timeout' => 5000,
+                'type' => 'error'
+            ]);
             return ;
         }
 
