@@ -13,7 +13,7 @@ class ReferralRewards extends Component {
     public $filter = '';
     public $loading = false;
     public $confirmingClaimAll = false;
-    public $confirmingRewardId = 9;
+    public $confirmingRewardId = null;
     public $totalClaimed = 0;
     public $totalEarned = 0;
     public $withdrawable = 0;

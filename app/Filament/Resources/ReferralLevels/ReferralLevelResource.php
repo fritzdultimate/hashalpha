@@ -19,7 +19,7 @@ class ReferralLevelResource extends Resource
 {
     protected static ?string $model = ReferralLevel::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStar;
 
     public static function form(Schema $schema): Schema
     {
