@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard\Deposit;
 
+use App\Enums\DepositStatus;
 use App\Livewire\QrCode;
 use App\Models\Deposit;
 use App\Models\Wallet;
@@ -161,7 +162,7 @@ class Create extends Component {
                 'wallet_id' => $wallet->id,
                 'currency' => $this->network,
                 'amount' => $this->amount,
-                'status' => 'waiting',
+                'status' => DepositStatus::WAITING,
                 'note' => $this->note
             ]);
  

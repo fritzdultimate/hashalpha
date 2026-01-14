@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DepositStatus;
 use App\Models\Deposit;
 use App\Services\NowPaymentsService;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class DepositController extends Controller {
     public function cancelDeposit($id) {
         $deposit = Deposit::findOrFail($id);
 
-        if($deposit->status === 'finished') {
+        if($deposit->status === DepositStatus::FINISHED) {
             $deposit->status = 'cancelled';
             $deposit->save();
 
