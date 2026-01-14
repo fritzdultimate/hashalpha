@@ -8,10 +8,12 @@ enum DepositStatus: string
     case PENDING   = 'pending';
     case CONFIRMED    = 'confirmed';
     case CONFIRMING    = 'confirming';
+    case SENDING    = 'sending';
     case PARTIALLYPAID = 'partially_paid';
     case FINISHED = 'finished';
     case FAILED    = 'failed';
     case CANCELLED = 'canceled';
+    case REFUNDED = 'refunded';
     case EXPIRED = 'expired';
 
     public function label(): string
