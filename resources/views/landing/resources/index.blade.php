@@ -45,7 +45,7 @@
                     <li
                         class="halpha-flex halpha-justify-between halpha-items-start halpha-bg-[#0b0b0d] halpha-p-3 halpha-rounded">
                         <div>
-                            <a href="/blog/post-1" class="halpha-font-medium">v1.2 Release — Affiliate Dashboard &
+                            <a href="#blog-post" class="halpha-font-medium">v1.2 Release — Affiliate Dashboard &
                                 Tracking</a>
                             <div class="halpha-text-xs halpha-text-gray-400">Oct 15, 2025 — Improvements to affiliate
                                 onboarding and analytics</div>
@@ -55,7 +55,7 @@
                     <li
                         class="halpha-flex halpha-justify-between halpha-items-start halpha-bg-[#0b0b0d] halpha-p-3 halpha-rounded">
                         <div>
-                            <a href="/blog/post-2" class="halpha-font-medium">Whitepaper v1.0 Released</a>
+                            <a href="{{ asset('resources/halpha-whitepaper.pdf') }}" target="_blank" class="halpha-font-medium">Whitepaper v1.0 Released</a>
                             <div class="halpha-text-xs halpha-text-gray-400">Sep 12, 2025 — Architecture & tokenomics
                                 explained</div>
                         </div>

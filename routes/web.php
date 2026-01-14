@@ -40,7 +40,7 @@ Route::prefix('affiliate')->group(function () {
     Route::get('/tools', [AffiliateController::class, 'tools'])->name('affiliate.tools');
 });
 
-Route::prefix('resources')->group(function () {
+Route::prefix('docs')->group(function () {
     Route::get('/', [ResourceController::class, 'index'])->name('resources.index');
     Route::get('/roadmap', [ResourceController::class, 'roadmap'])->name('resources.roadmap');
     Route::get('/whitepaper/download', [ResourceController::class, 'downloadWhitepaper'])->name('resources.whitepaper.download');
