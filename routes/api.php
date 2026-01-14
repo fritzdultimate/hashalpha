@@ -10,4 +10,4 @@ Route::get('/transparency/beacon', [BeaconController::class, 'publicStatus'])->n
 Route::post('/webhooks/nowpayments', [NowPaymentsController::class, 'webhook'])->name('webhooks.nowpayments');
 
 Route::get('/deposit/status/{id}', [DepositController::class, 'pollDeposit']);
-Route::get('/deposit/cancel/{id}', [DepositController::class, 'cancelDeposit']);
+Route::post('/deposit/cancel/{id}', [DepositController::class, 'cancelDeposit']);

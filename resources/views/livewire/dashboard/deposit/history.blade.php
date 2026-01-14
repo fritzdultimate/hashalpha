@@ -106,8 +106,8 @@
                     <div class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-3 md:halpha-col-span-2">
                         <div class="halpha-flex halpha-items-center halpha-gap-2">
                             <span
-                                class="{{ $statusClasses[$tx->status] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }} halpha-px-2 halpha-py-1 halpha-rounded-full halpha-text-xs halpha-font-semibold">
-                                {{ strtolower($tx->status) }}
+                                class="{{ $statusClasses[$tx->status->value] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }} halpha-px-2 halpha-py-1 halpha-rounded-full halpha-text-xs halpha-font-semibold">
+                                {{ strtolower($tx->status->value) }}
                             </span>
                         </div>
 
@@ -168,7 +168,7 @@
 
                         <div class="halpha-flex halpha-flex-col halpha-gap-2 halpha-items-center">
                             <div class="halpha-text-xs halpha-text-gray-400">Status</div>
-                            <div class="halpha-text-sm halpha-font-semibold {{ $statusClasses[$selected->status] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }} halpha-inline-block halpha-px-3 halpha-py-0.5 halpha-rounded-full halpha-shadow">{{ $selected->status }}</div>
+                            <div class="halpha-text-sm halpha-font-semibold {{ $statusClasses[$selected->status->value] ?? 'halpha-text-gray-400 halpha-bg-gray-900/10' }} halpha-inline-block halpha-px-3 halpha-py-0.5 halpha-rounded-full halpha-shadow">{{ $selected->status->value }}</div>
                         </div>
 
                         <div>
