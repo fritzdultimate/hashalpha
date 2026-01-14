@@ -7,6 +7,7 @@ enum DepositStatus: string
     case WAITING = 'waiting';
     case PENDING   = 'pending';
     case CONFIRMED    = 'confirmed';
+    case CONFIRMING    = 'confirming';
     case PARTIALLYPAID = 'partially_paid';
     case FINISHED = 'finished';
     case FAILED    = 'failed';
