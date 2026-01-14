@@ -45,7 +45,7 @@ class DepositController extends Controller {
         }
 
         return response()->json([
-                'success' => false
-            ]);
+            'success' => false
+        ]);
     }
 }

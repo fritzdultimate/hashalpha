@@ -20,7 +20,7 @@ class Create extends Component {
     public $currency = 'ETH';
     public $amount;
     public $invoice;
-    public $depositId = 2;
+    public $depositId = null;
     public $wallets;
     public $note = '';
     public $network = '';

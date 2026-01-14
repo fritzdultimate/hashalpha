@@ -172,6 +172,7 @@ function depositPanel() {
                     }
                 });
                 const data = await res.json();
+                console.log(data)
                 if (data.success) {
                     this.status = 'cancelled';
                     this.progress = 0;
