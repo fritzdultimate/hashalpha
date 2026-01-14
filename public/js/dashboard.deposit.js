@@ -163,6 +163,7 @@ function depositPanel() {
         },
 
         async cancelDeposit() {
+            this.stopPolling();
             this.cancelling = true;
             if (!this.depositId) {
                 this.closePanel();
@@ -181,8 +182,8 @@ function depositPanel() {
                 if (data.success) {
                     this.status = 'cancelled';
                     this.progress = 0;
-                    this.stopPolling();
                 } else {
+                    this.startPolling();
                     this.error = data.message || 'Failed to cancel';
                 }
                 this.cancelling = false;
