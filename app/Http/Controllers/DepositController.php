@@ -30,7 +30,10 @@ class DepositController extends Controller {
     }
 
     public function cancelDeposit($id) {
-        $deposit = Deposit::where('user_id', auth()->id())->findOrFail($id);
+        $deposit = Deposit::where([
+            'user_id', auth()->id(),
+            'id' => $id
+        ])->first();
 
         if($deposit->status !== DepositStatus::FINISHED) {
             $deposit->status = DepositStatus::CANCELLED;
