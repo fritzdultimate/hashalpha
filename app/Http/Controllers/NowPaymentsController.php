@@ -67,7 +67,14 @@ class NowPaymentsController extends Controller {
 
                 
                 if ($paidAmount > 0) {
-                    $deposit->user->increment('balance', $paidAmount);
+                    $user = $deposit->user()->lockForUpdate()->first();
+                    $user->update([
+                        'balance' => bcadd(
+                            (string) $user->balance,
+                            (string) $paidAmount,
+                            8
+                        ),
+                    ]);
                 }
 
                 // 🔥 CREDIT USER HERE (only once)
