@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DepositStatus;
 use App\Mail\OtpNotification;
 use App\Models\Deposit;
 use App\Services\NowPaymentsService;
@@ -26,26 +27,51 @@ class NowPaymentsController extends Controller {
         $data = $req->json()->all();
         $orderId = $data['order_id'] ?? null;
 
+        if (! isset($data['payment_id'])) {
+            return response('Invalid payload', 400);
+        }
+
+
         DB::transaction(function() use ($orderId, $data) {
-            $deposit = Deposit::where('nowpayments_invoice_id', $data['payment_id'])->orWhere('id', $orderId)->lockForUpdate()->first();
+            $deposit = Deposit::where('nowpayments_invoice_id', $data['payment_id'])->lockForUpdate()->first();
             if (!$deposit) return;
-            
+
+            $allowedStatuses = [
+                DepositStatus::PENDING->value => ['waiting', 'confirming'],
+                DepositStatus::CONFIRMED->value => ['finished'],
+            ];
             $status = $data['payment_status'];
+            $currentStatus = $deposit->status->value;
+
+            if (isset($allowedStatuses[$currentStatus]) && ! in_array($status, $allowedStatuses[$currentStatus])) {
+                return; // ignore backward status
+            }
+            
             $deposit->status = $status;
             $deposit->tx_id = $data['pay_address'] ?? $data['tx_hash'] ?? $deposit->tx_id;
             $deposit->confirmations = $data['confirmations'] ?? $deposit->confirmations;
+            $deposit->meta = $data;
             $deposit->save();
 
-            if ($status === 'confirmed' && !$deposit->processed_at) {
-                // $wallet = $deposit->wallet;
-                // $wallet->pending_balance -= $deposit->amount;
-                // $wallet->balance += $deposit->amount;
-                // $wallet->save();
+            if ($deposit->processed_at) {
+                return;
+            }
 
-                $deposit->processed_at = now();
-                $deposit->save();
+            if ($deposit->status === DepositStatus::FINISHED) {
 
-                // AssignStakeOnDeposit::dispatch($deposit);
+                $deposit->update([
+                    'processed_at' => now(),
+                    'amount_paid' => $data['actually_paid']
+                ]);
+
+                $paidAmount = (float) ($data['actually_paid'] ?? 0);
+                if ($paidAmount > 0) {
+                    $deposit->user->increment('balance', $paidAmount);
+                }
+
+                // 🔥 CREDIT USER HERE (only once)
+                // Wallet::credit(...)
+                // Dispatch job if heavy logic
             }
         });
 
