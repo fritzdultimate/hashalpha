@@ -58,13 +58,14 @@ class NowPaymentsController extends Controller {
             }
 
             if ($deposit->status === DepositStatus::FINISHED) {
+                $paidAmount = (float) ($data['actually_paid'] ?? 0);
 
                 $deposit->update([
                     'processed_at' => now(),
-                    'amount_paid' => $data['actually_paid']
+                    'amount_paid' => $paidAmount
                 ]);
 
-                $paidAmount = (float) ($data['actually_paid'] ?? 0);
+                
                 if ($paidAmount > 0) {
                     $deposit->user->increment('balance', $paidAmount);
                 }
