@@ -59,11 +59,11 @@
                     <div class="grid-3-columns footer-main-pages-grid">
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">V-NFTs (Validator NFTs)</a>
+                                <a href="{{ route('nfts') }}" aria-current="page" class="footer-link w--current halpha-text-sm">V-NFTs (Validator NFTs)</a>
                             </li>
 
                             <li class="footer-list-item">
-                                <a href="#" aria-current="page" class="footer-link w--current halpha-text-sm">$HASH Token (Coming Soon)</a>
+                                <a href="{{ route('hash-token') }}" aria-current="page" class="footer-link w--current halpha-text-sm">$HASH Token (Coming Soon)</a>
                             </li>
 
                             <li class="footer-list-item">
