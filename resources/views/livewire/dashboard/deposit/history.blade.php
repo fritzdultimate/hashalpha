@@ -216,7 +216,7 @@
             navigator.clipboard.writeText(ref).then(() => {
                 // toast
                 const t = document.createElement('div');
-                t.textContent = 'Reference copied';
+                t.textContent = 'Wallet address copied';
                 t.className = 'halpha-fixed halpha-bottom-4 halpha-right-4 halpha-bg-gray-800 halpha-text-white halpha-p-2 halpha-rounded';
                 document.body.appendChild(t);
                 setTimeout(() => t.remove(), 1600);
