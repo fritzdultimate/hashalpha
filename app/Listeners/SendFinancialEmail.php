@@ -2,6 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Events\StakeCreated;
+use App\Events\WithdrawalRequested;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -22,21 +24,23 @@ class SendFinancialEmail implements ShouldQueue
      * Handle the event.
      */
     public function handle(object $event): void {
-        \Log::error('SendFinancial Listener ', [
-                'event' => $event,
-                'exist' => method_exists($event, 'deposit')
+        \Log::info('SendFinancialEmail fired', [
+            'event' => get_class($event),
+            'props' => get_object_vars($event),
         ]);
-        if (method_exists($event, 'deposit')) {
-            $this->sendDepositMail($event->deposit);
-        }
 
-        if (method_exists($event, 'stake')) {
-            $this->sendStakeMail($event->stake);
-        }
+        // if ($event instanceof DepositCreated) {
+        //     $this->sendDepositMail($event->deposit);
+        //     return;
+        // }
 
-        if (method_exists($event, 'withdrawal')) {
-            $this->sendWithdrawalMail($event->withdrawal);
-        }
+        // if ($event instanceof StakeCreated) {
+        //     $this->sendStakeMail($event->stake);
+        // }
+
+        // if ($event instanceof WithdrawalRequested) {
+        //     $this->sendWithdrawalMail($event->withdrawal);
+        // }
     }
 
     protected function sendDepositMail($deposit) {
