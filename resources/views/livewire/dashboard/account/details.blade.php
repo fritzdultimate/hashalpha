@@ -39,14 +39,14 @@
                 {{-- Phone --}}
                 <div>
                     <label class="halpha-text-xs halpha-text-gray-400">Phone Number</label>
-                    <input type="text" wire:model.defer="phone" class="halpha-input" placeholder="+234..." />
+                    <input type="text" wire:model.defer="phone" class="halpha-input" placeholder="" />
                 </div>
 
                 {{-- Country + Timezone --}}
                 <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-4">
                     <div>
                         <label class="halpha-text-xs halpha-text-gray-400">Country</label>
-                        <input type="text" wire:model.defer="country" class="halpha-input" placeholder="NG" />
+                        <input type="text" wire:model.defer="country" class="halpha-input" placeholder="" />
                     </div>
 
                     <div>
