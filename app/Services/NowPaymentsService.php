@@ -71,7 +71,7 @@ class NowPaymentsService {
      * Verify webhook signature (HMAC-SHA512)
      */
     public static function verifySignature($rawPayload, $receivedSignature) {
-        $ipnSecret = config('services.nowpayments.ipn_secret');
+        $ipnSecret = self::$ipnSecret;
 
         if ($receivedSignature === null) {
             return false;
