@@ -56,16 +56,19 @@
 
                     {{-- Estimated rewards --}}
                     <div class="halpha-bg-gray-800 halpha-p-3 halpha-rounded halpha-text-xs halpha-text-gray-300">
+                        @php
+                            $amountNumeric = is_numeric($amount) ? (float)$amount : 0;
+                        @endphp
                         <p>
                             <strong>Estimated daily reward:</strong>
                             <span>
-                                ${{ number_format($amount * 0.01 * $this->plan->daily_roi) }}
+                                ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi) }}
                             </span>
                         </p>
                         <p>
                             <strong>Estimated total reward:</strong>
                             <span>
-                                ${{ number_format($amount * 0.01 * $this->plan->daily_roi * $this->plan->duration) }}
+                                ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi * $this->plan->duration) }}
                             </span>
                         </p>
                     </div>
