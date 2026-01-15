@@ -62,6 +62,18 @@ class Overview extends Component
             ->selectRaw('SUM(s.amount * p.daily_roi / 100) as daily_reward')
             ->value('daily_reward');
 
+        $dailyEstimatedReward = $user->stakes()
+            ->where('status', 'active')
+            ->with('plan')
+            ->get()
+            ->sum(function ($stake) {
+                return bcmul(
+                    $stake->amount,
+                    bcdiv($stake->plan->daily_roi, '100', 8),
+                    8
+                );
+            });
+
 
         $this->dailyEstimatedReward = $dailyEstimatedReward ? round($dailyEstimatedReward, 2) : 0;
 
