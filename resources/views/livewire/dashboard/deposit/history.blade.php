@@ -153,7 +153,7 @@
                     <div class="halpha-flex halpha-items-start halpha-justify-between halpha-gap-3">
                         <div>
                             <h2 class="halpha-text-lg halpha-font-semibold halpha-text-white">{{ $this->mapCurrencyLabel($selected->currency) }}</h2>
-                            <p class="halpha-text-xs halpha-text-gray-400 truncate">{{ $selected->reference ?? '—' }}</p>
+                            <p class="halpha-text-xs halpha-text-gray-400 truncate">{{ $selected->tx_hash ?? '—' }}</p>
                         </div>
                         <button wire:click="closeModal" class="halpha-text-gray-400">Close</button>
                     </div>
@@ -187,7 +187,7 @@
 
                     <div class="halpha-mt-4 halpha-text-sm halpha-text-gray-300 halpha-space-y-2">
                         <div><strong class="halpha-text-gray-200">Reference:</strong> <span
-                                class="truncate block">{{ $selected->reference ?? '—' }}</span></div>
+                                class="truncate block">{{ $selected->tx_hash ?? '—' }}</span></div>
                         <div><strong class="halpha-text-gray-200">Notes:</strong> <span>{{ $selected->note ?? '—' }}</span>
                         </div>
                         <div><strong class="halpha-text-gray-200">Address:</strong>
@@ -197,7 +197,7 @@
 
                     <div class="halpha-flex halpha-justify-end halpha-gap-2 halpha-mt-4">
                         <a href="{{ $selected->explorer_url ?? '#' }}" target="_blank"
-                            class="halpha-text-xs halpha-font-medium halpha-px-3 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700">View
+                            class="halpha-text-xs halpha-font-medium halpha-px-3 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700 halpha-hidden">View
                             on explorer</a>
                         <button wire:click="closeModal"
                             class="halpha-text-xs halpha-font-medium halpha-px-3 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700">Done</button>
