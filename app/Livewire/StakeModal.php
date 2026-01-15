@@ -3,8 +3,10 @@
 namespace App\Livewire;
 
 use App\Domain\Staking\StakeRules;
+use App\Mail\StakeCreatedMail;
 use App\Models\StakingPlan;
 use App\Services\ReferralBonusService;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -97,6 +99,7 @@ class StakeModal extends Component
                 'status' => 'active',
                 'started_at' => now(),
                 'wallet_id' => '1',
+                'expected_end_date' => now()->addDays($this->plan->duration),
                 'meta' => [
                     'auto_compound' => (bool) $this->autoCompound
                 ]
@@ -117,6 +120,11 @@ class StakeModal extends Component
             ]);
 
             ReferralBonusService::distribute($user, $stake);
+
+            Mail::to($stake->user->email)
+            ->send(new StakeCreatedMail($stake));
+
+
 
             DB::commit();
         } catch (\Throwable $e) {

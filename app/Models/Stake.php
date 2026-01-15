@@ -13,6 +13,7 @@ class Stake extends Model {
         'next_payout_at' => 'datetime',
         'meta' => 'array',
         'status' => StakeStatus::class,
+        'expected_end_date' => 'datetime'
     ];
 
     public function user() {

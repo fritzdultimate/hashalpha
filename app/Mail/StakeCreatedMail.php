@@ -20,7 +20,7 @@ class StakeCreatedMail extends Mailable
      */
     public function __construct(public Stake $stake)
     {
-        //
+        $this->subject = '🎉 Your Stake Has Been Created';
     }
 
     /**
@@ -29,7 +29,7 @@ class StakeCreatedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Deposit Notification',
+            subject: $this->subject,
         );
     }
 
@@ -39,7 +39,14 @@ class StakeCreatedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.deposit',
+            markdown: 'emails.user.stake.created',
+            with: [
+                'user' => $this->stake->user,
+                'deposit' => $this->stake,
+                'plan' => $this->stake->plan,
+                'subject' => $this->subject,
+                'appName' => config('app.name'),
+            ]
         );
     }
 
