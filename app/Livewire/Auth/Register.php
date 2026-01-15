@@ -111,6 +111,11 @@ class Register extends Component {
                         DB::rollBack();
 
                         $this->addError('email', 'This email is already registered.');
+
+                        \Log::error('User registration failed: ', [
+                            'message' => $ex->getMessage(),
+                            'email' => $this->email,
+                        ]);
                         return;
                     }
                     if ($attempt >= $maxAttempts) {
