@@ -46,7 +46,7 @@
 
         @if($bonusPercent > 0)
             <div class="halpha-card halpha-rounded-lg halpha-bg-accent-soft halpha-p-3 halpha-text-[12px] halpha-text-accent-1 halpha-font-medium">
-                Deposit now and get {{ $bonusPercent }}% bonus! Bonus valid untill Feb. 01, 2026.
+                Deposit now and get {{ $bonusPercent }}% bonus! Bonus valid untill 1st February, 2026.
             </div>
         @endif
 
