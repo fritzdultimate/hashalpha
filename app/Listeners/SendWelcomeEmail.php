@@ -5,7 +5,7 @@ namespace App\Listeners;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendFinancialEmail
+class SendWelcomeEmail
 {
     use InteractsWithQueue;
 

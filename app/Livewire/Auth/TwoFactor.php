@@ -1,6 +1,7 @@
 <?php
 namespace App\Livewire\Auth;
 
+use App\Events\UserEmailVerified;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -41,7 +42,10 @@ class TwoFactor extends Component {
         }
         session()->forget(['2fa_user_id','2fa_type']);
         auth()->loginUsingId($this->user->id);
-        auth()->user()->markEmailAsVerified();
+        auth()->user()->markEmailAsVerified(); 
+
+        event(new UserEmailVerified(auth()->user()));
+
         return redirect()->intended('/dashboard');
     }
 

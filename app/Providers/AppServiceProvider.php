@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\DepositCreated;
 use App\Events\StakeCreated;
+use App\Events\UserEmailVerified;
 use App\Events\WithdrawalRequested;
 use App\Listeners\SendFinancialEmail;
+use App\Listeners\SendWelcomeEmail;
 use App\Models\Stake;
 use App\Observers\TransactionObserver;
 use Illuminate\Support\Facades\Event;
@@ -29,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(
             DepositCreated::class,
             SendFinancialEmail::class
+        );
+
+        Event::listen(
+            UserEmailVerified::class,
+            SendWelcomeEmail::class
         );
 
         // Event::listen(
