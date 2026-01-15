@@ -31,6 +31,8 @@ class DepositService {
         $bonusPercent = (float) CustomSetting::get('deposit_bonus_percentage', 0);
         $bonusDuration = (int) CustomSetting::get('deposit_bonus_duration_days', 0);
 
+        if($bonusPercent <= 0) return;
+
         $bonusAmount = $depositAmount * ($bonusPercent / 100);
 
         $deposit->update([
