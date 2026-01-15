@@ -20,14 +20,14 @@
 
                 {{-- Name --}}
                 <div>
-                    <label class="halpha-text-xs halpha-text-gray-400">Full Name</label>
-                    <input type="text" wire:model.defer="name" class="halpha-input" placeholder="Your full name" />
+                    <label class="halpha-text-xs halpha-text-gray-400">Username</label>
+                    <input disabled type="text" wire:model.defer="name" class="halpha-input disabled:halpha-opacity-50" placeholder="Your full name" />
                 </div>
 
                 {{-- Email --}}
                 <div>
                     <label class="halpha-text-xs halpha-text-gray-400">Email Address</label>
-                    <input type="email" wire:model.defer="email" class="halpha-input" placeholder="you@example.com" />
+                    <input disabled type="email" wire:model.defer="email" class="halpha-input disabled:halpha-opacity-50" placeholder="you@example.com" />
 
                     @if(!auth()->user()->hasVerifiedEmail())
                         <p class="halpha-text-xs halpha-text-warning halpha-mt-1">
@@ -51,7 +51,7 @@
 
                     <div>
                         <label class="halpha-text-xs halpha-text-gray-400">Timezone</label>
-                        <input type="text" wire:model.defer="timezone" class="halpha-input" placeholder="" />
+                        <input type="text" wire:model.defer="timezone" class="halpha-input" placeholder="UTC" />
                     </div>
                 </div>
 

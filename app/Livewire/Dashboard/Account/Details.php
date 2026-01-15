@@ -23,17 +23,16 @@ class Details extends Component {
 
         $this->name     = $user->name;
         $this->email    = $user->email;
-        $this->phone    = $user->phone;
+        $this->phone    = $user->phone_number;
         $this->country  = $user->country;
         $this->timezone = $user->timezone;
     }
 
     protected function rules() {
         return [
-            'name'     => 'required|string|min:3',
-            'email'    => 'required|email',
+            // 'name'     => 'required|string|min:3',
             'phone'    => 'nullable|string|min:7',
-            'country'  => 'nullable|string|max:2',
+            'country'  => 'nullable|string',
             'timezone' => 'nullable|string',
         ];
     }
@@ -44,7 +43,7 @@ class Details extends Component {
         auth()->user()->update([
             'name'     => $this->name,
             'email'    => $this->email,
-            'phone'    => $this->phone,
+            'phone_number'    => $this->phone,
             'country'  => $this->country,
             'timezone' => $this->timezone,
         ]);
