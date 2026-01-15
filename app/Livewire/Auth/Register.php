@@ -47,6 +47,7 @@ class Register extends Component {
     }
 
     public function submit() {
+        $this->email = strtolower(trim($this->email));
         $this->validate();
 
         $fullname = trim($this->fullname ?? '');
@@ -106,6 +107,12 @@ class Register extends Component {
                     $this->statusMessage = 'Account created! Redirecting…';
                     break;
                 } catch (QueryException $ex) {
+                    if ($ex->getCode() === '23000') {
+                        DB::rollBack();
+
+                        $this->addError('email', 'This email is already registered.');
+                        return;
+                    }
                     if ($attempt >= $maxAttempts) {
                         throw $ex;
                     }
@@ -132,6 +139,7 @@ class Register extends Component {
             DB::rollBack();
 
             \Log::error('User registration failed: '.$e->getMessage(), [
+                'message' => $e->getMessage(),
                 'email' => $this->email,
             ]);
 
