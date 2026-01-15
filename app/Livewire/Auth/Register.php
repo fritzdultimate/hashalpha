@@ -85,15 +85,15 @@ class Register extends Component {
                     $referrer = User::where('affiliate_code', $this->ref)->first();
                     $user = User::create([
                         'firstname' => $firstName,
-                        'lastname'  => $lastName,
-                        'email'     => $this->email,
-                        'password'  => Hash::make($this->password),
-                        'name'      => $candidate,
+                        'lastname' => $lastName,
+                        'email' => $this->email,
+                        'password' => Hash::make($this->password),
+                        'name' => $candidate,
                         'referrer_id' => $referrer?->id,
                     ]);
                     if($referrer) {
                         ReferralCreationService::createFor($user, $referrer);
-                        RankEvaluatorService::evaluate($user);
+                        RankEvaluatorService::evaluate($referrer);
 
                         Mail::to($referrer->email)->queue(
                             new ReferredUserNotice(

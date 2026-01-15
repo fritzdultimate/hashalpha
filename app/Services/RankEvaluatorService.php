@@ -9,7 +9,7 @@ use App\Models\UserRank;
 
 class RankEvaluatorService {
     public static function evaluate(User $user): void {
-        $volume = Stake::where('referrer_id', $user->id)->sum('amount');
+        $volume = Stake::where('user_id', $user->id)->sum('amount');
 
         $activeReferrals = ReferralReward::where('user_id', $user->id)
             ->whereHas('fromUser', fn($q) => $q->where('is_suspended', false))
