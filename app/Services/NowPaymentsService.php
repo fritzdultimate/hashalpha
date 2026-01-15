@@ -78,13 +78,12 @@ class NowPaymentsService {
         $settings = PaymentSetting::where('provider', 'nowpayments')
             ->where('is_active', true)
             ->first();
-        $ipnSecret = self::$ipnSecret;
         \Log::info($settings->ipn_secret);
 
         if ($receivedSignature === null) {
             return false;
         }
-        $expected = hash_hmac('sha512', $rawPayload, $ipnSecret);
+        $expected = hash_hmac('sha512', $rawPayload, $settings->ipn_secret);
 
         return hash_equals($expected, $receivedSignature);
     }
