@@ -189,6 +189,7 @@ class Create extends Component {
                 'message' => 'Your deposit is on the way! Processing time is subject to network conditions.',
                 'timeout' => 10000,
             ]);
+            
             event(new DepositCreated($deposit));
         });
         
