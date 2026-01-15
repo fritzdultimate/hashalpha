@@ -23,7 +23,7 @@
                 letter-spacing:0.5px;
                 color:#38bdf8;
             ">
-                {{ number_format($deposit->amount, 2) }}
+                ${{ number_format($deposit->amount, 2) }}
             </div>
 
             <p style="margin-top:10px; font-size:12px; color:#9CA3AF;">
@@ -82,7 +82,7 @@
                 <tr>
                     <td style="padding:6px 0;">Payment Method</td>
                     <td align="right" style="padding:6px 0;">
-                        {{ strtoupper($deposit->gateway ?? 'Crypto') }}
+                        {{ strtoupper($deposit->wallet->currency ?? 'Crypto') }}
                     </td>
                 </tr>
 
