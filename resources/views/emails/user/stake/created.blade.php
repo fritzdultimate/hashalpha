@@ -84,7 +84,7 @@
                 <tr>
                     <td style="padding:6px 0;">Stake ID</td>
                     <td align="right" style="padding:6px 0; color:#ffffff;">
-                        #{{ $stake->id }}
+                        #stake{{ $stake->id }}
                     </td>
                 </tr>
 
