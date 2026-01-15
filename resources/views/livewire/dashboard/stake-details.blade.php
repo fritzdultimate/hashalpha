@@ -24,7 +24,7 @@
                     <div class="halpha-space-y-2">
                         <div class="halpha-text-sm halpha-text-gray-400">Total earned</div>
                         <div class="halpha-text-lg halpha-font-semibold halpha-text-white">
-                            ${{ number_format($s->total_claimed ?? 0, 2) }}
+                            ${{ number_format($s->rewards->sum('amount'), 2) }}
                         </div>
 
                         <div class="halpha-flex halpha-items-center halpha-gap-2">
@@ -40,7 +40,7 @@
                     <div class="halpha-mt-auto">
                         <x-halpha-rounded-progress
                             :started-at="$s->started_at"
-                            :duration-days="10"
+                            :duration-days="$s->plan->duration"
                             size="56"
                             stroke="6"
                         />
