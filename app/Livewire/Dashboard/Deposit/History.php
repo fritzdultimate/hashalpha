@@ -40,7 +40,10 @@ class History extends Component {
     }
 
     public function showDetails($id){
-        $this->selected = Deposit::find($id);
+        $this->selected = Deposit::where([
+            'user_id', auth()->id(),
+            'id' => $id
+        ])->first();
         $this->showModal = (bool) $this->selected;
     }
 
