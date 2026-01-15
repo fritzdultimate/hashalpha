@@ -72,6 +72,7 @@ class NowPaymentsService {
      */
     public static function verifySignature($rawPayload, $receivedSignature) {
         $ipnSecret = self::$ipnSecret;
+        \Log::info($ipnSecret);
 
         if ($receivedSignature === null) {
             return false;
