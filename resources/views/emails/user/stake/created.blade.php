@@ -64,7 +64,7 @@
                 border-radius:999px;
                 text-transform:uppercase;
             ">
-                {{ ucfirst($stake->status) }}
+                {{ ucfirst($stake->status->value) }}
             </span>
         </td>
     </tr>
@@ -105,7 +105,7 @@
                 <tr>
                     <td style="padding:6px 0;">Status</td>
                     <td align="right" style="padding:6px 0; color:#facc15;">
-                        {{ ucfirst($stake->status) }}
+                        {{ ucfirst($stake->status->value) }}
                     </td>
                 </tr>
 
