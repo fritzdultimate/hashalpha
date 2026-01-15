@@ -135,7 +135,7 @@
                 Account ID
             </p>
             <p class="halpha-text-xs halpha-text-white halpha-mt-1">
-                {{ auth()->user()->id }}
+                {{ auth()->user()->affiliate_code }}
             </p>
         </div>
 
