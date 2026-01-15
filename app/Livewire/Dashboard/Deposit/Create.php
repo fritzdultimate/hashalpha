@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard\Deposit;
 
 use App\Enums\DepositStatus;
+use App\Events\DepositCreated;
 use App\Livewire\QrCode;
 use App\Models\Deposit;
 use App\Models\Wallet;
@@ -188,6 +189,7 @@ class Create extends Component {
                 'message' => 'Your deposit is on the way! Processing time is subject to network conditions.',
                 'timeout' => 10000,
             ]);
+            event(new DepositCreated($deposit));
         });
         
     }
