@@ -23,6 +23,6 @@ class SendWelcomeEmail
     public function handle(object $event): void {
 
         Mail::to($event->user->email)
-            ->send(new \App\Mail\DepositCreatedMail($event->user));
+            ->send(new \App\Mail\WelcomeMail($event->user));
     }
 }
