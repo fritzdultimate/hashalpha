@@ -85,6 +85,7 @@ class Overview extends Component
                 return DB::table('rewards')
                     ->where('user_id', auth()->id())
                     ->where('reward_type', 'staking')
+                    ->where('status', 'claimed')
                     ->sum('amount');
             }
         );
