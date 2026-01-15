@@ -44,9 +44,9 @@ class NowPaymentsController extends Controller {
             $status = $data['payment_status'];
             $currentStatus = $deposit->status->value;
 
-            if (isset($allowedStatuses[$currentStatus]) && ! in_array($status, $allowedStatuses[$currentStatus])) {
-                return; // ignore backward status
-            }
+            // if (isset($allowedStatuses[$currentStatus]) && ! in_array($status, $allowedStatuses[$currentStatus])) {
+            //     return;
+            // }
             
             $deposit->status = $status;
             $deposit->tx_id = $data['pay_address'] ?? $data['tx_hash'] ?? $deposit->tx_id;
