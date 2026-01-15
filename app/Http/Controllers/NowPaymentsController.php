@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 
 class NowPaymentsController extends Controller {
     public function webhook(Request $req) {
-        
+        \Log::info('nowpayments webhook called');
         $payload = $req->getContent();
         $signature = $req->header('x-nowpayments-sig');
 
