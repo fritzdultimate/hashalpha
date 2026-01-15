@@ -51,7 +51,7 @@
 
                     <div>
                         <label class="halpha-text-xs halpha-text-gray-400">Timezone</label>
-                        <input type="text" wire:model.defer="timezone" class="halpha-input" placeholder="Africa/Lagos" />
+                        <input type="text" wire:model.defer="timezone" class="halpha-input" placeholder="" />
                     </div>
                 </div>
 
