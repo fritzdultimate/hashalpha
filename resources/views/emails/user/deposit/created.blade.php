@@ -1,137 +1,116 @@
-<!DOCTYPE html>
-<html lang="en" style="margin:0; padding:0; background:#0f0f11;">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $subject }}</title>
-</head>
+@extends('emails.layouts.app')
 
-<body style="margin:0; padding:0; background:#0f0f11; font-family:Arial, Helvetica, sans-serif;">
+@section('contents')
+    <!-- Greeting -->
+    <tr>
+        <td style="font-size:14px; color:#d1d1d6; text-align:center; padding-bottom:18px;">
+            Hi {{ $user->name }}, your deposit has been successfully initiated.
+            We’re currently waiting for network confirmation.
+        </td>
+    </tr>
 
-<table width="100%" cellpadding="0" cellspacing="0" style="padding:30px 0;">
-<tr>
-<td align="center">
+    <!-- Amount Box -->
+    <tr>
+        <td align="center" style="padding:22px 0;">
+            <div style="
+                display:inline-block;
+                background:#020617;
+                border:1px solid #1e293b;
+                border-radius:14px;
+                padding:20px 34px;
+                font-size:34px;
+                font-weight:700;
+                letter-spacing:0.5px;
+                color:#38bdf8;
+            ">
+                {{ number_format($deposit->amount, 2) }}
+            </div>
 
-<!-- Card -->
-<table width="100%" cellpadding="0" cellspacing="0"
-       style="max-width:520px; background:#1a1a1f; border-radius:14px; padding:32px; border:1px solid #2b2b33; color:#ffffff;">
+            <p style="margin-top:10px; font-size:12px; color:#9CA3AF;">
+                Deposit amount submitted
+            </p>
+        </td>
+    </tr>
 
-<!-- Logo -->
-<tr>
-    <td align="center" style="padding-bottom:24px;">
-        <img src="{{ asset('img/logo/logo-white.png') }}" alt="{{ $appName }}"
-             style="width:120px; opacity:0.95;">
-    </td>
-</tr>
+    <!-- Status Badge -->
+    <tr>
+        <td align="center" style="padding-bottom:18px;">
+            <span style="
+                display:inline-block;
+                background:#0f172a;
+                border:1px solid #334155;
+                color:#facc15;
+                font-size:11px;
+                font-weight:600;
+                letter-spacing:0.4px;
+                padding:6px 14px;
+                border-radius:999px;
+                text-transform:uppercase;
+            ">
+                Pending Confirmation
+            </span>
+        </td>
+    </tr>
 
-<!-- Title -->
-<tr>
-    <td style="font-size:22px; font-weight:700; text-align:center; padding-bottom:10px;">
-        {{ $subject }}
-    </td>
-</tr>
+    <!-- Details -->
+    <tr>
+        <td>
+            <table width="100%" cellpadding="0" cellspacing="0"
+                style="
+                    background:#0b0b10;
+                    border-radius:12px;
+                    padding:18px;
+                    font-size:13px;
+                    color:#c7c7cc;
+                    border:1px solid #1f2937;
+                ">
 
-<!-- Greeting -->
-<tr>
-    <td style="font-size:14px; color:#d1d1d6; text-align:center; padding-bottom:20px;">
-        Hi {{ $user->name }}, your deposit has been successfully created, status will update automatically.
-    </td>
-</tr>
+                <tr>
+                    <td style="padding:6px 0;">Deposit ID</td>
+                    <td align="right" style="padding:6px 0; color:#ffffff;">
+                        #{{ $deposit->id }}
+                    </td>
+                </tr>
 
-<!-- Amount Box -->
-<tr>
-    <td align="center" style="padding:20px 0;">
-        <div style="
-            display:inline-block;
-            background:#0f172a;
-            border:1px solid #1e293b;
-            border-radius:12px;
-            padding:18px 28px;
-            font-size:32px;
-            font-weight:700;
-            color:#22d3ee;
-        ">
-            {{ number_format($deposit->amount_paid ?? $deposit->amount, 2) }}
-        </div>
+                <tr>
+                    <td style="padding:6px 0;">Status</td>
+                    <td align="right" style="padding:6px 0; color:#facc15;">
+                        Pending
+                    </td>
+                </tr>
 
-        <p style="margin-top:8px; font-size:12px; color:#9CA3AF;">
-            Amount credited to your wallet
-        </p>
-    </td>
-</tr>
+                <tr>
+                    <td style="padding:6px 0;">Payment Method</td>
+                    <td align="right" style="padding:6px 0;">
+                        {{ strtoupper($deposit->gateway ?? 'Crypto') }}
+                    </td>
+                </tr>
 
-<!-- Details -->
-<tr>
-<td>
-<table width="100%" cellpadding="0" cellspacing="0"
-       style="background:#0f0f14; border-radius:10px; padding:16px; font-size:13px; color:#c7c7cc;">
+                <tr>
+                    <td style="padding:6px 0;">Transaction ID</td>
+                    <td align="right" style="padding:6px 0; font-size:11px; color:#9CA3AF;">
+                        {{ $deposit->tx_id ?? 'Will be available after confirmation' }}
+                    </td>
+                </tr>
 
-<tr>
-    <td style="padding:6px 0;">Deposit ID</td>
-    <td align="right" style="padding:6px 0; color:#ffffff;">
-        #{{ $deposit->id }}
-    </td>
-</tr>
+                <tr>
+                    <td style="padding:6px 0;">Created At</td>
+                    <td align="right" style="padding:6px 0;">
+                        {{ $deposit->created_at->format('M d, Y • H:i') }}
+                    </td>
+                </tr>
 
-<tr>
-    <td style="padding:6px 0;">Status</td>
-    <td align="right" style="padding:6px 0; color:#22c55e;">
-        Completed
-    </td>
-</tr>
+            </table>
+        </td>
+    </tr>
 
-<tr>
-    <td style="padding:6px 0;">Payment Method</td>
-    <td align="right" style="padding:6px 0;">
-        {{ strtoupper($deposit->gateway ?? 'Crypto') }}
-    </td>
-</tr>
-
-<tr>
-    <td style="padding:6px 0;">Transaction ID</td>
-    <td align="right" style="padding:6px 0; font-size:11px;">
-        {{ $deposit->tx_id ?? 'N/A' }}
-    </td>
-</tr>
-
-<tr>
-    <td style="padding:6px 0;">Date</td>
-    <td align="right" style="padding:6px 0;">
-        {{ $deposit->processed_at?->format('M d, Y • H:i') }}
-    </td>
-</tr>
-
-</table>
-</td>
-</tr>
-
-<!-- Info -->
-<tr>
-    <td style="padding-top:20px; font-size:12px; color:#8d8d95; text-align:center;">
-        Your wallet balance has been updated and is now available for use.
-        If you did not initiate this deposit, please contact support immediately.
-    </td>
-</tr>
-
-<!-- Divider -->
-<tr>
-    <td style="border-bottom:1px solid #2b2b33; padding:24px 0;"></td>
-</tr>
-
-<!-- Footer -->
-<tr>
-<td align="center" style="padding-top:20px; font-size:11px; color:#9CA3AF;">
-    © {{ date('Y') }} {{ $appName }}. All rights reserved.<br>
-    Secure • Encrypted • Trusted Infrastructure
-</td>
-</tr>
-
-</table>
-<!-- End Card -->
-
-</td>
-</tr>
-</table>
-
-</body>
-</html>
+    <!-- Info -->
+    <tr>
+        <td style="padding-top:22px; font-size:12px; color:#8d8d95; text-align:center; line-height:18px;">
+            This deposit will be credited to your wallet automatically once the
+            required network confirmations are completed.
+            <br><br>
+            If you did not initiate this deposit, please contact our support team immediately.
+        </td>
+    </tr>
+@endsection
