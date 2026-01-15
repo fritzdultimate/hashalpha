@@ -13,21 +13,18 @@ use Illuminate\Support\Facades\Mail;
 
 class NowPaymentsController extends Controller {
     public function webhook(Request $req) {
-        \Log::info('nowpayments webhook called 1');
         $payload = $req->getContent();
         $signature = $req->header('x-nowpayments-sig');
 
         if (!$signature) {
             return response('Invalid signature', 400);
         }
-        \Log::info('nowpayments webhook called 2');
 
         if (!NowPaymentsService::verifySignature($payload, $signature)) {
             \Log::info('Invalid signature');
             return response('Invalid signature', 400);
             
         }
-        \Log::info('nowpayments webhook called 3');
 
         $data = $req->json()->all();
         $orderId = $data['order_id'] ?? null;
@@ -36,7 +33,6 @@ class NowPaymentsController extends Controller {
             return response('Invalid payload', 400);
         }
 
-        \Log::info($data);
 
 
         DB::transaction(function() use ($orderId, $data) {
@@ -74,15 +70,8 @@ class NowPaymentsController extends Controller {
 
                 
                 if ($paidAmount > 0) {
-                    \Log::info("Paid amount: $paidAmount");
                     $user = $deposit->user()->lockForUpdate()->first();
-                    $user->update([
-                        'balance' => bcadd(
-                            (string) $user->balance,
-                            (string) $paidAmount,
-                            8
-                        ),
-                    ]);
+                    
                     $user->increment('balance', $paidAmount);
 
                     DepositService::depositBonus($user, $deposit);
