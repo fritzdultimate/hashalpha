@@ -54,7 +54,7 @@ class Bonuses extends Component {
 
     public function render() {
         return view('livewire.dashboard.affiliate.bonuses', [
-            'bonuses' => ReferralReward::with('referralUser')
+            'bonuses' => ReferralReward::with('fromUser')
                 ->where('user_id', auth()->id())
                 ->latest()
                 ->limit(20)
