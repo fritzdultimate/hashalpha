@@ -81,6 +81,12 @@ class MigrateSqliteToMysql extends Command
                         continue;
                     }
 
+                    if ($column === 'rules') {
+                        // If value is plain text, convert each line to JSON array
+                        $lines = preg_split('/\r\n|\r|\n/', $value);
+                        $row[$column] = json_encode(array_map('trim', $lines));
+                    }
+
                     if (Schema::getColumnType($name, $column) === 'json') {
                         if (!is_array($value) && !is_object($value)) {
                             $decoded = json_decode($value, true);
