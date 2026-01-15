@@ -23,7 +23,9 @@ class NowPaymentsController extends Controller {
         \Log::info('nowpayments webhook called 2');
 
         if (!NowPaymentsService::verifySignature($payload, $signature)) {
+            \Log::info('Invalid signature');
             return response('Invalid signature', 400);
+            
         }
         \Log::info('nowpayments webhook called 3');
 
