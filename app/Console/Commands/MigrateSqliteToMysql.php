@@ -44,7 +44,7 @@ class MigrateSqliteToMysql extends Command
             'referrals',
             'withdrawals',
             'deposits',
-            'admin_transactions',
+            // 'admin_transactions',
             'roles',
             'permissions',
             'model_has_roles',
