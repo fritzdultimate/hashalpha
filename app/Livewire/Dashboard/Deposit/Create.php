@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard\Deposit;
 use App\Enums\DepositStatus;
 use App\Events\DepositCreated;
 use App\Livewire\QrCode;
+use App\Models\CustomSetting;
 use App\Models\Deposit;
 use App\Models\Wallet;
 use App\Services\NowPaymentsService;
@@ -34,6 +35,8 @@ class Create extends Component {
     public $search;
 
     public $selectedWallet = null;
+    public $bonusPercent;
+    public $bonusDuration;
 
     public function updated($prop, $value) {
         if($prop === "search") {
@@ -101,6 +104,9 @@ class Create extends Component {
     public function mount(NowPaymentsService $np) {
         $this->nowPaymentWallets = $np->getCurrencies();
         $this->filteredCurrencies = $this->nowPaymentWallets;
+
+        $this->bonusPercent = CustomSetting::get('deposit_bonus_percentage', 0);
+        $this->bonusDuration = CustomSetting::get('deposit_bonus_duration_days', 0);
     }
 
 
