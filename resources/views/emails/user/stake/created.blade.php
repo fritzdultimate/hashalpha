@@ -89,13 +89,6 @@
                 </tr>
 
                 <tr>
-                    <td style="padding:6px 0;">Plan ID</td>
-                    <td align="right" style="padding:6px 0; color:#ffffff;">
-                        {{ $plan->id ?? 'N/A' }}
-                    </td>
-                </tr>
-
-                <tr>
                     <td style="padding:6px 0;">Amount</td>
                     <td align="right" style="padding:6px 0; color:#38bdf8;">
                         ${{ number_format($stake->amount, 2) }}
