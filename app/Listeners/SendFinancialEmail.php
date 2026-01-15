@@ -22,6 +22,10 @@ class SendFinancialEmail implements ShouldQueue
      * Handle the event.
      */
     public function handle(object $event): void {
+        \Log::error('SendFinancial Listener ', [
+                'event' => $event,
+                'exist' => method_exists($event, 'deposit')
+        ]);
         if (method_exists($event, 'deposit')) {
             $this->sendDepositMail($event->deposit);
         }

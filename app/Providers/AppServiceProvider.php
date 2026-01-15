@@ -31,14 +31,14 @@ class AppServiceProvider extends ServiceProvider
             SendFinancialEmail::class
         );
 
-        Event::listen(
-            StakeCreated::class,
-            SendFinancialEmail::class
-        );
+        // Event::listen(
+        //     StakeCreated::class,
+        //     SendFinancialEmail::class
+        // );
 
-        Event::listen(
-            WithdrawalRequested::class,
-            SendFinancialEmail::class
-        );
+        // Event::listen(
+        //     WithdrawalRequested::class,
+        //     SendFinancialEmail::class
+        // );
     }
 }
