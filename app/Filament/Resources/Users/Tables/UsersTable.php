@@ -11,6 +11,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -69,7 +70,10 @@ class UsersTable
                 //
             ])
             ->recordActions([
-                Action::make('topup')
+                ViewAction::make()
+                    ->badge(),
+                ActionGroup::make([
+                    Action::make('topup')
                     ->label('Top Up')
                     ->icon('heroicon-o-plus-circle')
                     ->color('success')
@@ -90,7 +94,13 @@ class UsersTable
                             $data['reason'] ?? null,
                             auth()->user()
                         );
+
+                        Notification::make()
+                            ->title('Balance Updated')
+                            ->success()
+                            ->send();
                     }),
+                    // ->visible(fn () => auth()->user()->hasRole(['super-admin'])),
 
                 Action::make('debit')
                     ->label('Debit')
@@ -113,15 +123,13 @@ class UsersTable
                             $data['reason'],
                             auth()->user()
                         );
-                    }),
-                ViewAction::make()
-                    ->badge(),
-                ActionGroup::make([
-                    Action::make('cancel')
-                        ->label('Cancel')
-                        ->color('danger')
-                        ->icon('heroicon-o-x-mark')
-                        ->requiresConfirmation()
+
+                        Notification::make()
+                            ->title('Balance Updated')
+                            ->success()
+                            ->send();
+                    })
+                    // ->visible(fn () => auth()->user()->hasRole(['super-admin'])),
                 ]),
                 
             ])

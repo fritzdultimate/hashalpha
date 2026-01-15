@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::table('rewards', function (Blueprint $table) {
             $table->renameColumn('amount_usd', 'compounded_at');
-
-            Schema::table('rewards', function (Blueprint $table) {
-                $table->timestamp('compounded_at')->nullable()->change();
-            });
+        });
+        Schema::table('rewards', function (Blueprint $table) {
+            $table->timestamp('compounded_at')->nullable()->change();
         });
     }
 
