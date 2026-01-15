@@ -74,6 +74,7 @@ class NowPaymentsController extends Controller {
 
                 
                 if ($paidAmount > 0) {
+                    \Log::info("Paid amount: $paidAmount");
                     $user = $deposit->user()->lockForUpdate()->first();
                     $user->update([
                         'balance' => bcadd(
@@ -82,6 +83,7 @@ class NowPaymentsController extends Controller {
                             8
                         ),
                     ]);
+                    $user->increment('balance', $paidAmount);
 
                     DepositService::depositBonus($user, $deposit);
                 }
