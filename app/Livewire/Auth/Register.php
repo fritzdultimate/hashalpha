@@ -112,7 +112,7 @@ class Register extends Component {
 
                         $this->addError('email', 'This email is already registered.');
 
-                        \Log::error('User registration failed: ', [
+                        \Log::error('User registration failed here: ', [
                             'message' => $ex->getMessage(),
                             'email' => $this->email,
                         ]);
