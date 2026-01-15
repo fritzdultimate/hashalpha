@@ -36,7 +36,7 @@ class NowPaymentsController extends Controller {
             return response('Invalid payload', 400);
         }
 
-        \Log::info('nowpayments webhook called 4');
+        \Log::info($data);
 
 
         DB::transaction(function() use ($orderId, $data) {
