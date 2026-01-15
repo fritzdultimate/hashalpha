@@ -50,7 +50,7 @@ class History extends Component {
     }
 
     public function getTransactionsQueryProperty() {
-        $q = Deposit::query()
+        $q = Deposit::query()->where('user_id', auth()->id())
             ->when($this->search, fn($builder) => $builder->where(function($b) {
                 $b->where('currency', 'like', '%'.$this->search.'%')
                   ->orWhere('address', 'like', '%'.$this->search.'%')
