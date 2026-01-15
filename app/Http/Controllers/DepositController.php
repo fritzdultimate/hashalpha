@@ -16,7 +16,7 @@ class DepositController extends Controller {
 
         $details = $np->getPaymentStatus($deposit->nowpayments_invoice_id);
 
-        $deposit->status = $details["payment_status"] ?? $deposit->status;
+        // $deposit->status = $details["payment_status"] ?? $deposit->status;
         $deposit->tx_hash = $details["payin_hash"] ?? $deposit->tx_hash;
         $deposit->amount_paid = $details["actually_paid"] ?? $deposit->amount_paid;
         $deposit->save();
