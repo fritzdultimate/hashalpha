@@ -48,8 +48,10 @@ class ReferralBonusService {
                     continue;
                 }
 
+                $mainBonus = $stake->amount * 0.01 * $stake->plan->daily_roi;
+
                 $amount = bcmul(
-                    $stake->amount,
+                    $mainBonus,
                     bcdiv((string) $config->percent_bps, '10000', 8),
                     8
                 );
@@ -78,6 +80,7 @@ class ReferralBonusService {
                     'meta' => [
                         'plan_id' => $stake->plan_id,
                         'stake_amount' => $stake->amount,
+                        'grand_bonus' => $mainBonus
                     ],
                 ]);
 

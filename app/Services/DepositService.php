@@ -39,5 +39,7 @@ class DepositService {
             'bonus' => $bonusAmount,
             'bonus_expires_at' => now()->addDays($bonusDuration),
         ]);
+
+        // email deposit received bonus
     }
 }

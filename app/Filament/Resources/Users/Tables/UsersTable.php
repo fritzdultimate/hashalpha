@@ -128,9 +128,87 @@ class UsersTable
                             ->title('Balance Updated')
                             ->success()
                             ->send();
-                    })
+                    }),
                     // ->visible(fn () => auth()->user()->hasRole(['super-admin'])),
+
+                Action::make('lockRewards')
+                    ->label('Lock Rewards')
+                    ->icon('heroicon-o-lock-closed')
+                    ->color('danger')
+                    ->form([
+                        Textarea::make('reason')
+                            ->label('Reason for locking rewards')
+                            ->required()
+                            ->maxLength(500),
+                    ])
+                    ->requiresConfirmation()
+                    ->modalHeading('Lock Stake Rewards')
+                    ->modalDescription('This will prevent the user from claiming rewards generated from all their stakes.')
+                    ->action(function ($record, array $data) {
+                        $record->stakes()
+                            ->whereHas('rewards')
+                            ->each(function ($stake) use ($data) {
+                                $stake->rewards()
+                                ->where('status', 'pending')
+                                ->update([
+                                    'rewards_locked_at' => now(),
+                                    'rewards_locked_by' => auth()->id(),
+                                    'lock_reason' => $data['reason'],
+                                    'status' => 'locked'
+                                ]);
+                            });
+
+                        Notification::make()
+                            ->title('Rewards Locked')
+                            ->body('The user can no longer claim rewards from any of their stakes.')
+                            ->danger()
+                            ->send();
+                    })
+                    ->visible(fn ($record) =>
+                        $record->stakes()
+                            ->where('status', 'active')
+                            ->whereHas('rewards', function ($q) {
+                                $q->whereNull('rewards_locked_at')
+                                ->where('status', 'pending');
+                            })
+                            ->exists()
+                    ),
+
+                    Action::make('unlockRewards')
+                        ->label('Unlock Rewards')
+                        ->icon('heroicon-o-lock-open')
+                        ->color('success')
+                        ->requiresConfirmation()
+                        ->action(function ($record) {
+
+                            $record->stakes()
+                                ->whereHas('rewards')
+                                ->each(function ($stake) {
+                                    $stake->rewards()
+                                    ->where('status', 'locked')
+                                    ->update([
+                                        'rewards_locked_at' => null,
+                                        'rewards_locked_by' => null,
+                                        'lock_reason' => null,
+                                        'status' => 'pending'
+                                    ]);
+                                });
+
+                            Notification::make()
+                                ->title('Rewards Unlocked')
+                                ->success()
+                                ->send();
+                        })
+                        ->visible(fn ($record) => 
+                            $record->stakes()
+                            ->where('status', 'active')
+                            ->whereHas('rewards', fn ($q) =>
+                                $q->whereNotNull('rewards_locked_at')->where('status', 'locked')
+                            )->exists()
+                        ),
+
                 ]),
+                
                 
             ])
             ->toolbarActions([

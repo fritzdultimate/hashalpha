@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\DepositBonusReceived;
 use App\Events\DepositCreated;
 use App\Events\StakeCreated;
 use App\Events\WithdrawalRequested;
@@ -26,14 +27,13 @@ class SendFinancialEmail
      * Handle the event.
      */
     public function handle(object $event): void {
-        Log::info('SendFinancialEmail fired', [
-            'event' => get_class($event),
-            'props' => get_object_vars($event),
-            'instance' => $event instanceof DepositCreated
-        ]);
-
         if ($event instanceof DepositCreated) {
             $this->sendDepositMail($event->deposit);
+            return;
+        }
+
+        if ($event instanceof DepositBonusReceived) {
+            $this->sendReceivedBonusMail($event->deposit);
             return;
         }
 
@@ -47,6 +47,11 @@ class SendFinancialEmail
     }
 
     protected function sendDepositMail($deposit) {
+        Mail::to($deposit->user->email)
+            ->send(new \App\Mail\DepositCreatedMail($deposit));
+    }
+
+    protected function sendReceivedBonusMail($deposit) {
         Mail::to($deposit->user->email)
             ->send(new \App\Mail\DepositCreatedMail($deposit));
     }

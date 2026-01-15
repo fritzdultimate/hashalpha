@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\DepositStatus;
 use App\Mail\OtpNotification;
 use App\Models\Deposit;
+use App\Services\DepositService;
 use App\Services\NowPaymentsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -75,6 +76,8 @@ class NowPaymentsController extends Controller {
                             8
                         ),
                     ]);
+
+                    DepositService::depositBonus($user, $deposit);
                 }
 
                 // 🔥 CREDIT USER HERE (only once)
