@@ -8,6 +8,7 @@ use App\Livewire\QrCode;
 use App\Models\CustomSetting;
 use App\Models\Deposit;
 use App\Models\Wallet;
+use App\Services\DepositService;
 use App\Services\NowPaymentsService;
 use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Auth;
@@ -131,24 +132,27 @@ class Create extends Component {
         //     return;
         // }
 
-        TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
-        $this->dispatch('otp-created', $this->invoice);
+        // TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
+        // $this->dispatch('otp-created', $this->invoice);
+
+        $this->createPayment();
+
 
     }
 
 
     public function createPayment() {
 
-        if($this->otp === null) {
-            $this->addError('otp', 'Your OTP is required.');
-            return;
-        }
+        // if($this->otp === null) {
+        //     $this->addError('otp', 'Your OTP is required.');
+        //     return;
+        // }
 
-        $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
-        if(!$ok) {
-            $this->addError('otp', 'Invalid or expired otp.');
-            return;
-        }
+        // $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
+        // if(!$ok) {
+        //     $this->addError('otp', 'Invalid or expired otp.');
+        //     return;
+        // }
 
 
 
@@ -197,6 +201,7 @@ class Create extends Component {
             ]);
 
             event(new DepositCreated($deposit));
+            DepositService::depositBonus($deposit->user, $deposit);
         });
         
     }

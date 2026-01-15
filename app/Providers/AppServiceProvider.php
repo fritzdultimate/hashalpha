@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\DepositBonusReceived;
 use App\Events\DepositCreated;
 use App\Events\StakeCreated;
 use App\Events\UserEmailVerified;
@@ -36,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(
             UserEmailVerified::class,
             SendWelcomeEmail::class
+        );
+
+        Event::listen(
+            DepositBonusReceived::class,
+            SendFinancialEmail::class
         );
 
         // Event::listen(

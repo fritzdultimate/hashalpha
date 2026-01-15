@@ -15,7 +15,9 @@ class Deposit extends Model
         'nowpayments_invoice_id',
         'amount_paid',
         'note',
-        'status'
+        'status',
+        'bonus',
+        'bonus_expires_at'
     ];
     protected $casts = [
         'meta' => 'array',

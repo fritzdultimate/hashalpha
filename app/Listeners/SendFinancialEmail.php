@@ -53,7 +53,7 @@ class SendFinancialEmail
 
     protected function sendReceivedBonusMail($deposit) {
         Mail::to($deposit->user->email)
-            ->send(new \App\Mail\DepositCreatedMail($deposit));
+            ->send(new \App\Mail\DepositBonusMail($deposit));
     }
 
     protected function sendStakeMail($stake)

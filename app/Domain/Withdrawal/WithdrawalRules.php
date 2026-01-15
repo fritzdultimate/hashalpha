@@ -29,7 +29,20 @@ class WithdrawalRules {
 
         if (bccomp($amount, $min, 8) === -1) {
             throw new DomainException(
-                "Minimum withdrawal amount is {$min}."
+                "Minimum withdrawal amount is $" . number_format($min, 2)
+            );
+        }
+    }
+
+    protected static function userOnCompounding(User $user): void {
+        $compounded = $user->stakes()
+            ->where('status', 'active')
+            ->where('compounding', true)
+            ->exists();
+        
+        if($compounded) {
+            throw new DomainException(
+                "Account has active compounding stakes. Withdrawals are not allowed."
             );
         }
     }
@@ -42,7 +55,7 @@ class WithdrawalRules {
 
         if (bccomp($amount, $max, 8) === 1) {
             throw new DomainException(
-                "Maximum withdrawal amount per request is {$max}."
+                'Maximum withdrawal amount per request is $' . number_format($max, 2)
             );
         }
     }
