@@ -34,7 +34,6 @@ class StakesIndex extends Component {
     }
 
     public function openPanel() {
-        // toggle to list tab and expose browser event so front-end can show panel
         $this->tab = 'list';
         $this->dispatchBrowserEvent('open-stakes-panel');
     }
