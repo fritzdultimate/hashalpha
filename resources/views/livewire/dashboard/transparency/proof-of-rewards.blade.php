@@ -129,7 +129,7 @@
                     </li>
                 </ul>
 
-                <a class="halpha-bg-card-bg halpha-border halpha-rounded halpha-border-gray-600 halpha-flex halpha-gap-2 halpha-items-center halpha-p-2 halpha-px-6 halpha-text-accent-2 halpha-text-sm hover:halpha-opacity-70" href="#" target="_blank">
+                <a class="halpha-bg-card-bg halpha-border halpha-rounded halpha-border-gray-600 halpha-flex halpha-gap-2 halpha-items-center halpha-p-2 halpha-px-6 halpha-text-accent-2 halpha-text-sm hover:halpha-opacity-70" href="https://beaconcha.in/validator/1551509" target="_blank">
                     <x-heroicon-s-link class="halpha-h-4 halpha-w-4" />
                     View on Beacon Explorer
                 </a>
@@ -149,7 +149,7 @@
 
             <div class="halpha-flex halpha-gap-2 halpha-text-sm halpha-text-gray-400">
                 <span class="halpha-hidden md:halpha-block">Cumulative Rewards Earned:</span>
-                <span class="halpha-text-white">0 ETH</span>
+                <span class="halpha-text-white">{{ $cumulativeRewards }} ETH</span>
             </div>
         </h3>
 
@@ -169,26 +169,6 @@
                 </thead>
 
                 <tbody class="halpha-text-sm halpha-font-sans">
-                    @php
-                        $rewards = [
-                            [
-                                'amount' => 0,
-                                'date' => 'April 26, 2022 UTC'
-                            ], 
-                            [
-                                'amount' => 0,
-                                'date' => 'April 26, 2022 UTC'
-                            ], 
-                            [
-                                'amount' => 0,
-                                'date' => 'April 25, 2022 UTC'
-                            ], 
-                            [
-                                'amount' => 0,
-                                'date' => 'April 25, 2022 UTC'
-                            ]
-                        ]
-                    @endphp
 
                     @foreach ($rewards as $reward)
                         <tr
@@ -200,7 +180,7 @@
                         >
                             <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
                                 <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Date</span>
-                                {{ $reward['date'] }}
+                                {{ $reward['created_at'] }}
                             </td>
 
                             <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
@@ -210,12 +190,12 @@
 
                             <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
                                 <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Reward Status</span>
-                                Credited
+                                {{ $reward['status'] }}
                             </td>
 
                             <td class="halpha-py-2 md:halpha-py-3.5 halpha-px-4 halpha-text-[#f0f0f0]">
                                 <span class="halpha-block md:halpha-hidden halpha-text-xs halpha-text-gray-400">Source</span>
-                                Validator Rewards
+                                {{ $reward['source'] }}
                             </td>
                         </tr>
                     @endforeach
@@ -224,6 +204,15 @@
                 </tbody>
             </table>
         </div>
+
+        
+        <div
+            class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-items-center halpha-justify-between halpha-gap-3 halpha-p-4 halpha-border-t halpha-border-white/5 halpha-border-red-600 halpha-border">
+            <div class="halpha-text-xs halpha-text-muted">Showing {{ $rewards->firstItem() ?? 0 }} to
+                {{ $rewards->lastItem() ?? 0 }} of {{ $rewards->total() ?? count($rewards) }}</div>
+            <div class="halpha-text-sm halpha-pagination halpha-flex halpha-items-center halpha-gap-2 halpha-w-full">{{ $rewards->links() }}</div>
+        </div>
+       
 
 
 
