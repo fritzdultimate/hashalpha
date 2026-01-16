@@ -19,6 +19,7 @@ class StakesIndex extends Component {
     public $filterStatus = '';
     public $perPage = 12;
     public $selectedStakeId = null;
+    public $earningsPoints;
 
     protected $listeners = [
         'openMyStakes' => 'openPanel',
@@ -111,6 +112,33 @@ class StakesIndex extends Component {
             'rewards_locked_at' => null,
             'compounded_at' => null
         ])->sum('amount');
+
+        $rewards = Reward::where('user_id', $userId)
+            ->where('status', '!=', 'failed')
+            ->whereNull('rewards_locked_at')
+            ->whereNull('compounded_at')
+            ->where('created_at', '>=', now()->subDays(30))
+            ->orderBy('created_at')
+            ->get();
+
+        $daily = $rewards
+            ->groupBy(fn ($r) => $r->created_at->format('Y-m-d'))
+            ->map(fn ($day) => $day->sum('amount'));
+
+        $max = $daily->max() ?: 1;
+
+        $points = collect(range(0, 29))->map(function ($i) use ($daily, $max) {
+            $date = now()->subDays(29 - $i)->format('Y-m-d');
+            $value = $daily[$date] ?? 0;
+
+            $x = ($i / 29) * 100;
+            $y = 30 - (($value / $max) * 30);
+
+            return round($x, 2) . ',' . round($y, 2);
+        })->implode(' ');
+
+        $this->earningsPoints = $points;
+        // dd($points);
 
         return view('livewire.dashboard.stakes-index', compact('stakes','totalActive','totalClaimable'));
     }

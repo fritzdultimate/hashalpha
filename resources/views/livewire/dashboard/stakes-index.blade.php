@@ -57,11 +57,18 @@
         <div class="halpha-space-y-4">
             {{-- Chart --}}
             <div class="halpha-card halpha-p-4 halpha-bg-gray-900 halpha-border halpha-border-gray-800">
-                <div class="halpha-text-sm halpha-text-gray-400">Earnings (last 30 days)</div>
+                <div class="halpha-text-sm halpha-text-gray-400">
+                    Earnings (last 30 days)
+                </div>
+
                 <div class="halpha-mt-3 halpha-h-20 halpha-w-full halpha-bg-gray-800 halpha-rounded overflow-hidden">
                     <svg viewBox="0 0 100 30" class="halpha-w-full halpha-h-full">
-                        <polyline fill="none" stroke="var(--halpha-accent-2)" stroke-width="1.5"
-                            points="0,20 10,15 20,12 30,9 40,11 50,7 60,10 70,5 80,9 90,6 100,4" />
+                        <polyline
+                            fill="none"
+                            stroke="var(--halpha-accent-2)"
+                            stroke-width="1.5"
+                            points="{{ $earningsPoints }}"
+                        />
                     </svg>
                 </div>
             </div>
