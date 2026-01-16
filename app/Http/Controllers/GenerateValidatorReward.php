@@ -13,8 +13,9 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class GenerateValidatorReward extends Controller {
     public function handle() {
+        $count = ValidatorReward::count();
         $amount = bcdiv(
-            rand(1, 30), // 0.001 – 0.030
+            rand(1, 30),
             1000,
             8
         );
