@@ -20,7 +20,8 @@ class ClaimValidatorReward extends Controller {
             ->get();
 
         foreach ($rewards as $reward) {
-            $minutesSinceCreation = $now->diffInMinutes($reward->created_at);
+            $minutesSinceCreation = $reward->created_at->diffInMinutes($now);
+
             $randomDelay = rand(1, 10);
 
             if ($minutesSinceCreation >= $randomDelay) {
