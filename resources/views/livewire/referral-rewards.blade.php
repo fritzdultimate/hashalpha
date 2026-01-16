@@ -3,14 +3,14 @@
         <div class="halpha-card halpha-p-3 halpha-flex halpha-flex-col halpha-col-span-2">
             <div class="halpha-text-xs halpha-text-gray-400">Total Claimed</div>
             <div class="halpha-text-lg halpha-font-bold halpha-text-white">
-                ${{ number_format((float) $totalClaimed, 8) }}
+                ${{ number_format((float) $totalClaimed, 2) }}
             </div>
         </div>
 
         <div class="halpha-card halpha-p-3 halpha-flex halpha-flex-col">
             <div class="halpha-text-xs halpha-text-gray-400">Total earned</div>
             <div class="halpha-text-lg halpha-font-bold halpha-text-white">
-                ${{ number_format((float) $totalEarned, 8) }}
+                ${{ number_format((float) $totalEarned, 2) }}
             </div>
         </div>
 
@@ -19,7 +19,7 @@
 
             <div class="halpha-flex halpha-flex-col md:halpha-flex-row md:halpha-items-center halpha-justify-between">
                 <div class="halpha-text-lg halpha-font-bold halpha-text-white">
-                    ${{ number_format((float) $withdrawable, 8) }}
+                    ${{ number_format((float) $claimable, 2) }}
                 </div>
 
                 <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-w-full md:halpha-w-auto">
@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="halpha-text-sm halpha-font-semibold halpha-text-white mt-1">
-                                ${{ number_format($tx->amount / 1e8, 8) }}
+                                ${{ number_format($tx->amount, 2) }}
                             </div>
 
                             <div class="halpha-text-xs halpha-text-gray-400">

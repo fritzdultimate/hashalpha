@@ -16,7 +16,17 @@ class ReferralRewards extends Component {
     public $confirmingRewardId = null;
     public $totalClaimed = 0;
     public $totalEarned = 0;
-    public $withdrawable = 0;
+    public $claimable = 0;
+
+    public function mount() {
+        $rewards = ReferralReward::where('user_id', auth()->id());
+
+        $this->claimable = $rewards->where('status', 'pending')
+            ->sum('amount');
+
+        $this->totalEarned = $rewards->where('status', '!=', 'failed')
+            ->sum('amount');
+    }
 
     public function getRewardsProperty() {
         return ReferralReward::where('user_id', auth()->id())
