@@ -25,11 +25,11 @@
                 You received a bonus of ${{ number_format($bonus, 2) }}!
             </div>
 
-            @if($expires_at)
+            <!-- @if($expires_at)
                 <p style="margin-top:10px; font-size:12px; color:#9CA3AF;">
                     Bonus valid until {{ \Carbon\Carbon::parse($expires_at)->format('M d, Y') }}
                 </p>
-            @endif
+            @endif -->
         </td>
     </tr>
 
