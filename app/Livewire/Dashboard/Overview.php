@@ -4,6 +4,7 @@
 namespace App\Livewire\Dashboard;
 
 
+use App\Models\Rank;
 use App\Models\ReferralReward;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ class Overview extends Component
     public $totalReferralBonus;
     public $totalReferralDelta;
     public $referralRewardschartData;
+    public $rank;
 
 
     public function mount() {
@@ -36,6 +38,11 @@ class Overview extends Component
         $this->totalDeposited = (float) ($user->deposits()->sum('amount') ?? 0);
         $this->totalEarnings = (float) ($user->transactions()->where('type', 'credit')->sum('amount') ?? 0);
         $this->activeStakes = (int) ($user->stakes()->count() ?? 0);
+
+        $rank = Rank::orderBy('level')->first();
+
+        $this->rank = $user->rank?->name ?? $rank->name;
+
 
         $dailyRewards = Cache::remember(
             "user:{$userId}:daily_rewards",
@@ -145,6 +152,7 @@ class Overview extends Component
             function () use ($userId) {
                 return DB::table('referral_rewards')
                     ->where('user_id', $userId)
+                    ->where('status', '!=', 'fail')
                     ->orderByDesc('created_at')
                     ->limit(12)
                     ->get(['amount']);

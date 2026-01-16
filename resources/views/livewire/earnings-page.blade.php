@@ -155,15 +155,23 @@
                                     <span wire:loading wire:target="compoundProfit">waiting...</span>
                                 </button>
 
-                                @if($tx->status === 'pending')
-                                    <button class="halpha-text-xs halpha-px-1 halpha-py-1 halpha-border halpha-border-accent-3 halpha-rounded halpha-text-accent-2 halpha-flex halpha-gap-1">
+                                @if($tx->status->value === 'pending')
+                                    <button wire:click="claim({{ $tx->id }})" class="halpha-text-xs halpha-px-1 halpha-py-1 halpha-border halpha-border-accent-2 halpha-rounded halpha-text-accent-2 halpha-flex halpha-gap-1">
                                         <x-heroicon-o-arrow-path class="halpha-w-4 halpha-h-4" />
-                                        Claim
+                                        
+                                        <span wire:target="claim" wire:loading.remove>Claim</span>
+                                        <span wire:loading wire:target="claim">claiming...</span>
                                     </button>
                                 @else
                                     <span class="halpha-text-xs halpha-px-1 halpha-py-1 halpha-border halpha-border-gray-500 halpha-rounded halpha-text-gray-400 halpha-flex halpha-gap-1">
                                         <x-tabler-device-mobile-dollar class="halpha-w-4 halpha-h-4" />
-                                        Claimed
+                                        @if ($tx->rewards_locked_at)
+                                            Locked
+                                        @elseif ($tx->compounded_at)
+                                            Compounded
+                                        @else
+                                            Claimed
+                                        @endif
                                     </span>
                                 @endif
                             </div>

@@ -32,21 +32,25 @@ class EarningsPage extends Component
             return false;
         }
 
+        if ($reward->rewards_locked_at) {
+            return false;
+        }
+
         $stake = $reward->stake;
         if (! $stake) {
             return false;
         }
 
 
-        // if ($stake->status !== StakeStatus::ACTIVE) {
-        //     return false;
-        // }
-
-        if ($stake->ended_at && now()->greaterThanOrEqualTo($stake->ended_at)) {
+        if ($stake->status !== StakeStatus::ACTIVE) {
             return false;
         }
 
-        // Optional: lock / claimable date
+        if ($stake->expected_end_date && now()->greaterThanOrEqualTo($stake->expected_end_date)) {
+            return false;
+        }
+
+        
         if ($reward->claimable_at && now()->lessThan($reward->claimable_at)) {
             return false;
         }
@@ -89,7 +93,10 @@ class EarningsPage extends Component
     public function claimAll() {
         $user = auth()->user();
 
-        $pendingRewards = $user->rewards()->where('status', 'pending')->get();
+        $pendingRewards = $user->rewards()
+            ->whereNull('rewards_locked_at')
+            ->whereNull('compounded_at')
+            ->where('status', 'pending')->get();
 
         if ($pendingRewards->isEmpty()) {
             $this->dispatch('toast', payload: [
@@ -122,6 +129,41 @@ class EarningsPage extends Component
         // $this->emit('refreshEarnings');
     }
 
+    public function claim($id) {
+        $user = auth()->user();
+
+        $pendingReward = $user->rewards()
+            ->where('id', $id)
+            ->whereNull('rewards_locked_at')
+            ->whereNull('compounded_at')
+            ->where('status', 'pending')->first();
+
+        if (!$pendingReward) {
+            $this->dispatch('toast', payload: [
+                'message' => 'No claimable rewards.',
+                'timeout' => 5000,
+                'variant' => 'subtle'
+            ]);
+            return;
+        }
+
+        DB::transaction(function () use ($user, $pendingReward) {
+            $totalClaim = $pendingReward->amount;
+
+            $pendingReward->status = 'claimed';
+            $pendingReward->save();
+
+            $user->balance = bcadd($user->balance, (string) $totalClaim, 8);
+            $user->save();
+
+        });
+
+        $this->dispatch('toast', payload: [
+            'message' => 'Claimed reward.',
+            'timeout' => 5000,
+        ]);
+    }
+
     public function render() {
         $query = $this->getQuery();
         $earnings = $query->paginate($this->perPage);
@@ -135,6 +177,7 @@ class EarningsPage extends Component
             ->sum('amount');
 
         $withdrawable = Reward::where('user_id', auth()->id())
+            ->whereNull('compounded_at')
             ->where('status', 'pending')
             ->sum('amount');
 
