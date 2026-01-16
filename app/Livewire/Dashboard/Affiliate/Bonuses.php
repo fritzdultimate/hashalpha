@@ -29,6 +29,7 @@ class Bonuses extends Component {
             })
             ->sum('amount');
 
+
         $this->pending = ReferralReward::where('user_id', $userId)
             ->where('status', 'pending')
             ->sum('amount');
@@ -53,12 +54,13 @@ class Bonuses extends Component {
             auth()->user()->increment('balance', $this->claimable);
         });
 
+        $this->dispatch('toast', payload: [
+            'type' => 'success',
+            'message' => '$' . number_format($this->claimable, 2) . ' Referral bonus claimed successfully',
+            'timeout' => 10000,
+        ]);
         $this->loadBonuses();
 
-        $this->dispatch('toast', [
-            'type' => 'success',
-            'message' => 'Referral bonus claimed successfully',
-        ]);
     }
 
     public function render() {
