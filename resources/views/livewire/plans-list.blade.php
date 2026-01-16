@@ -170,7 +170,7 @@
                     </div>
 
                     {{-- utilization sparkline + bar --}}
-                    <div class="halpha-mt-4 halpha-space-y-2">
+                    <div class="halpha-mt-4 halpha-space-y-2 halpha-hidden">
                         <div class="halpha-h-8 halpha-w-full halpha-bg-gray-800 halpha-rounded overflow-hidden !halpha-hidden">
                             @php
                                 $amounts = $plan->stakes->pluck('amount')->toArray();
