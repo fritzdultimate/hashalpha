@@ -36,8 +36,13 @@ class Bonuses extends Component {
         if ($this->claimable <= 0) return;
 
         DB::transaction(function () {
+
             ReferralReward::where('user_id', auth()->id())
                 ->where('status', 'pending')
+                ->where(function ($q) {
+                    $q->whereNull('claimable_at')
+                    ->orWhere('claimable_at', '<=', now());
+                })
                 ->update([
                     'status' => 'paid',
                     'claimed_at' => now(),
