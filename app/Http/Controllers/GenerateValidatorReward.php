@@ -21,7 +21,7 @@ class GenerateValidatorReward extends Controller {
         );
 
         ValidatorReward::create([
-            'reward_date' => now()->toDateString(),
+            'reward_date' => now(),
             'amount' => $amount,
             'status' => 'pending',
             'source' => 'validator_reward',
