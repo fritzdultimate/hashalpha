@@ -4,7 +4,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class ReferralReward extends Model {
-    protected $fillable = ['user_id','from_user_id','level','amount','stake_id','status','meta'];
+    protected $fillable = [
+        'user_id',
+        'from_user_id',
+        'level',
+        'amount',
+        'stake_id',
+        'status',
+        'meta',
+        'percent_bps',
+        'calculated_for',
+        'claimed_at'
+    ];
     protected $casts = [
         'meta' => 'array',
         'claimable_at' => 'datetime',

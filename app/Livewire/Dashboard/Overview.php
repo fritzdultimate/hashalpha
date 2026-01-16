@@ -36,7 +36,6 @@ class Overview extends Component
         $this->totalDeposited = (float) ($user->deposits()->sum('amount') ?? 0);
         $this->totalEarnings = (float) ($user->transactions()->where('type', 'credit')->sum('amount') ?? 0);
         $this->activeStakes = (int) ($user->stakes()->count() ?? 0);
-        $this->balance = $user->balance;
 
         $dailyRewards = Cache::remember(
             "user:{$userId}:daily_rewards",
@@ -151,6 +150,9 @@ class Overview extends Component
                     ->get(['amount']);
             }
         );
+
+        $mainBalance = $user->balance;
+        $this->balance = $mainBalance;
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
     }
