@@ -107,7 +107,9 @@ class StakesIndex extends Component {
         $totalActive = \App\Models\Stake::where('user_id', $userId)->where('status', 'active')->sum('amount');
         $totalClaimable = Reward::where([
             'user_id' => $userId,
-            'status' => 'pending'
+            'status' => 'pending',
+            'rewards_locked_at' => null,
+            'compounded_at' => null
         ])->sum('amount');
 
         return view('livewire.dashboard.stakes-index', compact('stakes','totalActive','totalClaimable'));
