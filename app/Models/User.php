@@ -31,7 +31,8 @@ class User extends Authenticatable implements FilamentUser {
         'lastname',
         'phone_number',
         'country',
-        'timezone'
+        'timezone',
+        'referrer_id'
     ];
 
     /**

@@ -31,7 +31,11 @@ class RankProgress extends Component
         $userId = auth()->id();
 
         $this->claimable = ReferralReward::where('user_id', $userId)
-            ->where('status', 'claimable')
+            ->where('status', 'pending')
+            ->where(function ($q) {
+                $q->whereNull('claimable_at')
+                ->orWhere('claimable_at', '<=', now());
+            })
             ->sum('amount');
 
         $this->pending = ReferralReward::where('user_id', $userId)
@@ -48,6 +52,7 @@ class RankProgress extends Component
             ->orderBy('level')
             ->first();
 
+
         if (!$this->nextRank) {
             $this->progressPercent = 100;
             return;
@@ -63,7 +68,7 @@ class RankProgress extends Component
             ->count('from_user_id');
 
         $earnings = ReferralReward::where('user_id', $user->id)
-            ->where('status', 'claimed')
+            ->where('status', 'paid')
             ->sum('amount');
 
         $refPct = intval(($activeReferrals/$this->nextRank->required_active_referrals) * 100);

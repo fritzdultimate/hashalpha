@@ -21,7 +21,7 @@
 
     <div class="halpha-card halpha-p-4">
         <div class="halpha-flex halpha-justify-between halpha-text-xs halpha-text-gray-400 mb-1">
-            <span>Progress to Gold</span>
+            <span>Progress to {{ $nextRank->name }}</span>
             <span>{{ $progressPercent }}%</span>
         </div>
 
