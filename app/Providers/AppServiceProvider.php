@@ -29,7 +29,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void {
         Stake::observe(TransactionObserver::class);
-        Deposit::observe(TransactionObserver::class);
+        // Deposit::observe(TransactionObserver::class);
+        
 
         Event::listen(
             DepositCreated::class,

@@ -6,6 +6,7 @@ use App\Events\DepositBonusReceived;
 use App\Events\DepositCreated;
 use App\Events\StakeCreated;
 use App\Events\WithdrawalRequested;
+use App\Models\Transaction;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -29,6 +30,18 @@ class SendFinancialEmail
     public function handle(object $event): void {
         if ($event instanceof DepositCreated) {
             $this->sendDepositMail($event->deposit);
+
+            $payload = [
+                'related_type' => get_class($event->deposit),
+                'related_id' => $event->deposit->getKey(),
+                'type' => 'credit',
+                
+                'amount' => $event->deposit->amount ?: null,
+                'user_id' => $event->deposit->user_id ?: null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+            Transaction::create($payload);
             return;
         }
 
@@ -36,14 +49,6 @@ class SendFinancialEmail
             $this->sendReceivedBonusMail($event->deposit);
             return;
         }
-
-        // if ($event instanceof StakeCreated) {
-        //     $this->sendStakeMail($event->stake);
-        // }
-
-        // if ($event instanceof WithdrawalRequested) {
-        //     $this->sendWithdrawalMail($event->withdrawal);
-        // }
     }
 
     protected function sendDepositMail($deposit) {
@@ -54,17 +59,5 @@ class SendFinancialEmail
     protected function sendReceivedBonusMail($deposit) {
         Mail::to($deposit->user->email)
             ->send(new \App\Mail\DepositBonusMail($deposit));
-    }
-
-    protected function sendStakeMail($stake)
-    {
-        Mail::to($stake->user->email)
-            ->send(new \App\Mail\StakeCreatedMail($stake));
-    }
-
-    protected function sendWithdrawalMail($withdrawal)
-    {
-        Mail::to($withdrawal->user->email)
-            ->send(new \App\Mail\WithdrawalRequestedMail($withdrawal));
     }
 }

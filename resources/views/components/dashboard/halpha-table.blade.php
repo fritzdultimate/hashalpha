@@ -96,7 +96,7 @@
                                         @if ($col['key'] === 'type')
                                             <x-dashboard.status-maker :flat="true" label="{{ $value }}" className="{{ $value }}"  />
                                         @elseif ($col['key'] === 'status')
-                                            <x-dashboard.status-maker label="{{ 'Pending' }}" className="pending"  />
+                                            <x-dashboard.status-maker label="{{  $row?->related?->status }}" className="pending"  />
                                         @else
                                             {{ is_callable(value: $callable) ? $callable($row) : $value }}
                                         @endif

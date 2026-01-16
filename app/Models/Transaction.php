@@ -41,4 +41,14 @@ class Transaction extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function related() {
+        return $this->morphTo(
+            name: 'related',
+            type: 'related_type',
+            id: 'related_id'
+        );
+    }
+
+
 }

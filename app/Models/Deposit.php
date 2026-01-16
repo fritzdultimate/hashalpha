@@ -55,4 +55,8 @@ class Deposit extends Model
 
         return $this;
     }
+
+    public function transactions() {
+        return $this->morphMany(Transaction::class, 'related');
+    }
 }
