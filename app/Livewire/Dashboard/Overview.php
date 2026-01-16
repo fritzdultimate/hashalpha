@@ -151,7 +151,7 @@ class Overview extends Component
             }
         );
 
-        $mainBalance = $user->balance;
+        $mainBalance = $user->balance + $referral_rewards->sum('amount');
         $this->balance = $mainBalance;
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
