@@ -1,4 +1,29 @@
 <div class="halpha-w-full halpha-space-y-4">
+    <div class="halpha-flex halpha-items-center halpha-justify-between halpha-gap-3">
+        <div class="halpha-flex halpha-items-center halpha-gap-3">
+            <a href="{{ route('stakes.index') }}"
+                
+                class="halpha-px-3 halpha-py-2 halpha-rounded  halpha-bg-gray-800 halpha-text-gray-300"
+            >
+                My stakes
+            </a>
+
+            <button  
+                class="halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white"
+            >
+                Earnings
+            </button>
+        </div>
+
+        <div class="halpha-flex halpha-items-center halpha-gap-2 !halpha-hidden">
+            <button 
+                wire:click="exportCsv"
+                class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-border halpha-border-gray-700 halpha-text-gray-300"
+            >
+                Export CSV
+            </button>
+        </div>
+    </div>
     @if($earnings->isNotEmpty())
         <div class="halpha-card halpha-p-3 halpha-flex halpha-flex-col halpha-gap-2 halpha-bg-gray-900/60 halpha-rounded-xl">
             <div class="halpha-flex halpha-justify-between halpha-items-center">

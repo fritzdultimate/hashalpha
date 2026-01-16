@@ -10,12 +10,12 @@
                 My stakes
             </button>
 
-            <button 
-                wire:click="switchTab('earnings')"
-                class="halpha-px-3 halpha-py-2 halpha-rounded {{ $tab === 'earnings' ? 'halpha-bg-accent-2 halpha-text-white' : 'halpha-bg-gray-800 halpha-text-gray-300' }}"
+            <a href="{{ route('staking.earnings') }}"
+                
+                class="halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300"
             >
                 Earnings
-            </button>
+            </a>
         </div>
 
         <div class="halpha-flex halpha-items-center halpha-gap-2">
