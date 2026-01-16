@@ -22,12 +22,12 @@ class Bonuses extends Component {
         $userId = auth()->id();
 
         $this->claimable = ReferralReward::where('user_id', $userId)
-    ->where('status', 'pending')
-    ->where(function ($q) {
-        $q->whereNull('claimable_at')
-          ->orWhere('claimable_at', '<=', now());
-    })
-    ->sum('amount');
+            ->where('status', 'pending')
+            ->where(function ($q) {
+                $q->whereNull('claimable_at')
+                ->orWhere('claimable_at', '<=', now());
+            })
+            ->sum('amount');
 
         $this->pending = ReferralReward::where('user_id', $userId)
             ->where('status', 'pending')
