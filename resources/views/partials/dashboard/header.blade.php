@@ -73,8 +73,8 @@
 
             <div x-show="open" x-cloak
                 class="halpha-absolute halpha-right-0 halpha-mt-2 halpha-w-48 halpha-bg-[var(--halpha-surface)] halpha-rounded halpha-shadow-lg halpha-p-2">
-                <a href="#" class="halpha-block halpha-py-2 halpha-px-3 halpha-text-sm">Profile</a>
-                <a href="#" class="halpha-block halpha-py-2 halpha-px-3 halpha-text-sm">Settings</a>
+                <!-- <a href="#" class="halpha-block halpha-py-2 halpha-px-3 halpha-text-sm">Profile</a> -->
+                <!-- <a href="#" class="halpha-block halpha-py-2 halpha-px-3 halpha-text-sm">Settings</a> -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
