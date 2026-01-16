@@ -17,7 +17,8 @@ class Deposit extends Model
         'note',
         'status',
         'bonus',
-        'bonus_expires_at'
+        'bonus_expires_at',
+        'processed_at'
     ];
     protected $casts = [
         'meta' => 'array',
