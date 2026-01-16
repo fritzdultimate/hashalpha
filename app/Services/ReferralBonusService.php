@@ -66,10 +66,10 @@ class ReferralBonusService {
                     continue;
                 }
 
-                if (ReferralReward::where('from_user_id', $staker->id)
-                    ->exists()) {
-                    continue;
-                }
+                // if (ReferralReward::where('from_user_id', $staker->id)
+                //     ->exists()) {
+                //     continue;
+                // }
 
                 ReferralReward::create([
                     'user_id' => $referrer->id,
