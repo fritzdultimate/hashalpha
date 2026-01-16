@@ -19,12 +19,15 @@ class ReferralRewards extends Component {
     public $claimable = 0;
 
     public function mount() {
-        $rewards = ReferralReward::where('user_id', auth()->id());
+        $baseQuery = ReferralReward::where('user_id', auth()->id());
 
-        $this->claimable = $rewards->where('status', 'pending')
+        $this->claimable = (clone $baseQuery)->where('status', 'pending')
             ->sum('amount');
 
-        $this->totalEarned = $rewards->where('status', '!=', 'failed')
+        $this->totalEarned = (clone $baseQuery)->where('status', '!=', 'failed')
+            ->sum('amount');
+
+        $this->totalClaimed = (clone $baseQuery)->where('status', 'paid')
             ->sum('amount');
     }
 
