@@ -116,10 +116,10 @@
                                 "url" => route('staking.stake'),
                                 "label" => "My Stakes"
                             ],
-                            [
-                                "url" => route('staking.earnings'),
-                                "label" => "Earnings"
-                            ],
+                            // [
+                            //     "url" => route('staking.earnings'),
+                            //     "label" => "Earnings"
+                            // ],
                         ],
                         'route' => 'staking'
 
