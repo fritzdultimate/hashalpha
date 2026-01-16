@@ -31,17 +31,23 @@ class SendFinancialEmail
         if ($event instanceof DepositCreated) {
             $this->sendDepositMail($event->deposit);
 
-            $payload = [
-                'related_type' => get_class($event->deposit),
-                'related_id' => $event->deposit->getKey(),
+            $event->deposit->transactions()->create([
+                'user_id' => $event->deposit->user_id,
                 'type' => 'credit',
+                'amount' => $event->deposit->amount,
+            ]);
+
+            // $payload = [
+            //     'related_type' => get_class($event->deposit),
+            //     'related_id' => $event->deposit->getKey(),
+            //     'type' => 'credit',
                 
-                'amount' => $event->deposit->amount ?: null,
-                'user_id' => $event->deposit->user_id ?: null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-            Transaction::create($payload);
+            //     'amount' => $event->deposit->amount ?: null,
+            //     'user_id' => $event->deposit->user_id ?: null,
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ];
+            // Transaction::create($payload);
             return;
         }
 
