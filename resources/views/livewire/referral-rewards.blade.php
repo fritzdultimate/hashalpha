@@ -134,7 +134,7 @@
 
                 {{-- pagination --}}
                 <div class="halpha-flex halpha-justify-center halpha-mt-2">
-                    {{ $earnings->links() }}
+                    {{ $rewards->links() }}
                 </div>
             @endif
         @endif
