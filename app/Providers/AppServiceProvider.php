@@ -9,6 +9,7 @@ use App\Events\UserEmailVerified;
 use App\Events\WithdrawalRequested;
 use App\Listeners\SendFinancialEmail;
 use App\Listeners\SendWelcomeEmail;
+use App\Models\Deposit;
 use App\Models\Stake;
 use App\Observers\TransactionObserver;
 use Illuminate\Support\Facades\Event;
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void {
         Stake::observe(TransactionObserver::class);
+        Deposit::observe(TransactionObserver::class);
 
         Event::listen(
             DepositCreated::class,

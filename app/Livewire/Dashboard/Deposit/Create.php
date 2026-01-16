@@ -201,7 +201,7 @@ class Create extends Component {
             ]);
 
             event(new DepositCreated($deposit));
-            DepositService::depositBonus($deposit->user, $deposit);
+            // DepositService::depositBonus($deposit->user, $deposit);
         });
         
     }
