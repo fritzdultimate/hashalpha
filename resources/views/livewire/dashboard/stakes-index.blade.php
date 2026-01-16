@@ -82,7 +82,7 @@
                                 <th class="halpha-py-2">Stake</th>
                                 <th class="halpha-py-2">Amount</th>
                                 <th class="halpha-py-2">Earned</th>
-                                <th class="halpha-py-2 halpha-hidden sm:halpha-block">APY</th>
+                                <th class="halpha-py-2 halpha-hidden sm:halpha-block">ROI</th>
                                 <th class="halpha-py-2">Status</th>
                             </tr>
                         </thead>
