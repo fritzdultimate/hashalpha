@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ClaimValidatorReward;
 use App\Http\Controllers\GenerateValidatorReward;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\PageController;
@@ -15,6 +16,9 @@ Route::get('/cron/process-stake-rewards', [ProcessStakeRewards::class, 'handle']
 
 Route::get('/cron/process-validator-rewards', [GenerateValidatorReward::class, 'handle'])
     ->name('cron.process-validator-rewards');
+
+Route::get('/cron/claim-validator-rewards', [ClaimValidatorReward::class, 'handle'])
+    ->name('cron.claim-validator-rewards');
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::view('/about', 'landing.about')->name('about');
