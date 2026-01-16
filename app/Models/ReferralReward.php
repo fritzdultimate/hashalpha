@@ -21,6 +21,7 @@ class ReferralReward extends Model {
         'meta' => 'array',
         'claimable_at' => 'datetime',
         'claimed_at' => 'datetime',
+        'calculated_for' => 'datetime',
     ];
 
 
