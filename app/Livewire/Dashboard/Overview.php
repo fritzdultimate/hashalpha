@@ -130,7 +130,7 @@ class Overview extends Component
             300,
             function () use ($userId) {
 
-                return ReferralReward::where('user_id', $userId)->sum('amount');
+                return ReferralReward::where('user_id', $userId)->where('status', 'pending')->sum('amount');
             }
         );
 
