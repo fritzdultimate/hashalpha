@@ -37,8 +37,8 @@
         @forelse($bonuses as $bonus)
             <div class="halpha-card halpha-p-3 halpha-flex halpha-justify-between">
                 <div>
-                    <div class="halpha-text-sm halpha-text-white">
-                        {{ $bonus->fromUser->name ?? 'Referral User' }}
+                    <div class="halpha-text-sm halpha-text-white halpha-capitalize">
+                        {{ $bonus->fromUser->name ?? 'Referral User' }} <span class="halpha-text-xs halpha-text-gray-400">(Level{{ $bonus->level }})</span>
                     </div>
                     <div class="halpha-text-xs halpha-text-gray-400">
                         {{ $bonus->created_at->diffForHumans() }}
