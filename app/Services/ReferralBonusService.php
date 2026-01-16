@@ -48,7 +48,7 @@ class ReferralBonusService {
                     continue;
                 }
 
-                $mainBonus = $stake->amount * 0.01 * 10;
+                $mainBonus = $stake->amount * 0.01 * 20;
 
                 $amount = bcmul(
                     $mainBonus,
