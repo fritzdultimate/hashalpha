@@ -79,7 +79,7 @@ class ReferralBonusService {
                     'percent_bps' => $config->percent_bps,
                     'amount' => $amount,
                     'status' => 'pending',
-                    'lock_reason' => "Level {$level} referral lock",
+                    'lock_reason' => "Level_{$level}_referral_lock",
                     'claimable_at' => now()->addDays($stake->plan->duration),
                     'calculated_for' => now()->startOfDay(),
                     'meta' => [

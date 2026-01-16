@@ -152,7 +152,8 @@
                     </button>
                     <button wire:click="claim({{ $confirmingRewardId }})"
                         class="halpha-text-xs halpha-bg-accent-2 halpha-text-white halpha-rounded halpha-px-3 halpha-py-1">
-                        Confirm
+                        <span wire:target="claim" wire:loading.remove>Confirm</span>
+                        <span wire:target="claim" wire:loading>Claiming...</span>
                     </button>
                 </div>
             </div>
