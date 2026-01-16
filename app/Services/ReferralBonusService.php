@@ -80,7 +80,7 @@ class ReferralBonusService {
                     'amount' => $amount,
                     'status' => 'pending',
                     'lock_reason' => "Level {$level} referral lock",
-                    'claimable_at' => now()->addDays($config->lock_days),
+                    'claimable_at' => now()->addDays($stake->plan->duration),
                     'calculated_for' => now()->startOfDay(),
                     'meta' => [
                         'plan_id' => $stake->plan_id,
