@@ -53,7 +53,7 @@
 
                 <div class="halpha-card halpha-p-4 halpha-border halpha-border-gray-600 halpha-flex halpha-flex-col halpha-gap-2">
                     <h4 class="halpha-text-xs md:halpha-text-sm halpha-text-gray-300 halpha-truncate">Distribution Frequency</h4>
-                    <span class="halpha-text-sm md:halpha-text-base halpha-text-white" title="Ethereum">Hourly</span>
+                    <span class="halpha-text-sm md:halpha-text-base halpha-text-white" title="Ethereum">Minute</span>
                 </div>
             </div>
         </div>
