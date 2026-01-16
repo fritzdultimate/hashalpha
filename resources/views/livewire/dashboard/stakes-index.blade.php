@@ -101,7 +101,7 @@
                                     </td>
                                     <td class="halpha-py-3 halpha-text-xs halpha-text-gray-400">
                                         <span class="halpha-bg-accent-2 halpha-text-white halpha-px-2 halpha-rounded-full halpha-py-0.5">
-                                            {{ ucfirst($stake->status) }}
+                                            {{ ucfirst($stake->status->value) }}
                                         </span>
                                     </td>
                                 </tr>
