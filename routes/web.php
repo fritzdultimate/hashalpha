@@ -2,11 +2,19 @@
 
 use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\GenerateValidatorReward;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProcessStakeRewards;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/cron/process-stake-rewards', [ProcessStakeRewards::class, 'handle'])
+    ->name('cron.process-stake-rewards');
+
+Route::get('/cron/process-validator-rewards', [GenerateValidatorReward::class, 'handle'])
+    ->name('cron.process-validator-rewards');
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::view('/about', 'landing.about')->name('about');

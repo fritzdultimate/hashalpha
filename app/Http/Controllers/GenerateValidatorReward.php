@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class GenerateValidatorReward extends Controller {
-    public function handle($id, NowPaymentsService $np) {
+    public function handle() {
         $amount = bcdiv(
             rand(1, 30), // 0.001 – 0.030
             1000,
