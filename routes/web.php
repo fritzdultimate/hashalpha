@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddValidatorBlock;
 use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClaimValidatorReward;
@@ -19,6 +20,9 @@ Route::get('/cron/process-validator-rewards', [GenerateValidatorReward::class, '
 
 Route::get('/cron/claim-validator-rewards', [ClaimValidatorReward::class, 'handle'])
     ->name('cron.claim-validator-rewards');
+
+Route::get('/cron/add-validator-block', [AddValidatorBlock::class, 'handle'])
+    ->name('cron.add-validator-block');
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::view('/about', 'landing.about')->name('about');
