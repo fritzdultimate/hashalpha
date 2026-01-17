@@ -30,6 +30,14 @@ class SupportTicketResource extends Resource
         return SupportTicketsTable::configure($table);
     }
 
+    public static function canCreate(): bool {
+        return false;
+    }
+
+    public static function getHeaderActions(): array {
+        return [];
+    }
+
     public static function getRelations(): array
     {
         return [
