@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Enums\DepositStatus;
 use App\Enums\WithdrawalStatus;
+use App\Mail\WithdrawalCompletedMail;
 use App\Models\Deposit;
 use App\Models\ReferralReward;
 use App\Models\Withdrawal;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class  WithdrawalService {
     public static function review(Withdrawal $withdrawal) {
@@ -79,7 +81,9 @@ class  WithdrawalService {
                 $withdrawal->markCompleted('djssdoas');
             }
 
-            // send email
+            if($withdrawal->status === WithdrawalStatus::COMPLETED) {
+                Mail::to($withdrawal->user->email)->send(new WithdrawalCompletedMail($withdrawal));
+            }
         });
     }
 
