@@ -43,7 +43,7 @@ class ProcessStakeRewards extends Controller {
             return;
         }
         
-        if (now()->gte($stake->expected_end_date)) {
+        if ($stake->expected_end_date && now()->gte($stake->expected_end_date)) {
             $stake->update(['status' => 'completed']);
             return;
         }
