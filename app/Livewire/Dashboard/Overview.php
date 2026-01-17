@@ -98,13 +98,13 @@ class Overview extends Component
 
         $currentRewards = DB::table('rewards')
             ->where('user_id', $userId)
-            // ->where('reward_type', 'staking')
+            ->where('reward_type', 'staking')
             ->where('created_at', '>=', now()->subDays(30))
             ->sum('amount');
 
         $previousRewards = DB::table('rewards')
             ->where('user_id', $userId)
-            // ->where('reward_type', 'staking')
+            ->where('reward_type', 'staking')
             ->whereBetween('created_at', [now()->subDays(60), now()->subDays(30)])
             ->sum('amount');
 

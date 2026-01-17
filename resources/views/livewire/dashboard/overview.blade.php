@@ -81,14 +81,15 @@
         </a>
 
         <!-- Referrals Button -->
-        <button
+        <a
+            href="{{ route('referral.bonus') }}"
             class="halpha-relative halpha-w-full halpha-py-2 md:halpha-py-4 halpha-rounded halpha-shadow-lg halpha-transition-all halpha-font-semibold halpha-text-surface
         halpha-bg-gradient-to-r halpha-from-[#0284C7] halpha-to-[#0ea5a4] hover:halpha-shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-2 halpha-hidden md:halpha-block">
             <div class="halpha-flex halpha-items-center halpha-justify-center halpha-gap-2">
                 <x-fas-users class="halpha-w-4 halpha-h-4" />
                 Referrals
             </div>
-        </button>
+    </a>
     </div>
 
 
