@@ -19,7 +19,7 @@
             <div
                 class="halpha-bg-card-bg halpha-rounded-l halpha-border halpha-border-white/5 halpha-p-4 halpha-flex halpha-flex-col halpha-items-center halpha-justify-center halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
                 <h6 class="halpha-text-muted">Blocks Validated</h6>
-                <span class="count-up" data-value="129392">129,392</span>
+                <span class="count-up" data-value="{{ $validatedBlocks }}">--</span>
             </div>
 
             <div

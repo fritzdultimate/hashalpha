@@ -22,6 +22,7 @@ class ValidatorBlockService {
                 'validator_id' => $validator->id,
                 'block_hash'   => Str::uuid()->toString(),
                 'block_number' => self::nextBlockNumber(),
+                'status' => 'validated'
             ]);
         });
     }

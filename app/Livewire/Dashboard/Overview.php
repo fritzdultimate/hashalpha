@@ -7,6 +7,7 @@ namespace App\Livewire\Dashboard;
 use App\Models\Rank;
 use App\Models\ReferralReward;
 use App\Models\User;
+use App\Models\ValidatorBlock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,11 @@ class Overview extends Component
     public $totalReferralDelta;
     public $referralRewardschartData;
     public $rank;
+    public $validatedBlocks = 129392;
 
+    public function loadValidatorBlocks() {
+        $this->validatedBlocks = $this->validatedBlocks + ValidatorBlock::count();
+    }
 
     public function mount() {
         $user = Auth::user();
