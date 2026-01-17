@@ -4,6 +4,7 @@
 namespace App\Livewire\Dashboard;
 
 
+use App\Models\Deposit;
 use App\Models\Rank;
 use App\Models\ReferralReward;
 use App\Models\User;
@@ -164,7 +165,10 @@ class Overview extends Component
             }
         );
 
-        $mainBalance = $user->balance + $this->totalReferralBonus;
+        $bonusAvailable = Deposit::where('user_id', $user->id)
+            ->where('status', 'finished')
+            ->sum('bonus');
+        $mainBalance = $user->balance + $this->totalReferralBonus + $bonusAvailable;
         $this->balance = $mainBalance;
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
