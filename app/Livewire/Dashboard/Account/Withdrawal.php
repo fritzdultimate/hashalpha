@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard\Account;
 
 use App\Domain\Withdrawal\WithdrawalRules;
+use App\Models\ReferralReward;
 use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,15 +14,17 @@ use Livewire\Component;
 class Withdrawal extends Component {
     public $amount;
     public $walletId;
+    public $asset;
     public $address;
     public $otp = null;
     public $showOtpForm = false;
     public $withdrawalPlaced = false;
     public \App\Models\Withdrawal $withdrawal;
+    public $totalAvailable = 0;
 
 
     protected $rules = [
-        'amount' => 'required|numeric|min:10',
+        'amount' => 'required|numeric',
         'address' => 'required',
         'walletId' => 'required'
     ];
@@ -35,7 +38,7 @@ class Withdrawal extends Component {
     protected function prepareWithdrawal() {
         $user = auth()->user();
         try {
-            WithdrawalRules::canCreate($user, $this->amount);
+            WithdrawalRules::canCreate($user, $this->amount, $this->asset);
         } catch (\DomainException $e) {
             $this->addError('amount', $e->getMessage());
             return;
@@ -55,6 +58,7 @@ class Withdrawal extends Component {
         $this->reset([
             'amount',
             'walletId',
+            'asset',
             'address',
             'otp',
             'showOtpForm',
@@ -82,6 +86,7 @@ class Withdrawal extends Component {
                 'wallet_id' => $this->walletId,
                 'amount' => $this->amount,
                 'address' => $this->address,
+                'asset' => $this->asset
             ]);
 
             $this->withdrawalPlaced = true;
@@ -92,6 +97,12 @@ class Withdrawal extends Component {
 
     public function cancelProcess() {
         $this->showOtpForm = false;
+    }
+
+    public function mount() {
+        $this->totalAvailable = ReferralReward::where('user_id', auth()->id())
+            ->get()
+            ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
     }
 
 

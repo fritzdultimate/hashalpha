@@ -16,7 +16,8 @@ class ReferralReward extends Model {
         'calculated_for',
         'claimed_at',
         'lock_reason',
-        'claimable_at'
+        'claimable_at',
+        'withdrawn'
     ];
     protected $casts = [
         'meta' => 'array',

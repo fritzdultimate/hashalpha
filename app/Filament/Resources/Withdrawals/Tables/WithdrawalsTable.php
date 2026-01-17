@@ -33,6 +33,9 @@ class WithdrawalsTable
                     ->badge()
                     ->color(fn (WithdrawalStatus  $state): string => $state->color())      
                     ->searchable(),
+                TextColumn::make('asset')
+                    ->badge()
+                    ->color('info'),
                 TextColumn::make('address')
                     ->copyable()
                     ->limit(10)

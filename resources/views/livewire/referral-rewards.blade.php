@@ -1,21 +1,15 @@
 <div class="halpha-w-full halpha-space-y-4">
     <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3">
-        <div class="halpha-card halpha-p-3 halpha-flex halpha-flex-col halpha-col-span-2">
-            <div class="halpha-text-xs halpha-text-gray-400">Total Claimed</div>
-            <div class="halpha-text-lg halpha-font-bold halpha-text-white">
-                ${{ number_format((float) $totalClaimed, 2) }}
-            </div>
-        </div>
 
         <div class="halpha-card halpha-p-3 halpha-flex halpha-flex-col">
-            <div class="halpha-text-xs halpha-text-gray-400">Total earned</div>
+            <div class="halpha-text-xs halpha-text-gray-400">Total Available</div>
             <div class="halpha-text-lg halpha-font-bold halpha-text-white">
                 ${{ number_format((float) $totalEarned, 2) }}
             </div>
         </div>
 
         <div class="halpha-card halpha-p-3 halpha-flex halpha-flex-col">
-            <div class="halpha-text-xs halpha-text-gray-400">Claimable</div>
+            <div class="halpha-text-xs halpha-text-gray-400">Withdrawn</div>
 
             <div class="halpha-flex halpha-flex-col md:halpha-flex-row md:halpha-items-center halpha-justify-between">
                 <div class="halpha-text-lg halpha-font-bold halpha-text-white">
@@ -23,15 +17,15 @@
                 </div>
 
                 <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-w-full md:halpha-w-auto">
-                    <button 
-                        wire:click="claimAll"
+                    <a 
+                        href="{{ route('account.withdrawal') }}"
                         class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-w-full halpha-max-h-8"
                         aria-label="Claim all rewards"
                     >
-                        <span wire:loading.remove wire:target="claimAll">Claim all</span>
+                        <span wire:loading.remove wire:target="claimAll">Withdraw</span>
                         <x-ri-loader-4-fill wire:target="claimAll" wire:loading class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
                         
-                    </button>
+                </a>
                 </div>
             </div>
         </div>

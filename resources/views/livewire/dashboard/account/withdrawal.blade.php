@@ -144,6 +144,28 @@
                 @enderror
             </div>
 
+            {{-- Wallet / Currency --}}
+            <div>
+                <label class="halpha-text-xs halpha-text-gray-400">
+                    Withdrawal Asset
+                </label>
+
+                <select wire:model="asset" class="halpha-input">
+                    <option value="">Select Asset</option>
+                    
+                    <option value="balance">
+                        Main Balance - (${{ number_format(auth()->user()->balance, 2) }})
+                    </option>
+                    <option value="referral_rewards">
+                        Referral Bonus - (${{ number_format($totalAvailable, 2) }})
+                    </option>
+                    
+                </select>
+                @error('walletId')
+                    <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
             {{-- Address --}}
             <div>
                 <label class="halpha-text-xs halpha-text-gray-400">

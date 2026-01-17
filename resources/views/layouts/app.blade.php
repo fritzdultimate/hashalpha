@@ -200,10 +200,10 @@
                                 "url" => route('account.wallets'),
                                 "label" => "Wallets"
                             ],
-                            [
-                                "url" => route('account.referral.rewards'),
-                                "label" => "Referral Bonuses"
-                            ],
+                            // [
+                            //     "url" => route('account.referral.rewards'),
+                            //     "label" => "Referral Bonuses"
+                            // ],
                             [
                                 "url" => route('account.withdrawal'),
                                 "label" => 'Withdrawal'

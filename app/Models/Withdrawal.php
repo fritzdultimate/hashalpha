@@ -16,6 +16,7 @@ class Withdrawal extends Model {
         'tx_hash',
         'failure_reason',
         'processed_at',
+        'asset',
     ];
 
     protected $casts = [
