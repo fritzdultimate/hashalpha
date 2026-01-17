@@ -21,7 +21,6 @@ class ValidatorBlockService {
             return ValidatorBlock::create([
                 'validator_id' => $validator->id,
                 'block_hash'   => Str::uuid()->toString(),
-                'block_number' => self::nextBlockNumber(),
                 'status' => 'validated'
             ]);
         });
