@@ -30,6 +30,7 @@ class  WithdrawalService {
 
         DB::transaction(function () use ($withdrawal) {
             if($withdrawal->asset === 'referral_rewards') {
+                
                 $totalAvailable = ReferralReward::where('user_id', $withdrawal->user->id)
                     ->get()
                     ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
@@ -39,6 +40,7 @@ class  WithdrawalService {
                 }
 
                 $remaining = $withdrawal->amount;
+
 
                 $rewards = ReferralReward::where('user_id', $withdrawal->user->id)
                     ->whereColumn('withdrawn', '<', 'amount')
@@ -68,6 +70,7 @@ class  WithdrawalService {
 
                     $remaining -= $available;
                 }
+                $withdrawal->markCompleted('djssdoas');
             } else {
                 if($withdrawal->amount > $withdrawal->user->balance) {
                     return; //insufficient
@@ -81,7 +84,16 @@ class  WithdrawalService {
     }
 
     public static function markAsProcessing(Withdrawal $withdrawal) {
+        if ($withdrawal->status === WithdrawalStatus::COMPLETED || $withdrawal->status === WithdrawalStatus::FAILED) {
+            return;
+        }
 
+        DB::transaction(function () use ($withdrawal) {
+
+            $withdrawal->markProcessing();
+
+            // send email
+        });
     }
 
     public static function markAsFailed(Withdrawal $withdrawal) {
