@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void {
-        Stake::observe(TransactionObserver::class);
+        // Stake::observe(TransactionObserver::class);
         // Deposit::observe(TransactionObserver::class);
         
 
