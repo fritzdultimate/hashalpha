@@ -9,9 +9,10 @@ class ValidatorBlock extends Model
     protected $fillable = [
         'validator_id',
         'block_hash',
-        'block_number',
         'status',
         'validated_at',
+        'created_at',
+        'updated_at'
     ];
 
     protected $casts = [
