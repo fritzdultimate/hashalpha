@@ -14,7 +14,7 @@ class ValidatorBlockService {
 
             $validator = StakingPlan::query()
                 ->select('*')
-                ->orderByRaw('RAND() * maximum_amount DESC')
+                ->orderByRaw('RAND() * max_amount DESC')
                 ->lockForUpdate()
                 ->firstOrFail();
 
