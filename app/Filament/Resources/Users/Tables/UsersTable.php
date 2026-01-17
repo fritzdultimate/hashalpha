@@ -66,6 +66,7 @@ class UsersTable
                     ->dateTime()
                     ->sortable()
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
