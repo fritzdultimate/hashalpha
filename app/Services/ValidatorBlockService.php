@@ -22,7 +22,7 @@ class ValidatorBlockService {
                 'validator_id' => $validator->id,
                 'block_hash'   => Str::uuid()->toString(),
                 'status' => 'validated',
-                'validated_at' => now()->minutes(5)
+                'validated_at' => now()->addMinutes(5)
             ]);
         });
     }
