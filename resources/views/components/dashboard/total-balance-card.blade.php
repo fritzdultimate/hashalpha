@@ -24,7 +24,7 @@
         <div id="total-balance-chart" class="halpha-flex halpha-items-end" style="height:120px;"></div>
     </div>
 
-    <x-dashboard.stat title="Total Earned" value="${{ number_format($totalEarned, 2) }}" :delta="$totalEarnedDelta">
+    <x-dashboard.stat title="Total Network Rewards" value="${{ number_format($totalEarned, 2) }}" :delta="$totalEarnedDelta">
         <div id="daily-earnings" class="halpha-flex halpha-items-end"></div>
     </x-dashboard.stat>
 
