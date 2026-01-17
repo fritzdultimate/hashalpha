@@ -21,7 +21,8 @@ class ValidatorBlockService {
             return ValidatorBlock::create([
                 'validator_id' => $validator->id,
                 'block_hash'   => Str::uuid()->toString(),
-                'status' => 'validated'
+                'status' => 'validated',
+                'validated_at' => now()->minutes(5)
             ]);
         });
     }
