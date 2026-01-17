@@ -26,7 +26,7 @@ class WithdrawalRules {
      * Minimum withdrawal rule
      */
     protected static function minimumAmount(string $amount): void {
-        $min = config('withdrawal.minimum', '5');
+        $min = config('withdrawal.minimum', '50');
 
         if (bccomp($amount, $min, 8) === -1) {
             throw new DomainException(
