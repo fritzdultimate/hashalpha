@@ -25,7 +25,7 @@ class Bonuses extends Component {
         $userId = auth()->id();
 
         $this->totalAvailable = ReferralReward::where('user_id', $userId)
-            ->selectRaw('SUM(amount - withdrawn) as total')
+            ->selectRaw('SUM(amount - COALESCE(withdrawn, 0)) as total')
             ->value('total');
 
         $this->withdrawn = ReferralReward::where('user_id', $userId)
