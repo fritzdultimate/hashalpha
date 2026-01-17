@@ -60,7 +60,7 @@
                 </div>
 
                 <label class="halpha-relative halpha-inline-flex halpha-items-center halpha-cursor-pointer">
-                    <input type="checkbox" wire:model="withdrawalConfirmation" class="halpha-sr-only halpha-peer">
+                    <input type="checkbox" wire:model.live="withdrawalConfirmation" class="halpha-sr-only halpha-peer">
                     <div class="halpha-w-9 halpha-h-5 halpha-bg-gray-700 peer-checked:halpha-bg-accent-2 halpha-rounded-full"></div>
                     <div class="halpha-absolute halpha-left-1 halpha-top-1 halpha-bg-white halpha-w-3 halpha-h-3 halpha-rounded-full peer-checked:halpha-translate-x-4 halpha-transition"></div>
                 </label>
