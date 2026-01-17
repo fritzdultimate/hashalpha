@@ -70,7 +70,6 @@
 
         {{-- Save --}}
         <button
-            wire:click="save"
             class="halpha-bg-accent-2 halpha-text-white halpha-px-4 halpha-py-2 halpha-rounded halpha-text-xs disabled:halpha-opacity-60 disabled:halpha-cursor-not-allowed"
             wire:loading.attr="disabled"
         >

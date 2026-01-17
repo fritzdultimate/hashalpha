@@ -32,7 +32,10 @@ class User extends Authenticatable implements FilamentUser {
         'phone_number',
         'country',
         'timezone',
-        'referrer_id'
+        'referrer_id',
+        'two_factor_enabled',
+        'login_alerts',
+        'withdrawal_confirmation'
     ];
 
     /**

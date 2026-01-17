@@ -32,7 +32,7 @@ class Settings extends Component {
             'withdrawal_confirmation' => $this->withdrawalConfirmation,
         ]);
 
-        $this->dispatch('toast', type: 'success', message: 'Security settings updated');
+        $this->dispatch('toast', payload: ['type' => 'success', 'message' => 'Security settings updated']);
     }
 
 
