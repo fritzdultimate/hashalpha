@@ -36,6 +36,19 @@
                     </div>
                 </div>
 
+                {{-- Available Bonus --}}
+                <div class="halpha-bg-emerald-500/10 halpha-border halpha-border-emerald-500/30 halpha-rounded halpha-p-3 halpha-flex halpha-flex-col halpha-justify-center halpha-items-center">
+                    <p class="halpha-text-xs halpha-text-emerald-400">
+                        Available Bonus
+                    </p>
+                    <p class="halpha-text-lg halpha-font-bold halpha-text-emerald-300">
+                        ${{ number_format($this->availableBonus, 2) }}
+                    </p>
+                    <p class="halpha-text-[11px] halpha-text-emerald-400 mt-1">
+                        Your staking amount will be deducted from your available bonus first. Any remaining amount will be deducted from your main balance.
+                    </p>
+                </div>
+
                 {{-- Right section: stake input --}}
                 <div class="halpha-p-6 halpha-flex halpha-flex-col halpha-gap-4 md:halpha-w-1/2">
                     {{-- Amount input --}}

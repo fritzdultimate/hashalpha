@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Domain\Staking\StakeRules;
 use App\Mail\StakeCreatedMail;
+use App\Models\Deposit;
 use App\Models\StakingPlan;
 use App\Services\ReferralBonusService;
 use Illuminate\Support\Facades\Mail;
@@ -82,13 +83,44 @@ class StakeModal extends Component
             return;
         }
 
+        
+
         DB::beginTransaction();
         try {
-            // Subtract from user wallet balance
-            $before = $user->balance;
-            $newBalance = bcsub($before, $amt, 8);
-            $user->balance = $newBalance;
-            $user->save();
+
+            $remaining = (float) $amt;
+            $deposits = Deposit::where('user_id', $user->id)
+                ->where('bonus', '>', 0)
+                ->where('status', 'finished')
+                ->orderBy('created_at')
+                ->lockForUpdate()
+                ->get();
+
+            foreach ($deposits as $deposit) {
+                if ($remaining <= 0) {
+                    break;
+                }
+
+                if ($deposit->bonus >= $remaining) {
+                    $deposit->bonus -= $remaining;
+                    $deposit->save();
+                    $remaining = 0;
+                    break;
+                }
+
+                $remaining -= $deposit->bonus;
+                $deposit->bonus = 0;
+                $deposit->save();
+            }
+
+            if ($remaining > 0) {
+                if (bccomp($user->balance, (string)$remaining, 8) < 0) {
+                    throw new \Exception('Insufficient balance after bonus deduction.');
+                }
+
+                $user->balance = bcsub($user->balance, (string)$remaining, 8);
+                $user->save();
+            }
 
             
             $stake = Stake::create([
@@ -113,7 +145,9 @@ class StakeModal extends Component
                 'related_type' => 'App\Models\Stake',
                 'related_id' => $stake->id,
                 'meta' => [
-                    'note' => 'Staked'
+                    'note' => 'Staked',
+                    'used_bonus' => (float) $amt - $remaining,
+                    'used_balance' => $remaining,
                 ],
                 'created_at' => now(),
                 'updated_at' => now()
@@ -129,6 +163,10 @@ class StakeModal extends Component
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
+            $this->addError(
+            'amount',
+            'Unable to complete stake at the moment. Please try again.'
+            );
             throw $e;
         }
 
@@ -140,6 +178,13 @@ class StakeModal extends Component
             'timeout' => 5000,
             'stake_id' => $stake->id
         ]);
+    }
+
+    public function getAvailableBonusProperty(): float {
+        return (float) Deposit::where('user_id', auth()->id())
+            ->where('bonus', '>', 0)
+            ->where('status', 'finished')
+            ->sum('bonus');
     }
 
     public function render() {

@@ -2,11 +2,14 @@
 
 namespace App\Domain\Staking;
 
+use App\Models\Deposit;
 use App\Models\Stake;
 use App\Models\User;
 
-class StakeRules {
-    public static function canCreate(User $user, $stake_amount): void {
+class StakeRules
+{
+    public static function canCreate(User $user, $stake_amount): void
+    {
         self::maxActiveStakesPerPlan($user);
         self::checkBalance($user, $stake_amount);
 
@@ -16,7 +19,8 @@ class StakeRules {
         // self::planAvailability($plan);
     }
 
-    protected static function maxActiveStakesPerPlan(User $user): void {
+    protected static function maxActiveStakesPerPlan(User $user): void
+    {
         $count = Stake::where('user_id', $user->id)
             ->where('status', 'active')
             ->count();
@@ -28,10 +32,20 @@ class StakeRules {
         }
     }
 
-    protected static function checkBalance(User $user, $stake_amount): void {
-        if (bccomp($user->balance, $stake_amount, 8) === -1) {
+    protected static function checkBalance(User $user, $stake_amount): void
+    {
+        $bonusAvailable = Deposit::where('user_id', $user->id)
+            ->where('status', 'finished')
+            ->sum('bonus');
+        $totalAvailable = bcadd(
+            (string) $bonusAvailable,
+            (string) $user->balance,
+            8
+        );
+
+        if (bccomp($totalAvailable, $stake_amount, 8) < 0) {
             throw new \DomainException(
-                'Insufficient account balance to stake this amount.'
+                'Insufficient funds. Your bonus and balance combined are not enough to complete this stake.'
             );
         }
     }
