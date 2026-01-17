@@ -36,12 +36,17 @@
                 <label class="halpha-text-xs halpha-text-gray-400">
                     Category
                 </label>
-                <select wire:model="category" class="halpha-input">
+                <select wire:model.live="category" class="halpha-input">
                     <option value="general">General</option>
                     <option value="wallet">Wallet</option>
                     <option value="withdrawal">Withdrawal</option>
                     <option value="security">Security</option>
                 </select>
+                @error('category')
+                    <div class="halpha-text-red-600 halpha-text-xs">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div>
@@ -54,6 +59,11 @@
                     class="halpha-input"
                     placeholder="Brief summary of your issue"
                 />
+                @error('subject')
+                    <div class="halpha-text-red-600 halpha-text-xs">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div>
@@ -66,17 +76,63 @@
                     class="halpha-input"
                     placeholder="Describe the issue in detail"
                 ></textarea>
+                @error('message')
+                    <div class="halpha-text-red-600 halpha-text-xs">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <button
                 type="submit"
                 class="halpha-bg-accent-2 halpha-text-white halpha-px-4 halpha-py-2 halpha-rounded halpha-text-xs"
             >
-                Submit Ticket
+                <span wire:loading.remove="submit">Submit Ticket</span>
+                <span wire:loading wire:target="confirmSubmit">Preparing...</span>
+                <span wire:loading wire:target="submit">Submiting ticket...</span>
             </button>
 
         </form>
     </div>
+
+    {{-- User Tickets --}}
+    <div class="halpha-space-y-3 halpha-max-w-2xl">
+
+        <h2 class="halpha-text-sm halpha-font-semibold halpha-text-white">
+            Your Tickets
+        </h2>
+
+        @forelse ($tickets as $ticket)
+            <div class="halpha-card halpha-p-3 halpha-flex halpha-justify-between halpha-items-center">
+                <div>
+                    <p class="halpha-text-xs halpha-text-gray-400">
+                        {{ $ticket->ticket_number }}
+                    </p>
+                    <p class="halpha-text-sm halpha-text-white">
+                        {{ $ticket->subject }}
+                    </p>
+                    <p class="halpha-text-xs halpha-text-gray-500">
+                        {{ $ticket->created_at->diffForHumans() }}
+                    </p>
+                </div>
+
+                <span class="
+                    halpha-text-xs halpha-px-2 halpha-py-1 halpha-rounded
+                    @if($ticket->status === 'open') halpha-bg-yellow-500/10 halpha-text-yellow-500 @endif
+                    @if($ticket->status === 'in_progress') halpha-bg-blue-500/10 halpha-text-blue-500 @endif
+                    @if($ticket->status === 'resolved') halpha-bg-green-500/10 halpha-text-green-500 @endif
+                    @if($ticket->status === 'closed') halpha-bg-gray-500/10 halpha-text-gray-400 @endif
+                ">
+                    {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
+                </span>
+            </div>
+        @empty
+            <p class="halpha-text-xs halpha-text-gray-400">
+                You have not created any support tickets yet.
+            </p>
+        @endforelse
+    </div>
+
 
     {{-- Confirmation Modal --}}
     <x-confirmation-modal
