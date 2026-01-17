@@ -12,8 +12,12 @@ class SupportTicket extends Model {
         'priority',
         'status',
         'description',
-        'meta',
+        'closed_at',
         'ticket_number'
     ];
     protected $casts = ['meta'=>'array'];
+
+    public function messages() {
+        return $this->hasMany(SupportTicketMessage::class);
+    }
 }
