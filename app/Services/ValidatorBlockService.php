@@ -27,15 +27,16 @@ class ValidatorBlockService {
 
             $running = 0;
 
-            $validator = $plans->first(function ($plan) use (&$running, $random) {
+            foreach ($plans as $plan) {
                 $running += $plan->max_amount;
-                return $running >= $random;
-            });
 
-
-            $validator = StakingPlan::where('id', $validator->id)
-                ->lockForUpdate()
-                ->first();
+                if ($random <= $running) {
+                    $validator = StakingPlan::where('id', $plan->id)
+                        ->lockForUpdate()
+                        ->first();
+                    break;
+                }
+            }
 
             return ValidatorBlock::create([
                 'validator_id' => $validator->id,
