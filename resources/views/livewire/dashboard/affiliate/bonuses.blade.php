@@ -7,8 +7,8 @@
     </p>
 
     <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3">
-        <x-affiliate.stat label="Claimable" :value="number_format($claimable,2)" prefix="$" highlight />
-        <x-affiliate.stat label="Pending" :value="number_format($pending,2)" prefix="$" />
+        <x-affiliate.stat label="Total" :value="number_format($totalAvailable,2)" prefix="$" highlight />
+        <x-affiliate.stat label="Withdrawn" :value="number_format($pending,2)" prefix="$" />
     </div>
 
     @if($claimable > 0)
@@ -53,7 +53,7 @@
                             'halpha-text-gray-400' => $bonus->status === 'claimed',
                         ])
                     ">
-                        {{ ucfirst($bonus->status) }}
+                        <!-- {{ ucfirst($bonus->status) }} -->
                     </div>
                     <div class="halpha-text-xs halpha-text-gray-400">
                         ${{ number_format($bonus->amount, 2) }}

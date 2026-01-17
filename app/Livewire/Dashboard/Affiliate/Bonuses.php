@@ -14,6 +14,9 @@ class Bonuses extends Component {
     public float $claimable = 0;
     public float $pending = 0;
 
+    public float $totalAvailable = 0;
+    public float $withdrawan = 0;
+
     public function mount() {
         $this->loadBonuses();
     }
@@ -21,21 +24,16 @@ class Bonuses extends Component {
     public function loadBonuses(): void {
         $userId = auth()->id();
 
-        $this->claimable = ReferralReward::where('user_id', $userId)
-            ->where('status', 'pending')
-            ->where(function ($q) {
-                $q->whereNull('claimable_at')
-                ->orWhere('claimable_at', '<=', now());
-            })
-            ->sum('amount');
+        $this->totalAvailable = ReferralReward::where('user_id', $userId)
+            ->selectRaw('SUM(amount - withdrawn) as total')
+            ->value('total');
 
-
-        $this->pending = ReferralReward::where('user_id', $userId)
-            ->where('status', 'pending')
-            ->sum('amount');
+        $this->withdrawn = ReferralReward::where('user_id', $userId)
+            ->sum('withdrawn');
     }
 
     public function claim(): void {
+        return;
         if ($this->claimable <= 0) return;
 
         DB::transaction(function () {
