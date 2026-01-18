@@ -94,7 +94,7 @@
                                         @endphp
 
                                         @if ($col['key'] === 'type')
-                                            <x-dashboard.status-maker :flat="true" label="{{ $value }}" className="{{ $value }}"  />
+                                            <x-dashboard.status-maker :flat="true" label="{{ $value === 'hold' ? 'lockup' : $value }}" className="{{ $value }}"  />
                                         @elseif ($col['key'] === 'status')
                                             <x-dashboard.status-maker label="{{  $row?->related?->status }}" className="pending"  />
                                         @else
