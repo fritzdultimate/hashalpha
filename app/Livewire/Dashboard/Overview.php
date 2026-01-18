@@ -48,6 +48,7 @@ class Overview extends Component
         $rank = Rank::orderBy('level')->first();
 
         $this->rank = $user->rank?->name ?? $rank->name;
+        $this->loadValidatorBlocks();
 
 
         $dailyRewards = Cache::remember(
