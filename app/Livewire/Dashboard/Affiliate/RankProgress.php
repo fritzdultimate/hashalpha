@@ -18,6 +18,8 @@ class RankProgress extends Component
     public Rank $currentRank;
     public ?Rank $nextRank = null;
     public int $progressPercent = 0;
+    public $totalAvailable = 0;
+    public $withdrawn = 0;
 
     public function mount()
     {
@@ -30,17 +32,13 @@ class RankProgress extends Component
     {
         $userId = auth()->id();
 
-        $this->claimable = ReferralReward::where('user_id', $userId)
-            ->where('status', 'pending')
-            ->where(function ($q) {
-                $q->whereNull('claimable_at')
-                ->orWhere('claimable_at', '<=', now());
-            })
-            ->sum('amount');
+        $this->totalAvailable = ReferralReward::where('user_id', $userId)
+            ->get()
+            ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
 
-        $this->pending = ReferralReward::where('user_id', $userId)
-            ->where('status', 'pending')
-            ->sum('amount');
+        $this->withdrawn = ReferralReward::where('user_id', $userId)
+            ->sum('withdrawn');
+
     }
 
     public function loadRank(): void
