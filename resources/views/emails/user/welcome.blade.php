@@ -30,7 +30,7 @@
     <!-- Intro Text -->
     <tr>
         <td style="font-size:14px; color:#d1d1d6; text-align:center; padding:12px 0 22px; line-height:20px;">
-            Congratulations on successfully creating your account with <strong>HashAlpha</strong>. 
+            Congratulations on successfully creating your account with <strong>{{ env('APP_NAME') }}</strong>. 
             We’re thrilled to have you join our community and support your participation in our infrastructure-driven platform.
         </td>
     </tr>
@@ -112,7 +112,7 @@
     <!-- Info / Footer -->
     <tr>
         <td style="padding-top:22px; font-size:12px; color:#8d8d95; text-align:center; line-height:18px;">
-            At <strong>HashAlpha</strong>, we focus on transparency, infrastructure participation, and long-term sustainability.
+            At <strong>{{ env('APP_NAME') }}</strong>, we focus on transparency, infrastructure participation, and long-term sustainability.
             <br><br>
             If you need assistance at any stage, our support team is available to help: 
             <a href="mailto:support@hashalpha.io" style="color:#38bdf8; text-decoration:none;">support@hashalpha.io</a>.
