@@ -30,7 +30,7 @@
     <!-- Intro Text -->
     <tr>
         <td style="font-size:14px; color:#d1d1d6; text-align:center; padding:12px 0 22px; line-height:20px;">
-            Congratulations on successfully creating your account with <strong>HashAlpha Limited</strong>. 
+            Congratulations on successfully creating your account with <strong>HashAlpha</strong>. 
             We’re thrilled to have you join our community and support your participation in our infrastructure-driven platform.
         </td>
     </tr>
