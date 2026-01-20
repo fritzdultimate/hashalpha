@@ -98,8 +98,11 @@
 
                             {{-- Close --}}
                             <button wire:click="closeRankModal"
-                                class="absolute top-4 right-4 halpha-text-gray-400 hover:halpha-text-white transition">
-                                ✕
+                                class="absolute top-4 right-4 halpha-text-white hover:halpha-text-white transition">
+                                <span class="halpha-w-5 halpha-h-5 halpha-bg-accent-2 halpha-rounded halpha-p-1 halpha-px-2 hover:halpha-opacity-80">
+                                    ✕
+                                </span>
+                                
                             </button>
 
                             {{-- Header --}}
