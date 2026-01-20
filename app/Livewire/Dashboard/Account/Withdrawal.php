@@ -4,6 +4,8 @@ namespace App\Livewire\Dashboard\Account;
 
 use App\Domain\Withdrawal\WithdrawalRules;
 use App\Models\ReferralReward;
+use App\Models\WithdrawalCurrency;
+use App\Models\WithdrawalNetwork;
 use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +15,6 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class Withdrawal extends Component {
     public $amount;
-    public $walletId;
     public $asset;
     public $address;
     public $otp = null;
@@ -22,15 +23,23 @@ class Withdrawal extends Component {
     public \App\Models\Withdrawal $withdrawal;
     public $totalAvailable = 0;
 
+    public $currencyId;
+    public $networkId;
+    public $networks = [];
+    public $loading = false;
+
 
     protected $rules = [
         'amount' => 'required|numeric',
         'address' => 'required',
-        'walletId' => 'required'
+        'currencyId' => 'required|exists:withdrawal_currencies,id',
+        'networkId' => 'required|exists:withdrawal_networks,id',
+        'asset' => 'required|in:balance,referral_rewards',
     ];
 
 
     public function confirm() {
+        $this->loading = true;
         $this->validate();
         $this->dispatch('confirm-withdrawal');
     }
@@ -49,15 +58,23 @@ class Withdrawal extends Component {
 
     }
 
+    public function updatedCurrencyId($value) {
+        $this->networkId = null;
+
+        $this->networks = WithdrawalNetwork::where('withdrawal_currency_id', $value)
+            ->where('is_enabled', true)
+            ->get();
+    }
+
 
     public function withdraw() {
         $this->prepareWithdrawal();
+        $this->loading = false;
     }
 
     public function makeAnotherWithdrawal(): void {
         $this->reset([
             'amount',
-            'walletId',
             'asset',
             'address',
             'otp',
@@ -69,7 +86,7 @@ class Withdrawal extends Component {
     }
 
     public function proceedWithdrawal() {
-
+        $this->loading = true;
         if($this->otp === null) {
             $this->addError('otp', 'Your OTP is required.');
             return;
@@ -83,14 +100,17 @@ class Withdrawal extends Component {
         DB::transaction(function () {
             $this->withdrawal = \App\Models\Withdrawal::create([
                 'user_id' => auth()->id(),
-                'wallet_id' => $this->walletId,
                 'amount' => $this->amount,
                 'address' => $this->address,
-                'asset' => $this->asset
+                'asset' => $this->asset,
+                'withdrawal_currency_id' => $this->currencyId,
+                'withdrawal_network_id' => $this->networkId,
             ]);
 
             $this->withdrawalPlaced = true;
         });
+
+        $this->loading = false;
         
 
     }
@@ -109,7 +129,7 @@ class Withdrawal extends Component {
     public function render()
     {
         return view('livewire.dashboard.account.withdrawal', [
-            'wallets' => auth()->user()->wallets
+            'currencies' => WithdrawalCurrency::where('is_enabled', true)->get(),
         ]);
     }
 }

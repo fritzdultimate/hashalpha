@@ -17,6 +17,8 @@ class Withdrawal extends Model {
         'failure_reason',
         'processed_at',
         'asset',
+        'withdrawal_currency_id',
+        'withdrawal_network_id'
     ];
 
     protected $casts = [
@@ -70,5 +72,13 @@ class Withdrawal extends Model {
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function currency() {
+        return $this->belongsTo(WithdrawalCurrency::class, 'withdrawal_currency_id');
+    }
+
+    public function chain() {
+        return $this->belongsTo(WithdrawalNetwork::class, 'withdrawal_network_id');
     }
 }

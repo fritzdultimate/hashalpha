@@ -11,6 +11,13 @@
         <p class="halpha-text-xs halpha-text-gray-400">
             Send funds from your account to an external wallet
         </p>
+
+        <div>
+            <a href="{{ route('withdrawal.history') }}"
+            class="halpha-text-accent-2 halpha-text-xs halpha-font-semibold hover:underline">
+                View Withdrawal History
+            </a>
+        </div>
     </div>
 
     {{-- Warning --}}
@@ -131,20 +138,45 @@
                     Withdrawal Currency
                 </label>
 
-                <select wire:model="walletId" class="halpha-input">
+                <select wire:model.live="currencyId" class="halpha-input">
                     <option value="">Select currency</option>
-                    @foreach($wallets as $wallet)
-                        <option value="{{ $wallet->id }}">
-                            {{ strtoupper($wallet->currency) }} — {{ $wallet->network ?? 'Mainnet' }}
+                    @foreach($currencies as $currency)
+                        <option value="{{ $currency->id }}">
+                            {{ strtoupper($currency->code) }} — {{ $currency->name }}
                         </option>
                     @endforeach
                 </select>
-                @error('walletId')
-                    <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
+
+                @error('currencyId')
+                    <div class="halpha-text-red-500 halpha-text-xs mt-1">{{ $message }}</div>
                 @enderror
             </div>
+            @if($currencyId)
+                <div>
+                    <label class="halpha-text-xs halpha-text-gray-400">
+                        Network
+                    </label>
 
+                    <select wire:model="networkId" class="halpha-input">
+                        <option value="">Select network</option>
+                        @foreach($networks as $network)
+                            <option value="{{ $network->id }}">
+                                {{ strtoupper($network->name) }}
+                                @if($network->fee > 0)
+                                    — Fee: {{ $network->fee }}
+                                @endif
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('networkId')
+                        <div class="halpha-text-red-500 halpha-text-xs mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+            @endif
             {{-- Wallet / Currency --}}
+
+
             <div>
                 <label class="halpha-text-xs halpha-text-gray-400">
                     Withdrawal Asset
@@ -186,9 +218,13 @@
             {{-- CTA --}}
             <button 
                 type="submit"
-                class="halpha-bg-accent-2 halpha-text-white halpha-px-4 halpha-py-2 halpha-rounded halpha-text-xs halpha-w-full"
+                @disabled($loading)
+                class="halpha-bg-accent-2 disabled:halpha-opacity-50 halpha-text-white halpha-px-4 halpha-py-2 halpha-rounded halpha-text-xs halpha-w-full"
             >
-                <span wire:loading.remove wire:target="confirm">Review Withdrawal</span>
+                <span wire:loading.remove>Review Withdrawal</span>
+                <div wire:loading wire:target="withdraw" class="halpha-flex halpha-items-center halpha-gap-2">
+                    <span>Preparing Withdrawal...</span>    
+                </div>
                 <x-ri-loader-4-fill wire:loading wire:target="confirm" class="halpha-w-4 halpha-h-4 halpha-animate-spin" />
                 
             </button>
