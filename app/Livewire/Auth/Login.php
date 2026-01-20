@@ -78,7 +78,7 @@ class Login extends Component {
             return redirect()->route('2fa');
         }
 
-        auth()->loginUsingId($user->id, $this->remember);
+        Auth::login($user, $this->remember);
         session()->regenerate();
         return redirect()->intended('/dashboard');
     }
