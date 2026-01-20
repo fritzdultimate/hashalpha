@@ -46,11 +46,21 @@ class Login extends Component {
             throw ValidationException::withMessages(['email' => "Account is on hold. Please try again in " . remaining_time_until($user->suspended_until)]);
         }
 
-        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+        if (! $user || ! Auth::validate([
+            'email' => $this->email,
+            'password' => $this->password,
+        ])) {
             RateLimiter::hit($key, 60);
-            LoginGuardService::recordFailedAttempt($user);
-            throw ValidationException::withMessages(['email' => 'These credentials do not match our records.']);
+
+            if ($user) {
+                LoginGuardService::recordFailedAttempt($user);
+            }
+
+            throw ValidationException::withMessages([
+                'email' => 'These credentials do not match our records.',
+            ]);
         }
+
 
         
         LoginGuardService::resetFailures($user);
