@@ -45,7 +45,9 @@ class TwoFactor extends Component {
         Auth::login($this->user);
         auth()->user()->markEmailAsVerified(); 
 
-        event(new UserEmailVerified(auth()->user()));
+        if(session('2fa_type') === 'register') {
+            event(new UserEmailVerified(auth()->user()));
+        }
 
         return redirect()->intended('/dashboard');
     }
