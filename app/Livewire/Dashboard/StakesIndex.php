@@ -64,7 +64,7 @@ class StakesIndex extends Component {
                     'id' => $s->id,
                     'plan' => $s->plan->name ?? '',
                     'amount' => $s->amount,
-                    'status' => $s->status,
+                    'status' => $s->status->value,
                     'started_at' => optional($s->started_at)->toDateTimeString(),
                     'ended_at' => optional($s->ended_at)->toDateTimeString(),
                     'earned' => $s->earned_total ?? 0,

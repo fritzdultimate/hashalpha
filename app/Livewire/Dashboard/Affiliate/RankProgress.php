@@ -21,11 +21,27 @@ class RankProgress extends Component
     public $totalAvailable = 0;
     public $withdrawn = 0;
 
-    public function mount()
-    {
+    public ?Rank $selectedRank = null;
+    public bool $showRankModal = false;
+
+    public $userVolume = 0;
+    public $userActiveReferrals = 0;
+    public $userEarnings = 0;
+
+    public function mount() {
         RankEvaluatorService::evaluate(auth()->user());
         $this->loadBonuses();
         $this->loadRank();
+        // $this->showRankDetails(2);
+    }
+
+    public function showRankDetails(int $rankId): void {
+        $this->selectedRank = Rank::findOrFail($rankId);
+        $this->showRankModal = true;
+    }
+
+    public function closeRankModal(): void {
+        $this->reset(['showRankModal', 'selectedRank']);
     }
 
     public function loadBonuses(): void
@@ -59,15 +75,19 @@ class RankProgress extends Component
         $downlineIds = $this->getDownlineUserIds($user->id);
 
         $volume = Stake::whereIn('user_id', $downlineIds)->sum('amount');
+        $this->userVolume = $volume;
 
         $activeReferrals = ReferralReward::where('user_id', $user->id)
             ->whereHas('fromUser', fn($q) => $q->where('is_suspended', false))
             ->distinct('from_user_id')
             ->count('from_user_id');
 
+        $this->userActiveReferrals = $activeReferrals;
+
         $earnings = ReferralReward::where('user_id', $user->id)
-            ->where('status', 'paid')
             ->sum('amount');
+        
+        $this->userEarnings = $earnings;
 
         $refPct = intval(($activeReferrals/$this->nextRank->required_active_referrals) * 100);
         $earningsPct = intval(($earnings/$this->nextRank->required_earnings) * 100);

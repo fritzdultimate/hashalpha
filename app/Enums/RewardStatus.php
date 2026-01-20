@@ -7,6 +7,7 @@ enum RewardStatus: string
     case CLAIMED = 'claimed';
     case PENDING   = 'pending';
     case COMPOUNDED    = 'compounded';
+    case LOCKED    = 'locked';
 
     public function label(): string
     {
@@ -14,6 +15,7 @@ enum RewardStatus: string
             self::PENDING => 'Pending',
             self::CLAIMED => 'claimed',
             self::COMPOUNDED => 'compounded',
+            self::LOCKED => 'locked'
         };
     }
 
