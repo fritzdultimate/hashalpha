@@ -31,6 +31,22 @@
     </div>
 
     <div class="halpha-space-y-2">
+        {{-- Hint --}}
+        <div
+            class="halpha-card halpha-bg-card-soft halpha-p-3 halpha-text-[11px] halpha-text-gray-400 halpha-flex halpha-items-center halpha-gap-2">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" class="halpha-h-12 halpha-w-12 halpha-text-accent-2 halpha-opacity-80"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M12 18a6 6 0 100-12 6 6 0 000 12z" />
+            </svg>
+
+            <span>
+                Tap on any <strong class="halpha-text-gray-300">rank</strong> below to view detailed qualification
+                requirements and your progress.
+            </span>
+        </div>
+
         @foreach($ranks as $rank)
             <x-affiliate.step :name="$rank->name" :active="$rank->level <= $currentRank->level"
                 wire:click="showRankDetails({{ $rank->id }})" class="halpha-cursor-pointer" />
