@@ -15,6 +15,7 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class UsersTable
 {
@@ -74,6 +75,30 @@ class UsersTable
                 ViewAction::make()
                     ->badge(),
                 ActionGroup::make([
+                    Action::make('impersonate')
+                        ->label('Login as user')
+                        ->icon('heroicon-o-arrow-right-on-rectangle')
+                        ->color('warning')
+                        ->requiresConfirmation()
+                        ->visible(fn () => auth()->user()?->isAdmin())
+                        ->action(function ($record) {
+
+                            abort_unless(auth()->user()->isAdmin(), 403);
+
+                            // Prevent impersonating other admins
+                            if ($record->isAdmin()) {
+                                throw new \Exception('You cannot impersonate another admin.');
+                            }
+
+                            session([
+                                'impersonator_id' => auth()->id(),
+                            ]);
+
+                            Auth::login($record);
+                            session()->regenerate();
+
+                            return redirect('/dashboard');
+                        }),
                     Action::make('topup')
                     ->label('Top Up')
                     ->icon('heroicon-o-plus-circle')

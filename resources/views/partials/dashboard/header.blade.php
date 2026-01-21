@@ -46,7 +46,7 @@
 
 
         <!-- Notifications -->
-        <div class="halpha-relative">
+        <div class="halpha-relative halpha-hidden">
             <button class="halpha-p-2 halpha-rounded" @click.prevent="openNotifications = !openNotifications"
                 aria-expanded="false">
                 <svg class="halpha-h-5 halpha-w-5 halpha-text-[#e6f6ff]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

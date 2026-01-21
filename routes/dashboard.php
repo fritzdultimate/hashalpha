@@ -87,3 +87,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::post('/admin/stop-impersonation', function () {
+
+    abort_unless(session()->has('impersonator_id'), 403);
+
+    $adminId = session()->pull('impersonator_id');
+
+    Auth::loginUsingId($adminId);
+    session()->regenerate();
+
+    return redirect('/admin');
+})->name('admin.stop-impersonation');
+

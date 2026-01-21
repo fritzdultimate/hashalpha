@@ -85,9 +85,19 @@
             <div class="halpha-text-white halpha-text-2xl halpha-font-bold">My Dashboard</div>
         </div>
 
+            @if(session()->has('impersonator_id'))
+                <div class="halpha-bg-amber-500 halpha-text-black halpha-px-4 halpha-py-2 halpha-text-sm halpha-text-center">
+                    You are impersonating a user.
+                    <form method="POST" action="{{ route('admin.stop-impersonation') }}" class="halpha-inline">
+                        @csrf
+                        <button class="halpha-underline halpha-font-semibold halpha-ml-2">
+                            Return to Admin
+                        </button>
+                    </form>
+                </div>
+            @endif
 
         <div id="app" x-bind:style="appStyle" class="halpha-flex halpha-flex-1">
-
             @php
                 $navs = [
                     [
