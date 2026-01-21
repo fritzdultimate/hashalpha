@@ -15,9 +15,9 @@ class WithdrawalRules {
         self::checkBalance($user, $amount, $asset);
         self::minimumAmount($amount);
         self::maximumAmount($amount);
+        self::kycRequired($user);
 
         // Future rules go here 👇
-        // self::kycRequired($user);
         // self::cooldownCheck($user);
         // self::planAvailability($plan);
     }
