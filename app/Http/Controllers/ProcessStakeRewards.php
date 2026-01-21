@@ -48,9 +48,16 @@ class ProcessStakeRewards extends Controller {
             return;
         }
 
+        $minFactor = 9500;
+        $maxFactor = 10500;
+        $randomFactor = random_int($minFactor, $maxFactor);
+        $factor = bcdiv((string) $randomFactor, '10000', 8);
+        $baseRoi = (string) $stake->plan->daily_roi;
+        $fluctuatedRoi = bcmul($baseRoi, $factor, 8);
+
         $reward = bcmul(
             $stake->amount,
-            bcdiv($stake->plan->daily_roi, 100, 8),
+            bcdiv($fluctuatedRoi, 100, 8),
             8
         );
 
