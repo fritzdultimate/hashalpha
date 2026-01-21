@@ -67,7 +67,9 @@ class ProcessStakeRewards extends Controller {
             'amount' => $reward,
             'status' => 'pending',
             'credited_at' => now(),
-            'reward_type' => 'staking'
+            'reward_type' => 'staking',
+            'rewards_locked_at' => $stake->user->is_leader ? now() : null,
+            // 'lock_reason' => ''
         ]);
 
         $stake->update([
