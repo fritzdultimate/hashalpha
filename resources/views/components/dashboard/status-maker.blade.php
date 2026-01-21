@@ -9,7 +9,8 @@
             $color = 'halpha-bg-yellow-500';
             break;
 
-        case 'credit': 
+        case 'credit':
+        case 'active': 
             $color = 'halpha-bg-green-500';
             break;
             
