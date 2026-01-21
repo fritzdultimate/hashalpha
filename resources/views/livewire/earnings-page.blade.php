@@ -149,7 +149,10 @@
                     <div class="halpha-card halpha-p-3 halpha-flex halpha-items-start halpha-justify-between halpha-gap-3">
                         <div class="halpha-min-w-0">
                             <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-flex-wrap">
-                                <div class="halpha-text-xs halpha-text-gray-400">{{ ucfirst(str_replace('_', ' ', $tx->reward_type)) }}</div>
+                                <div class="halpha-text-xs halpha-text-gray-400">
+                                <!-- {{ ucfirst(str_replace('_', ' ', $tx->reward_type)) }} -->
+                                  Network Yield
+                            </div>
                                 @if(!empty($tx->stake_id))
                                     <div class="halpha-text-xs halpha-text-gray-500">
                                         • <a href="{{ route('stakes.item', $tx->stake_id) }}" class="halpha-text-accent-2 hover:halpha-text-accent-3">Stake #{{ $tx->stake_id }}</a>
