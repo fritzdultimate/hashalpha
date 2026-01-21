@@ -42,6 +42,7 @@ class StakingPlansTable
                     ->numeric()
                     ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])

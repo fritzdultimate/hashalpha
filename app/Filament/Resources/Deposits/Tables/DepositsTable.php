@@ -62,7 +62,7 @@ class DepositsTable
                     ->money('usd')
                     ->sortable(),
             ])
-
+            ->defaultSort('created_at', 'desc')
 
             ->filters([
             ])
