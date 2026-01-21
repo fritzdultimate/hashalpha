@@ -20,6 +20,10 @@ class ReferralBonusService {
             return;
         }
 
+        if($staker->is_leader) {
+            return;
+        }
+
         $referralTree = Referral::where('user_id', $staker->id)->first();
 
         if (! $referralTree) {

@@ -35,7 +35,8 @@ class User extends Authenticatable implements FilamentUser {
         'referrer_id',
         'two_factor_enabled',
         'login_alerts',
-        'withdrawal_confirmation'
+        'withdrawal_confirmation',
+        'is_leader'
     ];
 
     /**
@@ -59,7 +60,8 @@ class User extends Authenticatable implements FilamentUser {
             'password' => 'hashed',
             'login_alerts' => 'boolean',
             'withdrawal_confirmation' => 'boolean',
-            'two_factor_enabled' => 'boolean'
+            'two_factor_enabled' => 'boolean',
+            'is_leader' => 'boolean'
         ];
     }
 

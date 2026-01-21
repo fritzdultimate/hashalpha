@@ -63,6 +63,11 @@ class UsersTable
                     ->boolean()
                     ->trueColor('danger')
                     ->falseColor('success'),
+                IconColumn::make('is_leader')
+                    ->label('Leader')
+                    ->boolean()
+                    ->trueColor('success')
+                    ->falseColor('danger'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -232,6 +237,48 @@ class UsersTable
                                 $q->whereNotNull('rewards_locked_at')->where('status', 'locked')
                             )->exists()
                         ),
+
+                        // Make Leader
+                        Action::make('makeLeader')
+                            ->label('Make Leader')
+                            ->icon('heroicon-o-shield-check')
+                            ->color('success')
+                            ->requiresConfirmation()
+                            ->visible(fn ($record) => !$record->is_leader)
+                            ->action(function ($record) {
+
+                                abort_unless(!$record->is_leader, 403);
+                                $record->update(['is_leader' => true]);
+                                Notification::make()
+                                    ->title('Leader role assigned')
+                                    ->body('This user’s new stakes will no longer trigger downline bonuses.')
+                                    ->success()
+                                    ->send();
+                            })
+                            ->modalHeading('Confirm role change')
+                            ->modalDescription('Are you sure you want to change this user’s leadership status?'),
+                        // end make leaader
+
+                        // Remove Leader
+                        Action::make('removeLeader')
+                            ->label('Remove Leader Role')
+                            ->icon('heroicon-o-shield-exclamation')
+                            ->color('warning')
+                            ->requiresConfirmation()
+                            ->visible(fn ($record) => $record->is_leader)
+                            ->action(function ($record) {
+
+                                abort_unless($record->is_leader, 403);
+                                $record->update(['is_leader' => false]);
+                                Notification::make()
+                                    ->title('Leader role removed')
+                                    ->body('This user’s new stakes will now trigger downline bonuses.')
+                                    ->success()
+                                    ->send();
+                            })
+                            ->modalHeading('Confirm role change')
+                            ->modalDescription('Are you sure you want to change this user’s leadership status?'),
+                        // end remove leaader
 
                 ]),
                 
