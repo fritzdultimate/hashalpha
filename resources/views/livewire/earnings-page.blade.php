@@ -86,9 +86,10 @@
                 </div>
 
                 <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-w-full md:halpha-w-auto">
-                    <button 
+                    <button
+                        @disabled(auth()->user()->is_leader)
                         wire:click="claimAll"
-                        class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-w-full halpha-max-h-8"
+                        class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-w-full halpha-max-h-8 disabled:halpha-opacity-40"
                         aria-label="Claim all rewards"
                     >
                         <span wire:loading.remove wire:target="claimAll">Claim all</span>
@@ -193,7 +194,7 @@
                                 @else
                                     <span class="halpha-text-xs halpha-px-1 halpha-py-1 halpha-border halpha-border-gray-500 halpha-rounded halpha-text-gray-400 halpha-flex halpha-gap-1">
                                         <x-tabler-device-mobile-dollar class="halpha-w-4 halpha-h-4" />
-                                        @if ($tx->rewards_locked_at)
+                                        @if ($tx->rewards_locked_at || $tx->user->is_leader)
                                             Locked
                                         @elseif ($tx->compounded_at)
                                             Compounded

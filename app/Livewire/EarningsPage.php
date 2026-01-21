@@ -69,7 +69,7 @@ class EarningsPage extends Component
     }
 
     public function getQuery() {
-        $q = Reward::query()->with(['fromUser'])
+        $q = Reward::query()->with(['fromUser', 'user'])
             ->where('user_id', auth()->id());
 
         if ($this->filter === 'claimable') {
@@ -92,6 +92,14 @@ class EarningsPage extends Component
 
     public function claimAll() {
         $user = auth()->user();
+        if($user->is_leader) {
+            $this->dispatch('toast', payload: [
+                'message' => 'Action denied!',
+                'timeout' => 5000,
+                'variant' => 'subtle'
+            ]);
+            return;
+        }
 
         $pendingRewards = $user->rewards()
             ->whereNull('rewards_locked_at')
@@ -131,6 +139,15 @@ class EarningsPage extends Component
 
     public function claim($id) {
         $user = auth()->user();
+
+        if($user->is_leader) {
+            $this->dispatch('toast', payload: [
+                'message' => 'Action denied!',
+                'timeout' => 5000,
+                'variant' => 'subtle'
+            ]);
+            return;
+        }
 
         $pendingReward = $user->rewards()
             ->where('id', $id)
