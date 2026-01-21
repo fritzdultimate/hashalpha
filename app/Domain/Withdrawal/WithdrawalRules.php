@@ -22,6 +22,14 @@ class WithdrawalRules {
         // self::planAvailability($plan);
     }
 
+    protected static function kycRequired($user) {
+        if($user->kyc_status !== 'approved') {
+            throw new DomainException(
+                "For security and compliance reasons, you must complete KYC verification before proceeding."
+            );
+        }
+    }
+
     /**
      * Minimum withdrawal rule
      */
