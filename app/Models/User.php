@@ -130,4 +130,8 @@ class User extends Authenticatable implements FilamentUser {
         return $this->hasRole(['super-admin']) || $this->email === 'fritzdultimate7@gmail.com';
     }
 
+    public function tickets() {
+        return $this->hasMany(SupportTicket::class);
+    }
+
 }

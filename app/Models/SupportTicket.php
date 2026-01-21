@@ -20,4 +20,8 @@ class SupportTicket extends Model {
     public function messages() {
         return $this->hasMany(SupportTicketMessage::class);
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
