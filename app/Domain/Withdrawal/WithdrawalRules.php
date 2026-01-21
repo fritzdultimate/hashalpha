@@ -16,16 +16,29 @@ class WithdrawalRules {
         self::minimumAmount($amount);
         self::maximumAmount($amount);
         self::kycRequired($user);
-
-        // Future rules go here 👇
-        // self::cooldownCheck($user);
-        // self::planAvailability($plan);
+        self::cooldownCheck($user);
     }
 
     protected static function kycRequired($user) {
         if($user->kyc_status !== 'approved') {
             throw new DomainException(
                 "For security and compliance reasons, you must complete KYC verification before proceeding."
+            );
+        }
+    }
+
+    protected static function cooldownCheck($user): void {
+        $lastWithdrawal = Withdrawal::where('user_id', $user->id)
+            ->latest()
+            ->first();
+
+        if (! $lastWithdrawal) {
+            return;
+        }
+
+        if ($lastWithdrawal->created_at->diffInMinutes(now()) < 30) {
+            throw new DomainException(
+                'Please wait 30 minutes before making another withdrawal.'
             );
         }
     }
