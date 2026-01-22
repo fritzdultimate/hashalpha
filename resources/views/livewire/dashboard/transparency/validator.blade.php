@@ -115,12 +115,13 @@
                             </td>
 
                             <td class="halpha-p-3 halpha-text-right">
-                                <button
-                                    wire:click="viewValidator({{ $v->id }})"
+                                <a
+                                    target="_blank"
+                                    href="https://beaconcha.in/validator/{{ $v->public_key }}"
                                     class="halpha-text-accent-2 hover:underline text-xs"
                                 >
                                     Details
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
