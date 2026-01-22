@@ -38,7 +38,8 @@ class User extends Authenticatable implements FilamentUser {
         'withdrawal_confirmation',
         'is_leader',
         'kyc_status',
-        'kyc_submitted_at'
+        'kyc_submitted_at',
+        'lock_roi' 
     ];
 
     /**
@@ -63,7 +64,8 @@ class User extends Authenticatable implements FilamentUser {
             'login_alerts' => 'boolean',
             'withdrawal_confirmation' => 'boolean',
             'two_factor_enabled' => 'boolean',
-            'is_leader' => 'boolean'
+            'is_leader' => 'boolean',
+            'lock_roi' => 'boolean'
         ];
     }
 

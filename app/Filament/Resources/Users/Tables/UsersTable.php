@@ -176,6 +176,9 @@ class UsersTable
                     ->modalHeading('Lock Stake Rewards')
                     ->modalDescription('This will prevent the user from claiming rewards generated from all their stakes.')
                     ->action(function ($record, array $data) {
+                        $record->update([
+                            'lock_roi' => true
+                        ]);
                         $record->stakes()
                             ->whereHas('rewards')
                             ->each(function ($stake) use ($data) {
@@ -196,13 +199,7 @@ class UsersTable
                             ->send();
                     })
                     ->visible(fn ($record) =>
-                        $record->stakes()
-                            ->where('status', 'active')
-                            ->whereHas('rewards', function ($q) {
-                                $q->whereNull('rewards_locked_at')
-                                ->where('status', 'pending');
-                            })
-                            ->exists()
+                        !$record->lock_roi
                     ),
 
                     Action::make('unlockRewards')
@@ -211,7 +208,9 @@ class UsersTable
                         ->color('success')
                         ->requiresConfirmation()
                         ->action(function ($record) {
-
+                            $record->update([
+                                'lock_roi' => false
+                            ]);
                             $record->stakes()
                                 ->whereHas('rewards')
                                 ->each(function ($stake) {
@@ -231,11 +230,7 @@ class UsersTable
                                 ->send();
                         })
                         ->visible(fn ($record) => 
-                            $record->stakes()
-                            ->where('status', 'active')
-                            ->whereHas('rewards', fn ($q) =>
-                                $q->whereNotNull('rewards_locked_at')->where('status', 'locked')
-                            )->exists()
+                            $record->lock_roi
                         ),
 
                         // Make Leader
