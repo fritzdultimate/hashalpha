@@ -39,7 +39,9 @@ class User extends Authenticatable implements FilamentUser {
         'is_leader',
         'kyc_status',
         'kyc_submitted_at',
-        'lock_roi' 
+        'lock_roi',
+        'suspended_until',
+        'is_suspended'
     ];
 
     /**
@@ -65,7 +67,9 @@ class User extends Authenticatable implements FilamentUser {
             'withdrawal_confirmation' => 'boolean',
             'two_factor_enabled' => 'boolean',
             'is_leader' => 'boolean',
-            'lock_roi' => 'boolean'
+            'lock_roi' => 'boolean',
+            'is_suspended' => 'boolean',
+            'suspended_until' => 'datetime'
         ];
     }
 

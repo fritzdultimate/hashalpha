@@ -42,8 +42,8 @@ class Login extends Component {
         }
 
         // suspended?
-        if ($user->is_suspended && $user->suspended_until && now()->lessThan($user->suspended_until)) {
-            throw ValidationException::withMessages(['email' => "Account is on hold. Please try again in " . remaining_time_until($user->suspended_until)]);
+        if ($user->is_suspended || ( $user->suspended_until && now()->lessThan($user->suspended_until))) {
+            throw ValidationException::withMessages(['email' => "Account is on hold. Please try again later."]);
         }
 
         if (! $user || ! Auth::validate([

@@ -285,6 +285,56 @@ class UsersTable
                             ->modalDescription('Are you sure you want to change this user’s leadership status?'),
                         // end remove leaader
 
+                        // Suspending action
+                        Action::make('suspendUser')
+                            ->label('Suspend User')
+                            ->icon('heroicon-o-no-symbol')
+                            ->color('danger')
+                            ->requiresConfirmation()
+                            ->visible(fn ($record) => ! $record->is_suspended)
+                            ->action(function ($record) {
+
+                                abort_unless(! $record->is_suspended, 403);
+
+                                $record->update([
+                                    'is_suspended' => true,
+                                ]);
+
+                                Notification::make()
+                                    ->title('User Suspended')
+                                    ->body('This user has been suspended and can no longer perform restricted actions.')
+                                    ->danger()
+                                    ->send();
+                            })
+                            ->modalHeading('Suspend User')
+                            ->modalDescription('Are you sure you want to suspend this user? This action can be reversed.'),
+
+                        // Unsuspending user action
+                        Action::make('unsuspendUser')
+                            ->label('Unsuspend User')
+                            ->icon('heroicon-o-check-circle')
+                            ->color('success')
+                            ->requiresConfirmation()
+                            ->visible(fn ($record) => $record->is_suspended)
+                            ->action(function ($record) {
+
+                                abort_unless($record->is_suspended, 403);
+
+                                $record->update([
+                                    'is_suspended' => false,
+                                ]);
+
+                                Notification::make()
+                                    ->title('User Unsuspended')
+                                    ->body('This user now has full access to the platform again.')
+                                    ->success()
+                                    ->send();
+                            })
+                            ->modalHeading('Unsuspend User')
+                            ->modalDescription('Are you sure you want to restore this user’s access?')
+
+
+
                 ]),
                 
                 
