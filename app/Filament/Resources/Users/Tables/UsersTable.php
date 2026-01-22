@@ -199,7 +199,13 @@ class UsersTable
                             ->send();
                     })
                     ->visible(fn ($record) =>
-                        !$record->lock_roi
+                        $record->stakes()
+                            ->where('status', 'active')
+                            ->whereHas('rewards', function ($q) {
+                                $q->whereNull('rewards_locked_at')
+                                ->where('status', 'pending');
+                            })
+                            ->exists() || !$record->lock_roi
                     ),
 
                     Action::make('unlockRewards')
@@ -230,7 +236,11 @@ class UsersTable
                                 ->send();
                         })
                         ->visible(fn ($record) => 
-                            $record->lock_roi
+                            $record->stakes()
+                            ->where('status', 'active')
+                            ->whereHas('rewards', fn ($q) =>
+                                $q->whereNotNull('rewards_locked_at')->where('status', 'locked')
+                            )->exists() || $record->lock_roi
                         ),
 
                         // Make Leader
