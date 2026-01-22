@@ -210,10 +210,10 @@
                                 "url" => route('account.wallets'),
                                 "label" => "Wallets"
                             ],
-                            // [
-                            //     "url" => route('account.referral.rewards'),
-                            //     "label" => "Referral Bonuses"
-                            // ],
+                            [
+                                "url" => route('account.kyc'),
+                                "label" => "KYC"
+                            ],
                             [
                                 "url" => route('account.withdrawal'),
                                 "label" => 'Withdrawal'

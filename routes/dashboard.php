@@ -2,6 +2,7 @@
 use App\Http\Controllers\ProfileController;
 
 use App\Livewire\Dashboard\Account\Details;
+use App\Livewire\Dashboard\Account\Kyc;
 use App\Livewire\Dashboard\Account\Settings;
 use App\Livewire\Dashboard\Account\Support;
 use App\Livewire\Dashboard\Account\Wallets;
@@ -68,6 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Account
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/account/referral-bonuses', ReferralRewards::class)->name('account.referral.rewards');
+    Route::get('/account/kyc', Kyc::class)->name('account.kyc');
     Route::get('/account/wallet', Wallets::class)->name('account.wallets');
     Route::get('/account/withdrawal', Withdrawal::class)->name('account.withdrawal');
     Route::get('/account/withdrawal/history', WithdrawalHistory::class)->name('withdrawal.history');

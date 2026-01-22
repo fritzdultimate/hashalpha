@@ -36,7 +36,9 @@ class User extends Authenticatable implements FilamentUser {
         'two_factor_enabled',
         'login_alerts',
         'withdrawal_confirmation',
-        'is_leader'
+        'is_leader',
+        'kyc_status',
+        'kyc_submitted_at'
     ];
 
     /**
@@ -134,6 +136,10 @@ class User extends Authenticatable implements FilamentUser {
 
     public function tickets() {
         return $this->hasMany(SupportTicket::class);
+    }
+
+    public function kyc() {
+        return $this->hasOne(KycVerification::class);
     }
 
 }
