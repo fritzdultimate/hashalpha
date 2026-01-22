@@ -20,7 +20,7 @@ class KycVerificationForm
             ->components([
                 // TextInput::make('user.name')
                     // ->label('User'),
-                TextInput::make('full_name')->disabled(),
+                BadgeColumn::make('address')->disabled(),
                 TextInput::make('country')->disabled(),
                 DatePicker::make('date_of_birth')->disabled(),
                 Select::make('document_type')
@@ -32,7 +32,6 @@ class KycVerificationForm
                     ]),
                 FileUpload::make('document_front')->image()->disk('local')->downloadable(),
                 FileUpload::make('document_back')->disabled()->image()->disk('local')->downloadable(),
-                FileUpload::make('selfie')->disabled()->image()->disk('local')->downloadable(),
                 BadgeColumn::make('status')
                     ->disabled(),
                 // Textarea::make('admin_note'),

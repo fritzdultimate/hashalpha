@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class KycVerification extends Model {
     protected $fillable = [
         'user_id',
-        'full_name',
         'country',
         'date_of_birth',
         'document_type',
         'document_front',
         'document_back',
-        'selfie',
+        'address',
         'status',
         'admin_note',
         'reviewed_at',

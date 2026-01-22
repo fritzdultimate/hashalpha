@@ -14,19 +14,18 @@ class Kyc extends Component
 {
     use WithFileUploads;
 
-    public $full_name, $country, $date_of_birth;
+    public $address, $country, $date_of_birth;
     public $document_type = 'passport';
-    public $document_front, $document_back, $selfie;
+    public $document_front, $document_back;
     public $loading = false;
 
     public function submit() {
         $this->validate([
-            'full_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255|min:6',
             'country' => 'required|string',
             'date_of_birth' => 'required|date',
             'document_type' => 'required',
             'document_front' => 'required|image|max:4096',
-            'selfie' => 'required|image|max:4096',
         ]);
         $this->resetErrorBag();
 
@@ -34,13 +33,12 @@ class Kyc extends Component
 
         $kyc = KycVerification::create([
             'user_id' => auth()->id(),
-            'full_name' => $this->full_name,
+            'address' => $this->address,
             'country' => $this->country,
             'date_of_birth' => $this->date_of_birth,
             'document_type' => $this->document_type,
             'document_front' => $this->document_front->store('kyc', 'local'),
             'document_back' => $this->document_back?->store('kyc', 'local'),
-            'selfie' => $this->selfie->store('kyc', 'local'),
             'status' => 'pending',
         ]);
 
@@ -53,12 +51,11 @@ class Kyc extends Component
             session()->flash('success', 'KYC submitted successfully.');
 
             $this->reset([
-                'full_name',
+                'address',
                 'country',
                 'date_of_birth',
                 'document_front',
                 'document_type',
-                'selfie',
                 'document_back'
             ]);
 
@@ -68,11 +65,11 @@ class Kyc extends Component
 
     protected function messages() {
         return [
-            'full_name.required' => 'Please provide your full legal name.',
+            'address.required' => 'Please provide your full address.',
+            'address.min' => 'Please provide your full address.',
             'country.required' => 'Please specify your country of residence.',
             'date_of_birth.required' => 'Your date of birth is required for verification.',
             'document_front.required' => 'Please upload the front image of your identification document.',
-            'selfie.required' => 'A clear selfie is required to complete verification.',
         ];
     }
 

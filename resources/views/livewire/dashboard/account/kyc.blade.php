@@ -58,7 +58,7 @@
     @if(!$kyc || $kyc->status === 'rejected')
         <div class="halpha-card halpha-p-4 halpha-space-y-4">
 
-            <input wire:model="full_name" placeholder="Full Name" class="halpha-input" />
+            <input wire:model="address" placeholder="Full Address" class="halpha-input" />
 
             <input wire:model="country" placeholder="Country"
                 class="halpha-input" />
@@ -139,40 +139,6 @@
                                 </p>
                                 <p class="halpha-text-[10px] halpha-text-gray-500">
                                     JPG or PNG • Max 4MB
-                                </p>
-                            </div>
-                        @endif
-
-                    </label>
-
-                </div>
-
-                <div class="halpha-space-y-2 halpha-flex halpha-flex-col">
-
-                    <p class="halpha-text-xs halpha-text-gray-400">
-                        Selfie Verification
-                    </p>
-
-                    <label class="halpha-card halpha-border halpha-border-dashed halpha-border-gray-600 halpha-p-4 halpha-text-center halpha-cursor-pointer hover:halpha-border-accent-2 transition">
-
-                        <input type="file" wire:model="selfie" class="halpha-hidden" accept="image/*">
-
-                        @if ($selfie)
-                            <img src="{{ $selfie->temporaryUrl() }}"
-                                class="halpha-w-full halpha-h-40 halpha-object-cover halpha-rounded">
-                            <p class="halpha-text-xs halpha-text-gray-400 halpha-mt-2">
-                                Click to replace selfie
-                            </p>
-                        @else
-                            <div class="halpha-space-y-2">
-                                <div class="halpha-text-gray-500">
-                                    📤
-                                </div>
-                                <p class="halpha-text-xs halpha-text-gray-300">
-                                    Upload a clear selfie
-                                </p>
-                                <p class="halpha-text-[10px] halpha-text-gray-500">
-                                    No hats • No glasses • Good lighting
                                 </p>
                             </div>
                         @endif

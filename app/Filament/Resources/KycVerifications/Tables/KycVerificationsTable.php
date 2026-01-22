@@ -22,7 +22,6 @@ class KycVerificationsTable
         return $table
             ->columns([
                 TextColumn::make('user.name')->label('User')->searchable(),
-                TextColumn::make('full_name')->label('Full Name')->searchable(),
                 TextColumn::make('country')->searchable(),
                 BadgeColumn::make('status')
                     ->colors([
@@ -30,6 +29,7 @@ class KycVerificationsTable
                         'danger' => 'rejected',
                         'warning' => 'pending',
                     ]),
+                BadgeColumn::make('address')->color('info'),
                 TextColumn::make('date_of_birth')
                     ->date()
                     ->sortable(),
