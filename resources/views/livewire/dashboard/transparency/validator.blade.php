@@ -56,43 +56,70 @@
             Validators
         </h3>
 
-        <div class="halpha-overflow-x-auto">
+        <div class="halpha-hidden md:halpha-block halpha-overflow-x-auto">
             <table class="halpha-w-full halpha-text-xs">
                 <thead class="halpha-bg-card-soft halpha-text-gray-400">
                     <tr>
                         <th class="halpha-p-3 halpha-text-left">Validator</th>
+                        <th class="halpha-p-3 halpha-text-left">Public Key</th>
                         <th class="halpha-p-3">Status</th>
                         <th class="halpha-p-3">Uptime</th>
                         <th class="halpha-p-3">Region</th>
-                        <th class="halpha-p-3">Actions</th>
+                        <th class="halpha-p-3 halpha-text-right">Actions</th>
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-800">
-                    @foreach($this->validators as $v)
-                        <tr class="hover:halpha-bg-card-soft">
-                            <td class="halpha-p-3 halpha-text-white">
-                                {{ $v['name'] }}
-                            </td>
-
-                            <td class="halpha-p-3 halpha-text-green-400">
-                                {{ ucfirst($v['status']) }}
-                            </td>
-
-                            <td class="halpha-p-3 halpha-text-white">
-                                {{ $v['uptime'] }}
-                            </td>
-
-                            <td class="halpha-p-3 halpha-text-gray-400">
-                                {{ $v['region'] }}
-                            </td>
-
+                <tbody class="halpha-divide-y halpha-divide-gray-800">
+                    @foreach($validators as $v)
+                        <tr class="hover:halpha-bg-card-soft halpha-transition">
                             <td class="halpha-p-3">
+                                <p class="halpha-text-white halpha-font-medium">
+                                    {{ $v->label ?? 'Validator #' . $v->id }}
+                                </p>
+                                <p class="halpha-text-[10px] halpha-text-gray-500">
+                                    Index #{{ $v->validator_index ?? '—' }}
+                                </p>
+                            </td>
+
+                            <td class="halpha-p-3 halpha-text-gray-400 halpha-font-mono">
+                                {{ Str::limit($v->public_key, 18) }}
+                            </td>
+
+                            <td class="halpha-p-3 halpha-text-center">
+                                <span class="
+                                    halpha-inline-flex halpha-items-center halpha-px-2 halpha-py-0.5 halpha-rounded-full
+                                    halpha-text-[10px]
+                                    @if($v->status === 'active') halpha-bg-green-500/10 halpha-text-green-400
+                                    @elseif($v->status === 'pending') halpha-bg-yellow-500/10 halpha-text-yellow-400
+                                    @else halpha-bg-red-500/10 halpha-text-red-400
+                                    @endif
+                                ">
+                                    {{ ucfirst($v->status) }}
+                                </span>
+                            </td>
+
+                            <td class="halpha-p-3 halpha-flex halpha-flex-col halpha-items-center halpha-text-center">
+                                <div class="halpha-w-24 halpha-bg-gray-800 halpha-rounded-full halpha-h-1.5">
+                                    <div
+                                        class="halpha-bg-green-500 halpha-h-1.5 halpha-rounded-full"
+                                        style="width: {{ $v->meta['uptime'] ?? 99 }}%">
+                                    </div>
+                                </div>
+                                <p class="halpha-text-[10px] halpha-text-gray-400 mt-1">
+                                    {{ $v->meta['uptime'] ?? '99.9' }}%
+                                </p>
+                            </td>
+
+                            <td class="halpha-p-3 halpha-text-gray-400 halpha-text-center">
+                                {{ $v->meta['region'] ?? 'Global' }}
+                            </td>
+
+                            <td class="halpha-p-3 halpha-text-right">
                                 <button
-                                    wire:click="viewValidator({{ json_encode($v) }})"
-                                    class="halpha-text-accent-2 hover:underline"
+                                    wire:click="viewValidator({{ $v->id }})"
+                                    class="halpha-text-accent-2 hover:underline text-xs"
                                 >
-                                    View details
+                                    Details
                                 </button>
                             </td>
                         </tr>
@@ -100,6 +127,60 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="md:halpha-hidden halpha-space-y-3">
+            @foreach($validators as $v)
+                <div class="halpha-card halpha-p-4 halpha-space-y-3">
+
+                    <div class="halpha-flex halpha-justify-between halpha-items-center">
+                        <div>
+                            <p class="halpha-text-white halpha-text-sm halpha-font-medium">
+                                {{ $v->label ?? 'Validator #' . $v->id }}
+                            </p>
+                            <p class="halpha-text-[10px] halpha-text-gray-500 halpha-font-mono">
+                                {{ Str::limit($v->public_key, 22) }}
+                            </p>
+                        </div>
+
+                        <span class="
+                            halpha-text-[10px] halpha-px-2 halpha-py-0.5 halpha-rounded-full
+                            @if($v->status === 'active') halpha-bg-green-500/10 halpha-text-green-400
+                            @elseif($v->status === 'pending') halpha-bg-yellow-500/10 halpha-text-yellow-400
+                            @else halpha-bg-red-500/10 halpha-text-red-400
+                            @endif
+                        ">
+                            {{ ucfirst($v->status) }}
+                        </span>
+                    </div>
+
+                    <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3 halpha-text-xs">
+                        <div>
+                            <p class="halpha-text-gray-500">Uptime</p>
+                            <p class="halpha-text-white">
+                                {{ $v->meta['uptime'] ?? '99.9' }}%
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="halpha-text-gray-500">Region</p>
+                            <p class="halpha-text-white">
+                                {{ $v->meta['region'] ?? 'Global' }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <a href="https://beaconcha.in/validator/{{ $v->public_key }}"
+                        target="_blank"
+                        class="halpha-text-xs halpha-text-accent-2 hover:halpha-underline"
+                    >
+                        View validator details →
+                    </button>
+
+                </div>
+            @endforeach
+        </div>
+
+
     </div>
 
     {{-- DETAILS MODAL --}}

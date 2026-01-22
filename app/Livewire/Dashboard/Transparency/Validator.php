@@ -4,14 +4,16 @@ namespace App\Livewire\Dashboard\Transparency;
 
 use App\Models\Stake;
 use App\Models\StakingPlan;
+use App\Models\ValidatorKey;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
 class Validator extends Component {
-
+    use WithPagination;
     public string $search = '';
     public string $status = 'all';
     public string $region = 'all';
@@ -63,6 +65,21 @@ class Validator extends Component {
     }
 
     public function render() {
-        return view('livewire.dashboard.transparency.validator');
+        $validators = ValidatorKey::query()
+            ->when($this->search, fn ($q) =>
+                $q->where('public_key', 'like', "%{$this->search}%")
+                   ->orWhere('label', 'like', "%{$this->search}%")
+            )
+            ->when($this->status !== 'all', fn ($q) =>
+                $q->where('status', $this->status)
+            )
+            ->when($this->region !== 'all', fn ($q) =>
+                $q->where('meta->region', $this->region)
+            )
+            ->latest()
+            ->paginate(10);
+        return view('livewire.dashboard.transparency.validator', [
+            'validators' => $validators,
+        ]);
     }
 }
