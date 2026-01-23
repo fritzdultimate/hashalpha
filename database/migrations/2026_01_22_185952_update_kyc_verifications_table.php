@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('kyc_verification', function (Blueprint $table) {
+        Schema::table('kyc_verifications', function (Blueprint $table) {
             // Drop selfie column
-            if (Schema::hasColumn('kyc_verification', 'selfie')) {
+            if (Schema::hasColumn('kyc_verifications', 'selfie')) {
                 $table->dropColumn('selfie');
             }
 
             // Rename full_name to address
-            if (Schema::hasColumn('kyc_verification', 'full_name')) {
+            if (Schema::hasColumn('kyc_verifications', 'full_name')) {
                 $table->renameColumn('full_name', 'address');
             }
         });
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kyc_verification', function (Blueprint $table) {
+        Schema::table('kyc_verifications', function (Blueprint $table) {
             // Revert changes
             $table->string('selfie')->nullable();
             $table->renameColumn('address', 'full_name');
