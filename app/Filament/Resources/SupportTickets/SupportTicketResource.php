@@ -34,6 +34,15 @@ class SupportTicketResource extends Resource
         return false;
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) SupportTicket::where('status', 'open')->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string {
+        return 'danger'; // red badge
+    }
+
     public static function getHeaderActions(): array {
         return [];
     }

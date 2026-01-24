@@ -35,6 +35,15 @@ class KycVerificationResource extends Resource
         return KycVerificationsTable::configure($table);
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) KycVerification::where('status', 'pending')->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string {
+        return 'danger'; // red badge
+    }
+
     public static function getRelations(): array
     {
         return [
