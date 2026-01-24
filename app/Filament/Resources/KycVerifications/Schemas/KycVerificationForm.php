@@ -30,7 +30,7 @@ class KycVerificationForm
                         'national_id' => 'National ID',
                         'drivers_license' => 'Driver’s License',
                     ]),
-                FileUpload::make('document_front')->image()->disk('local')->downloadable(),
+                FileUpload::make('document_front')->image()->disk('public')->downloadable(),
                 FileUpload::make('document_back')->disabled()->image()->disk('local')->downloadable(),
                 BadgeColumn::make('status')
                     ->disabled(),

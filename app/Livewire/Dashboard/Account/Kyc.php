@@ -48,7 +48,7 @@ class Kyc extends Component
                 'kyc_submitted_at' => now()
             ]);
             auth()->user()->refresh();
-            session()->flash('success', 'KYC submitted successfully.');
+            session()->flash('success', 'Your details are under review. We\'ll notify you as soon as verification is complete.');
 
             $this->reset([
                 'address',

@@ -43,7 +43,7 @@
         >
 
             <p class="halpha-font-medium halpha-text-success halpha-mb-1">
-                Verification submitted successfully
+                Verification submitted
             </p>
 
             <p class="halpha-text-gray-400">
@@ -63,8 +63,14 @@
             <input wire:model="country" placeholder="Country"
                 class="halpha-input" />
 
-            <input wire:model="date_of_birth" type="date"
-                class="halpha-input" />
+            <input
+                wire:model="date_of_birth"
+                type="text"
+                class="halpha-input"
+                onfocus="this.type='date'"
+                onblur="if(!this.value)this.type='text'"
+                placeholder="Date of Birth"
+            />
 
             <select wire:model="document_type" class="halpha-input">
                 <option value="passport">Passport</option>
