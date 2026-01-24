@@ -163,9 +163,9 @@
                         </div>
 
                         <div>
-                            <p class="halpha-text-gray-500">Region</p>
+                            <p class="halpha-text-gray-500">Deployment model</p>
                             <p class="halpha-text-white">
-                                {{ $v->meta['region'] ?? 'Global' }}
+                                {{ $v->meta['region'] ?? 'Distributed' }}
                             </p>
                         </div>
                     </div>
