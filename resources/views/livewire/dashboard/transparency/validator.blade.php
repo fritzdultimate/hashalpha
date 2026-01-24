@@ -7,7 +7,7 @@
             Validator Network
         </h1>
         <p class="halpha-text-xs md:halpha-text-sm halpha-text-gray-400">
-            Active validators participating in the HashAlpha infrastructure
+            Validators operated by the infrastructure team, now contributing to the {{ env('APP_NAME') }} network.
         </p>
     </div>
 
