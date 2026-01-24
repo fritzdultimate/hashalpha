@@ -64,7 +64,7 @@
                         <th class="halpha-p-3 halpha-text-left">Public Key</th>
                         <th class="halpha-p-3">Status</th>
                         <th class="halpha-p-3">Uptime</th>
-                        <th class="halpha-p-3">Region</th>
+                        <th class="halpha-p-3">Deployment model</th>
                         <th class="halpha-p-3 halpha-text-right">Actions</th>
                     </tr>
                 </thead>
@@ -111,7 +111,7 @@
                             </td>
 
                             <td class="halpha-p-3 halpha-text-gray-400 halpha-text-center">
-                                {{ $v->meta['region'] ?? 'Global' }}
+                                {{ $v->meta['region'] ?? 'Distributed' }}
                             </td>
 
                             <td class="halpha-p-3 halpha-text-right">
