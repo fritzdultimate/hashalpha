@@ -152,4 +152,12 @@ class User extends Authenticatable implements FilamentUser {
         return $this->hasOne(KycVerification::class);
     }
 
+    public function withdraw(string $amount): void {
+        if (bccomp($this->balance, $amount, 8) < 0) {
+            throw new \Exception('Insufficient balance');
+        }
+
+        $this->decrement('balance', $amount);
+    }
+
 }

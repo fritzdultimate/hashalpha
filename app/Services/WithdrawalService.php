@@ -74,10 +74,11 @@ class  WithdrawalService {
                 }
                 $withdrawal->markCompleted('djssdoas');
             } else {
-                if($withdrawal->amount > $withdrawal->user->balance) {
-                    return; //insufficient
+                $user = $withdrawal->user()->lockForUpdate()->first();
+                if (bccomp($user->balance, (string) $withdrawal->amount, 8) < 0) {
+                    throw new \Exception('Insufficient balance');
                 }
-                $withdrawal->user()->decrement('balance', $withdrawal->amount);
+                $user->decrement('balance', $withdrawal->amount);
                 $withdrawal->markCompleted('djssdoas');
             }
 
