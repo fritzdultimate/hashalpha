@@ -11,7 +11,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -125,15 +125,23 @@ class WithdrawalsTable
                         ->visible(fn (Withdrawal $record) =>
                             $record->status === WithdrawalStatus::PROCESSING
                         )
-                        ->form([
-                            TextInput::make('tx_hash')
-                                ->label('Transaction Hash')
-                                ->required()
-                                ->placeholder('0x...')
-                                ->maxLength(255),
-                        ])
                         ->action(function (Withdrawal $record, array $data) {
-                            WithdrawalService::complete($record, $data['tx_hash']);
+                            try {
+                                WithdrawalService::complete($record, $data['tx_hash']);
+
+                                Notification::make()
+                                    ->title('Withdrawal approved')
+                                    ->success()
+                                    ->send();
+                            } catch(\Throwable $e) {
+                                Notification::make()
+                                    ->title('Withdrawal failed')
+                                    ->body($e->getMessage())
+                                    ->danger()
+                                    ->send();
+
+                                throw $e;
+                            }
                         }),
                     DeleteAction::make(),
                 ])
