@@ -195,6 +195,7 @@ class EarningsPage extends Component
 
         $withdrawable = Reward::where('user_id', auth()->id())
             ->whereNull('compounded_at')
+            ->whereNull('rewards_locked_at')
             ->where('status', 'pending')
             ->sum('amount');
 
