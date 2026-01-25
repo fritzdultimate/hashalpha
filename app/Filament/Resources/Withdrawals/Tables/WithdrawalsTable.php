@@ -125,9 +125,9 @@ class WithdrawalsTable
                         ->visible(fn (Withdrawal $record) =>
                             $record->status === WithdrawalStatus::PROCESSING
                         )
-                        ->action(function (Withdrawal $record, array $data) {
+                        ->action(function (Withdrawal $record) {
                             try {
-                                WithdrawalService::complete($record, $data['tx_hash']);
+                                WithdrawalService::complete($record);
 
                                 Notification::make()
                                     ->title('Withdrawal approved')
