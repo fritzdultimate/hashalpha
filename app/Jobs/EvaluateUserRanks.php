@@ -21,8 +21,8 @@ class EvaluateUserRanks {
     /**
      * Execute the job.
      */
-    public function handle(): void
-    {
+    public function handle(): void {
+        \Log::info('this evaluator was called');
         User::query()
             ->where('is_suspended', false)
             ->chunkById(200, function ($users) {
