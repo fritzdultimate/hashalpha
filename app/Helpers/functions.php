@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Transaction;
+use App\Models\Withdrawal;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -58,3 +60,22 @@ function generateReferralCode(string $email, int $length = 8): string {
 
     return strtoupper(substr(base_convert(substr($hash, 0, 16), 16, 36), 0, $length));
 }
+
+
+function logWithdrawalTransaction(
+    Withdrawal $withdrawal,
+    string $type,
+    ?float $amount = null,
+    array $meta = []
+) {
+    Transaction::create([
+        'user_id' => $withdrawal->user_id,
+        'type' => $type,
+        'amount' => $amount ?? 0,
+        'balance_after' => $withdrawal->user->balance,
+        'related_type' => Withdrawal::class,
+        'related_id' => $withdrawal->id,
+        'meta' => $meta,
+    ]);
+}
+

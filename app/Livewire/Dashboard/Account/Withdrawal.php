@@ -107,6 +107,8 @@ class Withdrawal extends Component {
                 'withdrawal_network_id' => $this->networkId,
             ]);
 
+            logWithdrawalTransaction($this->withdrawal, 'debit', $this->amount);
+
             $this->withdrawalPlaced = true;
         });
 

@@ -13,8 +13,10 @@
         </p>
 
         <div>
-            <a href="{{ route('withdrawal.history') }}"
-            class="halpha-text-accent-2 halpha-text-xs halpha-font-semibold hover:underline">
+            <a 
+                href="{{ route('withdrawal.history') }}"
+                class="halpha-text-accent-2 halpha-text-xs halpha-font-semibold hover:underline"
+            >
                 View Withdrawal History
             </a>
         </div>
@@ -97,7 +99,7 @@
 
             {{-- CTA --}}
             <div class="halpha-flex halpha-flex-col halpha-gap-2">
-                <a href="#"
+                <a href="{{ route('withdrawal.history') }}"
                 class="halpha-bg-accent-2 halpha-text-white halpha-py-2 halpha-rounded halpha-text-xs">
                     View Withdrawal History
                 </a>
