@@ -44,7 +44,14 @@ class UsersTable
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->falseColor('danger'),
-                TextColumn::make('userRank.rank.name')
+                IconColumn::make('lock_roi')
+                    ->label('ROI Lock')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-lock-closed')
+                    ->falseIcon('heroicon-o-lock-open')
+                    ->trueColor('danger')
+                    ->falseColor('success'),
+                TextColumn::make('rank.rank.name')
                     ->label('Rank')
                     ->badge()
                     ->color(fn ($state) => match (strtolower($state ?? '')) {
