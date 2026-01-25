@@ -34,6 +34,7 @@ class StakeService {
 
             $stake->rewards()
                 ->whereNull('rewards_locked_at')
+                ->where('status', 'pending')
                 ->update([
                     'rewards_locked_at' => now(),
                     'status' => 'locked',
