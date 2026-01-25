@@ -140,7 +140,7 @@ class WithdrawalsTable
                                     ->danger()
                                     ->send();
 
-                                throw $e;
+                                // throw $e;
                             }
                         }),
                     DeleteAction::make(),
