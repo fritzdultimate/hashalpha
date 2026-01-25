@@ -36,6 +36,10 @@ class EarningsPage extends Component
             return false;
         }
 
+        if ($reward->compounded_at) {
+            return false;
+        }
+
         $stake = $reward->stake;
         if (! $stake) {
             return false;
@@ -126,7 +130,7 @@ class EarningsPage extends Component
             $user->balance = bcadd($user->balance, (string) $totalClaim, 8);
             $user->save();
 
-            // Optionally create a Transaction record if you track them
+            
         });
 
         $this->dispatch('toast', payload: [
@@ -222,10 +226,28 @@ class EarningsPage extends Component
             return ;
         }
 
+        if($earning->rewards_locked_at || $earning->compounded_at) {
+            $this->dispatch('toast', payload: [
+                'message' => "Cannot compound this reward",
+                'timeout' => 5000,
+                'type' => 'error'
+            ]);
+            return ;
+        }
+
         $stake = $earning->stake;
 
         if (! $stake) {
             return;
+        }
+
+        if($stake->status !== StakeStatus::ACTIVE) {
+            $this->dispatch('toast', payload: [
+                'message' => "Stake is not active",
+                'timeout' => 5000,
+                'type' => 'error'
+            ]);
+            return ;
         }
 
         DB::transaction(function () use ($earning, $stake) {

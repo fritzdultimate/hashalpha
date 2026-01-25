@@ -155,7 +155,7 @@
                                   Network Yield
                             </div>
                                 @if(!empty($tx->stake_id))
-                                    <div class="halpha-text-xs halpha-text-gray-500">
+                                    <div class="halpha-text-xs halpha-text-gray-500 halpha-hidden">
                                         • <a href="{{ route('stakes.item', $tx->stake_id) }}" class="halpha-text-accent-2 hover:halpha-text-accent-3">Stake #{{ $tx->stake_id }}</a>
                                     </div>
                                 @endif
@@ -178,14 +178,15 @@
                                 <button wire:click="compoundProfit({{ $tx->id }})"
                                     @disabled(! $this->isCompoundable($tx))
                                     wire:loading.attr="disabled"
-                                    title="Copy reward id"
                                     class="halpha-text-xs halpha-text-gray-300 halpha-border halpha-border-gray-700 halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-accent-2 disabled:halpha-opacity-20">
                                     <span wire:target="compoundProfit" wire:loading.remove>Compound</span>
                                     <span wire:loading wire:target="compoundProfit">waiting...</span>
                                 </button>
 
-                                @if($tx->status->value === 'pending')
-                                    <button wire:click="claim({{ $tx->id }})" class="halpha-text-xs halpha-px-1 halpha-py-1 halpha-border halpha-border-accent-2 halpha-rounded halpha-text-accent-2 halpha-flex halpha-gap-1">
+                                @if($tx->status->value === 'pending' && !$tx->user->is_leader)
+                                    <button 
+                                        wire:click="claim({{ $tx->id }})" class="halpha-text-xs halpha-px-1 halpha-py-1 halpha-border halpha-border-accent-2 halpha-rounded halpha-text-accent-2 halpha-flex halpha-gap-1"
+                                    >
                                         <x-heroicon-o-arrow-path class="halpha-w-4 halpha-h-4" />
                                         
                                         <span wire:target="claim" wire:loading.remove>Claim</span>
