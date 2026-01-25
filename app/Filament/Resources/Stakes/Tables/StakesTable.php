@@ -11,6 +11,8 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -41,6 +43,14 @@ class StakesTable
                     ->badge()
                     ->color(fn (StakeStatus  $state): string => $state->color())      
                     ->searchable(),
+
+                IconColumn::make('lock_roi')
+                    ->label('ROI Lock')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-lock-closed')
+                    ->falseIcon('heroicon-o-lock-open')
+                    ->trueColor('danger')
+                    ->falseColor('success'),
 
                 TextColumn::make('created_at')
                     ->dateTime()
