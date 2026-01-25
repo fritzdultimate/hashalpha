@@ -10,6 +10,7 @@
             break;
 
         case 'credit':
+        case 'completed':
         case 'active': 
             $color = 'halpha-bg-green-500';
             break;
