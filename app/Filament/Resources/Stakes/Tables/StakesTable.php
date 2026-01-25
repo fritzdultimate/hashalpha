@@ -95,6 +95,32 @@ class StakesTable
                         ->action(function (Stake $record) {
                             StakeService::resume($record);
                         }),
+
+                    Action::make('lockReward')
+                        ->label('Lock Reward')
+                        ->color('warning')
+                        ->icon('heroicon-o-lock-closed')
+                        ->requiresConfirmation()
+                        ->visible(fn (Stake $record) =>
+                            $record->status === StakeStatus::ACTIVE &&
+                            $record->lock_roi === false
+                        )
+                        ->action(function (Stake $record) {
+                            StakeService::lockReward($record);
+                        }),
+
+                    Action::make('unlockReward')
+                        ->label('Unlock Reward')
+                        ->color('success')
+                        ->icon('heroicon-o-lock-open')
+                        ->requiresConfirmation()
+                        ->visible(fn (Stake $record) =>
+                            $record->status === StakeStatus::ACTIVE &&
+                            $record->lock_roi === true
+                        )
+                        ->action(function (Stake $record) {
+                            StakeService::unlockReward($record);
+                        }),
                     DeleteAction::make(),
                 ])
                 ->label('Action')
