@@ -25,12 +25,12 @@ class  WithdrawalService {
         });
     }
 
-    public static function complete(Withdrawal $withdrawal) {
+    public static function complete(Withdrawal $withdrawal, string $txHash) {
        if ($withdrawal->status === WithdrawalStatus::COMPLETED || $withdrawal->status === WithdrawalStatus::FAILED || $withdrawal->status === WithdrawalStatus::CANCELLED) {
             return;
         }
 
-        DB::transaction(function () use ($withdrawal) {
+        DB::transaction(function () use ($withdrawal, $txHash) {
             if($withdrawal->asset === 'referral_rewards') {
                 
                 $totalAvailable = ReferralReward::where('user_id', $withdrawal->user->id)
@@ -72,14 +72,14 @@ class  WithdrawalService {
 
                     $remaining -= $available;
                 }
-                $withdrawal->markCompleted('djssdoas');
+                $withdrawal->markCompleted($txHash);
             } else {
                 $user = $withdrawal->user()->lockForUpdate()->first();
                 if (bccomp($user->balance, (string) $withdrawal->amount, 8) < 0) {
                     throw new \Exception('Insufficient balance');
                 }
                 $user->decrement('balance', $withdrawal->amount);
-                $withdrawal->markCompleted('djssdoas');
+                $withdrawal->markCompleted($txHash);
             }
 
             if($withdrawal->status === WithdrawalStatus::COMPLETED) {

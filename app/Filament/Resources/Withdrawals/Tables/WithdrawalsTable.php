@@ -11,6 +11,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -119,13 +120,20 @@ class WithdrawalsTable
                         ->color('success')
                         ->icon('heroicon-o-check-circle')
                         ->modalHeading('Approve Withdrawal')
-                        ->modalDescription('This withdrawal will be approved and completed.')
+                        ->modalDescription('Enter the transaction hash used to complete this withdrawal.')
                         ->requiresConfirmation()
                         ->visible(fn (Withdrawal $record) =>
                             $record->status === WithdrawalStatus::PROCESSING
                         )
-                        ->action(function (Withdrawal $record) {
-                            WithdrawalService::complete($record);
+                        ->form([
+                            TextInput::make('tx_hash')
+                                ->label('Transaction Hash')
+                                ->required()
+                                ->placeholder('0x...')
+                                ->maxLength(255),
+                        ])
+                        ->action(function (Withdrawal $record, array $data) {
+                            WithdrawalService::complete($record, $data['tx_hash']);
                         }),
                     DeleteAction::make(),
                 ])
