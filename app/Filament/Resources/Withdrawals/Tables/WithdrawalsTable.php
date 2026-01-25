@@ -119,8 +119,8 @@ class WithdrawalsTable
                         ->label('Aprrove')
                         ->color('success')
                         ->icon('heroicon-o-check-circle')
-                        ->modalHeading('Approve Withdrawal')
-                        ->modalDescription('Enter the transaction hash used to complete this withdrawal.')
+                        ->modalHeading('Approve Withdrawal?')
+                        ->modalDescription('This withdrawal will be approved and user deducted.')
                         ->requiresConfirmation()
                         ->visible(fn (Withdrawal $record) =>
                             $record->status === WithdrawalStatus::PROCESSING
