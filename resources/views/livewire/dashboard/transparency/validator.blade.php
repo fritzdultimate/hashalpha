@@ -175,12 +175,19 @@
                         class="halpha-text-xs halpha-text-accent-2 hover:halpha-underline"
                     >
                         View validator details →
-                    </button>
+                    </a>
 
                 </div>
             @endforeach
         </div>
 
+        {{-- pagination --}}
+        <div
+            class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-items-center halpha-justify-between halpha-gap-3 halpha-p-4 halpha-border-t halpha-border-white/5 halpha-border-red-600 halpha-border">
+            <div class="halpha-text-xs halpha-text-muted">Showing {{ $validators->firstItem() ?? 0 }} to
+                {{ $validators->lastItem() ?? 0 }} of {{ $validators->total() ?? count($validators) }}</div>
+            <div class="halpha-text-sm halpha-pagination halpha-flex halpha-items-center halpha-gap-2 halpha-w-full">{{ $validators->links() }}</div>
+        </div>     
 
     </div>
 

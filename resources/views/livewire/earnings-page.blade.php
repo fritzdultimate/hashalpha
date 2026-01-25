@@ -210,9 +210,12 @@
                 @endforeach
 
                 {{-- pagination --}}
-                <div class="halpha-flex halpha-justify-center halpha-mt-2">
-                    {{ $earnings->links() }}
-                </div>
+                <div
+                    class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-items-center halpha-justify-between halpha-gap-3 halpha-p-4 halpha-border-t halpha-border-white/5 halpha-border-red-600 halpha-border">
+                    <div class="halpha-text-xs halpha-text-muted">Showing {{ $earnings->firstItem() ?? 0 }} to
+                        {{ $earnings->lastItem() ?? 0 }} of {{ $earnings->total() ?? count($earnings) }}</div>
+                    <div class="halpha-text-sm halpha-pagination halpha-flex halpha-items-center halpha-gap-2 halpha-w-full">{{ $earnings->links() }}</div>
+                </div>                
             @endif
         @endif
     </div>
