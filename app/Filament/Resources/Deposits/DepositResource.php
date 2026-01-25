@@ -31,6 +31,14 @@ class DepositResource extends Resource
         return false;
     }
 
+    public static function getNavigationBadge(): ?string {
+        return (string) Deposit::where('status', 'pending')->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string {
+        return 'warning';
+    }
+
     public static function form(Schema $schema): Schema {
         return DepositForm::configure($schema);
     }

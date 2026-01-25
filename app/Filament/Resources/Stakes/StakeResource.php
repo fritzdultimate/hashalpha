@@ -25,6 +25,14 @@ class StakeResource extends Resource
         return StakeForm::configure($schema);
     }
 
+    public static function getNavigationBadge(): ?string {
+        return (string) Stake::where('status', 'active')->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string {
+        return 'success';
+    }
+
     public static function table(Table $table): Table
     {
         return StakesTable::configure($table);

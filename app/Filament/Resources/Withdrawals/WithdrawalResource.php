@@ -20,6 +20,14 @@ class WithdrawalResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowRight;
 
+    public static function getNavigationBadge(): ?string {
+        return (string) Withdrawal::where('status', 'pending')->count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string {
+        return 'warning';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return WithdrawalForm::configure($schema);
