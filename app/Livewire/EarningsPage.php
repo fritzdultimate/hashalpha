@@ -161,7 +161,7 @@ class EarningsPage extends Component
 
         if (!$pendingReward) {
             $this->dispatch('toast', payload: [
-                'message' => 'No claimable rewards.',
+                'message' => 'Reward not claimable',
                 'timeout' => 5000,
                 'variant' => 'subtle'
             ]);
