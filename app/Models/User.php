@@ -73,6 +73,10 @@ class User extends Authenticatable implements FilamentUser {
         ];
     }
 
+    public function shouldLockRewards(): bool {
+        return $this->lock_roi || $this->is_leader;
+    }
+
     protected static function booted() {
         static::creating(function ($user) {
             if (!$user->affiliate_code) {

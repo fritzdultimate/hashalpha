@@ -61,13 +61,13 @@ class ProcessStakeRewards extends Controller {
             8
         );
 
-        $lock_rewards = $stake->user->lock_roi || $stake->user->is_leader;
+        $lock_rewards = $stake->user->shouldLockRewards();
 
         Reward::create([
             'user_id' => $stake->user_id,
             'stake_id' => $stake->id,
             'amount' => $reward,
-            'status' => 'pending',
+            'status' => $lock_rewards ? 'locked' : 'pending',
             'credited_at' => now(),
             'reward_type' => 'staking',
             'rewards_locked_at' => $lock_rewards ? now() : null,
