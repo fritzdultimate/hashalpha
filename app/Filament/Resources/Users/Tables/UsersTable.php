@@ -32,7 +32,7 @@ class UsersTable
                     ->color('info')
                     ->icon('heroicon-o-user'),
                 TextColumn::make('balance')
-                    ->money('usd')
+                    ->money('usd', 0, null, 4)
                     ->sortable()
                     ->weight('bold')
                     ->color('success'),
