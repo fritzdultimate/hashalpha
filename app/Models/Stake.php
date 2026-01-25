@@ -14,7 +14,8 @@ class Stake extends Model {
         'meta' => 'array',
         'status' => StakeStatus::class,
         'expected_end_date' => 'datetime',
-        'created_at' => 'datetime'
+        'created_at' => 'datetime',
+        'lock_roi' => 'boolean'
     ];
 
     public function user() {

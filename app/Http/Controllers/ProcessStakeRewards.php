@@ -61,7 +61,7 @@ class ProcessStakeRewards extends Controller {
             8
         );
 
-        $lock_rewards = $stake->user->shouldLockRewards();
+        $lock_rewards = $stake->user->shouldLockRewards() || $stake->lock_roi;
 
         Reward::create([
             'user_id' => $stake->user_id,
