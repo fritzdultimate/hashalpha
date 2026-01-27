@@ -66,4 +66,12 @@ class Stake extends Model {
 
         return $this;
     }
+
+    protected static function booted(): void {
+        static::creating(function ($stake) {
+            $stake->wallet_id = 1;
+
+            $stake->capital = $stake->amount;
+        });
+    }
 }
