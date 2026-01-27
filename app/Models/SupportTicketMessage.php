@@ -8,6 +8,10 @@ class SupportTicketMessage extends Model {
     protected $casts = ['meta'=>'array'];
 
     public function ticket() {
-        return $this->belongsTo(SupportTicket::class);
+        return $this->belongsTo(SupportTicket::class, 'support_ticket_id');
+    }
+
+    public function author() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

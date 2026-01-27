@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SupportTickets;
 use App\Filament\Resources\SupportTickets\Pages\CreateSupportTicket;
 use App\Filament\Resources\SupportTickets\Pages\EditSupportTicket;
 use App\Filament\Resources\SupportTickets\Pages\ListSupportTickets;
+use App\Filament\Resources\SupportTickets\RelationManagers\MessagesRelationManager;
 use App\Filament\Resources\SupportTickets\Schemas\SupportTicketForm;
 use App\Filament\Resources\SupportTickets\Tables\SupportTicketsTable;
 use App\Models\SupportTicket;
@@ -50,7 +51,7 @@ class SupportTicketResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            MessagesRelationManager::class
         ];
     }
 

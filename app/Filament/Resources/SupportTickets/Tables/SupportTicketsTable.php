@@ -47,6 +47,14 @@ class SupportTicketsTable
                         'danger' => 'urgent',
                     ])
                     ->sortable(),
+                BadgeColumn::make('messages_count')
+                    ->label('Replies')
+                    ->counts('messages')
+                    ->color(fn ($record) =>
+                        $record->messages()->where('is_staff', false)->exists()
+                            ? 'danger'
+                            : 'success'
+                    ),
                 TextColumn::make('closed_at')
                     ->label('Closed At')
                     ->dateTime()
@@ -111,6 +119,7 @@ class SupportTicketsTable
                     ->icon('heroicon-o-check-circle')
                     ->color('danger')
                     ->requiresConfirmation()
+                    ->visible(fn ($record) => $record->status !== 'closed')
                     ->action(fn ($record) => $record->update([
                         'status' => 'closed',
                         'closed_at' => now(),
@@ -132,6 +141,7 @@ class SupportTicketsTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('created_at', 'desc');
+            ->defaultSort('created_at', 'desc')
+            ->headerActions([]);
     }
 }

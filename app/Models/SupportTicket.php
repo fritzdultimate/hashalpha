@@ -18,7 +18,11 @@ class SupportTicket extends Model {
     protected $casts = ['meta'=>'array'];
 
     public function messages() {
-        return $this->hasMany(SupportTicketMessage::class);
+        return $this->hasMany(SupportTicketMessage::class)->latest();
+    }
+
+    public function staffReplies() {
+        return $this->messages()->where('is_staff', true);
     }
 
     public function user() {

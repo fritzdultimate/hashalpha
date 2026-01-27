@@ -103,28 +103,99 @@
         </h2>
 
         @forelse ($tickets as $ticket)
-            <div class="halpha-card halpha-p-3 halpha-flex halpha-justify-between halpha-items-center">
-                <div>
-                    <p class="halpha-text-xs halpha-text-gray-400">
-                        {{ $ticket->ticket_number }}
-                    </p>
-                    <p class="halpha-text-sm halpha-text-white">
-                        {{ $ticket->subject }}
-                    </p>
-                    <p class="halpha-text-xs halpha-text-gray-500">
-                        {{ $ticket->created_at->diffForHumans() }}
-                    </p>
+            <div
+                x-data="{ replying: false }"
+                class="halpha-card halpha-p-3 halpha-space-y-3"
+            >
+                <div class="halpha-card halpha-p-3 halpha-flex halpha-justify-between halpha-items-center">
+                    <div>
+                        <p class="halpha-text-xs halpha-text-gray-400">
+                            {{ $ticket->ticket_number }}
+                        </p>
+                        <p class="halpha-text-sm halpha-text-white">
+                            {{ $ticket->subject }}
+                        </p>
+                        <p class="halpha-text-xs halpha-text-gray-500">
+                            {{ $ticket->created_at->diffForHumans() }}
+                        </p>
+                    </div>
+
+                    <span class="
+                        halpha-text-xs halpha-px-2 halpha-py-1 halpha-rounded
+                        @if($ticket->status === 'open') halpha-bg-yellow-500/10 halpha-text-yellow-500 @endif
+                        @if($ticket->status === 'in_progress') halpha-bg-blue-500/10 halpha-text-blue-500 @endif
+                        @if($ticket->status === 'resolved') halpha-bg-green-500/10 halpha-text-green-500 @endif
+                        @if($ticket->status === 'closed') halpha-bg-gray-500/10 halpha-text-gray-400 @endif
+                    ">
+                        {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
+                    </span>
                 </div>
 
-                <span class="
-                    halpha-text-xs halpha-px-2 halpha-py-1 halpha-rounded
-                    @if($ticket->status === 'open') halpha-bg-yellow-500/10 halpha-text-yellow-500 @endif
-                    @if($ticket->status === 'in_progress') halpha-bg-blue-500/10 halpha-text-blue-500 @endif
-                    @if($ticket->status === 'resolved') halpha-bg-green-500/10 halpha-text-green-500 @endif
-                    @if($ticket->status === 'closed') halpha-bg-gray-500/10 halpha-text-gray-400 @endif
-                ">
-                    {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
-                </span>
+                @foreach ($ticket->messages as $msg)
+                    <div class="halpha-flex {{ $msg->is_staff ? 'halpha-justify-start' : 'halpha-justify-end' }}">
+                        <div class="halpha-max-w-md halpha-px-3 halpha-py-2 halpha-rounded
+                            {{ $msg->is_staff
+                                ? 'halpha-bg-gray-800 halpha-text-white'
+                                : 'halpha-bg-accent-2 halpha-text-white' }}">
+                            
+                            <p class="halpha-text-xs halpha-opacity-70">
+                                {{ $msg->is_staff ? 'Support' : 'You' }}
+                            </p>
+
+                            <p class="halpha-text-sm">
+                                {{ $msg->message }}
+                            </p>
+
+                            <p class="halpha-text-[10px] halpha-opacity-50 mt-1">
+                                {{ $msg->created_at->diffForHumans() }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+
+                <button
+                    type="button"
+                    @click="replying = true"
+                    x-show="!replying"
+                    class="halpha-text-xs halpha-text-accent-2 hover:underline"
+                >
+                    Reply
+                </button>
+
+                <form
+                    x-show="replying"
+                    x-transition
+                    wire:submit.prevent="reply({{ $ticket->id }})"
+                    class="halpha-space-y-2"
+                >
+                    <textarea
+                        wire:model.defer="replyMessage"
+                        class="halpha-input"
+                        rows="3"
+                        placeholder="Type your reply..."
+                        required
+                    ></textarea>
+
+                    <div class="halpha-flex halpha-gap-3">
+                        <button 
+                            type="submit" 
+                            class="halpha-bg-accent-2 halpha-text-white halpha-py-2 halpha-rounded halpha-text-xs halpha-px-6"
+                            wire:loading.attr="disabled"
+                        >
+                            <span wire:loading.remove wire:target="reply">Reply</span>
+                            <span wire:loading wire:target="reply">Repling...</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            @click="replying = false"
+                            class="halpha-text-sm halpha-text-gray-400"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
             </div>
         @empty
             <p class="halpha-text-xs halpha-text-gray-400">

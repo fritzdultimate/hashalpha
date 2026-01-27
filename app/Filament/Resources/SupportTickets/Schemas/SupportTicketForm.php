@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\SupportTickets\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -14,11 +15,10 @@ class SupportTicketForm
     {
         return $schema
             ->components([
-                TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('assigned_to')
-                    ->numeric(),
+                TextInput::make('user_name')
+                    ->disabled()
+                    ->label('User')
+                    ->formatStateUsing(fn ($record) => ucfirst($record?->user?->name) ?? '—'),
                 TextInput::make('ticket_number')
                     ->required(),
                 TextInput::make('subject')

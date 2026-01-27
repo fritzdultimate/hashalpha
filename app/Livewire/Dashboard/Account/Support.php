@@ -12,7 +12,7 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class Support extends Component {
     public $category = 'general';
-    public $subject, $message;
+    public $subject, $message, $replyMessage;
 
 
     public function submit() {
@@ -59,6 +59,23 @@ class Support extends Component {
     public function confirmSubmit() {
         $this->dispatch('confirm-support-submit');
     }
+
+    public function reply($id) {
+        SupportTicketMessage::create([
+            'support_ticket_id' => $id,
+            'user_id' => auth()->id(),
+            'message' => $this->replyMessage,
+            'is_staff' => false,
+        ]);
+
+        SupportTicket::where('id', $id)
+            ->update(['status' => 'open']);
+
+        $this->replyMessage = '';
+
+        $this->dispatch('$refresh');
+    }
+
 
 
     public function render(){
