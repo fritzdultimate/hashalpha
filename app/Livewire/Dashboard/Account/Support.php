@@ -33,12 +33,12 @@ class Support extends Component {
                 'priority' => 'medium',
             ]);
 
-            SupportTicketMessage::create([
-                'support_ticket_id' => $ticket->id,
-                'user_id' => auth()->id(),
-                'message' => $this->message,
-                'is_staff' => false,
-            ]);
+            // SupportTicketMessage::create([
+            //     'support_ticket_id' => $ticket->id,
+            //     'user_id' => auth()->id(),
+            //     'message' => $this->message,
+            //     'is_staff' => false,
+            // ]);
         });
 
         $this->reset(['subject', 'message', 'category']);
