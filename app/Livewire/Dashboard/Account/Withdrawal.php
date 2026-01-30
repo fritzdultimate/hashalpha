@@ -41,7 +41,7 @@ class Withdrawal extends Component {
     ];
 
     public function getWithdrawalFeePercentProperty() {
-        return (float) CustomSetting::get('withdrawal_fee_percent', 0);
+        return max(0, (float) CustomSetting::get('withdrawal_fee_percent', 0));
     }
 
     public function getWithdrawalFeeProperty() {

@@ -28,7 +28,7 @@ class StakeModal extends Component
     public $user;
 
     public function getPoolFeePercentProperty() {
-        return (float) CustomSetting::get('pool_fee', 0);
+        return max(0, (float) CustomSetting::get('pool_fee_percent', 0));
     }
 
     public function getPoolFeeProperty() {
