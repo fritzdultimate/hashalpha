@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard\Account;
 
 use App\Domain\Withdrawal\WithdrawalRules;
+use App\Models\CustomSetting;
 use App\Models\ReferralReward;
 use App\Models\WithdrawalCurrency;
 use App\Models\WithdrawalNetwork;
@@ -29,18 +30,52 @@ class Withdrawal extends Component {
     public $loading = false;
 
 
+
+
     protected $rules = [
-        'amount' => 'required|numeric',
+        'amount' => 'required|numeric|min:0.01',
         'address' => 'required',
         'currencyId' => 'required|exists:withdrawal_currencies,id',
         'networkId' => 'required|exists:withdrawal_networks,id',
         'asset' => 'required|in:balance,referral_rewards',
     ];
 
+    public function getWithdrawalFeePercentProperty() {
+        return (float) CustomSetting::get('withdrawal_fee_percent', 0);
+    }
+
+    public function getWithdrawalFeeProperty() {
+        if (!$this->amount || $this->amount <= 0) {
+            return 0;
+        }
+
+        return ($this->amount * $this->withdrawalFeePercent) / 100;
+    }
+
+    public function getTotalDebitProperty() {
+        return $this->amount + $this->withdrawalFee;
+    }
+
 
     public function confirm() {
         $this->loading = true;
         $this->validate();
+        if ($this->asset === 'balance' && $this->totalDebit > auth()->user()->balance) {
+            $this->addError('amount', 'Insufficient balance to cover amount and withdrawal fee.');
+            $this->loading = false;
+            return;
+        }
+        if ($this->asset === 'referral_rewards') {
+            $totalAvailable = ReferralReward::where('user_id', auth()->id())
+                ->get()
+                ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
+
+            if ($this->totalDebit > $totalAvailable) {
+                $this->addError('amount', 'Insufficient referral bonus to cover amount and withdrawal fee.');
+                $this->loading = false;
+                return;
+            }
+        }
         $this->dispatch('confirm-withdrawal');
     }
 
@@ -50,6 +85,7 @@ class Withdrawal extends Component {
             WithdrawalRules::canCreate($user, $this->amount, $this->asset);
         } catch (\DomainException $e) {
             $this->addError('amount', $e->getMessage());
+            $this->loading = false;
             return;
         }
 
@@ -73,6 +109,7 @@ class Withdrawal extends Component {
     }
 
     public function makeAnotherWithdrawal(): void {
+        $this->loading = false;
         $this->reset([
             'amount',
             'asset',
@@ -105,6 +142,11 @@ class Withdrawal extends Component {
                 'asset' => $this->asset,
                 'withdrawal_currency_id' => $this->currencyId,
                 'withdrawal_network_id' => $this->networkId,
+                'meta' => [
+                    'fee' => $this->withdrawalFee,
+                    'fee_percent' => $this->withdrawalFeePercent,
+                    'total_to_debit' => $this->totalDebit,
+                ],
             ]);
 
             logWithdrawalTransaction($this->withdrawal, 'debit', $this->amount);

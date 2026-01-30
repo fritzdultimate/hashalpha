@@ -31,17 +31,18 @@ class  WithdrawalService {
         }
 
         DB::transaction(function () use ($withdrawal) {
+            $totalToDebit = $withdrawal->meta['total_to_debit'] ?? $withdrawal->amount;
             if($withdrawal->asset === 'referral_rewards') {
                 
                 $totalAvailable = ReferralReward::where('user_id', $withdrawal->user->id)
                     ->get()
                     ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
 
-                if ($withdrawal->amount > $totalAvailable) {
+                if ($totalToDebit > $totalAvailable) {
                     throw new \Exception('Insufficient referral balance');
                 }
 
-                $remaining = $withdrawal->amount;
+                $remaining = $totalToDebit;
 
 
                 $rewards = ReferralReward::where('user_id', $withdrawal->user->id)
@@ -75,10 +76,10 @@ class  WithdrawalService {
                 $withdrawal->markCompleted('-');
             } else {
                 $user = $withdrawal->user()->lockForUpdate()->first();
-                if (bccomp($user->balance, (string) $withdrawal->amount, 8) < 0) {
+                if (bccomp($user->balance, (string) $totalToDebit, 8) < 0) {
                     throw new \Exception('Insufficient balance');
                 }
-                $user->decrement('balance', $withdrawal->amount);
+                $user->decrement('balance', $totalToDebit);
                 $withdrawal->markCompleted('-');
             }
 

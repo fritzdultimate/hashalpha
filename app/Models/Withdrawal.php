@@ -24,7 +24,8 @@ class Withdrawal extends Model {
     protected $casts = [
         'status' => WithdrawalStatus::class,
         'processed_at' => 'datetime',
-        'created_at' => 'datetime'
+        'created_at' => 'datetime',
+        'meta' => 'array',
     ];
 
     /* --------------------

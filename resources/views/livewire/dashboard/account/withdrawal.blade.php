@@ -118,7 +118,7 @@
             <div>
                 <label class="halpha-text-xs halpha-text-gray-400">Amount</label>
                 <input 
-                    wire:model.defer="amount" 
+                    wire:model.live="amount" 
                     type="text"
                     x-on:input="
                         $el.value = $el.value.replace(/[^0-9.]/g, '')
@@ -129,6 +129,9 @@
                     pattern="[0-9]*"
                     placeholder="Enter amount" 
                 />
+                <p class="halpha-text-[11px] halpha-text-gray-500">
+                    A {{ $this->withdrawalFeePercent }}% network processing fee applies.
+                </p>
                 @error('amount')
                     <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
                 @enderror
@@ -216,6 +219,38 @@
                     Address must match the selected currency and network.
                 </p>
             </div>
+
+            @if($amount > 0)
+                <div class="halpha-bg-card-soft halpha-border halpha-border-white/5 halpha-rounded-lg halpha-p-3 halpha-text-xs halpha-space-y-2">
+
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">Entered Amount</span>
+                        <span class="halpha-text-gray-200">
+                            ${{ number_format($amount, 2) }}
+                        </span>
+                    </div>
+
+                    <div class="halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-400">
+                            Withdrawal Fee ({{ $this->withdrawalFeePercent }}%)
+                        </span>
+                        <span class="halpha-text-amber-400">
+                            ${{ number_format($this->withdrawalFee, 2) }}
+                        </span>
+                    </div>
+
+                    <div class="halpha-border-t halpha-border-white/5 halpha-pt-2 halpha-flex halpha-justify-between">
+                        <span class="halpha-text-gray-300 halpha-font-medium">
+                            Total Debit
+                        </span>
+                        <span class="halpha-text-white halpha-font-semibold">
+                            ${{ number_format($this->totalDebit, 2) }}
+                        </span>
+                    </div>
+
+                </div>
+            @endif
+
 
             {{-- CTA --}}
             <button 

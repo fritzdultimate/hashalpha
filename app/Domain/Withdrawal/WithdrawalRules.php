@@ -12,7 +12,7 @@ use DomainException;
 class WithdrawalRules {
     public static function canCreate(User $user, $amount, $asset = 'balance'): void {
         self::noPendingWithdrawal($user);
-        self::checkBalance($user, $amount, $asset);
+        // self::checkBalance($user, $amount, $asset);
         self::minimumAmount($amount);
         self::maximumAmount($amount);
         self::kycRequired($user);
