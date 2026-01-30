@@ -67,24 +67,56 @@
                         @error('amount') <div class="halpha-text-xs halpha-text-red-400 mt-1">{{ $message }}</div> @enderror
                     </div>
 
-                    {{-- Estimated rewards --}}
-                    <div class="halpha-bg-gray-800 halpha-p-3 halpha-rounded halpha-text-xs halpha-text-gray-300">
-                        @php
-                            $amountNumeric = is_numeric($amount) ? (float)$amount : 0;
-                        @endphp
-                        <p>
-                            <strong>Estimated daily reward:</strong>
-                            <span>
-                                ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi) }}
-                            </span>
-                        </p>
-                        <p>
-                            <strong>Estimated total reward:</strong>
-                            <span>
-                                ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi * $this->plan->duration) }}
-                            </span>
-                        </p>
-                    </div>
+                    @if($amount > 0)
+                        <div class="halpha-bg-card-soft halpha-border halpha-border-white/5 halpha-rounded-lg halpha-p-3 halpha-text-xs halpha-space-y-2">
+
+                            <div class="halpha-flex halpha-justify-between">
+                                <span class="halpha-text-gray-400">Stake</span>
+                                <span class="halpha-text-gray-200">
+                                    ${{ number_format($amount, 2) }}
+                                </span>
+                            </div>
+                            @if ($this->poolFee > 0)
+                                <div class="halpha-flex halpha-justify-between">
+                                    <span class="halpha-text-gray-400">
+                                        Pool Fee ({{ $this->poolFeePercent }}%)
+                                    </span>
+                                    <span class="halpha-text-amber-400">
+                                        ${{ number_format($this->poolFee, 2) }}
+                                    </span>
+                                </div> 
+                            @endif
+
+                            <div class="halpha-border-t halpha-border-white/5 halpha-pt-2 halpha-flex halpha-justify-between">
+                                <span class="halpha-text-gray-300 halpha-font-medium">
+                                    Total Debit
+                                </span>
+                                <span class="halpha-text-white halpha-font-semibold">
+                                    ${{ number_format($this->totalDebit, 2) }}
+                                </span>
+                            </div>
+
+                        </div>
+
+                        {{-- Estimated rewards --}}
+                        <div class="halpha-bg-gray-800 halpha-p-3 halpha-rounded halpha-text-xs halpha-text-gray-300">
+                            @php
+                                $amountNumeric = is_numeric($amount) ? (float)$amount : 0;
+                            @endphp
+                            <p>
+                                <strong>Estimated daily reward:</strong>
+                                <span>
+                                    ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi, 2) }}
+                                </span>
+                            </p>
+                            <p>
+                                <strong>Estimated total reward:</strong>
+                                <span>
+                                    ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi * $this->plan->duration, 2) }}
+                                </span>
+                            </p>
+                        </div>
+                    @endif
 
                     {{-- Buttons --}}
                     <div class="halpha-flex halpha-gap-3 halpha-justify-end halpha-mt-4">

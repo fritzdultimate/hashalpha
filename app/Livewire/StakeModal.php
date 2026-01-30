@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Domain\Staking\StakeRules;
 use App\Mail\StakeCreatedMail;
+use App\Models\CustomSetting;
 use App\Models\Deposit;
 use App\Models\StakingPlan;
 use App\Services\ReferralBonusService;
@@ -25,6 +26,22 @@ class StakeModal extends Component
     public $autoCompound = false;
     public $termDays = null;
     public $user;
+
+    public function getPoolFeePercentProperty() {
+        return (float) CustomSetting::get('pool_fee', 0);
+    }
+
+    public function getPoolFeeProperty() {
+        if (!$this->amount || $this->amount <= 0) {
+            return 0;
+        }
+
+        return ($this->amount * $this->poolFeePercent) / 100;
+    }
+
+    public function getTotalDebitProperty() {
+        return $this->amount + $this->poolFee;
+    }
 
 
     public function mount() {
@@ -74,10 +91,10 @@ class StakeModal extends Component
         $this->validate();
 
         $user = auth()->user();
-        $amt = (string) number_format((float)$this->amount, 8, '.', '');
+        $amt = (string) number_format((float)$this->totalDebit, 8, '.', '');
 
         try {
-            StakeRules::canCreate($user, $amt);
+            StakeRules::canCreate($user, $amt, $this->totalDebit);
         } catch (\DomainException $e) {
             $this->addError('amount', $e->getMessage());
             return;
@@ -126,27 +143,30 @@ class StakeModal extends Component
             $stake = Stake::create([
                 'user_id' => $user->id,
                 'plan_id' => $this->plan->id,
-                'amount' => $amt,
-                'capital' => $amt,
+                'amount' => $this->amount,
+                'capital' => $this->amount,
                 'status' => 'active',
                 'started_at' => now(),
                 'wallet_id' => '1',
                 'expected_end_date' => now()->addDays($this->plan->duration),
                 'meta' => [
-                    'auto_compound' => (bool) $this->autoCompound
+                    'auto_compound' => (bool) $this->autoCompound,
+                    'fee' => $this->poolFee,
+                    'fee_percent' => $this->poolFeePercent,
+                    'total_debited' => $this->totalDebit,
                 ]
             ]);
 
             Transaction::create([
                 'user_id' => $user->id,
                 'type' => 'hold',
-                'amount' => $amt,
+                'amount' => $this->amount,
                 'balance_after' => $user->balance,
                 'related_type' => 'App\Models\Stake',
                 'related_id' => $stake->id,
                 'meta' => [
                     'note' => 'Staked',
-                    'used_bonus' => (float) $amt - $remaining,
+                    'used_bonus' => (float) $this->amount - $remaining,
                     'used_balance' => $remaining,
                 ],
                 'created_at' => now(),

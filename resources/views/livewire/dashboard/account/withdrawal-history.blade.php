@@ -88,7 +88,7 @@
                     {{-- Amount (fixed column) --}}
                     <div
                         class="halpha-text-sm halpha-font-semibold halpha-text-white/30 halpha-w-full md:halpha-col-span-1 halpha-flex halpha-justify-end md:halpha-justify-start halpha-items-center halpha-flex-none halpha-whitespace-nowrap">
-                        ${{ number_format($tx->amount, 2) }}
+                        ${{ number_format($tx->meta['total_to_debit'] ?? $tx->amount, 2) }}
                     </div>
 
                     {{-- Network / Currency (desktop only) --}}
@@ -152,7 +152,7 @@
                     role="dialog" aria-modal="true">
                     <div class="halpha-flex halpha-items-start halpha-justify-between halpha-gap-3">
                         <div>
-                            <h2 class="halpha-text-lg halpha-font-semibold halpha-text-white">{{ $this->mapCurrencyLabel($selected->currency) }}</h2>
+                            <h2 class="halpha-text-lg halpha-font-semibold halpha-text-white">{{ $this->mapCurrencyLabel($selected->currency->code) }}</h2>
                             <p class="halpha-text-xs halpha-text-gray-400 truncate">{{ $selected->tx_hash ?? '—' }}</p>
                         </div>
                         <button wire:click="closeModal" class="halpha-text-gray-400">Close</button>
@@ -162,7 +162,7 @@
                         <div>
                             <div class="halpha-text-xs halpha-text-gray-400">Amount</div>
                             <div class="halpha-text-sm halpha-font-semibold halpha-text-white">
-                                {{ number_format($selected->amount, 2) }}
+                                {{ number_format($selected->meta['total_to_debit'], 2) }}
                             </div>
                         </div>
 
@@ -173,7 +173,7 @@
 
                         <div>
                             <div class="halpha-text-xs halpha-text-gray-400">Network</div>
-                            <div class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-uppercase">{{ $selected->currency }}
+                            <div class="halpha-text-sm halpha-font-semibold halpha-text-white halpha-uppercase">{{ $selected->currency->code }}
                             </div>
                         </div>
 

@@ -58,11 +58,9 @@ class Withdrawal extends Component {
 
 
     public function confirm() {
-        $this->loading = true;
         $this->validate();
         if ($this->asset === 'balance' && $this->totalDebit > auth()->user()->balance) {
             $this->addError('amount', 'Insufficient balance to cover amount and withdrawal fee.');
-            $this->loading = false;
             return;
         }
         if ($this->asset === 'referral_rewards') {
@@ -72,7 +70,6 @@ class Withdrawal extends Component {
 
             if ($this->totalDebit > $totalAvailable) {
                 $this->addError('amount', 'Insufficient referral bonus to cover amount and withdrawal fee.');
-                $this->loading = false;
                 return;
             }
         }

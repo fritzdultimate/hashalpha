@@ -8,10 +8,10 @@ use App\Models\User;
 
 class StakeRules
 {
-    public static function canCreate(User $user, $stake_amount): void
+    public static function canCreate(User $user, $stake_amount, $totalDebit): void
     {
         self::maxActiveStakesPerPlan($user);
-        self::checkBalance($user, $stake_amount);
+        self::checkBalance($user, $totalDebit);
 
         // Future rules go here 👇
         // self::kycRequired($user);
@@ -32,7 +32,7 @@ class StakeRules
         }
     }
 
-    protected static function checkBalance(User $user, $stake_amount): void
+    protected static function checkBalance(User $user, $totalDebit): void
     {
         $bonusAvailable = Deposit::where('user_id', $user->id)
             ->where('status', 'finished')
@@ -43,9 +43,9 @@ class StakeRules
             8
         );
 
-        if (bccomp($totalAvailable, $stake_amount, 8) < 0) {
+        if (bccomp($totalAvailable, $totalDebit, 8) < 0) {
             throw new \DomainException(
-                'Insufficient funds. Your bonus and balance combined are not enough to complete this stake.'
+                'Insufficient funds. We could not complete this stake.'
             );
         }
     }

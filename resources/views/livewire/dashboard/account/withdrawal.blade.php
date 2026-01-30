@@ -229,15 +229,16 @@
                             ${{ number_format($amount, 2) }}
                         </span>
                     </div>
-
-                    <div class="halpha-flex halpha-justify-between">
-                        <span class="halpha-text-gray-400">
-                            Withdrawal Fee ({{ $this->withdrawalFeePercent }}%)
-                        </span>
-                        <span class="halpha-text-amber-400">
-                            ${{ number_format($this->withdrawalFee, 2) }}
-                        </span>
-                    </div>
+                    @if ($this->withdrawalFee > 0)
+                        <div class="halpha-flex halpha-justify-between">
+                            <span class="halpha-text-gray-400">
+                                Withdrawal Fee ({{ $this->withdrawalFeePercent }}%)
+                            </span>
+                            <span class="halpha-text-amber-400">
+                                ${{ number_format($this->withdrawalFee, 2) }}
+                            </span>
+                        </div>
+                    @endif
 
                     <div class="halpha-border-t halpha-border-white/5 halpha-pt-2 halpha-flex halpha-justify-between">
                         <span class="halpha-text-gray-300 halpha-font-medium">

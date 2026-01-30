@@ -27,7 +27,8 @@ class WithdrawalsTable
                     ->color('success')
                     ->description(fn (Withdrawal $record) => ucfirst($record->user->name))
                     ->sortable(),
-                TextColumn::make('amount')
+                TextColumn::make('meta.total_to_debit')
+                    ->placeholder(fn(Withdrawal $record) => $record->amount)
                     ->money('usd')
                     ->sortable(),
                 TextColumn::make('status')

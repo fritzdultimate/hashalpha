@@ -18,7 +18,8 @@ class Withdrawal extends Model {
         'processed_at',
         'asset',
         'withdrawal_currency_id',
-        'withdrawal_network_id'
+        'withdrawal_network_id',
+        'meta'
     ];
 
     protected $casts = [
