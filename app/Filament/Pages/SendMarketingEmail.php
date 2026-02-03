@@ -106,7 +106,7 @@ class SendMarketingEmail extends Page implements HasForms {
             ->success()
             ->send();
 
-        $this->form->reset();
+        $this->form->fill();
 
     }
 

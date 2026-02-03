@@ -5,10 +5,10 @@
         <x-filament::button
             wire:click="send"
             color="info"
-            class="!halpha-mt-4"
+            class="mt-2 w-full"
             style="margin-top: 1rem"
         >
-            Send Emails
+            Send Email
         </x-filament::button>
     </div>
 </x-filament-panels::page>
