@@ -97,6 +97,7 @@ class Register extends Component {
                         'password' => Hash::make($this->password),
                         'name' => $candidate,
                         'referrer_id' => $referrer?->id,
+                        'affiliate_code' => generateReferralCode($this->email)
                     ]);
                     if($referrer) {
                         ReferralCreationService::createFor($user, $referrer);
