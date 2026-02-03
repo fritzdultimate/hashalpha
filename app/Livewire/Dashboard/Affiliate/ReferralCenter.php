@@ -36,7 +36,7 @@ class ReferralCenter extends Component {
         }
         $userId = auth()->id();
         $this->referralLink = Cache::remember("user{$user->id}:affiliate_link", 6000, function() use($user)  {
-            $code = $user->affiliate_code ?? generateReferralCode($user->email);
+            $code = $user->affiliate_code;
             return route('register', ['ref' => $code]); 
         });
 

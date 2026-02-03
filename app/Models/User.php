@@ -41,7 +41,8 @@ class User extends Authenticatable implements FilamentUser {
         'kyc_submitted_at',
         'lock_roi',
         'suspended_until',
-        'is_suspended'
+        'is_suspended',
+        'affiliate_code'
     ];
 
     /**

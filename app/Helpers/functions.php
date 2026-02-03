@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\Withdrawal;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -53,12 +54,19 @@ if (!function_exists('remaining_time_until')) {
 }
 
 function generateReferralCode(string $email, int $length = 8): string {
-    $base = strtolower(trim($email)) . config('app.key');
+    do {
+        $base = strtolower(trim($email)) . config('app.key') . bin2hex(random_bytes(4));
 
-    // Create deterministic hash
-    $hash = hash('sha256', $base);
+        
+        $hash = hash('sha256', $base);
 
-    return strtoupper(substr(base_convert(substr($hash, 0, 16), 16, 36), 0, $length));
+        $code = strtoupper(substr(base_convert(substr($hash, 0, 16), 16, 36), 0, $length));
+
+        // Check if it exists in DB
+        $exists = User::where('affiliate_code', $code)->exists();
+    } while ($exists);
+
+    return $code;
 }
 
 
