@@ -31,13 +31,16 @@ class Register extends Component {
         'fullname' => 'required|string|min:3|regex:/^[a-zA-Z]+([\'\-\s][a-zA-Z]+)+$/',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:6',
-        'terms' => 'accepted'
+        'terms' => 'accepted',
+        'ref' => 'required'
     ];
 
     protected $messages = [
         'fullname.required' => 'Full name is required.',
         'fullname.regex' => 'Please enter your full name (first and last name) using only letters.',
         'fullname.min' => 'Your full name must be at least 3 characters.',
+
+        'ref.required' => 'You must provide an upline to register.',
 
         'terms.accepted' => 'You must agree to the terms and conditions before continuing.'
     ];
@@ -83,6 +86,10 @@ class Register extends Component {
 
                 try {
                     $referrer = User::where('affiliate_code', $this->ref)->first();
+                    if(!$referrer) {
+                        $this->addError('ref', 'You must provide an upline to register.');
+                        return;
+                    }
                     $user = User::create([
                         'firstname' => $firstName,
                         'lastname' => $lastName,

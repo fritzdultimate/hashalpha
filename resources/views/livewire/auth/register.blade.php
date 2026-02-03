@@ -35,6 +35,9 @@
                     <input wire:model.defer="password" type="password" placeholder="Enter your password"
                         class="halpha-w-full !halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input">
 
+                    <input wire:model.defer="ref" type="text" placeholder="Sponsor code" required
+                        class="halpha-w-full !halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input">
+
                     
 
                     <label class="halpha-flex halpha-items-center halpha-gap-2 halpha-justify-center">
