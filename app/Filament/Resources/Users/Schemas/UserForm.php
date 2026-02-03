@@ -19,19 +19,6 @@ class UserForm
                     ->label('Email address')
                     ->email()
                     ->required(),
-                DateTimePicker::make('email_verified_at'),
-                TextInput::make('affiliate_code'),
-                TextInput::make('referrer.name')
-                    ->label('Referrer')
-                    ->placeholder('_'),
-                Toggle::make('is_suspended')
-                    ->required(),
-                TextInput::make('failed_logins')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                DateTimePicker::make('last_failed_at')
-                    ->placeholder('_'),
                 TextInput::make('firstname'),
                 TextInput::make('lastname'),
             ]);
