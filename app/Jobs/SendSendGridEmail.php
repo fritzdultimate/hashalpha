@@ -17,7 +17,6 @@ class SendSendGridEmail implements ShouldQueue {
     ) {}
 
     public function handle(): void {
-        // dd('reached here');
         $mail = new Mail();
 
         $mail->setFrom(

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use SendGrid;
 
 class SendGridService {
@@ -10,15 +11,18 @@ class SendGridService {
     }
 
     public static function templates() {
-        $sg = self::client();
-        $response = $sg->client->templates()->get(null, [
-            'generations' => 'dynamic',
-        ]);
+        return Cache::remember('sendgrid:templates', 30 * 60, function () {
+            $sg = self::client();
 
+            $response = $sg->client->templates()->get(null, [
+                'generations' => 'dynamic',
+            ]);
 
-        return collect(json_decode($response->body(), true)['templates'])
-            ->mapWithKeys(fn ($t) => [
+            $templates = json_decode($response->body(), true)['templates'] ?? [];
+
+            return collect($templates)->mapWithKeys(fn ($t) => [
                 $t['id'] => $t['name'],
             ]);
+        });
     }
 }

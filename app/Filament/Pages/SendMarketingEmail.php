@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
 use Filament\Forms;
@@ -53,6 +54,7 @@ class SendMarketingEmail extends Page implements HasForms {
 
                 TagsInput::make('custom_emails')
                     ->label('Custom Emails')
+                    ->placeholder('Type email and hit space...')
                     ->visible(fn (Get $get) =>
                         in_array('custom', $get('audience') ?? [])
                     )
@@ -67,6 +69,10 @@ class SendMarketingEmail extends Page implements HasForms {
 
         $emails = [];
 
+        // if (!empty($data['audience']) && !in_array('custom', $data['audience'])) {
+        //     $emails = AudienceResolver::resolve($data['audience']);
+        // }
+
         if (!in_array('custom', $data['audience'])) {
             $emails = AudienceResolver::resolve($data['audience']);
         }
@@ -78,6 +84,15 @@ class SendMarketingEmail extends Page implements HasForms {
             );
         }
 
+        if (empty($emails)) {
+            Notification::make()
+                ->title('No Emails Found')
+                ->body('No recipients matched the selected audience or custom emails.')
+                ->danger()
+                ->send();
+            return;
+        }
+
         foreach (array_unique($emails) as $email) {
             SendSendGridEmail::dispatch(
                 $data['template_id'],
@@ -85,9 +100,14 @@ class SendMarketingEmail extends Page implements HasForms {
             );
         }
 
-        // dd('fffo', $data['template_id'], $emails);
+        Notification::make()
+            ->title('Emails Sent')
+            ->body(count($emails) . ' emails have been sent to recipients.')
+            ->success()
+            ->send();
 
-        // $this->notify('success', 'Emails queued successfully');
+        $this->form->reset();
+
     }
 
 }
