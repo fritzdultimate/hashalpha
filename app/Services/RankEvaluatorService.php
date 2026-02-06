@@ -2,14 +2,16 @@
 namespace App\Services;
 
 use App\Models\Rank;
+use App\Models\RankBonus;
 use App\Models\ReferralReward;
 use App\Models\Stake;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserRank;
 
 class RankEvaluatorService {
     public static function evaluate(User $user): void {
-        $volume = Stake::where('user_id', $user->id)->sum('amount');
+        $volume = Stake::whereIn('user_id', getDownlineUserIds($user->id))->sum('amount');
 
         $activeReferrals = ReferralReward::where('user_id', $user->id)
             ->whereHas('fromUser', fn($q) => $q->where('is_suspended', false))
@@ -17,8 +19,9 @@ class RankEvaluatorService {
             ->count('from_user_id');
 
         $earnings = ReferralReward::where('user_id', $user->id)
-            ->where('status', 'claimed')
             ->sum('amount');
+
+        $currentLevel = $user->rank?->rank?->level;
 
         $eligibleRank = Rank::orderBy('level')
             ->get()
@@ -30,12 +33,39 @@ class RankEvaluatorService {
 
         if (!$eligibleRank) return;
 
-        UserRank::updateOrCreate(
-            ['user_id' => $user->id],
+        if($currentLevel >= $eligibleRank->level) return;
+
+        $bonusAmount = $eligibleRank->bonus;
+
+        UserRank::create(
             [
                 'rank_id' => $eligibleRank->id,
+                'user_id' => $user->id,
                 'achieved_at' => now(),
             ]
         );
+
+        $bonus = RankBonus::firstOrCreate(
+            [
+                'user_id' => $user->id,
+                'rank_id' => $eligibleRank->id,
+            ],
+            [
+                'amount' => $bonusAmount,
+                'status' => 'credited',
+                'credited_at' => now(),
+            ]
+        );
+
+        if($bonus) {
+            Transaction::create([
+                'related_type' => RankBonus::class,
+                'related_id' => $bonus->id,
+                'amount' => $bonusAmount,
+                'type' => 'rank_bonus',
+                'user_id' => $user->id
+            ]);
+        }
+
     }
 }

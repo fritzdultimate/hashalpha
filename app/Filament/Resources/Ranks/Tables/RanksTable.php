@@ -32,6 +32,13 @@ class RanksTable
                         'success' => fn ($state) => $state >= 7,
                     ])
                     ->sortable(),
+                TextColumn::make('bonus')
+                    ->label('Bonus')
+                    ->numeric()
+                    ->money('USD')
+                    ->sortable()
+                    ->icon('heroicon-o-bolt')
+                    ->color('success'),
                 TextColumn::make('required_volume')
                     ->label('Required Volume')
                     ->numeric()

@@ -48,7 +48,7 @@
             break;
 
         default:
-            $color = 'bg-gray-500';
+            $color = 'halpha-bg-gray-700';
             break;
 
     }

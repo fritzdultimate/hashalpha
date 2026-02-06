@@ -15,7 +15,7 @@ class RankProgress extends Component
 {
     public float $claimable = 0;
     public float $pending = 0;
-    public Rank $currentRank;
+    public Rank|null $currentRank;
     public ?Rank $nextRank = null;
     public int $progressPercent = 0;
     public $totalAvailable = 0;
@@ -60,11 +60,13 @@ class RankProgress extends Component
     public function loadRank(): void
     {
         $user = auth()->user();
-        $this->currentRank = $user->rank->rank ?? Rank::first();
+        $this->currentRank = $user?->rank?->rank;
+        $level = $user?->rank?->rank?->level ?? 0;
 
-        $this->nextRank = Rank::where('level', '>', $this->currentRank->level)
+        $this->nextRank = Rank::where('level', '>', $level)
             ->orderBy('level')
             ->first();
+
 
 
         if (!$this->nextRank) {
@@ -72,7 +74,7 @@ class RankProgress extends Component
             return;
         }
 
-        $downlineIds = $this->getDownlineUserIds($user->id);
+        $downlineIds = getDownlineUserIds($user->id);
 
         $volume = Stake::whereIn('user_id', $downlineIds)->sum('amount');
         $this->userVolume = $volume;
@@ -89,35 +91,18 @@ class RankProgress extends Component
         
         $this->userEarnings = $earnings;
 
-        $refPct = intval(($activeReferrals/$this->nextRank->required_active_referrals) * 100);
-        $earningsPct = intval(($earnings/$this->nextRank->required_earnings) * 100);
-        $volPct = intval(($volume / $this->nextRank->required_volume) * 100);
+        $refPct = min(100, intval(($activeReferrals/$this->nextRank->required_active_referrals) * 100));
+        $earningsPct = min(100, intval(($earnings/$this->nextRank->required_earnings) * 100));
+        $volPct = min(100, intval(($volume / $this->nextRank->required_volume) * 100));
 
         $actualPct = intval(($refPct + $earningsPct + $volPct)/3);
+
+        // dd($actualPct);
 
         $this->progressPercent = min(
             100,
             intval($actualPct)
         );
-    }
-
-    private function getDownlineUserIds(int $userId, int $maxDepth = 10): array
-    {
-        $currentLevel = [$userId];
-        $all = [];
-
-        for ($i = 0; $i < $maxDepth; $i++) {
-            $currentLevel = User::whereIn('referrer_id', $currentLevel)
-                ->pluck('id')
-                ->toArray();
-
-            if (empty($currentLevel))
-                break;
-
-            $all = array_merge($all, $currentLevel);
-        }
-
-        return $all;
     }
 
 

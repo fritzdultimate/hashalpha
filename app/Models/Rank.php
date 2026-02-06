@@ -9,6 +9,7 @@ class Rank extends Model {
         'required_volume',
         'required_active_referrals',
         'required_earnings',
+        'bonus'
     ];
 
     public function ranks() {

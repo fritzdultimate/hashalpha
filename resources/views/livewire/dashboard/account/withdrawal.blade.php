@@ -198,7 +198,7 @@
                     </option>
                     
                 </select>
-                @error('walletId')
+                @error('asset')
                     <div class="halpha-text-red-500 halpha-text-xs halpha-mt-1">{{ $message }}</div>
                 @enderror
             </div>

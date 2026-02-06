@@ -15,7 +15,7 @@
     <div class="halpha-card halpha-p-5 halpha-text-center">
         <p class="halpha-text-xs halpha-text-gray-400">Your rank</p>
         <h2 class="halpha-text-2xl halpha-font-bold halpha-text-accent-2">
-            {{ $currentRank->name }}
+            {{ $currentRank->name ?? 'Unranked' }}
         </h2>
     </div>
 
@@ -48,7 +48,7 @@
         </div>
 
         @foreach($ranks as $rank)
-            <x-affiliate.step :name="$rank->name" :active="$rank->level <= $currentRank->level"
+            <x-affiliate.step :name="$rank->name" :active="$rank->level <= ($currentRank->level ?? 0)"
                 wire:click="showRankDetails({{ $rank->id }})" class="halpha-cursor-pointer" />
         @endforeach
     </div>
@@ -207,7 +207,7 @@
 
                             {{-- STATUS --}}
                             <div class="text-center pt-4 border-t border-gray-800">
-                                @if($selectedRank->level <= $currentRank->level)
+                                @if($selectedRank->level <= ($currentRank->level ?? 0))
                                     <span
                                         class="inline-flex items-center gap-1 halpha-text-xs halpha-text-accent-2 halpha-font-semibold">
                                         ✔ Rank Achieved

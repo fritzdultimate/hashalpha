@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Account;
 
 use App\Domain\Withdrawal\WithdrawalRules;
 use App\Models\CustomSetting;
+use App\Models\RankBonus;
 use App\Models\ReferralReward;
 use App\Models\WithdrawalCurrency;
 use App\Models\WithdrawalNetwork;
@@ -64,12 +65,21 @@ class Withdrawal extends Component {
             return;
         }
         if ($this->asset === 'referral_rewards') {
-            $totalAvailable = ReferralReward::where('user_id', auth()->id())
-                ->get()
-                ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
+            $rankBonus = RankBonus::where('user_id', auth()->id())
+                ->sum(DB::raw('amount - COALESCE(withdrawn, 0)'));
+
+            
+
+            $referralRewards = ReferralReward::where('user_id', auth()->id())
+                ->sum(DB::raw('amount - COALESCE(withdrawn, 0)'));
+
+            $rankBonus = max(0, $rankBonus);
+            $referralRewards = max(0, $referralRewards);
+
+            $totalAvailable = $rankBonus + $referralRewards;
 
             if ($this->totalDebit > $totalAvailable) {
-                $this->addError('amount', 'Insufficient referral bonus to cover amount and withdrawal fee.');
+                $this->addError('amount', 'Insufficient bonus to cover amount and withdrawal fee.');
                 return;
             }
         }
@@ -161,9 +171,13 @@ class Withdrawal extends Component {
     }
 
     public function mount() {
-        $this->totalAvailable = ReferralReward::where('user_id', auth()->id())
-            ->get()
-            ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
+        $rankBonus = RankBonus::where('user_id', auth()->id())
+            ->sum(DB::raw('amount - COALESCE(withdrawn, 0)'));
+
+        $referralRewards = ReferralReward::where('user_id', auth()->id())
+            ->sum(DB::raw('amount - COALESCE(withdrawn, 0)'));
+
+        $this->totalAvailable = $rankBonus + $referralRewards;
     }
 
 

@@ -96,7 +96,10 @@
                                         @if ($col['key'] === 'type')
                                             <x-dashboard.status-maker :flat="true" label="{{ $value === 'hold' ? 'lockup' : $value }}" className="{{ $value }}"  />
                                         @elseif ($col['key'] === 'status')
-                                            <x-dashboard.status-maker label="{{  $row?->related?->status }}" className="{{ strtolower(is_string($row?->related?->status) ? $row->related->status : ($row?->related?->status?->value ?? '')) }}"  />
+                                            <x-dashboard.status-maker 
+                                                label="{{  $row?->related?->status ?? 'unavailable' }}" 
+                                                className="{{ strtolower(is_string($row?->related?->status) ? $row->related->status : ($row?->related?->status?->value ?? '')) }}"  
+                                            />
                                         @else
                                             {{ is_callable(value: $callable) ? $callable($row) : $value }}
                                         @endif

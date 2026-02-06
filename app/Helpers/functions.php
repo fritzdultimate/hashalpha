@@ -87,3 +87,22 @@ function logWithdrawalTransaction(
     ]);
 }
 
+function getDownlineUserIds(int $userId, int $maxDepth = 10): array
+    {
+        $currentLevel = [$userId];
+        $all = [];
+
+        for ($i = 0; $i < $maxDepth; $i++) {
+            $currentLevel = User::whereIn('referrer_id', $currentLevel)
+                ->pluck('id')
+                ->toArray();
+
+            if (empty($currentLevel))
+                break;
+
+            $all = array_merge($all, $currentLevel);
+        }
+
+        return $all;
+    }
+

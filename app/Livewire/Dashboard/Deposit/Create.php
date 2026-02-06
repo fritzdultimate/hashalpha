@@ -216,12 +216,12 @@ class Create extends Component {
 
 
         
-        if (!empty($this->depositId)) {
-            $dep = Deposit::find($this->depositId);
-            $dep->status = $latest['payment_status'] ?? $dep->status;
-            $dep->metadata = $latest;
-            $dep->save();
-        }
+        // if (!empty($this->depositId)) {
+        //     $dep = Deposit::find($this->depositId);
+        //     $dep->status = $latest['payment_status'] ?? $dep->status;
+        //     $dep->metadata = $latest;
+        //     $dep->save();
+        // }
     }
 
 

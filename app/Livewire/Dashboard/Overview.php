@@ -6,6 +6,7 @@ namespace App\Livewire\Dashboard;
 
 use App\Models\Deposit;
 use App\Models\Rank;
+use App\Models\RankBonus;
 use App\Models\ReferralReward;
 use App\Models\User;
 use App\Models\ValidatorBlock;
@@ -47,7 +48,7 @@ class Overview extends Component
 
         $rank = Rank::orderBy('level')->first();
 
-        $this->rank = $user->rank?->name ?? $rank->name;
+        $this->rank = $user->rank?->rank?->name ?? 'Unranked';
         $this->loadValidatorBlocks();
 
 
@@ -131,6 +132,18 @@ class Overview extends Component
 
         $this->earningchartData = $earnings->pluck('amount')->map(fn($v) => round($v, 2));
 
+        $rankBonusAvailable = Cache::remember(
+            "user:{$userId}:rank_bonus_available",
+            300,
+            function () use ($userId) {
+
+                return RankBonus::where('user_id', $userId)
+                    ->selectRaw('COALESCE(SUM(amount), 0) - COALESCE(SUM(withdrawn), 0) as remaining')
+                    ->value('remaining');
+
+            }
+        );
+
         // Referral Bonus Section
         $this->totalReferralBonus = Cache::remember(
             "user:{$userId}:total_referral_bonus",
@@ -142,7 +155,7 @@ class Overview extends Component
                     ->value('remaining');
 
             }
-        );
+        ) + $rankBonusAvailable;
 
         $currentReferrals = DB::table('referral_rewards')
             ->where('user_id', $userId)
@@ -172,7 +185,8 @@ class Overview extends Component
         $bonusAvailable = Deposit::where('user_id', $user->id)
             ->where('status', 'finished')
             ->sum('bonus');
-        $mainBalance = $user->balance + $this->totalReferralBonus + $bonusAvailable;
+
+        $mainBalance = $user->balance + $this->totalReferralBonus + $bonusAvailable + $rankBonusAvailable;
         $this->balance = $mainBalance;
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));

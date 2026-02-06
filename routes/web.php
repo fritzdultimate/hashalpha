@@ -12,18 +12,6 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/cron/process-stake-rewards', [ProcessStakeRewards::class, 'handle'])
-    ->name('cron.process-stake-rewards');
-
-Route::get('/cron/process-validator-rewards', [GenerateValidatorReward::class, 'handle'])
-    ->name('cron.process-validator-rewards');
-
-Route::get('/cron/claim-validator-rewards', [ClaimValidatorReward::class, 'handle'])
-    ->name('cron.claim-validator-rewards');
-
-Route::get('/cron/add-validator-block', [AddValidatorBlock::class, 'handle'])
-    ->name('cron.add-validator-block');
-
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::view('/about', 'landing.about')->name('about');
 Route::view('/staking', 'landing.staking')->name('staking');
@@ -101,3 +89,4 @@ Route::view('email-template', 'emaim-template');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/dashboard.php'; 
+require __DIR__.'/cronjob.php'; 

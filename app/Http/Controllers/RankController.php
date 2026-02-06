@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Services\RankEvaluatorService;
 
 class RankController extends Controller {
-    public function handle() {
+    public function assignRank() {
         $users = User::all();
 
         foreach($users as $user) {

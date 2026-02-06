@@ -25,6 +25,13 @@ class RankForm
                 TextInput::make('required_earnings')
                     ->required()
                     ->numeric(),
+                TextInput::make('bonus')
+                    ->label('Bonus Amount')
+                    ->required()
+                    ->numeric()
+                    ->prefix('$')
+                    ->minValue(0)
+                    ->step(0.01)
             ]);
     }
 }
