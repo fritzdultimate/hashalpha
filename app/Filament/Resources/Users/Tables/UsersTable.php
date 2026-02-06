@@ -60,7 +60,7 @@ class UsersTable
                         'gold' => 'amber',
                         'platinum' => 'info',
                         'diamond' => 'success',
-                        default => 'secondary',
+                        default => 'gray',
                     })
                     ->sortable()
                     ->placeholder('Unranked'),
