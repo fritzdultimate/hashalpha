@@ -13,7 +13,7 @@ class TwoFactorService {
         // delete previous of same type
         TwoFactorCode::where('user_id', $user->id)->where('type', $type)->delete();
 
-        Mail::to($user->email)->send(new OtpNotification(
+        Mail::to($user->email)->queue(new OtpNotification(
             otp: $code
         ));
         return TwoFactorCode::create([
