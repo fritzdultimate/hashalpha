@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 // Artisan::command('inspire', function () {
 //     Log::info('SCHEDULER HIT: schedule:run executed artisan');
 //     $this->comment(Inspiring::quote());
-// })->purpose('Display an inspiring quote');
+// })->purpose('Display an inspiring quote'); 
 Log::info('SCHEDULER HIT: schedule:run executed outside');
 
 Schedule::call(function () {
