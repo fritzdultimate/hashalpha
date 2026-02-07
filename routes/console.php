@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 Log::info('SCHEDULER HIT: schedule:run executed');
 
 Schedule::call(function () {
-    Log::info('SCHEDULER HIT: schedule:run executed');
+    Log::info('SCHEDULER HIT: schedule:run executed this');
 })->everyMinute();
 
 // Schedule::job(new EvaluateUserRanks())
