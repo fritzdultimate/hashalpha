@@ -93,6 +93,7 @@ class SendMarketingEmail extends Page implements HasForms {
             return;
         }
 
+
         foreach (array_unique($emails) as $email) {
             SendSendGridEmail::dispatch(
                 $data['template_id'],

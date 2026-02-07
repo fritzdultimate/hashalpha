@@ -9,7 +9,7 @@ class AudienceResolver {
         $query = User::query();
 
         if (in_array('active', $filters)) {
-            $query->where('status', 'active');
+            $query->where('is_suspended', false);
         }
 
         if (in_array('suspended', $filters)) {
@@ -40,6 +40,7 @@ class AudienceResolver {
             );
         }
 
-        return $query->whereNotNull('email');
+        // dd($query->whereNotNull('email')->pluck('email')->toArray());
+        return $query->whereNotNull('email')->pluck('email')->toArray();
     }
 }
