@@ -19,7 +19,7 @@
 <!-- Logo -->
 <tr>
     <td align="center" style="padding-bottom:24px;">
-        <img src="{{ asset('img/logo/logo-white.png') }}" alt="{{ $appName }}"
+        <img src="https://hashalpha.io/img/logo/logo-white.png" alt="{{ $appName }}"
              style="width:120px; opacity:0.95;">
     </td>
 </tr>
