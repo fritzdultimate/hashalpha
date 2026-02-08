@@ -94,7 +94,7 @@
                     {{-- Network / Currency (desktop only) --}}
                     <div
                         class="halpha-hidden md:halpha-flex md:halpha-items-center md:halpha-col-span-1 halpha-text-xs halpha-text-gray-300 halpha-truncate halpha-uppercase">
-                        {{ $tx->chain->name ?? '—' }} &middot;  {{ $tx->currency->name }}
+                        {{ $tx->chain?->name ?? '—' }} &middot;  {{ $tx->currency?->name ?? '-' }}
                     </div>
 
                     {{-- Date --}}
