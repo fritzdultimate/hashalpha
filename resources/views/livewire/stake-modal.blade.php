@@ -37,7 +37,7 @@
                 </div>
 
                 {{-- Available Bonus --}}
-                <div class="halpha-bg-emerald-500/10 halpha-border halpha-border-emerald-500/30 halpha-rounded halpha-p-3 halpha-flex halpha-flex-col halpha-justify-center halpha-items-center">
+                <div class="halpha-bg-emerald-500/10 halpha-border halpha-border-emerald-500/30 halpha-rounded halpha-p-3 halpha-hidden halpha-flex-col halpha-justify-center halpha-items-center">
                     <p class="halpha-text-xs halpha-text-emerald-400">
                         Available Bonus
                     </p>
