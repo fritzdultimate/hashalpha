@@ -45,7 +45,7 @@
                 padding:6px 14px;
                 border-radius:999px;
             ">
-                {{ strtoupper(str_replace('_', ' ', $asset ?? 'Wallet Balance')) }}
+                {{ strtoupper(str_replace('_', ' ', $asset . ' Account' ?? 'Wallet Balance')) }}
             </span>
         </td>
     </tr>
