@@ -10,7 +10,7 @@ class StakeRules
 {
     public static function canCreate(User $user, $stake_amount, $totalDebit): void
     {
-        self::maxActiveStakesPerPlan($user);
+        // self::maxActiveStakesPerPlan($user);
         self::checkBalance($user, $totalDebit);
 
         // Future rules go here 👇

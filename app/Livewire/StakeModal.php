@@ -106,33 +106,33 @@ class StakeModal extends Component
         try {
 
             $remaining = (float) $amt;
-            $deposits = Deposit::where('user_id', $user->id)
-                ->where('bonus', '>', 0)
-                ->where('status', 'finished')
-                ->orderBy('created_at')
-                ->lockForUpdate()
-                ->get();
+            // $deposits = Deposit::where('user_id', $user->id)
+            //     ->where('bonus', '>', 0)
+            //     ->where('status', 'finished')
+            //     ->orderBy('created_at')
+            //     ->lockForUpdate()
+            //     ->get();
 
-            foreach ($deposits as $deposit) {
-                if ($remaining <= 0) {
-                    break;
-                }
+            // foreach ($deposits as $deposit) {
+            //     if ($remaining <= 0) {
+            //         break;
+            //     }
 
-                if ($deposit->bonus >= $remaining) {
-                    $deposit->bonus -= $remaining;
-                    $deposit->save();
-                    $remaining = 0;
-                    break;
-                }
+            //     if ($deposit->bonus >= $remaining) {
+            //         $deposit->bonus -= $remaining;
+            //         $deposit->save();
+            //         $remaining = 0;
+            //         break;
+            //     }
 
-                $remaining -= $deposit->bonus;
-                $deposit->bonus = 0;
-                $deposit->save();
-            }
+            //     $remaining -= $deposit->bonus;
+            //     $deposit->bonus = 0;
+            //     $deposit->save();
+            // }
 
             if ($remaining > 0) {
                 if (bccomp($user->balance, (string)$remaining, 8) < 0) {
-                    throw new \Exception('Insufficient balance after bonus deduction.');
+                    throw new \Exception('Insufficient balance.');
                 }
 
                 $user->balance = bcsub($user->balance, (string)$remaining, 8);
