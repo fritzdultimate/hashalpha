@@ -54,7 +54,7 @@ class Withdrawal extends Component {
     }
 
     public function getTotalDebitProperty() {
-        return $this->amount + $this->withdrawalFee;
+        return $this->amount; //+ $this->withdrawalFee;
     }
 
 

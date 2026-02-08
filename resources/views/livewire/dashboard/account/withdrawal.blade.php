@@ -242,10 +242,10 @@
 
                     <div class="halpha-border-t halpha-border-white/5 halpha-pt-2 halpha-flex halpha-justify-between">
                         <span class="halpha-text-gray-300 halpha-font-medium">
-                            Total Debit
+                            Receiving
                         </span>
                         <span class="halpha-text-white halpha-font-semibold">
-                            ${{ number_format($this->totalDebit, 2) }}
+                            ${{ number_format($this->totalDebit - $this->withdrawalFee, 2) }}
                         </span>
                     </div>
 
