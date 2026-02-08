@@ -12,6 +12,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -28,8 +29,14 @@ class WithdrawalsTable
                     ->description(fn (Withdrawal $record) => ucfirst($record->user->name))
                     ->sortable(),
                 TextColumn::make('meta.total_to_debit')
+                    ->label('Amount')
+                    ->getStateUsing(fn(Withdrawal $record) => $record->meta['total_to_debit'] ?? $record->amount)
+                    ->money('usd')
+                    ->sortable(),
+                TextColumn::make('payout')
                     ->placeholder(fn(Withdrawal $record) => $record->amount)
                     ->money('usd')
+                    ->getStateUsing(fn($record) => ($record->meta['total_to_debit'] ?? $record->amount) - ($record->meta['fee'] ?? 0))
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
@@ -38,7 +45,8 @@ class WithdrawalsTable
                 TextColumn::make('asset')
                     ->badge()
                     ->color('info'),
-                TextColumn::make('address')
+                BadgeColumn::make('address')
+                    ->color('info')
                     ->copyable()
                     ->limit(10)
                     ->copyMessage('Address copied')
