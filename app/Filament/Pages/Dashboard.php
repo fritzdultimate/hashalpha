@@ -12,11 +12,10 @@ use Filament\Support\Icons\Heroicon;
 class Dashboard extends Page
 {
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Home;
-    protected string $view = 'filament.pages.dashboard';
+    // protected string $view = 'filament.pages.dashboard';
 
     // Optional: add widgets if you want them automatically
-    protected function getHeaderWidgets(): array
-    {
+    protected function getHeaderWidgets(): array {
         return [
             UserStats::class,
             TotalDeposits::class,
