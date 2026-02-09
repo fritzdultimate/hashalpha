@@ -3,6 +3,8 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Widgets\TotalDeposits;
+use App\Filament\Widgets\UserOverview;
+use App\Filament\Widgets\UserStats;
 use Filament\Pages\Page;
 use BackedEnum;
 use Filament\Support\Icons\Heroicon;
@@ -16,6 +18,7 @@ class Dashboard extends Page
     protected function getHeaderWidgets(): array
     {
         return [
+            UserStats::class,
             TotalDeposits::class,
         ];
     }

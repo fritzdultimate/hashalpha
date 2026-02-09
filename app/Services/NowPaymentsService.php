@@ -22,9 +22,9 @@ class NowPaymentsService {
                 ->first()
         );
 
-        $settings = PaymentSetting::where('provider', 'nowpayments')
-                ->where('is_active', true)
-                ->first();
+        // $settings = PaymentSetting::where('provider', 'nowpayments')
+        //         ->where('is_active', true)
+        //         ->first();
 
 
         self::$apiKey = $settings?->api_key ?? config('services.nowpayments.api_key');
