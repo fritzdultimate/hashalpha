@@ -1,5 +1,71 @@
 <div class="halpha-flex halpha-flex-col halpha-gap-5">
 
+    <div
+    class="halpha-bg-card-bg halpha-rounded-xl halpha-border halpha-border-white/5 halpha-p-5 halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
+
+        <div class="halpha-flex halpha-items-center halpha-justify-between halpha-mb-4">
+            <h6 class="halpha-text-muted halpha-flex halpha-items-center halpha-gap-2 halpha-text-sm halpha-uppercase halpha-tracking-wide">
+                <x-fas-user-tie class="halpha-w-4 halpha-h-4 halpha-text-accent-2" />
+                My Sponsor
+            </h6>
+
+            @if($sponsor)
+                <span class="halpha-text-xs halpha-bg-success/20 halpha-text-success halpha-px-2 halpha-py-1 halpha-rounded-full">
+                    Active
+                </span>
+            @endif
+        </div>
+
+        @if($sponsor)
+
+            @php
+                $initials = strtoupper(substr($sponsor->name, 0, 1));
+                $maskedEmail = preg_replace('/(^.).*(@.*$)/', '$1***$2', $sponsor->email);
+            @endphp
+
+            <div class="halpha-flex halpha-items-center halpha-gap-4">
+
+                <!-- Avatar -->
+                <div class="halpha-w-12 halpha-h-12 halpha-rounded-full halpha-bg-gradient-to-r halpha-from-[#0ea5a4] halpha-to-[#22d3ee] halpha-flex halpha-items-center halpha-justify-center halpha-text-white halpha-font-semibold halpha-text-lg">
+                    {{ $initials }}
+                </div>
+
+                <!-- Sponsor Info -->
+                <div class="halpha-flex halpha-flex-col halpha-gap-1">
+                    <span class="halpha-text-lg halpha-font-semibold halpha-text-white">
+                        {{ ucwords($sponsor->name) }}
+                    </span>
+
+                    <span class="halpha-text-xs halpha-text-muted">
+                        {{ $maskedEmail }}
+                    </span>
+
+                    <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-xs halpha-mt-1">
+                        <span class="halpha-flex halpha-items-center halpha-gap-1">
+                            <x-fas-id-badge class="halpha-w-3 halpha-h-3 halpha-text-accent-2" />
+                            {{ $sponsor->affiliate_code ?? 'N/A' }}
+                        </span>
+
+                        <span class="halpha-flex halpha-items-center halpha-gap-1">
+                            <x-fas-layer-group class="halpha-w-3 halpha-h-3 halpha-text-accent-2" />
+                            {{ $sponsor->rank->rank->name ?? 'Member' }}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        @else
+
+            <div class="halpha-text-xs halpha-text-muted">
+                You joined without a sponsor.
+            </div>
+
+        @endif
+    </div>
+
+
+
     <x-dashboard.total-balance-card :balance="$balance" :totalEarned="$totalEarned" :chartData="$chartData" :dailyEstimatedReward="$dailyEstimatedReward" :totalEarnedDelta="$totalEarnedDelta" :earningchartData="$earningchartData" :totalReferralBonus="$totalReferralBonus" :totalReferralDelta="$totalReferralDelta" />
 
 

@@ -195,6 +195,9 @@ class Overview extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.overview');
+        $sponsor = auth()->user()->referrer; 
+        return view('livewire.dashboard.overview', [
+            'sponsor' => $sponsor
+        ]);
     }
 }
