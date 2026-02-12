@@ -196,7 +196,7 @@ class Overview extends Component
     public function render()
     {
         $sponsor = auth()->user()->referral->referrer;
-        $active = $sponsor->stakes->where('status', 'active')->count() > 0;
+        $active = $sponsor?->stakes?->where('status', 'active')?->count() ?? 0 > 0;
         return view('livewire.dashboard.overview', [
             'sponsor' => $sponsor,
             'active' => $active
