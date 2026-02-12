@@ -107,6 +107,11 @@ class ReferralCenter extends Component {
     }
 
     public function render() {
-        return view('livewire.dashboard.affiliate.referral-center');
+        $sponsor = auth()->user()->referral?->referrer;
+        $active = $sponsor?->stakes?->where('status', 'active')?->count() ?? 0 > 0;
+        return view('livewire.dashboard.affiliate.referral-center', [
+            'sponsor' => $sponsor,
+            'active' => $active
+        ]);
     }
 }
