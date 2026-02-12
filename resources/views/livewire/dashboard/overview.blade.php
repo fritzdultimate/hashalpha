@@ -1,7 +1,7 @@
 <div class="halpha-flex halpha-flex-col halpha-gap-5">
 
     <div
-    class="halpha-bg-card-bg halpha-rounded-xl halpha-border halpha-border-white/5 halpha-p-5 halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)]">
+    class="halpha-bg-card-bg halpha-rounded-xl halpha-border halpha-border-white/5 halpha-p-5 halpha-shadow-[0_0_2px_rgba(0,255,255,0.50)] halpha-hidden">
 
         <div class="halpha-flex halpha-items-center halpha-justify-between halpha-mb-4">
             <h6 class="halpha-text-muted halpha-flex halpha-items-center halpha-gap-2 halpha-text-sm halpha-uppercase halpha-tracking-wide">
@@ -11,7 +11,7 @@
 
             @if($sponsor)
                 <span class="halpha-text-xs halpha-bg-success/20 halpha-text-success halpha-px-2 halpha-py-1 halpha-rounded-full">
-                    Active
+                    {{ $active ? 'Active' : 'Inactive' }}
                 </span>
             @endif
         </div>
