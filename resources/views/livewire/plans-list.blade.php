@@ -142,7 +142,7 @@
                 {{-- Performance Section --}}
                 <div class="halpha-mt-6 halpha-text-center">
                     <div class="halpha-text-4xl halpha-font-bold halpha-text-accent-2 tracking-tight">
-                        {{ number_format($plan->min_roi, 1) }}% – {{ number_format($plan->max_roi, 1) }}%
+                        {{ number_format($plan->min_roi, 2) }}% – {{ number_format($plan->max_roi, 2) }}%
                     </div>
 
                     <div class="halpha-text-[11px] halpha-text-gray-500 halpha-mt-2 halpha-uppercase halpha-tracking-[0.2em]">
