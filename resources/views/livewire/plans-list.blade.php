@@ -177,7 +177,7 @@
 
                 </div>
 
-                <div class="halpha-space-y-2 halpha-mt-6 halpha-flex halpha-justify-center">
+                <div class="halpha-space-y-2 halpha-my-6 halpha-flex halpha-justify-center">
                     <div class="halpha-flex halpha-gap-2 halpha-items-center halpha-mt-2">
                         {{-- badges --}}
                         @if($plan->compound_allowed)
