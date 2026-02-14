@@ -23,7 +23,11 @@ class StakingPlanForm
                     ->default(0),
                 TextInput::make('max_amount')
                     ->numeric(),
-                TextInput::make('daily_roi')
+                TextInput::make('min_roi')
+                    ->required()
+                    ->numeric()
+                    ->default(0),
+                TextInput::make('max_roi')
                     ->required()
                     ->numeric()
                     ->default(0),

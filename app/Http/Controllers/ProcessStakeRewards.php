@@ -2,17 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\DepositStatus;
-use App\Models\Deposit;
 use App\Models\Reward;
 use App\Models\Stake;
-use App\Models\ValidatorReward;
-use App\Services\NowPaymentsService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ProcessStakeRewards extends Controller {
     public function handle() {
@@ -48,12 +40,20 @@ class ProcessStakeRewards extends Controller {
             return;
         }
 
-        $minFactor = 9500;
-        $maxFactor = 10500;
-        $randomFactor = random_int($minFactor, $maxFactor);
-        $factor = bcdiv((string) $randomFactor, '10000', 8);
-        $baseRoi = (string) $stake->plan->daily_roi;
-        $fluctuatedRoi = bcmul($baseRoi, $factor, 8);
+        // $minFactor = 9500;
+        // $maxFactor = 10500;
+        // $randomFactor = random_int($minFactor, $maxFactor);
+        // $factor = bcdiv((string) $randomFactor, '10000', 8);
+        // $baseRoi = (string) $stake->plan->daily_roi;
+        // $fluctuatedRoi = bcmul($baseRoi, $factor, 8);
+
+        $minRoi = (string) $stake->plan->min_roi;
+        $maxRoi = (string) $stake->plan->max_roi;
+
+        $minInt = (int) bcmul($minRoi, '10000');
+        $maxInt = (int) bcmul($maxRoi, '10000');
+        $randomInt = random_int($minInt, $maxInt);
+        $fluctuatedRoi = bcdiv((string) $randomInt, '10000', 8);
 
         $reward = bcmul(
             $stake->amount,
@@ -71,6 +71,12 @@ class ProcessStakeRewards extends Controller {
             'credited_at' => now(),
             'reward_type' => 'staking',
             'rewards_locked_at' => $lock_rewards ? now() : null,
+            'meta' => [
+                'roi_used' => $fluctuatedRoi,
+                'plan_min_roi' => $stake->plan->min_roi,
+                'plan_max_roi' => $stake->plan->max_roi,
+                'generated_at' => now()->toDateTimeString(),
+            ]
             // 'lock_reason' => ''
         ]);
 

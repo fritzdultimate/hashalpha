@@ -23,7 +23,10 @@ class StakingPlansTable
                 TextColumn::make('max_amount')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('daily_roi')
+                TextColumn::make('min_roi')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('max_roi')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('payout_frequency')

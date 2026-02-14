@@ -120,125 +120,95 @@
 
         {{-- Plan grid --}}
         <div class="halpha-space-y-3 md:halpha-space-y-0 md:halpha-grid md:halpha-grid-cols-3 halpha-gap-5">
+
             @foreach($this->plans as $plan)
-                <div
-                    class="halpha-card halpha-p-4 md:halpha-p-6 halpha-flex halpha-flex-col halpha-rounded-xl halpha-bg-gray-900 halpha-border halpha-border-gray-800">
-                    <div class="halpha-flex halpha-justify-between halpha-items-start halpha-gap-3">
-                        <div class="halpha-min-w-0 halpha-flex halpha-flex-col halpha-gap-2">
-                            <div class="halpha-flex halpha-items-center halpha-gap-3">
-                                <div class="halpha-flex halpha-items-center halpha-justify-center halpha-w-10 halpha-h-10 halpha-rounded-full halpha-bg-gray-800 halpha-min-w-10">
-                                    <span
-                                        class="halpha-text-xs halpha-text-gray-400">{{ strtoupper(substr($plan->name, 0, 2)) }}</span>
-                                </div>
-                                <div class="halpha-min-w-0">
-                                    <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white truncate">{{ $plan->name }}
-                                    </h3>
-                                    <div class="halpha-text-xs halpha-text-gray-400 truncate">{{ $plan->description ?? '—' }}
-                                    </div>
-                                </div>
-                            </div>
+            <div class="halpha-card halpha-p-6 halpha-flex halpha-flex-col halpha-rounded-xl halpha-bg-gray-900 halpha-border halpha-border-gray-800 halpha-transition hover:halpha-border-gray-600">
 
-                            
-                        </div>
-
-                        <div class="halpha-text-right halpha-flex halpha-flex-col halpha-items-end halpha-justify-between">
-                            <div>
-                                <div class="halpha-flex">
-                                    <div class="halpha-text-2xl halpha-font-bold halpha-text-accent-2">
-                                        {{ rtrim((string) $plan->daily_roi, '.') }}%
-                                    </div>
-                                    <span class="halpha-mt-auto halpha-text-gray-400 halpha-text-xs halpha-capitalize">/{{ $plan->payout_frequency }}</span>
-                                </div>
-                                <div class="halpha-text-xs halpha-text-gray-400">ROI</div>
-                            </div>
-                        </div>
+                {{-- Header --}}
+                <div class="halpha-flex halpha-items-center halpha-gap-3">
+                    <div class="halpha-flex halpha-items-center halpha-justify-center halpha-w-10 halpha-h-10 halpha-rounded-full halpha-bg-gray-800 halpha-min-w-10">
+                        <span
+                            class="halpha-text-xs halpha-text-gray-400">{{ strtoupper(substr($plan->name, 0, 2)) }}</span>
                     </div>
-
-                    <div class="halpha-space-y-2 halpha-mt-3">
-                        <div class="halpha-flex halpha-gap-2 halpha-items-center halpha-mt-2">
-                            {{-- badges --}}
-                            @if($plan->compound_allowed)
-                                <span
-                                    class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-success/10 halpha-text-success halpha-font-medium">Compound</span>
-                            @endif
-                            <span
-                                class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300 halpha-font-medium">Min:
-                                {{ number_format($plan->min_amount, 2) }}</span>
-                            <span
-                                class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300 halpha-font-medium">{{ $plan->duration ? $plan->duration . 'd' : 'Flexible' }}</span>
+                    <div class="halpha-min-w-0">
+                        <h3 class="halpha-text-lg halpha-font-semibold halpha-text-white truncate">{{ $plan->name }}
+                        </h3>
+                        <div class="halpha-text-xs halpha-text-gray-400 truncate">{{ $plan->description ?? '—' }}
                         </div>
-                    </div>
-
-                    {{-- utilization sparkline + bar --}}
-                    <div class="halpha-mt-4 halpha-space-y-2 halpha-hidden">
-                        <div class="halpha-h-8 halpha-w-full halpha-bg-gray-800 halpha-rounded overflow-hidden !halpha-hidden">
-                            @php
-                                $amounts = $plan->stakes->pluck('amount')->toArray();
-
-                                if (count($amounts) === 0) {
-                                    $amounts = [1, 1, 1, 1, 1];
-                                }
-
-                                $max = max($amounts);
-                                $normalized = array_map(fn($a) => $max ? (($a - $plan->min_amount) / $max) : 0, $amounts);
-                                $plan->sparkline = $normalized;
-
-                                $vals = $plan->sparkline;
-                                $count = count($vals);
-                                $points = [];
-
-                                $maxv = max($vals);
-                                $points = [];
-                                foreach ($vals as $i => $v) {
-                                    $x = ($i / max(1, $count - 1)) * 100;
-                                    $y = 26 - ($v * 20);
-                                    $points[] = $x . ',' . $y;
-                                }
-                            @endphp
-                            <svg viewBox="0 0 100 30" class="halpha-w-full halpha-h-full">
-                                <polyline fill="none" stroke="var(--halpha-accent-2)" stroke-width="1.5"
-                                    points="{{ implode(' ', $points) }}" />
-                            </svg>
-                        </div>
-
-                        {{-- utilization bar --}}
-                        @php
-                            $util = $plan->utilization ?? 0;
-                            $util = (int) min(100, max(0, $util));
-                        @endphp
-                        <div class="halpha-w-full halpha-bg-gray-800 halpha-rounded halpha-h-2">
-                            <div class="halpha-h-2 halpha-rounded"
-                                style="width: {{ $util }}%; background: linear-gradient(90deg, var(--halpha-accent-2), rgba(14,165,163,0.6));">
-                            </div>
-                        </div>
-                        <div class="halpha-text-xs halpha-text-gray-400">
-                            Pool utilization: <span class="halpha-text-white halpha-font-medium">{{ $util }}%</span>
-                        </div>
-                    </div>
-
-                    {{-- actions --}}
-                    <div class="halpha-mt-4 halpha-flex halpha-gap-3">
-
-                        <button 
-                            wire:click="openStakeModal({{ $plan->id }})"
-                            class="halpha-flex-1 halpha-py-2 halpha-rounded-lg halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-max-h-10 halpha-flex halpha-justify-center halpha-items-center"
-                            aria-label="Stake on {{ $plan->name }}"
-                        >
-                            <span wire:loading.remove wire:target="openStakeModal">Stake</span>
-                            <x-ri-loader-4-fill wire:target="openStakeModal" wire:loading class="halpha-w-6 halpha-h-6 halpha-animate-spin" />
-                        </button>
-
-                        <button 
-                            type="button" 
-                            class="halpha-py-2 halpha-px-4 halpha-rounded-lg halpha-border halpha-border-gray-700 halpha-text-xs halpha-text-gray-300 halpha-hidden" 
-                            aria-label="View details for {{ $plan->name }}"
-                            onclick="dispatchEvent(new CustomEvent('openPlanDetails', { detail: {{ $plan->id }} }))"
-                        >
-                            Details
-                        </button>
                     </div>
                 </div>
+
+
+                {{-- Performance Section --}}
+                <div class="halpha-mt-6 halpha-text-center">
+                    <div class="halpha-text-4xl halpha-font-bold halpha-text-accent-2 tracking-tight">
+                        {{ number_format($plan->min_roi, 1) }}% – {{ number_format($plan->max_roi, 1) }}%
+                    </div>
+
+                    <div class="halpha-text-[11px] halpha-text-gray-500 halpha-mt-2 halpha-uppercase halpha-tracking-[0.2em]">
+                        DAILY PERFORMANCE RANGE
+                    </div>
+                </div>
+
+
+                {{-- Meta Info --}}
+                <div class="halpha-mt-6 halpha-hidden halpha-justify-center halpha-gap-6 halpha-text-sm halpha-text-gray-400">
+
+                    <div class="halpha-text-center">
+                        <div class="halpha-text-white halpha-font-medium">
+                            {{ number_format($plan->min_amount, 2) }}
+                        </div>
+                        <div class="halpha-text-xs halpha-text-gray-500">Minimum</div>
+                    </div>
+
+                    <div class="halpha-text-center">
+                        <div class="halpha-text-white halpha-font-medium">
+                            {{ $plan->duration ? $plan->duration . ' Days' : 'Flexible' }}
+                        </div>
+                        <div class="halpha-text-xs halpha-text-gray-500">Duration</div>
+                    </div>
+
+                    <div class="halpha-text-center">
+                        <div class="halpha-text-white halpha-font-medium">
+                            {{ $plan->compound_allowed ? 'Enabled' : 'Disabled' }}
+                        </div>
+                        <div class="halpha-text-xs halpha-text-gray-500">Compounding</div>
+                    </div>
+
+                </div>
+
+                <div class="halpha-space-y-2 halpha-mt-3 halpha-flex halpha-justify-center">
+                    <div class="halpha-flex halpha-gap-2 halpha-items-center halpha-mt-2">
+                        {{-- badges --}}
+                        @if($plan->compound_allowed)
+                            <span
+                                class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-success/10 halpha-text-success halpha-font-medium">Compound</span>
+                        @endif
+                        <span
+                            class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300 halpha-font-medium">Min:
+                            {{ number_format($plan->min_amount, 2) }}</span>
+                        <span
+                            class="halpha-text-[11px] halpha-px-2 halpha-py-1 halpha-rounded halpha-bg-gray-800 halpha-text-gray-300 halpha-font-medium">{{ $plan->duration ? $plan->duration . 'd' : 'Flexible' }}</span>
+                    </div>
+                </div>
+
+
+                {{-- Divider --}}
+                <div class="halpha-border-t halpha-border-gray-800 halpha-my-6"></div>
+
+
+                {{-- Action --}}
+                <button 
+                    wire:click="openStakeModal({{ $plan->id }})"
+                    class="halpha-w-full halpha-py-3 halpha-rounded-lg halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-transition hover:halpha-opacity-90 halpha-flex halpha-justify-center halpha-items-center"
+                >
+                    <span wire:loading.remove wire:target="openStakeModal">Stake</span>
+                    <x-ri-loader-4-fill wire:target="openStakeModal" wire:loading class="halpha-w-6 halpha-h-6 halpha-animate-spin" />
+                </button>
+
+            </div>
             @endforeach
+
         </div>
 
         {{-- load more --}}

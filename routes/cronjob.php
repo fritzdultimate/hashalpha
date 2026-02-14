@@ -5,6 +5,7 @@ use App\Http\Controllers\ClaimValidatorReward;
 use App\Http\Controllers\GenerateValidatorReward;
 use App\Http\Controllers\ProcessStakeRewards;
 use App\Http\Controllers\RankController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/cron/process-stake-rewards', [ProcessStakeRewards::class, 'handle'])
     ->name('cron.process-stake-rewards');

@@ -10,7 +10,8 @@ class Reward extends Model {
     protected $guarded = [];
     protected $casts = [
         'credited_at' => 'datetime',
-        'status' => RewardStatus::class
+        'status' => RewardStatus::class,
+        'meta' => 'array'
 
     ];
 
