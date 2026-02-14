@@ -25,9 +25,9 @@ class StakingPlan extends Model {
         return $value / 100;
     }
 
-    public function setDailyRoiAttribute($value) {
+    public function setMinRoiAttribute($value) {
         if (is_null($value) || $value === '') {
-            $this->attributes['daily_roi'] = '0.00000000';
+            $this->attributes['min_roi'] = '0.00000000';
             return;
         }
 
@@ -40,18 +40,48 @@ class StakingPlan extends Model {
             $num = rtrim((string)$value, '%');
             $num = (string) floatval($num);
             $fraction = bcdiv($num, '100', 8);
-            $this->attributes['daily_roi'] = $fraction;
+            $this->attributes['min_roi'] = $fraction;
             return;
         }
 
         $num = (string) floatval($value);
 
         $fraction = bcdiv($num, '100', 8);
-        $this->attributes['daily_roi'] = $fraction;
+        $this->attributes['min_roi'] = $fraction;
 
     }
 
-    public function getDailyRoiAttribute($value) {
+    public function setMaxRoiAttribute($value) {
+        if (is_null($value) || $value === '') {
+            $this->attributes['max_roi'] = '0.00000000';
+            return;
+        }
+
+        if (is_string($value)) {
+            $value = trim($value);
+            $value = str_replace(',', '.', $value);
+        }
+
+        if ((string)$value !== '' && Str::endsWith((string)$value, '%')) {
+            $num = rtrim((string)$value, '%');
+            $num = (string) floatval($num);
+            $fraction = bcdiv($num, '100', 8);
+            $this->attributes['max_roi'] = $fraction;
+            return;
+        }
+
+        $num = (string) floatval($value);
+
+        $fraction = bcdiv($num, '100', 8);
+        $this->attributes['max_roi'] = $fraction;
+
+    }
+
+    public function getMinRoiAttribute($value) {
+        return $value * 100;
+    }
+
+    public function getMaxRoiAttribute($value) {
         return $value * 100;
     }
 
