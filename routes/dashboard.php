@@ -60,7 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('transparency')->middleware(['auth'])->group(function () {
         Route::get('/validator', Validator::class)->name('transparency.validator');
-        Route::get('/rewards', ProofOfRewards::class)->name('transparency.rewards');
+        // Route::get('/rewards', ProofOfRewards::class)->name('transparency.rewards');
         Route::get('/reports', Reports::class)->name('transparency.reports');
         Route::get('/system-status', SystemStatus::class)->name('transparency.status');
     });

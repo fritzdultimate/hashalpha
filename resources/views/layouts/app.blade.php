@@ -185,10 +185,10 @@
                                 "url" => route('transparency.validator'),
                                 "label" => "Validators"
                             ],
-                            [
-                                "url" => route('transparency.rewards'),
-                                "label" => 'Proof of Rewards'
-                            ],
+                            // [
+                            //     "url" => route('transparency.rewards'),
+                            //     "label" => 'Proof of Rewards'
+                            // ],
                             [
                                 "url" => route('transparency.reports'),
                                 "label" => 'Reports'
