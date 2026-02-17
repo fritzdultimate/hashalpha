@@ -72,7 +72,7 @@
                         </li>
                         <li class="header-nav-list-item show-on-tablet">
                             <div class="btn-primary-wrapper">
-                                <a href="{{ route('register') }}" class="btn-primary small w-button">Get started</a>
+                                <a href="{{ route('login') }}" class="btn-primary small w-button">Login</a>
                                 <div class="btn-primary-border"></div>
                             </div>
                         </li>
@@ -94,7 +94,7 @@
                 </div>
                 
                 <div class="btn-primary-wrapper hidden-on-tablet">
-                    <a href="{{ route('register') }}" class="btn-primary small w-button">Get started</a>
+                    <a href="{{ route('login') }}" class="btn-primary small w-button">Login</a>
                     <div class="btn-primary-border"></div>
                 </div>
                 
