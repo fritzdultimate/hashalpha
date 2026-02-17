@@ -55,7 +55,7 @@
                         <x-codicon-loading wire:loading wire:target="login" class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
                     </button>
 
-                    <p class="halpha-text-white halpha-text-center">Don't have an account? <a class="halpha-text-gray-400" href="{{ route('register') }}">Register</a></p>
+                    <p class="halpha-text-white halpha-text-center halpha-hidden">Don't have an account? <a class="halpha-text-gray-400" href="{{ route('register') }}">Register</a></p>
                 </div>
             </form>
         </div>

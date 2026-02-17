@@ -47,6 +47,11 @@ class Register extends Component {
 
     public function mount() {
         $this->ref = request()->query('ref');
+        // $referrer = User::where('affiliate_code', $this->ref)->first();
+
+        if(!$this->ref) {
+            return redirect()->route('login');
+        }
     }
 
     public function submit() {
