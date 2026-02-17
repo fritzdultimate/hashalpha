@@ -17,8 +17,8 @@
                         
                         <div data-w-id="94b66ed0-3a57-7602-7036-6692c6d028e9" style="opacity: 1; filter: blur(0px);" class="buttons-flex-container">
                             <div data-w-id="94b66ed0-3a57-7602-7036-6692c6d028ea" class="btn-primary-wrapper">
-                                <a href="{{ route('register') }}" class="btn-primary w-button halpha-hidden">
-                                    Get started<span class="line-rounded-icon link-icon-right" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></span>
+                                <a href="{{ route('about') }}" class="btn-primary w-button">
+                                    See more<span class="line-rounded-icon link-icon-right" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></span>
                                 </a>
                                 
                                 <div class="btn-primary-border"></div>
