@@ -22,8 +22,8 @@
                 </div>
                 
                 <div data-w-id="59a0c9f7-296b-773a-326e-b1cc37aba366" class="btn-primary-wrapper" style="opacity: 1; filter: blur(0px);">
-                    <a href="{{ route('register') }}" class="btn-primary w-button">
-                        Get started
+                    <a href="{{ route('login') }}" class="btn-primary w-button">
+                        Login
                         <span class="line-rounded-icon link-icon-right" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"></span>
                     </a>
                     <div class="btn-primary-border"></div>

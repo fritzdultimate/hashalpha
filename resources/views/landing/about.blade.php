@@ -22,7 +22,7 @@
 
 
             <div data-w-id="5efe5cb4-a493-305f-011b-7f8e173d14a6" style="opacity: 1; filter: blur(0px);"
-                class="buttons-flex-container center">
+                class="buttons-flex-container center !halpha-hidden">
                 <div data-w-id="5efe5cb4-a493-305f-011b-7f8e173d14a7" class="btn-primary-wrapper">
                     <a href="{{ route('register') }}" class="btn-primary w-button">
                         Get Started
