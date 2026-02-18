@@ -6,7 +6,17 @@
                     Why {{ env('APP_NAME') }} Exists
                 </h2>
                 <p class="color-neutral-100 mg-bottom-24px !halpha-text-gray-400">
-                    Blockchain has become critical infrastructure, yet accessing the economics behind it remains complex and inaccessible for most people. HashAlpha exists to bridge that gap — operating validator infrastructure and exposing it through a structured, transparent platform for participation and growth.
+                    Blockchain networks are becoming the backbone of global digital Infrastructure - yet access to the economic layer behind them remains fragmented and complex.
+
+                </p>
+
+                <p class="color-neutral-100 mg-bottom-24px !halpha-text-gray-400">
+                    {{ env('APP_NAME') }} exists to bridge that gap.
+
+                </p>
+
+                <p class="color-neutral-100 mg-bottom-24px !halpha-text-gray-400">
+                    We build and operate a diversified blockchain infrastructure engine — expanding beyond validator operations into delegation services, node hosting, and performance-driven infrastructure strategies — transforming professional-grade digital asset infrastructure into accessible participation.
 
                 </p>
             </div>
@@ -16,22 +26,40 @@
             @php
                 $features = [
                     [
-                        'title' => 'Institutional Validator Infrastructure', 
-                        'text' => 'Enterprise-grade ETH validators operating across multiple Tier-4 data centers with MEV-boosted performance.', 
+                        'title' => 'Institutional-Grade Infrastructure Engine', 
+                        'text' => [
+                            'Enterprise validator operations, geographically distributed node architecture, institutional delegation channels, and scalable infrastructure services designed for performance, uptime, and long-term resilience.',
+                            'Our infrastructure layer continues to expand as capacity grows — aligning revenue generation with real network contribution.'
+                        ], 
                         'img' => asset('images/landing/easy-to-create-wallet-circle-image.png')
                     ],
                     [
-                        'title' => 'Real Daily Staking Rewards', 
-                        'text' => 'Rewards sourced directly from Ethereum’s Proof-of-Stake issuance and MEV relay optimization.', 'img' => asset('images/landing/send-and-receive-circle-image.png')
+                        'title' => 'Multi-Vertical Revenue Model', 
+                        'text' => [
+                            'Revenue is generated across diversified infrastructure channels, including:',
+                            [
+                                'Ethereum validator rewards',
+                                'MEV optimization and block execution strategies',
+                                'Institutional delegation service fees',
+                                'Enterprise node hosting subscriptions',
+                                'Performance-based infrastructure strategies'
+                            ],
+                            'This diversified model strengthens scalability and reduces reliance on a single revenue source.'
+                        ], 
+                        'img' => asset('images/landing/send-and-receive-circle-image.png')
                     ],
                     [
                         'title' => 'Digital Infrastructure Identity (V-NFTs & $HASH)', 
-                        'text' => 'A layered ecosystem of validator credentials and utility tokens designed to power long-term participation, access, and governance.', 
+                        'text' => [
+                            'A utility-driven ecosystem of digital infrastructure credentials and governance tools designed to support participation, alignment, and long-term ecosystem growth.'
+                        ], 
                         'img' => asset('images/landing/floating-bg-shape-3.jpg')
                     ], 
                     [
-                        'title' => 'Global Affiliate Ecosystem', 
-                        'text' => 'A structured multi-tier partner program that rewards network growth sustainably and transparently.', 
+                        'title' => 'Global Partner Ecosystem', 
+                        'text' => [
+                            'A structured, performance-aligned partner program that rewards responsible network expansion — built to support sustainable scaling rather than short-term incentives.'
+                        ], 
                         'img' => asset('images/landing/floating-bg-shape-3.jpg')
                     ]
                 ];
@@ -45,7 +73,22 @@
                     <div class="halpha-flex-1">
                         <h3 class="halpha-text-lg md:halpha-text-xl halpha-font-semibold halpha-text-white">
                             {{ $f['title'] }}</h3>
-                        <p class="halpha-text-sm md:halpha-text-base halpha-text-gray-300 halpha-mt-2">{{ $f['text'] }}</p>
+                        <div>
+                            @foreach ($f['text'] as $text)
+                                @if (is_array($text))
+                                    <ul class="halpha-list-disc">
+                                        @foreach ($text as $t)
+                                            <li class="halpha-text-gray-300 halpha-text-sm">{{ $t }}</li>
+                                        @endforeach
+                                    </ul>
+
+                                    @continue
+                                @endif
+                                <p class="halpha-text-sm md:halpha-text-base halpha-text-gray-300 halpha-mt-2">
+                                    {{ $text }}
+                                </p>  
+                            @endforeach
+                        </div>
                     </div>
                 </article>
             @endforeach

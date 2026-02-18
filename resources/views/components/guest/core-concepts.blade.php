@@ -13,9 +13,10 @@
                 <ul class="halpha-flex halpha-flex-col halpha-gap-5 halpha-w-full !halpha-pl-0">
                     @php
                         $concepts = [
-                            'Each deposit contributes to hashalpha pool of Ethereum validator nodes and MEV- boosting infrastructure', 
-                            'The validator rewards + MEV yields are aggregated, averaged and distributed daily(up to 0.6% per day, depending on staking plan)', 
-                            'Rewards are sustainable, backed by real blockchain operations'
+                            'Each deposit contributes to HashAlpha’s diversified blockchain infrastructure engine — spanning validator operations, institutional delegation, node hosting, and performance-driven infrastructure strategies.', 
+                            'Revenue is generated across multiple infrastructure verticals, including Ethereum consensus rewards, MEV optimization, delegation service fees, and enterprise infrastructure services.', 
+                            'Infrastructure revenue is aggregated, risk-managed, and allocated to participant pools based on plan structure, lock-up period, and overall infrastructure performance',
+                            'Distributions are backed by real on-chain activity and operational output — aligned with scaling capacity and network conditions.'
                         ]
                     @endphp
                     @foreach ($concepts as $concept)

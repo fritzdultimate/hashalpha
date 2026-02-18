@@ -11,8 +11,12 @@
                             Earn daily from the backbone of blockchain
                         </h1>
                         
+                        <p class="color-neutral-100 mg-bottom-32px !halpha-hidden">
+                            {{ env('APP_LONG_NAME') }} transforms Ethereum validator operations into accessible, daily staking rewards powered by real on-chain performance and MEV optimization.
+                        </p>
+
                         <p class="color-neutral-100 mg-bottom-32px">
-                        {{ env('APP_LONG_NAME') }} transforms Ethereum validator operations into accessible, daily staking rewards powered by real on-chain performance and MEV optimization.
+                            {{ env('APP_LONG_NAME') }} operates a diversified digital asset infrastructure engine - combining validator operations, MEV optimization, institutional delegation, and performance strategies to generate scalable, performance-aligned rewards.
                         </p>
                         
                         <div data-w-id="94b66ed0-3a57-7602-7036-6692c6d028e9" style="opacity: 1; filter: blur(0px);" class="buttons-flex-container">
