@@ -10,24 +10,52 @@
                 alt="" class="bg-gradient-top">
             <div data-w-id="c25d5f06-e5af-7950-3dc5-75d824685327" style="opacity: 1; filter: blur(0px);"
                 class="inner-container _470px _100-tablet">
-                <h2 class="display-2 mg-bottom-4px">The story behind our company</h2>
+                <h2 class="display-2 mg-bottom-4px">The story behind {{ env('APP_NAME') }}</h2>
 
                 <div class="halpha-flex halpha-flex-col halpha-gap-2">
                     <p class="halpha-text-gray-300 halpha-text-lg">
-                        {{ env('APP_LONG_NAME') }} was founded with a simple vision: to bring validator-level blockchain rewards to the world in a transparent, accessible, and scalable way.
+                        {{ env('APP_NAME') }} was founded on a simple belief:
                     </p>
 
                     <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
-                        The blockchain ecosystem depends on validators — the silent backbone securing billions in daily transactions. Until now, only large institutions benefited from this infrastructure revenue.
+                        Blockchain networks are becoming critical global infrastructure — yet access to the economics behind that infrastructure remains complex and fragmented.
                     </p>
 
                     <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
-                        We bridge that gap.
+                        Ethereum and other decentralized networks rely on validators, nodes, and infrastructure operators to secure billions in digital value daily. Historically, participation at this level required significant capital, technical expertise, or institutional access.
                     </p>
 
                     <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
-                        Through a combination of enterprise-grade validator operations, MEV optimization, strong partner networks, and a global education-first approach, {{ env('APP_NAME') }} empowers everyday users to participate in the core of Ethereum’s infrastructure.
+                        We exist to bridge that gap.
                     </p>
+
+                    <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
+                        Through institutional-grade infrastructure, disciplined operational management, and a structured participation layer, HashAlpha enables broader access to blockchain infrastructure economics — while aligning growth with real network contribution.
+                    </p>
+                </div>
+
+                <h3 class="display-3 mg-bottom-4px halpha-mt-10">Our Direction</h3>
+
+                <div class="halpha-flex halpha-flex-col halpha-gap-2">
+                    <p class="halpha-text-gray-300 halpha-text-base">
+                        As the ecosystem evolves, so do we.
+                    </p>
+
+                    <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-base">
+                        HashAlpha is entering its next phase of infrastructure expansion — scaling beyond core validator operations into a diversified infrastructure model designed for long-term resilience, performance alignment, and global accessibility.
+                    </p>
+
+                    <div>
+                        <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-base">
+                            Our focus remains clear:
+                        </p>
+
+                        <ul class="halpha-list-disc">
+                            <li class="halpha-text-gray-300 halpha-text-sm">Build real infrastructure.</li>
+                            <li class="halpha-text-gray-300 halpha-text-sm">Scale responsibly.</li>
+                            <li class="halpha-text-gray-300 halpha-text-sm">Align participation with performance.</li>
+                        </ul>
+                    </div>
                 </div>
                 
             </div>

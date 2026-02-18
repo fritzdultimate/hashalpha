@@ -4,38 +4,57 @@
     <!-- Hero -->
     <section class="halpha-py-8 md:halpha-py-32 halpha-bg-gradient-to-b halpha-from-[#04121a] halpha-to-[#07121a]">
         <div class="container-default w-container">
-            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-items-center">
+            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-12 halpha-items-center">
                 <div>
-                    <h1 class="display-2 heading-color-gradient">Stake with {{ env('APP_LONG_NAME') }}</h1>
+                    <h1 class="display-3 heading-color-gradient">INFRASTRUCTURE BACKED STAKING & YIELD OPERATIONS </h1>
                     <p class="mg-top-4 !halpha-text-gray-300">
-                        Earn predictable rewards from validators and MEV-enhanced operations. Transparent fees, daily
-                        payouts, and enterprise-grade security — no node ops required.
+                        Multi-Layer Digital Asset Infrastructure
+                    </p>
+                    <p class="mg-top-4 !halpha-text-gray-300">
+                        {{ env('APP_NAME') }} operates a diversified infrastructure ecosystem designed to generate performance through validator architecture, execution-layer optimization, and scalable hosting systems.
+                    </p>
+
+                    <p class="mg-top-4 !halpha-text-gray-300">
+                        Our model is built on systems — not single revenue streams.
+                    </p>
+
+                    <p class="mg-top-4 !halpha-text-gray-300">
+                        Engineered for resilience. Structured for scale. Designed for long-term participation.
+
                     </p>
 
                     <div class="halpha-flex halpha-gap-3 halpha-mt-6">
-                        <a href="{{ route('register') }}" class="btn-primary w-button">Join & Stake</a>
-                        <a href="{{ route('register') }}" class="btn-secondary w-button">See Plans</a>
+                        <!-- <a href="{{ route('register') }}" class="btn-primary w-button">Join & Stake</a> -->
+                        <a href="{{ route('login') }}" class="btn-secondary w-button">
+                            Explore Infrastructure 
+                        </a>
                     </div>
                 </div>
 
-                <div class="halpha-flex halpha-justify-end">
+                <div class="halpha-flex halpha-flex-col halpha-justify-end">
+                    <h2 class="halpha-text-lg">KEY METRICS:</h2>
                     <!-- small KPI card group -->
                     <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3 halpha-w-full md:halpha-w-3/4">
-                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a]">
-                            <div class="halpha-text-sm halpha-text-gray-300">Active Nodes</div>
-                            <div class="halpha-text-2xl halpha-font-bold halpha-text-white">128</div>
+                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a] halpha-text-center">
+                            <div class="halpha-text-sm halpha-text-gray-300">Active Infrastructure Nodes</div>
+                            <div class="halpha-text-2xl halpha-font-bold halpha-text-white">128+</div>
                         </div>
-                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a]">
-                            <div class="halpha-text-sm halpha-text-gray-300">Avg. Uptime</div>
+                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a] halpha-text-center">
+                            <div class="halpha-text-sm halpha-text-gray-300">Average Network Uptime</div>
                             <div class="halpha-text-2xl halpha-font-bold halpha-text-white">99.9%</div>
                         </div>
-                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a]">
-                            <div class="halpha-text-sm halpha-text-gray-300">Payout</div>
-                            <div class="halpha-text-2xl halpha-font-bold halpha-text-white">Daily</div>
+                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a] halpha-text-center">
+                            <div class="halpha-text-sm halpha-text-gray-300">Deployment Regions</div>
+                            <div class="halpha-text-base halpha-font-bold halpha-text-white">Multi-Region Architecture</div>
                         </div>
-                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a]">
-                            <div class="halpha-text-sm halpha-text-gray-300">MEV Enabled</div>
-                            <div class="halpha-text-2xl halpha-font-bold halpha-text-white">Yes</div>
+                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a] halpha-text-center">
+                            <div class="halpha-text-sm halpha-text-gray-300">Execution Optimization</div>
+                            <div class="halpha-text-base halpha-font-bold halpha-text-white">Integrated</div>
+                        </div>
+
+                        <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a] halpha-text-center">
+                            <div class="halpha-text-sm halpha-text-gray-300">Distribution Model</div>
+                            <div class="halpha-text-base halpha-font-bold halpha-text-white">Periodic & Performance-Based</div>
                         </div>
                     </div>
                 </div>
@@ -60,39 +79,100 @@
     @include('components.guest.validator-infrastructure')
 
     <!-- MEV-Boosted Staking -->
-    <section id="mev" class="halpha-py-16 md:halpha-py-32">
+    <section class="halpha-py-16 md:halpha-py-0">
         <div class="container-default w-container">
             <div class="inner-container _608px _100-tablet">
-                <h2 class="display-2 heading-color-gradient">MEV-Boosted Staking</h2>
-                <p class="!halpha-text-gray-400">We integrate MEV-boost relay services to increase proposer revenue while
-                    applying risk controls and revenue-sharing rules — designed to maximize yield without sacrificing
-                    decentralization.</p>
+                <h2 class="display-2 heading-color-gradient">REVENUE ARCHITECTURE</h2>
+                <p class="!halpha-text-gray-400">
+                    A Diversified Performance Model
+                </p>
             </div>
 
-            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-mt-6">
-                <div>
-                    <h4 class="halpha-text-white halpha-font-semibold">What is MEV?</h4>
-                    <p class="halpha-text-sm halpha-text-gray-300">MEV (Maximal Extractable Value) is additional proposer
-                        revenue captured from transaction ordering and bundle execution. We use vetted relays and ethical
-                        MEV strategies.</p>
+            <div class="halpha-mt-6">
+                <div class="halpha-flex halpha-flex-col">
+                    <p class="!halpha-text-gray-400">
+                        Performance within HashAlpha’s ecosystem is derived from multiple operational layers, including:
+                    </p>
 
-                    <h4 class="halpha-text-white halpha-font-semibold halpha-mt-4">Revenue Split</h4>
-                    <p class="halpha-text-sm halpha-text-gray-300">Proposer revenue is split between the validators and the
-                        staking pool per plan. Typical split example: 70% to stakers / 30% operational & infra fee (example
-                        — update with your policy).</p>
+                    <ul class="halpha-list-disc halpha-text-gray-300 halpha-text-base">
+                        <li>Consensus participation rewards</li>
+                        <li>Execution layer transaction fees</li>
+                        <li>MEV optimization systems</li>
+                        <li>Proprietary execution strategies</li>
+                        <li>Infrastructure-level efficiencies</li>
+                    </ul>
                 </div>
 
                 <div>
-                    <h4 class="halpha-text-white halpha-font-semibold">Risk Controls</h4>
-                    <ul class="halpha-list-none halpha-space-y-2 halpha-text-sm halpha-text-gray-300">
-                        <li>Relay vetting & SLA checks</li>
-                        <li>Dynamic share limits to avoid centralization</li>
-                        <li>Audited MEV operator contracts</li>
-                    </ul>
+                    <p class="!halpha-text-gray-400">Outcomes are variable and reflect real network conditions and system performance.</p>
+                    <p class="!halpha-text-gray-400">We prioritize sustainability and structured growth over aggressive short-term positioning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="halpha-mt-6">
-                        <a href="/transparency/mev-reports" class="btn-secondary w-button">MEV Reports & Audit</a>
-                    </div>
+    <section class="halpha-py-16 md:halpha-py-0">
+        <div class="container-default w-container">
+            <div class="inner-container _608px _100-tablet">
+                <h2 class="display-2 heading-color-gradient">DISTRIBUTIONS & TRANSPARENCY</h2>
+                <p class="!halpha-text-gray-400">
+                    
+                </p>
+            </div>
+
+            <div class="halpha-mt-6">
+                <div class="halpha-flex halpha-flex-col">
+                    <p class="!halpha-text-gray-400">
+                        Structured Distribution Model
+                    </p>
+
+                    <ul class="halpha-list-disc halpha-text-gray-300 halpha-text-base">
+                        <li>Rewards are aggregated across operational layers</li>
+                        <li>Balances reflect system-wide performance</li>
+                        <li>Optional compounding configurations available</li>
+                        <li>Withdrawals processed according to liquidity structure</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="!halpha-text-gray-400">
+                        Performance reporting and operational transparency remain core to our approach.
+                    </p>
+                    <p class="!halpha-text-gray-400">
+                        No fixed returns. No artificial guarantees.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="halpha-py-16 md:halpha-py-0">
+        <div class="container-default w-container">
+            <div class="inner-container _608px _100-tablet">
+                <h2 class="display-2 heading-color-gradient">PHASE 2: INFRASTRUCTURE EVOLUTION</h2>
+                <p class="!halpha-text-gray-400">
+                    Validators were the starting point.
+                </p>
+            </div>
+
+            <div class="halpha-mt-6">
+                <div class="halpha-flex halpha-flex-col">
+                    <p class="!halpha-text-gray-400">
+                        Phase 2 expands HashAlpha into a broader infrastructure and execution ecosystem designed to:
+                    </p>
+
+                    <ul class="halpha-list-disc halpha-text-gray-300 halpha-text-base">
+                        <li>Diversify revenue streams</li>
+                        <li>Strengthen operational resilience</li>
+                        <li>Scale infrastructure capacity</li>
+                        <li>Introduce institutional-grade participation frameworks</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="!halpha-text-gray-400">
+                        Deployment milestones will be introduced progressively.
+                    </p>
                 </div>
             </div>
         </div>
@@ -102,81 +182,38 @@
     <section id="yield" class="halpha-py-10 halpha-bg-[rgba(255,255,255,0.01)]">
         <div class="container-default w-container">
             <div class="inner-container _608px _100-tablet">
-                <h2 class="display-2 heading-color-gradient">Yield Strategy & Payout Schedule</h2>
-                <p class="!halpha-text-gray-400">We combine protocol block rewards, MEV revenue and an operational model to
-                    deliver regular payouts. Below is an example schedule and sample calculation.</p>
+                <h2 class="display-2 heading-color-gradient">SECURITY & GOVERNANCE</h2>
+                <p class="!halpha-text-gray-400">
+                    Security underpins every layer of our ecosystem.
+                </p>
             </div>
 
             <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-6 halpha-mt-6">
                 <div>
-                    <h4 class="halpha-text-white halpha-font-semibold">Payout cadence</h4>
                     <ul class="halpha-list-none halpha-space-y-2 halpha-text-sm halpha-text-gray-300">
-                        <li>Daily aggregation of earned rewards → user balances updated every 24 hours.</li>
-                        <li>Auto-compound option available for Pro and Institutional plans.</li>
-                        <li>Withdrawals processed within 24–72 hours (subject to plan liquidity).</li>
+                        <li>Layered custody architecture</li>
+                        <li>Infrastructure isolation protocols</li>
+                        <li>Automated monitoring and alert systems</li>
+                        <li>Defined operational response procedures</li>
+                        <li>Transparent and structured fee model</li>
                     </ul>
 
-                    <h4 class="halpha-text-white halpha-font-semibold halpha-mt-4">Sample calculation</h4>
-                    <pre class="halpha-bg-[#07121a] halpha-p-3 halpha-rounded-[8px] halpha-text-sm halpha-text-gray-300">
-    Example Yield Calculation — $20,000 Stake at Up to 1.3% Daily
-
-    Stake Amount: $20,000
-    Daily Reward Rate: Up to 1.3%
-    Lockup Period: 150 days
-
-    Daily Earnings
-    $20,000 × 1.3% = $260 per day
-
-    Total Rewards Over 150 Days
-    $260 × 150 days = $39,000 earned
-                    </pre>
+                    
                 </div>
 
                 <div>
-                    <!-- Chart placeholder: integrate chart library or image -->
-                    <div
-                        class="halpha-bg-[#07121a] halpha-rounded-[12px] halpha-p-4 halpha-h-60 halpha-flex halpha-items-center halpha-justify-center">
-                        <div class="halpha-text-sm halpha-text-gray-400"><!--[Yield projection chart]--></div>
-                    </div>
+                    <p class="halpha-text-white halpha-font-semibold halpha-mt-4">
+                        We build deliberately. We scale responsibly.
+                    </p>
+
+                    <p class="!halpha-text-gray-400">
+                        Security underpins every layer of our ecosystem.
+                    </p>
 
                     <div class="halpha-mt-4">
-                        <a href="/pricing" class="btn-primary w-button">See detailed payout rules</a>
+                        <a href="/login" class="btn-primary w-button">Get Started</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Payout schedule table -->
-            <div class="halpha-overflow-x-auto halpha-mt-6">
-                <table class="halpha-w-full halpha-text-sm halpha-text-gray-300">
-                    <thead class="halpha-text-left">
-                        <tr>
-                            <th class="halpha-p-3">Plan</th>
-                            <th class="halpha-p-3">Payout Frequency</th>
-                            <th class="halpha-p-3">Auto-compound</th>
-                            <th class="halpha-p-3">Withdrawal window</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="halpha-border-t halpha-border-[#111316]">
-                            <td class="halpha-p-3">Starter</td>
-                            <td class="halpha-p-3">Daily</td>
-                            <td class="halpha-p-3">No</td>
-                            <td class="halpha-p-3">24 hours</td>
-                        </tr>
-                        <tr class="halpha-border-t halpha-border-[#111316]">
-                            <td class="halpha-p-3">Pro</td>
-                            <td class="halpha-p-3">Daily</td>
-                            <td class="halpha-p-3">Optional</td>
-                            <td class="halpha-p-3">24–48 hours</td>
-                        </tr>
-                        <tr class="halpha-border-t halpha-border-[#111316]">
-                            <td class="halpha-p-3">Institutional</td>
-                            <td class="halpha-p-3">Daily</td>
-                            <td class="halpha-p-3">Optional</td>
-                            <td class="halpha-p-3">Custom</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </section>
