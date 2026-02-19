@@ -18,7 +18,7 @@ class ChallengeCategoryForm
                 Select::make('type')
                     ->options([
                         'volume' => 'Top Volume',
-                        'referrals' => 'Team Activation',
+                        'new_members' => 'Team Activation',
                         'fastest' => 'Fastest 7',
                     ])
                     ->required(),
