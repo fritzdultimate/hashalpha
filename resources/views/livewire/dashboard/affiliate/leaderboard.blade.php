@@ -91,7 +91,7 @@
                 <p class="halpha-text-xs halpha-text-gray-400">🥈 2nd</p>
                 <p class="halpha-text-sm halpha-text-white font-semibold halpha-capitalize">{{ $top3[1]->user->name }}</p>
                 <p class="halpha-text-xs halpha-text-gray-400">
-                    {{ $activeTab === 1 ? '$'.number_format($top3[1]->score, 2) : $top3[1]->score }}
+                    {{ $selectedCategory->type === 'volume' ? '$'.number_format($top3[1]->score, 2) : $top3[1]->score }}
                 </p>
             </div>
             @endif
@@ -102,7 +102,7 @@
                 <p class="halpha-text-xs text-black font-bold">🥇 1st</p>
                 <p class="halpha-text-sm text-black font-bold halpha-capitalize">{{ $top3[0]->user->name }}</p>
                 <p class="halpha-text-xs text-black">
-                    {{ $activeTab === 1 ? '$'.number_format($top3[0]->score, 2) : $top3[0]->score }}
+                    {{ $selectedCategory->type === 'volume' ? '$'.number_format($top3[0]->score, 2) : $top3[0]->score }}
                 </p>
             </div>
             @endif
@@ -113,7 +113,7 @@
                 <p class="halpha-text-xs halpha-text-gray-400">🥉 3rd</p>
                 <p class="halpha-text-sm halpha-text-white font-semibold halpha-capitalize">{{ $top3[2]->user->name }}</p>
                 <p class="halpha-text-xs halpha-text-gray-400">
-                    {{ $activeTab === 1 ? '$'.number_format($top3[2]->score, 2) : $top3[2]->score }}
+                    {{ $selectedCategory->type === 'volume' ? '$'.number_format($top3[2]->score, 2) : $top3[2]->score }}
                 </p>
             </div>
             @endif
@@ -157,7 +157,7 @@
 
                     <div class="halpha-text-right">
                         <p class="halpha-text-sm halpha-text-white">
-                            @if($activeTab === 1)
+                            @if($selectedCategory->type === 'volume')
                                 ${{ number_format($entry->score, 2) }}
                             @else
                                 {{ number_format($entry->score) }}
