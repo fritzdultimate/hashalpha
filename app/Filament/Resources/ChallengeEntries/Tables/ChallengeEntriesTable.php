@@ -14,15 +14,8 @@ class ChallengeEntriesTable
     {
         return $table
             ->columns([
-                TextColumn::make('challenge_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('challenge_category_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('user.name'),
+                TextColumn::make('category.type'),
                 TextColumn::make('score')
                     ->numeric()
                     ->sortable(),
@@ -32,14 +25,6 @@ class ChallengeEntriesTable
                 TextColumn::make('completed_at')
                     ->dateTime()
                     ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

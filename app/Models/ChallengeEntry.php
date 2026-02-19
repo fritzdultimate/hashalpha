@@ -27,6 +27,6 @@ class ChallengeEntry extends Model {
     }
 
     public function category() {
-        return $this->belongsTo(ChallengeCategory::class);
+        return $this->belongsTo(ChallengeCategory::class, 'challenge_category_id');
     }
 }
