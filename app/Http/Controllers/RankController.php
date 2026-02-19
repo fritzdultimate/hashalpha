@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Stake;
+
 use App\Models\User;
 use App\Services\RankEvaluatorService;
 
@@ -15,4 +15,6 @@ class RankController extends Controller {
             RankEvaluatorService::evaluate($user);
         }
     }
+
+    
 }

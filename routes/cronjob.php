@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddValidatorBlock;
 use App\Http\Controllers\ClaimValidatorReward;
 use App\Http\Controllers\GenerateValidatorReward;
+use App\Http\Controllers\LeaderBoardController;
 use App\Http\Controllers\ProcessStakeRewards;
 use App\Http\Controllers\RankController;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,6 @@ Route::get('/cron/add-validator-block', [AddValidatorBlock::class, 'handle'])
 // rank
 Route::get('/cron/assign-rank', [RankController::class, 'assignRank'])
     ->name('rank.assign');
+
+Route::get('/cron/leaderboard-score', [LeaderBoardController::class, 'leaderBoardEntry'])
+    ->name('leaderboard.score');
