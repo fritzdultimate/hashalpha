@@ -161,4 +161,5 @@ class User extends Authenticatable implements FilamentUser {
         $this->decrement('balance', $amount);
     }
 
+
 }

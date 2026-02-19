@@ -9,6 +9,7 @@ use App\Livewire\Dashboard\Account\Wallets;
 use App\Livewire\Dashboard\Account\Withdrawal;
 use App\Livewire\Dashboard\Account\WithdrawalHistory;
 use App\Livewire\Dashboard\Affiliate\Bonuses;
+use App\Livewire\Dashboard\Affiliate\Leaderboard;
 use App\Livewire\Dashboard\Affiliate\RankProgress;
 use App\Livewire\Dashboard\Affiliate\ReferralCenter;
 use App\Livewire\Dashboard\Affiliate\TeamDashboard;
@@ -55,6 +56,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/affiliate/team', TeamDashboard::class)->name('referral.team');
     Route::get('/affiliate/bonus', Bonuses::class)->name('referral.bonus');
     Route::get('/affiliate/rank-progress', RankProgress::class)->name('referral.progress');
+
+    Route::get('/affiliate/leaderboard', Leaderboard::class)->name('leaderboard');
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

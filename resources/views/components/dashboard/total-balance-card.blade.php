@@ -24,11 +24,11 @@
         <div id="total-balance-chart" class="halpha-flex halpha-items-end" style="height:120px;"></div>
     </div>
 
-    <x-dashboard.stat title="Total Network Rewards" value="${{ number_format($totalEarned, 2) }}" :delta="$totalEarnedDelta">
+    <x-dashboard.stat title="Total Network Rewards" value="${{ number_format($totalEarned, 2) }}">
         <div id="daily-earnings" class="halpha-flex halpha-items-end"></div>
     </x-dashboard.stat>
 
-    <x-dashboard.stat title="Referral Bonus" value="${{ number_format($totalReferralBonus, 2) }}" :delta="$totalReferralDelta">
+    <x-dashboard.stat title="Referral Bonus" value="${{ number_format($totalReferralBonus, 2) }}">
         <div id="referral-bonus" class="halpha-flex halpha-items-end"></div>
     </x-dashboard.stat>
 </div>
