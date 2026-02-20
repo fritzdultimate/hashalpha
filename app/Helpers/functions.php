@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Referral;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Withdrawal;
@@ -93,17 +94,22 @@ function getDownlineUserIds(int $userId, int $maxDepth = 10): array
     $all = [];
 
     for ($i = 0; $i < $maxDepth; $i++) {
-        $currentLevel = User::whereIn('referrer_id', $currentLevel)
-            ->pluck('id')
+
+        $nextLevel = Referral::whereIn('level_1_id', $currentLevel)
+            ->pluck('user_id')
             ->toArray();
 
-        if (empty($currentLevel))
+        if (empty($nextLevel)) {
             break;
+        }
 
-        $all = array_merge($all, $currentLevel);
+        $all = array_merge($all, $nextLevel);
+
+        // move to next depth
+        $currentLevel = $nextLevel;
     }
 
-    return $all;
+    return array_values(array_unique($all));
 }
 
 function mask($target) {
