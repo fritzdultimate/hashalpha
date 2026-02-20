@@ -114,7 +114,7 @@ function mask($target) {
     if ($length <= 2) {
         return substr($target, 0, 1) . '*';
     }
-    return substr($target, 0, 2) . str_repeat('*', $length - 4) . substr($target, -2);
+    return substr($target, 0, 2) . str_repeat('*', max(0, $length - 4)) . substr($target, -2);
 }
 
 if (!function_exists('mask_email')) {
