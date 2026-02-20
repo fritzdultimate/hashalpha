@@ -50,6 +50,7 @@ class LeaderBoardService {
             ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
             ->sum('amount');
 
+
         ChallengeEntry::updateOrCreate(
             [
                 'challenge_id' => $category->challenge->id,
