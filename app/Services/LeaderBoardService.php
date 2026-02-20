@@ -13,7 +13,7 @@ class LeaderBoardService {
 
         $user = User::where('id', 1)->first();
 
-        dd($user);
+        dd(getDownlineUserIds($user->id));
 
         User::where('is_suspended', false)
             ->chunk(100, function ($users) use ($categories) {
