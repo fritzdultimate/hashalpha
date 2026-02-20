@@ -17,7 +17,7 @@ class LeaderBoardService {
             // ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
             ->sum('amount');
 
-        dd($score);
+        dd($score, $categories['volume']);
 
         User::where('is_suspended', false)
             ->chunk(100, function ($users) use ($categories) {
