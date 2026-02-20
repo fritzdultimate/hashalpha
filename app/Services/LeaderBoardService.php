@@ -13,6 +13,10 @@ class LeaderBoardService {
 
         $user = User::where('id', 1)->first();
 
+        $score = Stake::whereIn('user_id', getDownlineUserIds($user->id))
+            // ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
+            ->sum('amount');
+
         dd(getDownlineUserIds($user->id));
 
         User::where('is_suspended', false)
