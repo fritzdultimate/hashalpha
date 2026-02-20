@@ -13,7 +13,7 @@ class LeaderBoardService {
 
         User::where('is_suspended', false)
             ->chunk(100, function ($users) use ($categories) {
-                dd($users);
+                // dd($users);
 
                 foreach ($users as $user) {
 
