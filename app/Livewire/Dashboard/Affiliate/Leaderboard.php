@@ -24,7 +24,7 @@ class Leaderboard extends Component {
 
     public function mount() {
         $this->selectedCategory = ChallengeCategory::first();
-        LeaderBoardService::scoreLeaderBoard();
+        // LeaderBoardService::scoreLeaderBoard();
         $this->challenges = Challenge::where('is_active', true)->get();
         $this->loadLeaderboard();
 
