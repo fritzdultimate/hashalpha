@@ -88,21 +88,52 @@ function logWithdrawalTransaction(
 }
 
 function getDownlineUserIds(int $userId, int $maxDepth = 10): array
+{
+    $currentLevel = [$userId];
+    $all = [];
+
+    for ($i = 0; $i < $maxDepth; $i++) {
+        $currentLevel = User::whereIn('referrer_id', $currentLevel)
+            ->pluck('id')
+            ->toArray();
+
+        if (empty($currentLevel))
+            break;
+
+        $all = array_merge($all, $currentLevel);
+    }
+
+    return $all;
+}
+
+function mask($target) {
+    if (!$target) return '—';
+
+    $length = strlen($target);
+
+    if ($length <= 2) {
+        return substr($target, 0, 1) . '*';
+    }
+    return substr($target, 0, 2) . str_repeat('*', $length - 4) . substr($target, -2);
+}
+
+if (!function_exists('mask_email')) {
+    function mask_email($email)
     {
-        $currentLevel = [$userId];
-        $all = [];
-
-        for ($i = 0; $i < $maxDepth; $i++) {
-            $currentLevel = User::whereIn('referrer_id', $currentLevel)
-                ->pluck('id')
-                ->toArray();
-
-            if (empty($currentLevel))
-                break;
-
-            $all = array_merge($all, $currentLevel);
+        if (!$email || !str_contains($email, '@')) {
+            return '—';
         }
 
-        return $all;
+        [$name, $domain] = explode('@', $email);
+
+        $nameLength = strlen($name);
+
+        $visible = min(5, max(3, floor($nameLength / 2)));
+
+        $masked = substr($name, 0, $visible)
+            . str_repeat('*', max(2, $nameLength - $visible));
+
+        return $masked . '@' . $domain;
     }
+}
 
