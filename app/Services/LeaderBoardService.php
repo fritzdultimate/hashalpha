@@ -11,14 +11,6 @@ class LeaderBoardService {
     public static function scoreLeaderBoard() {
         $categories = ChallengeCategory::with('challenge')->get()->keyBy('type');
 
-        $user = User::where('id', 1)->first();
-
-        $score = Stake::whereIn('user_id', getDownlineUserIds($user->id))
-            ->whereBetween('created_at', [$categories['volume']->challenge->start_at, $categories['volume']->challenge->end_at])
-            ->sum('amount');
-
-        dd($score);
-
         User::where('is_suspended', false)
             ->chunk(100, function ($users) use ($categories) {
                 // dd($users);
@@ -58,6 +50,9 @@ class LeaderBoardService {
         $score = Stake::whereIn('user_id', $downline)
             ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
             ->sum('amount');
+
+        echo "Scoring for $user->id";
+        echo "/n with score of $score";
 
 
         ChallengeEntry::updateOrCreate(
