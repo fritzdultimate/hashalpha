@@ -11,6 +11,10 @@ class LeaderBoardService {
     public static function scoreLeaderBoard() {
         $categories = ChallengeCategory::with('challenge')->get()->keyBy('type');
 
+        $user = User::where('id', 1)->first();
+
+        dd($user);
+
         User::where('is_suspended', false)
             ->chunk(100, function ($users) use ($categories) {
                 // dd($users);
