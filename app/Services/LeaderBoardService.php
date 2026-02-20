@@ -54,6 +54,7 @@ class LeaderBoardService {
             ->sum('amount');
 
         echo "Scoring for {$user->id}\n";
+        echo "\n";
         echo "with score of {$score}\n";
 
 
