@@ -48,7 +48,7 @@ class Leaderboard extends Component {
         $this->leaderboard = ChallengeEntry::with('user')
             ->where('challenge_category_id', $category->id)
             ->orderBy('rank')
-            ->limit(50)
+            ->limit(20)
             ->get();
 
         $this->detectMyRank($category);

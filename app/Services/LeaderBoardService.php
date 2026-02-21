@@ -53,9 +53,6 @@ class LeaderBoardService {
             ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
             ->sum('amount');
 
-        echo "Scoring for {$user->id}\n";
-        echo "\n";
-        echo "with score of {$score}\n";
 
 
         ChallengeEntry::updateOrCreate(
