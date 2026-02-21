@@ -47,7 +47,7 @@ class LeaderBoardService {
 
     private static function scoreForVolume($user, $category) {
         if (!$category) return;
-        $downline = getDownlineUserIds($user->id);
+        $downline = getDownlineUserIds($user->id, 1);
 
         $score = Stake::whereIn('user_id', $downline)
             ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
