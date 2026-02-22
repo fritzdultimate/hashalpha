@@ -140,6 +140,44 @@ class Leaderboard extends Component {
         $this->myRank = $entry?->rank;
     }
 
+    private function getDisplayRank($entry, $category) {
+        if (!$entry) return null;
+
+        $realRank = $entry->rank;
+
+        
+        if ($realRank && $realRank <= 10) {
+            return $realRank;
+        }
+
+        $referrals = Referral::where('level_1_id', $entry->user_id)->count();
+
+        $volume = Stake::whereIn('user_id', getDownlineUserIds($entry->user_id, 1))
+            ->whereBetween('created_at', [
+                $category->challenge->start_at,
+                $category->challenge->end_at
+            ])
+            ->sum('amount');
+
+        $base = 15;
+
+        if ($referrals == 0) {
+            $base += random_int(50, 125);
+        }
+
+        if ($volume <= 0) {
+            $base += random_int(100, 250);
+        }
+
+        if ($volume < ($category->min_activation_amount ?? 200)) {
+            $base += random_int(30, 73);
+        }
+
+        $randomOffset = random_int(0, 20);
+
+        return $base + $randomOffset + $realRank;
+    }
+
     public function render() {
         return view('livewire.dashboard.affiliate.leaderboard');
     }
