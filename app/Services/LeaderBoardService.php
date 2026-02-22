@@ -94,27 +94,24 @@ class LeaderBoardService {
     private static function scoreForTopNewMembers($user, $category) {
         if (!$category) return;
         $score = Referral::where('level_1_id', $user->id)
-            ->whereHas('user', function ($q) use($category) {
+            ->whereHas('user', function ($q) use ($category) {
                 $q->whereBetween('created_at', [
                     $category->challenge->start_at,
                     $category->challenge->end_at
-                ]);
-            })
-            ->whereHas('user.stakes', function ($q) use($category) {
-                $q->whereBetween('created_at', [
-                    $category->challenge->start_at,
-                    $category->challenge->end_at
-                ]);
-            })
-            ->withSum(['user.stakes as total_staked' => function ($q) use ($category) {
-                $q->whereBetween('created_at', [
-                    $category->challenge->start_at,
-                    $category->challenge->end_at
-                ]);
-            }], 'amount')
-            ->get()
-            ->filter(function ($ref) use ($category) {
-                return ($ref->user->total_staked ?? 0) >= ($category->min_activation_amount ?? 200);
+                ])
+                ->whereHas('stakes', function ($q) use ($category) {
+                    $q->whereBetween('created_at', [
+                        $category->challenge->start_at,
+                        $category->challenge->end_at
+                    ]);
+                })
+                ->withSum(['stakes as total_staked' => function ($q) use ($category) {
+                    $q->whereBetween('created_at', [
+                        $category->challenge->start_at,
+                        $category->challenge->end_at
+                    ]);
+                }], 'amount')
+                ->having('total_staked', '>=', $category->min_activation_amount ?? 200);
             })
             ->count();
 
