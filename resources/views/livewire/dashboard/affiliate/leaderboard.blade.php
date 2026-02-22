@@ -4,6 +4,27 @@
         Sprint Leaderboard
     </h1>
 
+    {{-- 🏁 PHASE HEADER --}}
+    <div class="halpha-flex halpha-items-center halpha-justify-between halpha-bg-gradient-to-r halpha-from-accent-2/20 halpha-to-accent-2/5 halpha-border halpha-border-accent-2/30 halpha-rounded-xl halpha-p-3">
+        
+        <div>
+            <p class="halpha-text-xs halpha-text-gray-400 uppercase tracking-wide">
+                Competition Phase
+            </p>
+            <h2 class="halpha-text-lg halpha-font-bold halpha-text-accent-2">
+                Sprint Phase 1 🚀
+            </h2>
+        </div>
+
+        <div class="halpha-text-right">
+            <p class="halpha-text-xs halpha-text-gray-400">Total Reward Pool</p>
+            <p class="halpha-text-sm halpha-font-bold halpha-text-white">
+                $10,000
+            </p>
+        </div>
+
+    </div>
+
     {{-- Tabs --}}
     <div class="halpha-flex halpha-gap-2">
         @foreach($categories as $ch)
@@ -19,26 +40,7 @@
 
     <div class="halpha-space-y-4">
 
-        {{-- 🏁 PHASE HEADER --}}
-        <div class="halpha-flex halpha-items-center halpha-justify-between halpha-bg-gradient-to-r halpha-from-accent-2/20 halpha-to-accent-2/5 halpha-border halpha-border-accent-2/30 halpha-rounded-xl halpha-p-3">
-            
-            <div>
-                <p class="halpha-text-xs halpha-text-gray-400 uppercase tracking-wide">
-                    Competition Phase
-                </p>
-                <h2 class="halpha-text-lg halpha-font-bold halpha-text-accent-2">
-                    Sprint Phase 1 🚀
-                </h2>
-            </div>
-
-            <div class="halpha-text-right">
-                <p class="halpha-text-xs halpha-text-gray-400">Total Reward Pool</p>
-                <p class="halpha-text-sm halpha-font-bold halpha-text-white">
-                    $10,000
-                </p>
-            </div>
-
-        </div>
+        
 
 
         {{-- 📘 DESCRIPTION --}}
