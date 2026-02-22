@@ -50,6 +50,8 @@ class LeaderBoardService {
         if (!$category) return;
         $downline = getDownlineUserIds($user->id, 1);
 
+        dd(getDownlineUserIds(23, 1));
+
 
 
         $score = Stake::whereIn('user_id', $downline)
