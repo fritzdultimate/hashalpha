@@ -33,6 +33,7 @@ class Leaderboard extends Component {
 
         $this->categories = ChallengeCategory::get();
         $this->loadMyStats($this->selectedCategory);
+        $this->loadMyReferrals($this->selectedCategory);
     }
 
     private function loadMyStats($category) {
@@ -127,9 +128,9 @@ class Leaderboard extends Component {
             ->limit(10)
             ->get();
 
-        // $this->detectMyRank($category);
+        $this->detectMyRank($category);
         // $this->loadMyStats($category);
-        $this->loadMyReferrals($category);
+        // $this->loadMyReferrals($category);
 
     }
 
