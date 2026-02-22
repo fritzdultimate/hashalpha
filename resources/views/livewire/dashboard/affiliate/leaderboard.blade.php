@@ -151,9 +151,8 @@
                 
                 @click="open = !open"
                 class="halpha-text-[10px] halpha-text-accent-2"
-            >
-                View
-            </button>
+                x-text="open ? 'Hide' : 'View'"
+            ></button>
         </div>
 
         <div x-show="open" x-transition class="halpha-space-y-2">
