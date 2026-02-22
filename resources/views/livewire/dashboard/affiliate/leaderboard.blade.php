@@ -65,36 +65,40 @@
                 </div>
             @endif
 
-            {{-- 🚀 NEW MEMBERS --}}
-            <div class="halpha-flex halpha-gap-3">
-                <div class="halpha-text-accent-2">🚀</div>
-                <div>
-                    <p class="halpha-text-white halpha-font-semibold text-sm">
-                        Most New Team Members — $2,500 Pool
-                    </p>
-                    <p>
-                        Earn rewards by onboarding new users who activate with at least 
-                        <span class="halpha-text-gray-200">$200</span>.
-                        Only <span class="halpha-text-gray-200">direct referrals</span> count toward ranking.
-                    </p>
+            @if (strtolower($selectedCategory->type) === 'new_members')
+                {{-- 🚀 NEW MEMBERS --}}
+                <div class="halpha-flex halpha-gap-3">
+                    <div class="halpha-text-accent-2">🚀</div>
+                    <div>
+                        <p class="halpha-text-white halpha-font-semibold text-sm">
+                            Most New Team Members — $2,500 Pool
+                        </p>
+                        <p>
+                            Earn rewards by onboarding new users who activate with at least 
+                            <span class="halpha-text-gray-200">$200</span>.
+                            Only <span class="halpha-text-gray-200">direct referrals</span> count toward ranking.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            @endif
 
-            {{-- ⚡ FASTEST --}}
-            <div class="halpha-flex halpha-gap-3">
-                <div class="halpha-text-accent-2">⚡</div>
-                <div>
-                    <p class="halpha-text-white halpha-font-semibold text-sm">
-                        Fastest 7 Activations — $2,500 Pool
-                    </p>
-                    <p>
-                        Be among the fastest to activate 
-                        <span class="halpha-text-gray-200">7 direct members</span> with 
-                        <span class="halpha-text-gray-200">$500+</span> each.
-                        Speed matters — early completion ranks higher.
-                    </p>
+            @if (strtolower($selectedCategory->type) === 'fastest')
+                {{-- ⚡ FASTEST --}}
+                <div class="halpha-flex halpha-gap-3">
+                    <div class="halpha-text-accent-2">⚡</div>
+                    <div>
+                        <p class="halpha-text-white halpha-font-semibold text-sm">
+                            Fastest 7 Activations — $2,500 Pool
+                        </p>
+                        <p>
+                            Be among the fastest to activate 
+                            <span class="halpha-text-gray-200">7 direct members</span> with 
+                            <span class="halpha-text-gray-200">$500+</span> each.
+                            Speed matters — early completion ranks higher.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            @endif
 
         </div>
 
