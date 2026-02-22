@@ -5,7 +5,7 @@
     </h1>
 
     {{-- 🏁 PHASE HEADER --}}
-    <div class="halpha-flex halpha-items-center halpha-justify-between halpha-bg-gradient-to-r halpha-from-accent-2/20 halpha-to-accent-2/5 halpha-border halpha-border-accent-2/30 halpha-rounded-xl halpha-p-3">
+    <div class="halpha-flex halpha-items-center halpha-justify-between halpha-bg-gradient-to-r halpha-from-blue-800/2 halpha-to-sky-200/5 halpha-opacity-50 halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-3">
         
         <div>
             <p class="halpha-text-xs halpha-text-gray-400 uppercase tracking-wide">
