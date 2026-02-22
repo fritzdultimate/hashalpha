@@ -32,6 +32,7 @@ class Leaderboard extends Component {
         $this->loadLeaderboard();
 
         $this->categories = ChallengeCategory::get();
+        $this->loadMyStats($this->selectedCategory);
     }
 
     private function loadMyStats($category) {
@@ -54,10 +55,10 @@ class Leaderboard extends Component {
             }])
             ->get();
 
-        // 2. Count referrals
+        
         $refCount = $referrals->count();
 
-        // 3. Sum volume
+        
         $volume = $referrals->sum(function ($ref) {
             return $ref->user
                 ? $ref->user->stakes->sum('amount')
@@ -127,7 +128,7 @@ class Leaderboard extends Component {
             ->get();
 
         $this->detectMyRank($category);
-        $this->loadMyStats($category);
+        // $this->loadMyStats($category);
         $this->loadMyReferrals($category);
 
     }
