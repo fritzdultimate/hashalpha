@@ -15,15 +15,15 @@ class LeaderBoardReferralBreakageSeeder extends Seeder
     {
         $levels = [
             1 => 100,
-            2 => 50,
-            3 => 20,
-            4 => 10,
-            5 => 5,
-            6 => 3,
-            7 => 2,
-            8 => 1,
-            9 => 1,
-            10 => 1,
+            2 => 90,
+            3 => 80,
+            4 => 70,
+            5 => 60,
+            6 => 50,
+            7 => 40,
+            8 => 35,
+            9 => 30,
+            10 => 25,
         ];
 
         foreach ($levels as $level => $percentage) {

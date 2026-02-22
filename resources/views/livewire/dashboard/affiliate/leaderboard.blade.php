@@ -52,8 +52,12 @@
                         Top Personal Volume — $5,000 Pool
                     </p>
                     <p>
-                        Ranked by total <span class="halpha-text-gray-200">direct (Level 1) volume</span> generated during the sprint.
-                        Only your personal activity counts — <span class="halpha-text-gray-200">no downline or spillover</span>.
+                        Ranked by your total <span class="halpha-text-gray-200">team volume</span> during the sprint,
+                        calculated using a <span class="halpha-text-gray-200">multi-level percentage system</span>.
+                    </p>
+
+                    <p class="halpha-mt-1">
+                        Direct referrals contribute the highest value, while deeper levels contribute smaller percentages.
                     </p>
                 </div>
             </div>
