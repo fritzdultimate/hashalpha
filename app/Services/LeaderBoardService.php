@@ -48,33 +48,33 @@ class LeaderBoardService {
 
     private static function scoreForVolume($user, $category) {
         if (!$category) return;
-        // $downline = getDownlineUserIds($user->id, 1);
+        $downline = getDownlineUserIds($user->id, 1);
 
 
 
-        // $score = Stake::whereIn('user_id', $downline)
-        //     ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
-        //     ->sum('amount');
+        $score = Stake::whereIn('user_id', $downline)
+            ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
+            ->sum('amount');
 
-        $score = 0;
+        // $score = 0;
 
-        for ($level = 1; $level <= 10; $level++) {
+        // for ($level = 1; $level <= 10; $level++) {
 
-            $usersAtLevel = getDownlineUsersByLevel($user->id, $level);
+        //     $usersAtLevel = getDownlineUsersByLevel($user->id, $level);
 
-            if (empty($usersAtLevel)) continue;
+        //     if (empty($usersAtLevel)) continue;
 
-            $percentage = LeaderboardReferralBreakage::where('level', $level)->value('percentage') ?? 0;
+        //     $percentage = LeaderboardReferralBreakage::where('level', $level)->value('percentage') ?? 0;
 
-            $volume = Stake::whereIn('user_id', $usersAtLevel)
-                ->whereBetween('created_at', [
-                    $category->challenge->start_at,
-                    $category->challenge->end_at
-                ])
-                ->sum('amount');
+        //     $volume = Stake::whereIn('user_id', $usersAtLevel)
+        //         ->whereBetween('created_at', [
+        //             $category->challenge->start_at,
+        //             $category->challenge->end_at
+        //         ])
+        //         ->sum('amount');
 
-            $score += ($volume * ($percentage / 100));
-        }
+        //     $score += ($volume * ($percentage / 100));
+        // }
 
 
 
