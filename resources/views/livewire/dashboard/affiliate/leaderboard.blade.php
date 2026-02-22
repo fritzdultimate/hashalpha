@@ -293,9 +293,9 @@
                             @endif
                         </p>
 
-                        @if($entry->rank <= 3 && false)
+                        @if($entry->rank <= 3 && true)
                             <span class="halpha-text-[10px] halpha-text-accent-2 halpha-font-medium">
-                                Reward Zone
+                                Reward Zone .
                             </span>
                         @endif
                     </div>
