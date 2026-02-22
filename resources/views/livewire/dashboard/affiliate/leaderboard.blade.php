@@ -287,7 +287,7 @@
                     <div class="halpha-text-right halpha-hidden">
                         <p class="halpha-text-sm halpha-text-white halpha-font-semibold">
                             @if($selectedCategory->type === 'volume')
-                                ${{ number_format($entry->score, 2) }}
+                                ${{ format_compact($entry->score) }}
                             @else
                                 {{ number_format($entry->score) }}
                             @endif
