@@ -25,7 +25,7 @@
                 ${{ number_format($stake->amount, 2) }}
             </div>
 
-            <p style="margin-top:10px; font-size:12px; color:#9CA3AF;">
+            <p style="margin-top:10px; font-size:12px; color:#9CA3AF; text-align: center;">
                 Stake amount
             </p>
         </td>
@@ -38,7 +38,8 @@
                 <strong>Plan:</strong> {{ $plan->name ?? 'N/A' }}
             </p>
             <p style="font-size:13px; color:#c7c7cc; margin:4px 0;">
-                <strong>Daily ROI:</strong> {{ $plan->daily_roi ?? 0 }}%
+                <strong>Daily ROI:</strong> {{ $stake->plan->min_roi }}% – {{ $stake->plan->max_roi }}%
+                <span style="color:#9ca3af;">(varies based on market conditions)</span>
             </p>
             <p style="font-size:13px; color:#c7c7cc; margin:4px 0;">
                 <strong>Start Date:</strong> {{ $stake->created_at->format('M d, Y') }}

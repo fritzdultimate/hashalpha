@@ -52,6 +52,25 @@
 
         <x-dashboard.disclaimer />
 
+        <div class="halpha-card halpha-rounded-lg halpha-bg-card-soft halpha-p-3 halpha-text-[11px] halpha-text-gray-400 halpha-leading-relaxed halpha-flex halpha-gap-2">
+    
+            <div class="halpha-text-accent-2">
+                ⚡
+            </div>
+
+            <div>
+                <p class="halpha-font-medium halpha-text-gray-300 halpha-mb-1">
+                    Smart Deposit Tip
+                </p>
+
+                <p>
+                    Consider depositing an additional <span class="halpha-text-gray-200">~1%</span> above your intended amount.
+                    This helps cover the <span class="halpha-text-gray-200">0.5% staking pool fee</span> and ensures your full amount is successfully staked.
+                </p>
+            </div>
+
+        </div>
+
 
         <x-dashboard.currency-listing :wallets="$wallets" :groupedWallets="$groupedWallets" />
 
