@@ -50,7 +50,7 @@ class LeaderBoardService {
         if (!$category) return;
         $downline = getDownlineUserIds($user->id, 1);
 
-        dd(getDownlineUserIds(23, 1));
+        // dd(getDownlineUserIds(23, 1));
 
 
 
