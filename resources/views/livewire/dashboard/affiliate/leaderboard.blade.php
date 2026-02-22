@@ -17,6 +17,86 @@
         @endforeach
     </div>
 
+    <div class="halpha-space-y-4">
+
+        {{-- 🏁 PHASE HEADER --}}
+        <div class="halpha-flex halpha-items-center halpha-justify-between halpha-bg-gradient-to-r halpha-from-accent-2/20 halpha-to-accent-2/5 halpha-border halpha-border-accent-2/30 halpha-rounded-xl halpha-p-3">
+            
+            <div>
+                <p class="halpha-text-xs halpha-text-gray-400 uppercase tracking-wide">
+                    Competition Phase
+                </p>
+                <h2 class="halpha-text-lg halpha-font-bold halpha-text-accent-2">
+                    Sprint Phase 1 🚀
+                </h2>
+            </div>
+
+            <div class="halpha-text-right">
+                <p class="halpha-text-xs halpha-text-gray-400">Total Reward Pool</p>
+                <p class="halpha-text-sm halpha-font-bold halpha-text-white">
+                    $10,000
+                </p>
+            </div>
+
+        </div>
+
+
+        {{-- 📘 DESCRIPTION --}}
+        <div class="halpha-card halpha-bg-card-soft halpha-p-4 halpha-rounded-xl halpha-space-y-4 halpha-text-[12px] halpha-text-gray-400">
+
+            {{-- 🥇 VOLUME --}}
+            <div class="halpha-flex halpha-gap-3">
+                <div class="halpha-text-accent-2">💰</div>
+                <div>
+                    <p class="halpha-text-white halpha-font-semibold text-sm">
+                        Top Personal Volume — $5,000 Pool
+                    </p>
+                    <p>
+                        Ranked by total <span class="halpha-text-gray-200">direct (Level 1) volume</span> generated during the sprint.
+                        Only your personal activity counts — <span class="halpha-text-gray-200">no downline or spillover</span>.
+                    </p>
+                </div>
+            </div>
+
+            {{-- 🚀 NEW MEMBERS --}}
+            <div class="halpha-flex halpha-gap-3">
+                <div class="halpha-text-accent-2">🚀</div>
+                <div>
+                    <p class="halpha-text-white halpha-font-semibold text-sm">
+                        Most New Team Members — $2,500 Pool
+                    </p>
+                    <p>
+                        Earn rewards by onboarding new users who activate with at least 
+                        <span class="halpha-text-gray-200">$200</span>.
+                        Only <span class="halpha-text-gray-200">direct referrals</span> count toward ranking.
+                    </p>
+                </div>
+            </div>
+
+            {{-- ⚡ FASTEST --}}
+            <div class="halpha-flex halpha-gap-3">
+                <div class="halpha-text-accent-2">⚡</div>
+                <div>
+                    <p class="halpha-text-white halpha-font-semibold text-sm">
+                        Fastest 7 Activations — $2,500 Pool
+                    </p>
+                    <p>
+                        Be among the fastest to activate 
+                        <span class="halpha-text-gray-200">7 direct members</span> with 
+                        <span class="halpha-text-gray-200">$500+</span> each.
+                        Speed matters — early completion ranks higher.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="halpha-text-[11px] halpha-text-gray-400 halpha-hidden">
+            Compete, climb the ranks, and earn from the pool before the sprint ends.
+        </p>
+
+    </div>
+
     @if($myRank)
         <div class="halpha-card halpha-p-3 halpha-text-center halpha-bg-card-soft">
             <p class="halpha-text-xs halpha-text-gray-400">Your Position</p>

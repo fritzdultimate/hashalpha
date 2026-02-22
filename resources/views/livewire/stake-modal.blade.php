@@ -17,7 +17,7 @@
                         <div>
                             <p class="halpha-text-xs halpha-text-gray-400">ROI</p>
                             <p class="halpha-text-lg halpha-font-semibold halpha-text-white">
-								{{ rtrim((string)$this->plan->daily_roi,'.') }}%
+								{{ rtrim((string)$this->plan->min_roi,'.') }}% - {{ rtrim((string)$this->plan->max_roi,'.') }}%
 							</p>
                         </div>
                         <div>
