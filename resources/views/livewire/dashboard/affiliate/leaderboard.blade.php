@@ -54,12 +54,11 @@
                         Top Personal Volume — $5,000 Pool
                     </p>
                     <p>
-                        Ranked by your total <span class="halpha-text-gray-200">team volume</span> during the sprint,
-                        calculated using a <span class="halpha-text-gray-200">multi-level percentage system</span>.
+                        Leaderboard rankings are determined by <span class="halpha-text-gray-200">total personal (Volume 1)</span> participation accumulated during the Sprint 1 period. Only <span class="halpha-text-gray-200">directly enrolled users</span> and personally generated volume are considered
                     </p>
 
                     <p class="halpha-mt-1">
-                        Direct referrals contribute the highest value, while deeper levels contribute smaller percentages.
+                        Downline activity and team spillover are not included in the calculation.
                     </p>
                 </div>
             </div>
