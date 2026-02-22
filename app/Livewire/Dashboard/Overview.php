@@ -81,9 +81,20 @@ class Overview extends Component
             ->with('plan')
             ->get()
             ->sum(function ($stake) {
+                $avgRoi = bcdiv(
+                    bcadd((string) $stake->plan->min_roi, (string) $stake->plan->max_roi, 8),
+                    '2',
+                    8
+                );
+                $roiDecimal = bcdiv($avgRoi, '100', 8);
+                return bcmul((string) $stake->amount, $roiDecimal, 8);
                 return bcmul(
                     $stake->amount,
-                    bcdiv((($stake->plan->min_roi + $stake->plan->max_roi)/2), '100', 8),
+                    bcdiv(
+                        bcadd((string) $stake->plan->min_roi, (string) $stake->plan->max_roi, 8),
+                        '2',
+                        8
+                    ),
                     8
                 );
             });
