@@ -127,7 +127,7 @@ class Leaderboard extends Component {
             ->limit(10)
             ->get();
 
-        $this->detectMyRank($category);
+        // $this->detectMyRank($category);
         // $this->loadMyStats($category);
         $this->loadMyReferrals($category);
 
