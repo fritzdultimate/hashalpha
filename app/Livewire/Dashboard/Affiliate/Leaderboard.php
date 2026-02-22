@@ -21,6 +21,9 @@ class Leaderboard extends Component {
     public $categories = [];
     public $selectedCategory = null;
 
+    public $myStats = [];
+    public $myReferrals = [];
+
 
     public function mount() {
         $this->selectedCategory = ChallengeCategory::first();
@@ -29,6 +32,78 @@ class Leaderboard extends Component {
         $this->loadLeaderboard();
 
         $this->categories = ChallengeCategory::get();
+    }
+
+    private function loadMyStats($category) {
+        $user = auth()->user();
+
+        if (!$user) return;
+
+        $referrals = Referral::where('level_1_id', $user->id)
+            ->whereHas('user', function ($q) use ($category) {
+                $q->whereBetween('created_at', [
+                    $category->challenge->start_at,
+                    $category->challenge->end_at
+                ]);
+            })
+            ->with(['user.stakes' => function ($q) use ($category) {
+                $q->whereBetween('created_at', [
+                    $category->challenge->start_at,
+                    $category->challenge->end_at
+                ]);
+            }])
+            ->get();
+
+        // 2. Count referrals
+        $refCount = $referrals->count();
+
+        // 3. Sum volume
+        $volume = $referrals->sum(function ($ref) {
+            return $ref->user
+                ? $ref->user->stakes->sum('amount')
+                : 0;
+        });
+
+        $this->myStats = [
+            'referrals' => $refCount,
+            'volume' => $volume
+        ];
+    }
+
+    private function loadMyReferrals($category) {
+        $user = auth()->user();
+
+        if (!$user) return;
+
+        $refs = Referral::where('level_1_id', $user->id)
+            ->with(['user.stakes' => function ($q) use ($category) {
+                $q->whereBetween('created_at', [
+                    $category->challenge->start_at,
+                    $category->challenge->end_at
+                ]);
+            }])
+            ->whereHas('user', function ($q) use ($category) {
+                $q->whereBetween('created_at', [
+                    $category->challenge->start_at,
+                    $category->challenge->end_at
+                ]);
+            })
+            ->get();
+
+        $this->myReferrals = $refs->map(function ($ref) {
+            $volume = $ref->user
+                ? $ref->user->stakes->sum('amount')
+                : 0;
+
+            return [
+                'name' => $ref->user->name ?? 'User',
+                'email' => $ref->user->email ?? '',
+                'volume' => $volume,
+            ];
+        })
+        ->sortByDesc('volume')
+        ->values()
+        ->toArray();
     }
 
     public function setTab($id) {
@@ -52,6 +127,9 @@ class Leaderboard extends Component {
             ->get();
 
         $this->detectMyRank($category);
+        $this->loadMyStats($category);
+        $this->loadMyReferrals($category);
+
     }
 
     private function detectMyRank($category) {

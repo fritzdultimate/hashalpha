@@ -117,6 +117,68 @@
         </div>
     @endif
 
+    <!-- Sprint Activity -->
+    <div class="halpha-card halpha-p-4 halpha-bg-card-soft halpha-rounded-xl halpha-space-y-3">
+
+        <p class="halpha-text-xs halpha-text-gray-400">My Sprint Activity</p>
+
+        <div class="halpha-flex halpha-justify-between">
+            <span class="halpha-text-gray-400 text-xs">Direct Referrals</span>
+            <span class="halpha-text-white font-semibold">
+                {{ $myStats['referrals'] ?? 0 }}
+            </span>
+        </div>
+
+        <div class="halpha-flex halpha-justify-between">
+            <span class="halpha-text-gray-400 text-xs">Total Volume</span>
+            <span class="halpha-text-accent-2 font-bold">
+                ${{ format_compact($myStats['volume'] ?? 0) }}
+            </span>
+        </div>
+
+    </div>
+
+    <div class="halpha-card halpha-p-4 halpha-bg-card-soft halpha-rounded-xl">
+
+        <div class="halpha-flex halpha-justify-between halpha-items-center halpha-mb-3">
+            <p class="halpha-text-xs halpha-text-gray-400">My Referrals (Sprint)</p>
+
+            <button 
+                x-data="{ open: false }"
+                @click="open = !open"
+                class="halpha-text-[10px] halpha-text-accent-2"
+            >
+                View
+            </button>
+        </div>
+
+        <div x-data="{ open: false }" x-show="open" x-transition class="halpha-space-y-2">
+
+            @forelse($myReferrals as $ref)
+                <div class="halpha-flex halpha-justify-between halpha-items-center halpha-bg-gray-800 halpha-p-2 halpha-rounded">
+
+                    <div>
+                        <p class="halpha-text-xs halpha-text-white">
+                            {{ mask($ref['name']) }}
+                        </p>
+                        <p class="halpha-text-[10px] halpha-text-gray-400">
+                            {{ mask_email($ref['email']) }}
+                        </p>
+                    </div>
+
+                    <p class="halpha-text-xs halpha-text-accent-2 font-semibold">
+                        ${{ format_compact($ref['volume']) }}
+                    </p>
+
+                </div>
+            @empty
+                <p class="halpha-text-[11px] halpha-text-gray-400">No referrals yet</p>
+            @endforelse
+
+        </div>
+
+    </div>
+
     <div 
         x-data="{
             end: {{ $selectedCategory && $selectedCategory->challenge->end_at ? 'new Date(\''.$selectedCategory->challenge->end_at.'\').getTime()' : 'null' }},
