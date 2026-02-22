@@ -138,13 +138,13 @@
 
     </div>
 
-    <div class="halpha-card halpha-p-4 halpha-bg-card-soft halpha-rounded-xl">
+    <div class="halpha-card halpha-p-4 halpha-bg-card-soft halpha-rounded-xl" x-data="{ open: false }">
 
         <div class="halpha-flex halpha-justify-between halpha-items-center halpha-mb-3">
             <p class="halpha-text-xs halpha-text-gray-400">My Referrals (Sprint)</p>
 
             <button 
-                x-data="{ open: false }"
+                
                 @click="open = !open"
                 class="halpha-text-[10px] halpha-text-accent-2"
             >
@@ -152,7 +152,7 @@
             </button>
         </div>
 
-        <div x-data="{ open: false }" x-show="open" x-transition class="halpha-space-y-2">
+        <div x-show="open" x-transition class="halpha-space-y-2">
 
             @forelse($myReferrals as $ref)
                 <div class="halpha-flex halpha-justify-between halpha-items-center halpha-bg-gray-800 halpha-p-2 halpha-rounded">
