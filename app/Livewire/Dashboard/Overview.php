@@ -88,15 +88,6 @@ class Overview extends Component
                 );
                 $roiDecimal = bcdiv($avgRoi, '100', 8);
                 return bcmul((string) $stake->amount, $roiDecimal, 8);
-                return bcmul(
-                    $stake->amount,
-                    bcdiv(
-                        bcadd((string) $stake->plan->min_roi, (string) $stake->plan->max_roi, 8),
-                        '2',
-                        8
-                    ),
-                    8
-                );
             });
 
 
