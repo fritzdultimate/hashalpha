@@ -83,7 +83,7 @@ class Overview extends Component
             ->sum(function ($stake) {
                 return bcmul(
                     $stake->amount,
-                    bcdiv($stake->plan->daily_roi, '100', 8),
+                    bcdiv((($stake->plan->min_roi + $stake->plan->max_roi)/2), '100', 8),
                     8
                 );
             });
