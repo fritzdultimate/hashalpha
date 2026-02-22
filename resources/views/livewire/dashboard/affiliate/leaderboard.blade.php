@@ -46,7 +46,7 @@
         {{-- 📘 DESCRIPTION --}}
         <div class="halpha-card halpha-bg-card-soft halpha-p-4 halpha-rounded-xl halpha-space-y-4 halpha-text-[12px] halpha-text-gray-400">
 
-            @if (strtolower($selectedCategory->challenge->name) === 'volume')
+            @if (strtolower($selectedCategory->type) === 'volume')
                 {{-- 🥇 VOLUME --}}
                 <div class="halpha-flex halpha-gap-3">
                     <div class="halpha-text-accent-2">💰</div>
