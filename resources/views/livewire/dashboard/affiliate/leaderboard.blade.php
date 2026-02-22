@@ -46,22 +46,24 @@
         {{-- 📘 DESCRIPTION --}}
         <div class="halpha-card halpha-bg-card-soft halpha-p-4 halpha-rounded-xl halpha-space-y-4 halpha-text-[12px] halpha-text-gray-400">
 
-            {{-- 🥇 VOLUME --}}
-            <div class="halpha-flex halpha-gap-3">
-                <div class="halpha-text-accent-2">💰</div>
-                <div>
-                    <p class="halpha-text-white halpha-font-semibold text-sm">
-                        Top Personal Volume — $5,000 Pool
-                    </p>
-                    <p>
-                        Leaderboard rankings are determined by <span class="halpha-text-gray-200">total personal (Volume 1)</span> participation accumulated during the Sprint 1 period. Only <span class="halpha-text-gray-200">directly enrolled users</span> and personally generated volume are considered
-                    </p>
+            @if ($selectedCategory->challenge->name === 'volume')
+                {{-- 🥇 VOLUME --}}
+                <div class="halpha-flex halpha-gap-3">
+                    <div class="halpha-text-accent-2">💰</div>
+                    <div>
+                        <p class="halpha-text-white halpha-font-semibold text-sm">
+                            Top Personal Volume — $5,000 Pool
+                        </p>
+                        <p>
+                            Leaderboard rankings are determined by <span class="halpha-text-gray-200">total personal (Volume 1)</span> participation accumulated during the Sprint 1 period. Only <span class="halpha-text-gray-200">directly enrolled users</span> and personally generated volume are considered
+                        </p>
 
-                    <p class="halpha-mt-1">
-                        Downline activity and team spillover are not included in the calculation.
-                    </p>
+                        <p class="halpha-mt-1">
+                            Downline activity and team spillover are not included in the calculation.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            @endif
 
             {{-- 🚀 NEW MEMBERS --}}
             <div class="halpha-flex halpha-gap-3">
