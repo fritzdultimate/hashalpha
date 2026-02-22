@@ -55,7 +55,11 @@
                             Top Personal Volume — $5,000 Pool
                         </p>
                         <p>
-                            Leaderboard rankings are determined by <span class="halpha-text-gray-200">total personal (Volume 1)</span> participation accumulated during the Sprint 1 period. Only <span class="halpha-text-gray-200">directly enrolled users</span> and personally generated volume are considered
+                            Leaderboard rankings are determined by <span class="halpha-text-gray-200">total personal (Volume 1)</span> participation accumulated during the Sprint 1 period.
+                        </p> 
+                            
+                        <p>
+                            Only <span class="halpha-text-gray-200">directly enrolled users</span> and personally generated volume are considered
                         </p>
 
                         <p class="halpha-mt-1">
