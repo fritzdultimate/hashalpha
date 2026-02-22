@@ -137,7 +137,7 @@ class Leaderboard extends Component {
             ->where('user_id', auth()->id())
             ->first();
 
-        $this->myRank = $entry?->rank;
+        $this->myRank = $entry ? $this->getDisplayRank($entry, $category) : null;
     }
 
     private function getDisplayRank($entry, $category) {
