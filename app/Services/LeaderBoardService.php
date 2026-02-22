@@ -106,6 +106,16 @@ class LeaderBoardService {
                     $category->challenge->end_at
                 ]);
             })
+            ->withSum(['user.stakes as total_staked' => function ($q) use ($category) {
+                $q->whereBetween('created_at', [
+                    $category->challenge->start_at,
+                    $category->challenge->end_at
+                ]);
+            }], 'amount')
+            ->get()
+            ->filter(function ($ref) use ($category) {
+                return ($ref->user->total_staked ?? 0) >= ($category->min_activation_amount ?? 200);
+            })
             ->count();
 
         ChallengeEntry::updateOrCreate(
