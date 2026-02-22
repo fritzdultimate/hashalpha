@@ -106,13 +106,13 @@
                             <p>
                                 <strong>Estimated daily reward:</strong>
                                 <span>
-                                    ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi, 2) }}
+                                    ${{ number_format($amountNumeric * 0.01 * $this->plan->min_roi, 2) }} - ${{ number_format($amountNumeric * 0.01 * $this->plan->max_roi, 2) }}
                                 </span>
                             </p>
                             <p>
                                 <strong>Estimated total reward:</strong>
                                 <span>
-                                    ${{ number_format($amountNumeric * 0.01 * $this->plan->daily_roi * $this->plan->duration, 2) }}
+                                    ${{ number_format($amountNumeric * 0.01 * (($this->plan->min_roi + $this->plan->max_roi)/2) * $this->plan->duration, 2) }}
                                 </span>
                             </p>
                         </div>
