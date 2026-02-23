@@ -154,18 +154,18 @@ class LeaderBoardService {
 
                 return $total >= ($category->min_activation_amount ?? 500);
             })
-            // ->map(function ($ref) use($category) {
-            //     $threshold = $category->min_activation_amount ?? 500;
-            //     $sum = 0;
+            ->map(function ($ref) use($category) {
+                $threshold = $category->min_activation_amount ?? 500;
+                $sum = 0;
                 
-            //     foreach ($ref->user->stakes as $stake) {
-            //         $sum += $stake->amount;
+                foreach ($ref->user->stakes as $stake) {
+                    $sum += $stake->amount;
 
-            //         if ($sum >= $threshold) {
-            //             return $stake->created_at; // ✅ exact activation time
-            //         }
-            //     }
-            // })
+                    if ($sum >= $threshold) {
+                        return $stake->created_at; // ✅ exact activation time
+                    }
+                }
+            })
             // ->filter()
             // ->sort()
             ->values();
