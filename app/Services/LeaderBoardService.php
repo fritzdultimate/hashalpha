@@ -157,6 +157,10 @@ class LeaderBoardService {
             ->map(function ($ref) use($category) {
                 $threshold = $category->min_activation_amount ?? 500;
                 $sum = 0;
+
+                if($ref->user->id === 23) {
+                    echo $ref->user->stakes->sum('amount');
+                }
                 
                 foreach ($ref->user->stakes as $stake) {
                     $sum += $stake->amount;
