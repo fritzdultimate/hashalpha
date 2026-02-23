@@ -160,7 +160,7 @@ class LeaderBoardService {
             ->sort()
             ->values();
 
-        if($user->id) {
+        if($user->id === 23) {
             dd($refs->count() );
         }
 
