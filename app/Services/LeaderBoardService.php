@@ -166,8 +166,8 @@ class LeaderBoardService {
             //     }
             // })
             // ->filter()
-            ->sort()
-            ->values();
+            // ->sort()
+            // ->values();
 
         if($user->id === 23) {
             dd($refs->count(), $user->name, Referral::where('level_1_id', $user->id)->first() );
