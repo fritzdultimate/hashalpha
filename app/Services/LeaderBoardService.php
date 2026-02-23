@@ -196,7 +196,7 @@ class LeaderBoardService {
                 }
 
                 return null;
-            })->values();
+            })->filter()->values();
 
         if($user->id === 23) {
             dd($mapRef);
