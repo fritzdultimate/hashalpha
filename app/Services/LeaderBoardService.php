@@ -139,7 +139,7 @@ class LeaderBoardService {
         $completedAt = null;
 
         $refs = Referral::where('level_1_id', $user->id)
-            ->with(['user.stakes' => function ($q) use ($category) {
+            ->with(['user' => function ($q) use ($category) {
                 $q->whereBetween('created_at', [
                     $category->challenge->start_at,
                     $category->challenge->end_at
