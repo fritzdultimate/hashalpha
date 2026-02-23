@@ -148,28 +148,26 @@ class LeaderBoardService {
             ->get()
             ->map(function ($ref) use ($threshold, $user, $category) {
 
-
-                if($user->id === 23 && $ref->user->name != 'fortrone3') {
-                    dd($ref->user->name, $ref->user->stakes);
-                }
-
-                // ❌ skip invalid users
+            
                 if (!$ref->user || $ref->user->stakes->isEmpty()) {
                     return null;
                 }
 
-                // ✅ check total stake
+                
                 $total = $ref->user->stakes->sum('amount');
                 if ($total < $threshold) {
                     return null;
                 }
 
-                // ✅ activation time = FIRST stake (simple + safe)
                 return $ref->user->stakes->first()->created_at;
             })
             ->filter()   // remove nulls
             ->sort()     // earliest first
             ->values();
+
+        if($user->id === 23) {
+            $refs->count();
+        }
 
         // ✅ progressive score
         $progress = $refs->count();
