@@ -154,7 +154,7 @@ class LeaderBoardService {
                         'challenge_start' => $category->challenge->start_at,
                         'challenge_end' => $category->challenge->end_at,
                         'user_stakes' => Stake::where('user_id', $ref->user->id)
-                            ->pluck('created_at'),
+                            ->pluck('created_at')->toArray(),
                     ]);
                     dd($ref->user->name, $ref->user->stakes);
                 }
