@@ -131,7 +131,6 @@ class LeaderBoardService {
     }
 
     private static function scoreForFastestNewUserActivators($user, $category) {
-        dd($category);
         if (!$category) return;
         $completedAt = null;
 
@@ -160,6 +159,10 @@ class LeaderBoardService {
             ->filter()
             ->sort()
             ->values();
+
+        if($user->id) {
+            dd($refs->count() );
+        }
 
         $progress = $refs->count();
         $score = min($progress, 7);
