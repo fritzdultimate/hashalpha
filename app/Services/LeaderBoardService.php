@@ -147,24 +147,24 @@ class LeaderBoardService {
                 ->orderBy('created_at');
             }])
             ->get()
-            ->map(function ($ref) use ($threshold) {
+            // ->map(function ($ref) use ($threshold) {
 
-                if (!$ref->user || $ref->user->stakes->isEmpty()) {
-                    return null;
-                }
+            //     if (!$ref->user || $ref->user->stakes->isEmpty()) {
+            //         return null;
+            //     }
 
-                $sum = 0;
+            //     $sum = 0;
 
-                foreach ($ref->user->stakes as $stake) {
-                    $sum += $stake->amount;
+            //     foreach ($ref->user->stakes as $stake) {
+            //         $sum += $stake->amount;
 
-                    if ($sum >= $threshold) {
-                        return $stake->created_at; // ✅ activation time
-                    }
-                }
+            //         if ($sum >= $threshold) {
+            //             return $stake->created_at; // ✅ activation time
+            //         }
+            //     }
 
-                return null;
-            })
+            //     return null;
+            // })
             ->filter()   // 🔥 REMOVE nulls
             ->sort()     // 🔥 EARLIEST FIRST
             ->values();
