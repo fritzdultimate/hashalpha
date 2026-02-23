@@ -153,7 +153,7 @@ class LeaderBoardService {
 
                 return $total >= ($category->min_activation_amount ?? 500);
             })
-            ->map(function ($ref) {
+            ->map(function ($ref) use($category) {
                 $threshold = $category->min_activation_amount ?? 500;
                 $sum = 0;
                 
