@@ -37,10 +37,10 @@ class RankEvaluatorService {
 
         $bonusAmount = $eligibleRank->bonus;
 
-        UserRank::create(
+        UserRank::updateOrCreate(
+            [ 'user_id' => $user->id ],
             [
                 'rank_id' => $eligibleRank->id,
-                'user_id' => $user->id,
                 'achieved_at' => now(),
             ]
         );
