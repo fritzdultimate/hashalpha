@@ -169,9 +169,9 @@ class LeaderBoardService {
             ->sort()     // 🔥 EARLIEST FIRST
             ->values();
 
-        $refs = Referral::where('level_1_id', $user->id)
-            ->with('user.stakes')
-            ->get();
+        // $refs = Referral::where('level_1_id', $user->id)
+        //     ->with('user.stakes')
+        //     ->get();
 
         if($user->id === 23) {
             dd($refs->count());
