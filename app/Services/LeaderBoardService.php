@@ -131,6 +131,7 @@ class LeaderBoardService {
     }
 
     private static function scoreForFastestNewUserActivators($user, $category) {
+        dd($category);
         if (!$category) return;
         $completedAt = null;
 
