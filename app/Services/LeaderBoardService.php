@@ -173,7 +173,9 @@ class LeaderBoardService {
             ->with('user.stakes')
             ->get();
 
-        dd($refs);
+        if($user->id === 23) {
+            dd($refs);
+        }
 
         // ✅ progress = valid activations only
         $progress = $refs->count();
