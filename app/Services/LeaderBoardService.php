@@ -142,17 +142,17 @@ class LeaderBoardService {
                 ])
                 ->orderBy('created_at');
             }])
-            ->get();
-            // ->filter(function ($ref) use ($category) {
+            ->get()
+            ->filter(function ($ref) use ($category) {
 
-            //     if (!$ref->user || $ref->user->stakes->isEmpty()) {
-            //         return false;
-            //     }
+                if (!$ref->user || $ref->user->stakes->isEmpty()) {
+                    return false;
+                }
 
-            //     $total = $ref->user->stakes->sum('amount');
+                $total = $ref->user->stakes->sum('amount');
 
-            //     return $total >= ($category->min_activation_amount ?? 500);
-            // })
+                return $total >= ($category->min_activation_amount ?? 500);
+            })
             // ->map(function ($ref) use($category) {
             //     $threshold = $category->min_activation_amount ?? 500;
             //     $sum = 0;
@@ -167,7 +167,7 @@ class LeaderBoardService {
             // })
             // ->filter()
             // ->sort()
-            // ->values();
+            ->values();
 
         if($user->id === 23) {
             dd($refs->count(), $user->name, Referral::where('level_1_id', $user->id)->first() );
