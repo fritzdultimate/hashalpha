@@ -150,7 +150,7 @@ class LeaderBoardService {
 
 
                 if($user->id === 23 && $ref->user->name != 'fortrone3') {
-                    dd($ref->user->name, $ref->user->stakes->sum('amount'));
+                    dd($ref->user->name, $ref->user->stakes->sum('capital'));
                 }
 
                 // ❌ skip invalid users
