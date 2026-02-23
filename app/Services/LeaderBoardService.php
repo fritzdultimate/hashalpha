@@ -161,7 +161,7 @@ class LeaderBoardService {
             ->values();
 
         if($user->id === 23) {
-            dd($refs->count(), $user->name );
+            dd($refs->count(), $user->name, Referral::where('level_1_id', $user->id)->first() );
         }
 
         $progress = $refs->count();
