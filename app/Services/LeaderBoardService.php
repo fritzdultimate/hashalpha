@@ -147,31 +147,37 @@ class LeaderBoardService {
                 ->orderBy('created_at');
             }])
             ->get()
-            // ->map(function ($ref) use ($threshold) {
+            ->map(function ($ref) use ($threshold) {
 
-            //     if (!$ref->user || $ref->user->stakes->isEmpty()) {
-            //         return null;
-            //     }
+                if (!$ref->user || $ref->user->stakes->isEmpty()) {
+                    return null;
+                }
 
-            //     $sum = 0;
+                $sum = 0;
 
-            //     foreach ($ref->user->stakes as $stake) {
-            //         $sum += $stake->amount;
+                foreach ($ref->user->stakes as $stake) {
+                    $sum += $stake->amount;
 
-            //         if ($sum >= $threshold) {
-            //             return $stake->created_at; // ✅ activation time
-            //         }
-            //     }
+                    if ($sum >= $threshold) {
+                        return $stake->created_at; // ✅ activation time
+                    }
+                }
 
-            //     return null;
-            // })
+                return null;
+            })
             ->filter()   // 🔥 REMOVE nulls
             ->sort()     // 🔥 EARLIEST FIRST
             ->values();
 
-        // $refs = Referral::where('level_1_id', $user->id)
-        //     ->with('user.stakes')
-        //     ->get();
+        $refs = Referral::where('level_1_id', $user->id)
+            ->with(['user.stakes' => function ($q) use ($category) {
+                $q->whereBetween('created_at', [
+                    $category->challenge->start_at,
+                    $category->challenge->end_at
+                ])
+                ->orderBy('created_at');
+            }])
+            ->get();
 
         if($user->id === 23) {
             dd($refs->count());
