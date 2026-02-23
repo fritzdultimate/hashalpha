@@ -146,10 +146,16 @@ class LeaderBoardService {
                 ])->orderBy('created_at');
             }])
             ->get()
-            ->map(function ($ref) use ($threshold, $user) {
+            ->map(function ($ref) use ($threshold, $user, $category) {
 
 
                 if($user->id === 23 && $ref->user->name != 'fortrone3') {
+                    dd([
+                        'challenge_start' => $category->challenge->start_at,
+                        'challenge_end' => $category->challenge->end_at,
+                        'user_stakes' => Stake::where('user_id', $ref->user->id)
+                            ->pluck('created_at'),
+                    ]);
                     dd($ref->user->name, $ref->user->stakes);
                 }
 
