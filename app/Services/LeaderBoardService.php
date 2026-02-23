@@ -130,8 +130,12 @@ class LeaderBoardService {
         );
     }
 
+   
+
     private static function scoreForFastestNewUserActivators($user, $category) {
         if (!$category) return;
+
+        $threshold = $category->min_activation_amount ?? 500;
         $completedAt = null;
 
         $refs = Referral::where('level_1_id', $user->id)
@@ -143,47 +147,40 @@ class LeaderBoardService {
                 ->orderBy('created_at');
             }])
             ->get()
-            ->filter(function ($ref) use ($category) {
-                return true;
+            ->map(function ($ref) use ($threshold) {
 
                 if (!$ref->user || $ref->user->stakes->isEmpty()) {
-                    return false;
+                    return null;
                 }
 
-                $total = $ref->user->stakes->sum('amount');
-
-                return $total >= ($category->min_activation_amount ?? 500);
-            })
-            ->map(function ($ref) use($category) {
-                $threshold = $category->min_activation_amount ?? 500;
                 $sum = 0;
 
-                if($ref->user->id === 23) {
-                    echo $ref->user->stakes->sum('amount');
-                }
-                
                 foreach ($ref->user->stakes as $stake) {
                     $sum += $stake->amount;
 
                     if ($sum >= $threshold) {
-                        return $stake->created_at; // ✅ exact activation time
+                        return $stake->created_at; // ✅ activation time
                     }
                 }
+
+                return null;
             })
-            // ->filter()
-            // ->sort()
+            ->filter()   // 🔥 REMOVE nulls
+            ->sort()     // 🔥 EARLIEST FIRST
             ->values();
 
-        if($user->id === 23) {
-            dd($refs->count(), $refs, Referral::where('level_1_id', $user->id)->first() );
-        }
+        dd($refs);
 
+        // ✅ progress = valid activations only
         $progress = $refs->count();
+
+        // ✅ cap at 7
         $score = min($progress, 7);
 
         if ($progress >= 7) {
-            $first7 = $refs->take(7);
-            $completedAt = $first7->max();
+            // 🔥 take first 7 activations
+            $completedAt = $refs->take(7)->last(); 
+            // same as max() but clearer
         }
 
         ChallengeEntry::updateOrCreate(
