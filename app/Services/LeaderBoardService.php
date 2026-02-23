@@ -161,7 +161,7 @@ class LeaderBoardService {
             ->values();
 
         if($user->id === 23) {
-            dd($refs->count() );
+            dd($refs->count(), $user->name );
         }
 
         $progress = $refs->count();
