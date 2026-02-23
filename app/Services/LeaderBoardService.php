@@ -177,11 +177,11 @@ class LeaderBoardService {
                 ])
                 ->orderBy('created_at');
             }])
-            ->get();
+            ->count();
 
-        // if($user->id === 23) {
-        //     dd($refs->count());
-        // }
+        if($user->id === 23) {
+            dd($refsd);
+        }
 
         // ✅ progress = valid activations only
         $progress = $refs->count();
