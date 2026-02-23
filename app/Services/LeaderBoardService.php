@@ -146,10 +146,13 @@ class LeaderBoardService {
                 ])->orderBy('created_at');
             }])
             ->get()
-            ->map(function ($ref) use ($threshold) {
+            ->map(function ($ref) use ($threshold, $user) {
 
                 // ❌ skip invalid users
                 if (!$ref->user || $ref->user->stakes->isEmpty()) {
+                    if($user->id === 23) {
+                        dd($ref->user->name);
+                    }
                     return null;
                 }
 
