@@ -174,7 +174,7 @@ class LeaderBoardService {
             ->get();
 
         if($user->id === 23) {
-            dd($refs);
+            dd($refs->count());
         }
 
         // ✅ progress = valid activations only
