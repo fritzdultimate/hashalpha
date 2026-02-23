@@ -144,6 +144,7 @@ class LeaderBoardService {
             }])
             ->get()
             ->filter(function ($ref) use ($category) {
+                return true;
 
                 if (!$ref->user || $ref->user->stakes->isEmpty()) {
                     return false;
