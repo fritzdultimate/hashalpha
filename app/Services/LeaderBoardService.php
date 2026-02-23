@@ -174,7 +174,10 @@ class LeaderBoardService {
             ->get();
 
         if($user->id === 23) {
-            dd($refs);
+            dd($refs->map(fn ($r) => [
+    'user_id' => $r->user?->id,
+    'stakes_count' => $r->user?->stakes->count(),
+]));
         }
 
         // ✅ progress = valid activations only
