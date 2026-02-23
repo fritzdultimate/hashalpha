@@ -166,7 +166,7 @@ class LeaderBoardService {
             ->values();
 
         if($user->id === 23) {
-            dd($refs->count());
+            dd($refs->count(), $refs);
         }
 
         // ✅ progressive score
