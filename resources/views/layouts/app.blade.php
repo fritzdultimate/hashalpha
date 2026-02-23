@@ -171,6 +171,10 @@
                             [
                                 "url" => route('referral.progress'),
                                 "label" => 'Rank Progress'
+                            ],
+                            [
+                                "url" => route('leaderboard'),
+                                "label" => 'Leaderboard'
                             ]
                         ],
                         'route' => 'referral'
