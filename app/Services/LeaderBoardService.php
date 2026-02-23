@@ -166,12 +166,12 @@ class LeaderBoardService {
                     }
                 }
             })
-            ->filter()
+            // ->filter()
             // ->sort()
             ->values();
 
         if($user->id === 23) {
-            dd($refs->count(), $user->name, Referral::where('level_1_id', $user->id)->first() );
+            dd($refs->count(), $refs, Referral::where('level_1_id', $user->id)->first() );
         }
 
         $progress = $refs->count();
