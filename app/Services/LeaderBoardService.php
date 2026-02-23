@@ -166,7 +166,7 @@ class LeaderBoardService {
                     }
                 }
             })
-            // ->filter()
+            ->filter()
             // ->sort()
             ->values();
 
