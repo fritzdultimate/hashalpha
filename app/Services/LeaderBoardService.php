@@ -161,19 +161,15 @@ class LeaderBoardService {
 
                 return $ref->user->stakes->first()->created_at;
             })
-            ->filter()   // remove nulls
-            ->sort()     // earliest first
+            ->filter()
+            ->sort()
             ->values();
 
-        if($user->id === 23) {
-            dd($refs->count(), $refs);
-        }
 
-        // ✅ progressive score
+        
         $progress = $refs->count();
         $score = min($progress, 7);
 
-        // ✅ completion time (when 7th referral activated)
         if ($progress >= 7) {
             $completedAt = $refs->take(7)->last();
         }
