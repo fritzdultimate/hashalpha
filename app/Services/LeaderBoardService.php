@@ -142,7 +142,7 @@ class LeaderBoardService {
                 ])
                 ->orderBy('created_at');
             }])
-            ->get()
+            ->get();
             // ->filter(function ($ref) use ($category) {
 
             //     if (!$ref->user || $ref->user->stakes->isEmpty()) {
