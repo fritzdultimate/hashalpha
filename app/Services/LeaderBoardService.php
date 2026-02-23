@@ -154,7 +154,16 @@ class LeaderBoardService {
                 return $total >= ($category->min_activation_amount ?? 500);
             })
             ->map(function ($ref) {
-                return optional($ref->user->stakes->first())->created_at;
+                $threshold = $category->min_activation_amount ?? 500;
+                $sum = 0;
+                
+                foreach ($ref->user->stakes as $stake) {
+                    $sum += $stake->amount;
+
+                    if ($sum >= $threshold) {
+                        return $stake->created_at; // ✅ exact activation time
+                    }
+                }
             })
             ->filter()
             ->sort()
