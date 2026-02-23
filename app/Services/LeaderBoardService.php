@@ -150,11 +150,6 @@ class LeaderBoardService {
 
 
                 if($user->id === 23 && $ref->user->name != 'fortrone3') {
-                    dd([
-                        'challenge_start' => $category->challenge->start_at,
-                        'challenge_end' => $category->challenge->end_at,
-                        'user_stakes' => Stake::where('user_id', $ref->user->id)->first()->created_at,
-                    ]);
                     dd($ref->user->name, $ref->user->stakes);
                 }
 
