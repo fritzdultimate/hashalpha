@@ -143,30 +143,38 @@ class LeaderBoardService {
                 $q->whereBetween('created_at', [
                     $category->challenge->start_at,
                     $category->challenge->end_at
-                ])
-                ->orderBy('created_at');
+                ])->orderBy('created_at');
             }])
             ->get()
-            ->filter()
-            ->sort()
+            ->map(function ($ref) use ($threshold) {
+
+                // ❌ skip invalid users
+                if (!$ref->user || $ref->user->stakes->isEmpty()) {
+                    return null;
+                }
+
+                // ✅ check total stake
+                $total = $ref->user->stakes->sum('amount');
+                if ($total < $threshold) {
+                    return null;
+                }
+
+                // ✅ activation time = FIRST stake (simple + safe)
+                return $ref->user->stakes->first()->created_at;
+            })
+            ->filter()   // remove nulls
+            ->sort()     // earliest first
             ->values();
 
-        if($user->id === 23) {
-            dd($refs);
-        }
-
-        // ✅ progress = valid activations only
+        // ✅ progressive score
         $progress = $refs->count();
-
-        // ✅ cap at 7
         $score = min($progress, 7);
 
+        // ✅ completion time (when 7th referral activated)
         if ($progress >= 7) {
-            // 🔥 take first 7 activations
-            $completedAt = $refs->take(7)->last(); 
-            // same as max() but clearer
+            $completedAt = $refs->take(7)->last();
         }
-
+        
         ChallengeEntry::updateOrCreate(
             [
                 'challenge_id' => $category->challenge->id,
@@ -178,5 +186,5 @@ class LeaderBoardService {
                 'completed_at' => $completedAt
             ]
         );
-    }
+    }   
 }
