@@ -162,7 +162,7 @@ class LeaderBoardService {
                 // ✅ activation time = FIRST stake (simple + safe)
                 return $ref->user->stakes->first()->created_at;
             })
-            ->filter()   // remove nulls
+            // ->filter()   // remove nulls
             ->sort()     // earliest first
             ->values();
 
