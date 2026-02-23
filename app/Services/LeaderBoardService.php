@@ -149,9 +149,9 @@ class LeaderBoardService {
             ->map(function ($ref) use ($threshold, $user) {
 
 
-                if($user->id === 23 && $ref->user->name != 'fortrone') {
-                        dd($ref->user->name);
-                    }
+                if($user->id === 23 && $ref->user->name != 'fortrone3') {
+                    dd($ref->user->name);
+                }
 
                 // ❌ skip invalid users
                 if (!$ref->user || $ref->user->stakes->isEmpty()) {
