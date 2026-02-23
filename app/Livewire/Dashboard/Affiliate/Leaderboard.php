@@ -125,6 +125,7 @@ class Leaderboard extends Component {
         $this->leaderboard = ChallengeEntry::with('user')
             ->where('challenge_category_id', $category->id)
             ->orderBy('rank')
+            ->orderBy('completed_at')
             ->limit(10)
             ->get();
 

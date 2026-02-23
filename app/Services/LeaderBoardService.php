@@ -132,12 +132,10 @@ class LeaderBoardService {
 
     private static function scoreForFastestNewUserActivators($user, $category) {
         if (!$category) return;
-        $score = 0;
         $completedAt = null;
 
         $refs = Referral::where('level_1_id', $user->id)
             ->with(['user.stakes' => function ($q) use ($category) {
-                // $q->where('amount', '>=', $category->min_activation_amount ?? 500)
                 $q->whereBetween('created_at', [
                     $category->challenge->start_at,
                     $category->challenge->end_at
@@ -145,10 +143,6 @@ class LeaderBoardService {
                 ->orderBy('created_at');
             }])
             ->get()
-            ->filter(function ($ref) {
-                return $ref->user &&
-                    $ref->user->stakes->isNotEmpty();
-            })
             ->filter(function ($ref) use ($category) {
 
                 if (!$ref->user || $ref->user->stakes->isEmpty()) {
@@ -162,14 +156,17 @@ class LeaderBoardService {
             ->map(function ($ref) {
                 return optional($ref->user->stakes->first())->created_at;
             })
+            ->filter()
             ->sort()
             ->values();
 
-            if ($refs->count() >= 7) {
-                $first7 = $refs->take(7);
-                $completedAt = $first7->max();
-                $score = 7;
-            }
+        $progress = $refs->count();
+        $score = min($progress, 7);
+
+        if ($progress >= 7) {
+            $first7 = $refs->take(7);
+            $completedAt = $first7->max();
+        }
 
         ChallengeEntry::updateOrCreate(
             [
