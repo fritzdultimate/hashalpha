@@ -147,59 +147,12 @@ class LeaderBoardService {
                 ->orderBy('created_at');
             }])
             ->get()
-            ->map(function ($ref) use ($threshold) {
-
-                if (!$ref->user || $ref->user->stakes->isEmpty()) {
-                    return null;
-                }
-
-                $sum = 0;
-
-                foreach ($ref->user->stakes as $stake) {
-                    $sum += $stake->amount;
-
-                    if ($sum >= $threshold) {
-                        return $stake->created_at; // ✅ activation time
-                    }
-                }
-
-                return null;
-            })
-            ->filter()   // 🔥 REMOVE nulls
-            ->sort()     // 🔥 EARLIEST FIRST
+            ->filter()
+            ->sort()
             ->values();
 
-        $refs = Referral::where('level_1_id', $user->id)
-            ->with(['user.stakes' => function ($q) use ($category) {
-                $q->whereBetween('created_at', [
-                    $category->challenge->start_at,
-                    $category->challenge->end_at
-                ])
-                ->orderBy('created_at');
-            }])
-            ->get();
-
-        $mapRef = $refs->map(function ($ref) use ($threshold) {
-
-                if (!$ref->user || $ref->user->stakes->isEmpty()) {
-                    return null;
-                }
-
-                $sum = 0;
-
-                foreach ($ref->user->stakes as $stake) {
-                    $sum += $stake->amount;
-
-                    if ($sum >= $threshold) {
-                        return $stake->created_at; // ✅ activation time
-                    }
-                }
-
-                return null;
-            })->filter()->values();
-
         if($user->id === 23) {
-            dd($mapRef);
+            dd($refs);
         }
 
         // ✅ progress = valid activations only
