@@ -169,6 +169,10 @@ class LeaderBoardService {
             ->sort()     // 🔥 EARLIEST FIRST
             ->values();
 
+        $refs = Referral::where('level_1_id', $user->id)
+            ->with('user.stakes')
+            ->get();
+
         dd($refs);
 
         // ✅ progress = valid activations only
