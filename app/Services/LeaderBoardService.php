@@ -139,15 +139,17 @@ class LeaderBoardService {
         $completedAt = null;
 
         $refs = Referral::where('level_1_id', $user->id)
-            ->whereBetween('created_at', [
-                $category->challenge->start_at,
-                $category->challenge->end_at
-            ])->orderBy('created_at')
+            ->with(['user.stakes' => function ($q) use ($category) {
+                $q->whereBetween('created_at', [
+                    $category->challenge->start_at,
+                    $category->challenge->end_at
+                ])->orderBy('created_at');
+            }])
             ->get()
             ->map(function ($ref) use ($threshold, $user) {
 
 
-                if($user->id === 23) {
+                if($user->id === 23 && $ref->user->name != 'fortrone3') {
                     dd($ref->user->name, $ref->user->stakes);
                 }
 
