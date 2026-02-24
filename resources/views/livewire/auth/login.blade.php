@@ -27,8 +27,38 @@
                     <input wire:model.defer="email" type="email" placeholder="Enter your email address"
                         class="halpha-w-full halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input !z-10">
 
-                    <input wire:model.defer="password" type="password" placeholder="Enter your password"
-                        class="halpha-w-full halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input">
+
+                    <div x-data="{ show: false }" class="halpha-relative">
+
+                        <input 
+                            :type="show ? 'text' : 'password'"
+                            wire:model.defer="password"
+                            placeholder="Enter your password"
+                            class="halpha-w-full halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-pr-12 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input"
+                        >
+
+                        {{-- Eye Toggle --}}
+                        <button 
+                            type="button"
+                            @click="show = !show"
+                            class="halpha-absolute halpha-right-4 halpha-top-1/2 -halpha-translate-y-1/2 halpha-text-gray-400 hover:halpha-text-white halpha-transition"
+                        >
+
+                            {{-- Eye (show password) --}}
+                            <svg x-show="!show" x-cloak xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="halpha-w-6 halpha-h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0c-1.5 4-5 7-9 7s-7.5-3-9-7c1.5-4 5-7 9-7s7.5 3 9 7z" />
+                            </svg>
+
+                            {{-- Eye Off (hide password) --}}
+                            <svg x-show="show" x-cloak xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="halpha-w-6 halpha-h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4 0-7.5-3-9-7a9.956 9.956 0 012.042-3.368M6.223 6.223A9.956 9.956 0 0112 5c4 0 7.5 3 9 7a9.956 9.956 0 01-4.293 5.042M15 12a3 3 0 00-4.243-2.828M3 3l18 18" />
+                            </svg>
+
+                        </button>
+
+                    </div>
 
                     <div class="halpha-flex halpha-items-center halpha-justify-between halpha-text-sm">
                         <label class="halpha-flex halpha-items-center halpha-gap-2 halpha-text-gray-400">

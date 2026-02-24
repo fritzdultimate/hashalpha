@@ -26,11 +26,13 @@ class Register extends Component {
     public $statusMessage = null;
     public $userIdToVerify;
     public ?string $ref = null;
+    public $password_confirmation;
 
     protected $rules = [
         'fullname' => 'required|string|min:3|regex:/^[a-zA-Z]+([\'\-\s][a-zA-Z]+)+$/',
         'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:6',
+        'password' => 'required|string|min:6|confirmed',
+        'password_confirmation' => 'required|string|min:6',
         'terms' => 'accepted',
         'ref' => 'required'
     ];
@@ -42,7 +44,9 @@ class Register extends Component {
 
         'ref.required' => 'You must provide an upline to register.',
 
-        'terms.accepted' => 'You must agree to the terms and conditions before continuing.'
+        'terms.accepted' => 'You must agree to the terms and conditions before continuing.',
+
+        'password.confirmed' => 'Passwords do not match.',
     ];
 
     public function mount() {
