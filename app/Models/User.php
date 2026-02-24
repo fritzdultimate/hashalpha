@@ -70,7 +70,8 @@ class User extends Authenticatable implements FilamentUser {
             'is_leader' => 'boolean',
             'lock_roi' => 'boolean',
             'is_suspended' => 'boolean',
-            'suspended_until' => 'datetime'
+            'suspended_until' => 'datetime',
+            'created_at' => 'datetime'
         ];
     }
 

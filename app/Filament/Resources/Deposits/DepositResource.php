@@ -31,6 +31,12 @@ class DepositResource extends Resource
         return false;
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('override', false);
+    }
+
     public static function getNavigationBadge(): ?string {
         return (string) Deposit::where('status', 'pending')->count();
     }

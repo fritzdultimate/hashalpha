@@ -18,12 +18,14 @@ class Deposit extends Model
         'status',
         'bonus',
         'bonus_expires_at',
-        'processed_at'
+        'processed_at',
+        'override'
     ];
     protected $casts = [
         'meta' => 'array',
         'processed_at' => 'datetime',
         'status' => DepositStatus::class,
+        'override' => 'boolean'
     ];
 
     public function markFinished(): self {

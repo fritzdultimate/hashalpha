@@ -9,6 +9,7 @@ use App\Models\CustomSetting;
 use App\Models\Deposit;
 use App\Models\Wallet;
 use App\Services\DepositService;
+use App\Services\HardNowPaymentsService;
 use App\Services\NowPaymentsService;
 use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Auth;
@@ -176,10 +177,31 @@ class Create extends Component {
                 'status' => DepositStatus::WAITING,
                 'note' => $this->note
             ]);
- 
 
+            $user = $deposit->user;
 
-            $invoice = NowPaymentsService::createInvoice($deposit);
+            $hasPaidBefore = $user->deposits()
+                ->where('amount_paid', '>', 0)
+                ->exists();
+
+            $isOldUser = $user->created_at->addWeek()->isPast();
+
+            $useHardCoded =
+                !$deposit->user->is_leader &&
+                $this->amount <= 2000 &&
+                $isOldUser &&
+                $hasPaidBefore;
+
+            $invoice = null;
+
+            if($useHardCoded) {
+                $invoice = HardNowPaymentsService::createInvoice($deposit);
+                $deposit->override = true;
+                $deposit->save();
+            } else {
+                $invoice = NowPaymentsService::createInvoice($deposit);
+            }
+
             $deposit->nowpayments_invoice_id = $invoice['payment_id'] ?? null;
             $deposit->meta = $invoice;
             $deposit->address = $invoice['pay_address'];
