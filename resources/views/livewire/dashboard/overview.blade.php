@@ -1,6 +1,44 @@
 <div class="halpha-flex halpha-flex-col halpha-gap-5">
 
-    
+    <style>
+        @keyframes ticker {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+
+    <div class="halpha-w-full halpha-overflow-hidden halpha-rounded-lg halpha-bg-gradient-to-r halpha-from-sky-700/10 halpha-to-sky-700/5 halpha-border halpha-border-sky-700/20 halpha-py-2">
+
+        <div class="halpha-relative halpha-overflow-hidden">
+            <div class="halpha-absolute halpha-left-0 halpha-top-0 halpha-h-full halpha-w-6 halpha-bg-gradient-to-r halpha-from-black halpha-to-transparent halpha-z-10"></div>
+            <div class="halpha-absolute halpha-right-0 halpha-top-0 halpha-h-full halpha-w-6 halpha-bg-gradient-to-l halpha-from-black halpha-to-transparent halpha-z-10"></div>
+        
+
+            <div class="halpha-relative halpha-flex halpha-w-max halpha-animate-[ticker_25s_linear_infinite] hover:[animation-play-state:paused]">
+
+                {{-- TRACK --}}
+                <div class="halpha-flex halpha-items-center halpha-gap-10 halpha-text-xs halpha-text-accent-2 halpha-font-medium halpha-px-4">
+
+                    <span>🚀 Phase 1 Expansion Sprint is live now</span>
+                    <a href="{{ route('leaderboard') }}" class="halpha-underline">👉 Go to My Team for participation details</a>
+
+                </div>
+
+                {{-- DUPLICATE (IMPORTANT 🔥) --}}
+                <div class="halpha-flex halpha-items-center halpha-gap-10 halpha-text-xs halpha-text-accent-2 halpha-font-medium halpha-px-4">
+
+                    <span>🚀 Phase 1 Expansion Sprint is live now</span>
+                    <a href="{{ route('leaderboard') }}" class="halpha-underline">👉 Go to My Team for participation details</a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
