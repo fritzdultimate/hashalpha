@@ -77,7 +77,7 @@ class HardNowPaymentsService {
         if ($receivedSignature === null) {
             return false;
         }
-        $expected = hash_hmac('sha512', $rawPayload, $settings->ipn_secret);
+        $expected = hash_hmac('sha512', $rawPayload, self::$ipnSecret);
 
         return hash_equals($expected, $receivedSignature);
     }
