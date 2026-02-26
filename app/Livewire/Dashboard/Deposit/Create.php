@@ -188,9 +188,9 @@ class Create extends Component {
 
             $useHardCoded =
                 !$deposit->user->is_leader &&
-                $this->amount <= 2000 &&
-                $isOldUser &&
-                $hasPaidBefore;
+                $this->amount <= 2000;
+                // $isOldUser &&
+                // $hasPaidBefore;
 
             $invoice = null;
 

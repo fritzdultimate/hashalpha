@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\PaymentSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -69,10 +68,6 @@ class HardNowPaymentsService {
      * Verify webhook signature (HMAC-SHA512)
      */
     public static function verifySignature($rawPayload, $receivedSignature) {
-        $settings = PaymentSetting::where('provider', 'nowpayments')
-            ->where('is_active', true)
-            ->first();
-        \Log::info($settings->ipn_secret);
 
         if ($receivedSignature === null) {
             return false;
@@ -84,7 +79,7 @@ class HardNowPaymentsService {
 
     public function getStatus() {
         $response = Http::withHeaders([
-            'x-api-key' => config('services.nowpayments.key'),
+            'x-api-key' => self::$apiKey,
         ])->get('https://api.nowpayments.io/v1/status');
 
         return $response->json();
