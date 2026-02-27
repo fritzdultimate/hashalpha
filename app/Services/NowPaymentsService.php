@@ -41,7 +41,7 @@ class NowPaymentsService {
             'order_id' => $deposit->id,
             'pay_currency' => strtoupper($deposit->currency),
             'ipn_callback_url' => route('webhooks.nowpayments'),
-            'order_description' => 'By user_id ' . 632
+            'order_description' => 'By user_id ' . Auth::id()
         ];
 
         $res = Http::withHeaders([
