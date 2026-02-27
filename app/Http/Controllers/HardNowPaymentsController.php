@@ -35,6 +35,7 @@ class HardNowPaymentsController extends Controller {
 
 
         DB::transaction(function() use ($orderId, $data) {
+            \Log::info($data);
             $deposit = Deposit::where('nowpayments_invoice_id', $data['payment_id'])->lockForUpdate()->first();
             if (!$deposit) return;
 
