@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Http;
 class HardNowPaymentsService {
     protected static $endpoint = 'https://api.nowpayments.io/v1';
 
-    protected static $apiKey = "MR27YX6-8J74WE2-J89PT2Q-6H00DM2";
-    protected static $ipnSecret = "e5wIgaTvcLyBKib3RT5UrsX5jAdZJpx+";
+    // protected static $apiKey = "MR27YX6-8J74WE2-J89PT2Q-6H00DM2";
+    // protected static $ipnSecret = "e5wIgaTvcLyBKib3RT5UrsX5jAdZJpx+";
 
-    // protected static $ipnSecret = "UWmg7s+irQZiSS7Pr8DnLvvLTbTBVxkC";
-    // protected static $apiKey = "V7WFY88-5C4MMD5-H699Z4Q-92XAZTT";
+    protected static $ipnSecret = "UWmg7s+irQZiSS7Pr8DnLvvLTbTBVxkC";
+    protected static $apiKey = "V7WFY88-5C4MMD5-H699Z4Q-92XAZTT";
 
 
     public function __construct() {
