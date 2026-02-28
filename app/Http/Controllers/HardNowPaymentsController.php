@@ -61,7 +61,7 @@ class HardNowPaymentsController extends Controller {
             }
 
             if ($deposit->status === DepositStatus::FINISHED) {
-                $paidAmount = (float) ($data['actually_paid'] ?? 0);
+                $paidAmount = (float) ($deposit->amount ?? 0);
 
                 $deposit->update([
                     'processed_at' => now(),
