@@ -1,6 +1,12 @@
 
 <div class="halpha-space-y-6">
 
+    <style>
+        .text-sm.text-gray-700.leading-5 {
+            display: none !important;
+        }
+    </style>
+
     {{-- Header --}}
     <div>
         <h1 class="halpha-text-xl md:halpha-text-3xl halpha-font-semibold halpha-text-white">
