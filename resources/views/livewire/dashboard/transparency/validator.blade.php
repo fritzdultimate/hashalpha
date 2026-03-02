@@ -2,7 +2,7 @@
 <div class="halpha-space-y-6">
 
     <style>
-        .text-sm.text-gray-700.leading-5 {
+        p.text-sm.text-gray-700.leading-5 {
             display: none !important;
         }
     </style>
