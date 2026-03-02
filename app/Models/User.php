@@ -162,5 +162,9 @@ class User extends Authenticatable implements FilamentUser {
         $this->decrement('balance', $amount);
     }
 
+    public function currentRank() {
+        return $this->hasOne(UserRank::class)->latestOfMany()->with('rank');
+    }
+
 
 }

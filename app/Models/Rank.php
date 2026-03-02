@@ -9,10 +9,18 @@ class Rank extends Model {
         'required_volume',
         'required_active_referrals',
         'required_earnings',
-        'bonus'
+        'bonus',
+        'deposits',
+        'direct_referrals',
+        'global_pool_share',
+        'global_override'
     ];
 
     public function ranks() {
         return $this->hasMany(UserRank::class);
+    }
+
+    public function percentages() {
+        return $this->hasMany(PerformancePercentage::class);
     }
 }

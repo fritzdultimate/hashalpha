@@ -36,12 +36,12 @@
     <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-4">
         <div class="halpha-card halpha-p-4 halpha-rounded-xl">
             <div class="halpha-text-xs halpha-text-gray-400">Total Validators</div>
-            <div class="halpha-text-xl halpha-font-semibold halpha-text-white">128</div>
+            <div class="halpha-text-xl halpha-font-semibold halpha-text-white">131</div>
         </div>
 
         <div class="halpha-card halpha-p-4 halpha-rounded-xl">
             <div class="halpha-text-xs halpha-text-gray-400">Active</div>
-            <div class="halpha-text-xl halpha-font-semibold halpha-text-green-400">125</div>
+            <div class="halpha-text-xl halpha-font-semibold halpha-text-green-400">128</div>
         </div>
 
         <div class="halpha-card halpha-p-4 halpha-rounded-xl">
@@ -184,7 +184,7 @@
         {{-- pagination --}}
         <div
             class="halpha-flex halpha-flex-col md:halpha-flex-row halpha-items-center halpha-justify-between halpha-gap-3 halpha-p-4 halpha-border-t halpha-border-white/5 halpha-border-red-600 halpha-border">
-            <div class="halpha-text-xs halpha-text-muted">Showing {{ $validators->firstItem() ?? 0 }} to
+            <div class="halpha-text-xs halpha-text-muted halpha-hidden">Showing {{ $validators->firstItem() ?? 0 }} to
                 {{ $validators->lastItem() ?? 0 }} of {{ $validators->total() ?? count($validators) }}</div>
             <div class="halpha-text-sm halpha-pagination halpha-flex halpha-items-center halpha-gap-2 halpha-w-full">{{ $validators->links() }}</div>
         </div>     

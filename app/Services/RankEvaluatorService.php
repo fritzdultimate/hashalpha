@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\Rank;
 use App\Models\RankBonus;
+use App\Models\Referral;
 use App\Models\ReferralReward;
 use App\Models\Stake;
 use App\Models\Transaction;
@@ -67,5 +68,18 @@ class RankEvaluatorService {
             ]);
         }
 
+    }
+
+    protected function qualifies(User $user, Rank $rank): bool {
+        $volume = Stake::where('user_id', $user->id)->sum('amount');
+
+        $directs = Referral::where('level_1_id', $user->id)->count();
+
+        $earnings = $user->performance_bonus ?? 0;
+
+        return
+            $volume >= $rank->required_volume &&
+            $directs >= $rank->required_active_referrals &&
+            $earnings >= $rank->required_earnings;
     }
 }
