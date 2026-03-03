@@ -171,11 +171,11 @@
             <div class="halpha-flex halpha-justify-between halpha-text-xs">
 
                 <span class="halpha-text-gray-300">
-                    Level {{ $miss->level }}
+                    Level {{ $miss['level'] }}
                 </span>
 
                 <span class="halpha-text-red-400">
-                    ${{ number_format($miss->amount, 2) }}
+                    ${{ number_format($miss['amount'], 2) }}
                 </span>
 
             </div>

@@ -3,7 +3,10 @@
 namespace App\Livewire\Dashboard\Affiliate;
 
 use App\Models\PerformancePercentage;
+use App\Models\Rank;
 use App\Models\Referral;
+use App\Models\ReferralReward;
+use App\Models\Stake;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -71,13 +74,47 @@ class PerformanceBonusDashboard extends Component
             ->get();
 
         
-        $this->progress = min(100, round((98 / 1000) * 100));
 
         $this->missedBreakdown = PerformanceBonus::where('user_id', auth()->id())
             ->where('type', 'missed')
             ->get()->toArray();
 
         $this->missedTotal = collect($this->missedBreakdown)->sum('amount');
+
+        $this->loadRankProgress($user);
+        
+    }
+
+    public function loadRankProgress(User $user) {
+        $downlineIds = getDownlineUserIds($user->id);
+        $activeReferrals = ReferralReward::where('user_id', $user->id)
+            ->whereHas('fromUser', fn($q) => $q->where('is_suspended', false))
+            ->distinct('from_user_id')
+            ->count('from_user_id');
+        $volume = Stake::whereIn('user_id', $downlineIds)->sum('amount');
+        $earnings = ReferralReward::where('user_id', $user->id)
+            ->sum('amount');
+
+        $level = $user?->rank?->rank?->level ?? 0;
+
+        $this->nextRank = Rank::where('level', '>', $level)
+            ->orderBy('level')
+            ->first();
+
+        if($level > 0 && !$this->nextRank) {
+            $this->progress = 100;
+        } else {
+            $refPct = min(100, intval(($activeReferrals/$this->nextRank->required_active_referrals) * 100));
+            $earningsPct = min(100, intval(($earnings/$this->nextRank->required_earnings) * 100));
+            $volPct = min(100, intval(($volume / $this->nextRank->required_volume) * 100));
+
+            $actualPct = intval(($refPct + $earningsPct + $volPct)/3);
+
+            $this->progress = min(
+                100,
+                intval($actualPct)
+            );
+        }
     }
 
     public function render() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reward;
 use App\Models\Stake;
+use App\Services\PerformanceBonusService;
 use Carbon\Carbon;
 
 class ProcessStakeRewards extends Controller {
@@ -79,6 +80,9 @@ class ProcessStakeRewards extends Controller {
             ]
             // 'lock_reason' => ''
         ]);
+
+        // Performance bonus distribution
+        // PerformanceBonusService::distribute($stake->user, $reward);
 
         $stake->update([
             'last_payout_at' => now(),

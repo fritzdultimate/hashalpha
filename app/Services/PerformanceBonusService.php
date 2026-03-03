@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\Deposit;
 use App\Models\PerformanceBonus;
+use App\Models\PerformancePercentage;
 use App\Models\Referral;
 use App\Models\Transaction;
 use App\Models\User;
@@ -23,7 +24,7 @@ class PerformanceBonusService {
         10 => 0.15
     ];
 
-    protected function meetsRequirements(User $user, $rank): bool {
+    protected static function meetsRequirements(User $user, $rank): bool {
         $deposits = Deposit::where([
             'user_id' => $user->id,
         ])->sum('amount_paid');
@@ -41,26 +42,29 @@ class PerformanceBonusService {
         return true;
     }
 
-    public function distribute(User $user, float $roiAmount) {
+    public static function distribute(User $user, float $roiAmount) {
         $ref = Referral::where('user_id', $user->id)->first();
+
 
         if (!$ref) return;
 
         for ($level = 1; $level <= 10; $level++) {
             $uplineId = $ref->{"level_{$level}_id"};
 
+
             if (!$uplineId) continue;
 
             $upline = User::find($uplineId);
             if (!$upline) continue;
 
+
             $rank = $upline->currentRank?->rank->load('percentages');
             if (!$rank) continue;
 
-            if (!$this->meetsRequirements($upline, $rank)) continue;
 
-            $percentage = $rank->percentages
-                ->where('level', $level)
+            if (!self::meetsRequirements($upline, $rank)) continue;
+
+            $percentage = PerformancePercentage::where('level', $level)
                 ->first()?->percentage ?? 0;
 
             if ($percentage <= 0) continue;
@@ -107,12 +111,12 @@ class PerformanceBonusService {
             $upline->increment('balance', $bonus);
         }
 
-        $this->handleGlobalBonus($ref, $roiAmount);
+        self::handleGlobalBonus($ref, $roiAmount);
     }
 
 
 
-    protected function handleGlobalBonus(Referral $ref, float $roiAmount): void {
+    protected static function handleGlobalBonus(Referral $ref, float $roiAmount): void {
         for ($level = 1; $level <= 10; $level++) {
             $uplineId = $ref->{"level_{$level}_id"};
             if (!$uplineId) continue;
@@ -123,7 +127,7 @@ class PerformanceBonusService {
             $rank = $upline->currentRank?->rank;
             if (!$rank) continue;
 
-            if (!$this->meetsRequirements($upline, $rank)) continue;
+            if (!self::meetsRequirements($upline, $rank)) continue;
 
             //Rank 10 & 11 → 0.5% override
             if ($rank->level >= 10) {
