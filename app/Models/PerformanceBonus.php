@@ -12,7 +12,8 @@ class PerformanceBonus extends Model {
         'percentage',
         'level',
         'roi_amount',
-        'type'
+        'type',
+        'synced_bonus'
     ];
 
     public function user() {

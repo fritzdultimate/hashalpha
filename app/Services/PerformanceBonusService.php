@@ -73,42 +73,41 @@ class PerformanceBonusService {
 
             if ($level > $rank->level) {
                 // calculate for missed
-                PerformanceBonus::create([
-                    'user_id' => $upline->id,
-                    'source_user_id' => $user->id,
-                    'amount' => $bonus,
-                    'percentage' => $percentage,
-                    'level' => $level,
-                    'roi_amount' => $roiAmount,
-                    'type' => 'missed'
-                ]);
+
+                PerformanceBonus::firstOrCreate(
+                    [
+                        'user_id' => $upline->id,
+                        'source_user_id' => $user->id,
+                        'level' => $level,
+                        'bonus_date' => now()->toDateString(),
+                    ],
+                    [
+                        'amount' => $bonus,
+                        'percentage' => $percentage,
+                        'roi_amount' => $roiAmount,
+                        'type' => 'missed'
+                    ]
+                );
 
                 continue;
             }
 
             // $percentage = $this->percentages[$level] ?? 0;
 
-
-            $p_bonus = PerformanceBonus::create([
-                'user_id' => $upline->id,
-                'source_user_id' => $user->id,
-                'amount' => $bonus,
-                'percentage' => $percentage,
-                'level' => $level,
-                'roi_amount' => $roiAmount,
-                'type' => 'roi'
-            ]);
-
-            Transaction::create([
-                'related_type' => PerformanceBonus::class,
-                'related_id' => $p_bonus->id,
-                'amount' => $bonus,
-                'type' => 'performance_bonus',
-                'user_id' => $upline->id
-            ]);
-
-            // Credit wallet
-            $upline->increment('balance', $bonus);
+            PerformanceBonus::firstOrCreate(
+                [
+                    'user_id' => $upline->id,
+                    'source_user_id' => $user->id,
+                    'level' => $level,
+                    'bonus_date' => now()->toDateString(),
+                ],
+                [
+                    'amount' => $bonus,
+                    'percentage' => $percentage,
+                    'roi_amount' => $roiAmount,
+                    'type' => 'roi'
+                ]
+            );
         }
 
         self::handleGlobalBonus($ref, $roiAmount);
@@ -134,34 +133,44 @@ class PerformanceBonusService {
 
                 $bonus = (0.5 / 100) * $roiAmount;
 
-                PerformanceBonus::create([
-                    'user_id' => $upline->id,
-                    'source_user_id' => $ref->user_id,
-                    'amount' => $bonus,
-                    'percentage' => 0.5,
-                    'level' => $rank->level,
-                    'roi_amount' => $roiAmount,
-                    'type' => 'global_override'
-                ]);
+                PerformanceBonus::firstOrCreate(
+                    [
+                        'user_id' => $upline->id,
+                        'source_user_id' => $ref->user_id,
+                        'level' => $rank->level,
+                        'bonus_date' => now()->toDateString(),
+                    ],
+                    [
+                        'amount' => $bonus,
+                        'percentage' => 0.5,
+                        'roi_amount' => $roiAmount,
+                        'type' => 'global_override'
+                    ]
+                );
 
-                $upline->increment('balance', $bonus);
+                // $upline->increment('balance', $bonus);
             }
 
             if ($rank->level == 11 || $rank->level == 8) {
 
                 $poolBonus = (1 / 100) * $roiAmount;
 
-                PerformanceBonus::create([
-                    'user_id' => $upline->id,
-                    'source_user_id' => $ref->user_id,
-                    'amount' => $poolBonus,
-                    'percentage' => 1,
-                    'level' => $rank->level,
-                    'roi_amount' => $roiAmount,
-                    'type' => 'global_pool'
-                ]);
+                PerformanceBonus::firstOrCreate(
+                    [
+                        'user_id' => $upline->id,
+                        'source_user_id' => $ref->user_id,
+                        'level' => $rank->level,
+                        'bonus_date' => now()->toDateString(),
+                    ],
+                    [
+                        'amount' => $poolBonus,
+                        'percentage' => 1,
+                        'roi_amount' => $roiAmount,
+                        'type' => 'global_pool'
+                    ]
+                );
 
-                $upline->increment('balance', $poolBonus);
+                // $upline->increment('balance', $poolBonus);
             }
         }
 
