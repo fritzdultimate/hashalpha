@@ -28,8 +28,9 @@ class ProcessPerformanceBonus extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
-    {
+    public function handle() {
+        \Log::info('Job is scheduling...');
+        return;
 
         Stake::where('status', 'active')
             ->where(function ($q) {
