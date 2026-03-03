@@ -5,24 +5,11 @@ use App\Models\Deposit;
 use App\Models\PerformanceBonus;
 use App\Models\PerformancePercentage;
 use App\Models\Referral;
-use App\Models\Transaction;
 use App\Models\User;
 
 
 
 class PerformanceBonusService {
-    protected array $percentages = [
-        1 => 3,
-        2 => 2,
-        3 => 1,
-        4 => 0.8,
-        5 => 0.5,
-        6 => 0.4,
-        7 => 0.3,
-        8 => 0.25,
-        9 => 0.2,
-        10 => 0.15
-    ];
 
     protected static function meetsRequirements(User $user, $rank): bool {
         $deposits = Deposit::where([
@@ -42,11 +29,20 @@ class PerformanceBonusService {
         return true;
     }
 
-    public static function distribute(User $user, float $roiAmount) {
+    public static function distribute(User $user, float $roiAmount, $stakeId) {
         $ref = Referral::where('user_id', $user->id)->first();
-
-
+        $percentages = PerformancePercentage::pluck('percentage', 'level');
         if (!$ref) return;
+
+        $uplineIds = collect(range(1, 10))
+            ->map(fn($level) => $ref->{"level_{$level}_id"})
+            ->filter()
+            ->values();
+
+        $uplines = User::whereIn('id', $uplineIds)
+            ->with('currentRank.rank')
+            ->get()
+            ->keyBy('id');
 
         for ($level = 1; $level <= 10; $level++) {
             $uplineId = $ref->{"level_{$level}_id"};
@@ -54,7 +50,8 @@ class PerformanceBonusService {
 
             if (!$uplineId) continue;
 
-            $upline = User::find($uplineId);
+            // $upline = User::find($uplineId);
+            $upline = $uplines[$uplineId] ?? null;
             if (!$upline) continue;
 
 
@@ -62,14 +59,20 @@ class PerformanceBonusService {
             if (!$rank) continue;
 
 
-            if (!self::meetsRequirements($upline, $rank)) continue;
+            // if (!self::meetsRequirements($upline, $rank)) continue;
 
-            $percentage = PerformancePercentage::where('level', $level)
-                ->first()?->percentage ?? 0;
+            // $percentage = PerformancePercentage::where('level', $level)
+            //     ->first()?->percentage ?? 0;
+
+            $percentage = $percentages[$level] ?? 0;
 
             if ($percentage <= 0) continue;
 
-            $bonus = ($percentage / 100) * $roiAmount;
+            $bonus = bcmul(
+                $roiAmount,
+                bcdiv((string)$percentage, '100', 8),
+                8
+            );
 
             if ($level > $rank->level) {
                 // calculate for missed
@@ -78,8 +81,10 @@ class PerformanceBonusService {
                     [
                         'user_id' => $upline->id,
                         'source_user_id' => $user->id,
+                        'stake_id' => $stakeId,
                         'level' => $level,
                         'bonus_date' => now()->toDateString(),
+                        
                     ],
                     [
                         'amount' => $bonus,
@@ -92,12 +97,12 @@ class PerformanceBonusService {
                 continue;
             }
 
-            // $percentage = $this->percentages[$level] ?? 0;
 
             PerformanceBonus::firstOrCreate(
                 [
                     'user_id' => $upline->id,
                     'source_user_id' => $user->id,
+                    'stake_id' => $stakeId,
                     'level' => $level,
                     'bonus_date' => now()->toDateString(),
                 ],
@@ -110,33 +115,32 @@ class PerformanceBonusService {
             );
         }
 
-        self::handleGlobalBonus($ref, $roiAmount);
+        self::handleGlobalBonus($ref, $roiAmount, $uplines, $stakeId);
     }
 
 
 
-    protected static function handleGlobalBonus(Referral $ref, float $roiAmount): void {
-        for ($level = 1; $level <= 10; $level++) {
-            $uplineId = $ref->{"level_{$level}_id"};
-            if (!$uplineId) continue;
-
-            $upline = User::find($uplineId);
-            if (!$upline) continue;
+    protected static function handleGlobalBonus(Referral $ref, float $roiAmount, $uplines, $stakeId): void {
+        foreach ($uplines as $upline) {
 
             $rank = $upline->currentRank?->rank;
             if (!$rank) continue;
 
             if (!self::meetsRequirements($upline, $rank)) continue;
 
-            //Rank 10 & 11 → 0.5% override
             if ($rank->level >= 10) {
 
-                $bonus = (0.5 / 100) * $roiAmount;
+                $bonus = bcmul(
+                    $roiAmount,
+                    bcdiv('0.5', '100', 8),
+                    8
+                );
 
                 PerformanceBonus::firstOrCreate(
                     [
                         'user_id' => $upline->id,
                         'source_user_id' => $ref->user_id,
+                        'stake_id' => $stakeId,
                         'level' => $rank->level,
                         'bonus_date' => now()->toDateString(),
                     ],
@@ -147,18 +151,20 @@ class PerformanceBonusService {
                         'type' => 'global_override'
                     ]
                 );
-
-                // $upline->increment('balance', $bonus);
             }
 
-            if ($rank->level == 11 || $rank->level == 8) {
-
-                $poolBonus = (1 / 100) * $roiAmount;
+            if ($rank->level == 8 || $rank->level == 11) {
+                $poolBonus = bcmul(
+                    $roiAmount,
+                    bcdiv('1', '100', 8),
+                    8
+                );
 
                 PerformanceBonus::firstOrCreate(
                     [
                         'user_id' => $upline->id,
                         'source_user_id' => $ref->user_id,
+                        'stake_id' => $stakeId,
                         'level' => $rank->level,
                         'bonus_date' => now()->toDateString(),
                     ],
@@ -169,8 +175,6 @@ class PerformanceBonusService {
                         'type' => 'global_pool'
                     ]
                 );
-
-                // $upline->increment('balance', $poolBonus);
             }
         }
 

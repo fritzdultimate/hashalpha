@@ -19,11 +19,11 @@
             <div class="halpha-text-right">
                 <div class="halpha-text-xs halpha-text-gray-400">Total Earned</div>
                 <div class="halpha-text-xl halpha-text-white halpha-font-bold">
-                    ${{ number_format($totalBonus, 2) }}
+                    ${{ number_format($totalBonus, 5) }}
                 </div>
 
                 <div class="halpha-text-xs halpha-text-success">
-                    +${{ number_format($todayBonus, 2) }} today
+                    +${{ number_format($todayBonus, 8) }} today
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
         <!-- Progress -->
         <div class="halpha-mt-4">
             <div class="halpha-flex halpha-justify-between halpha-text-xs halpha-text-gray-400">
-                <span>Rank Progress</span>
+                <span>Rank Progress to <strong class="halpha-capitalize halpha-text-white">{{ $nextRank->name }}</strong></span>
                 <span>{{ $progress }}%</span>
             </div>
 
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="halpha-text-lg halpha-text-red-400 halpha-font-semibold">
-                    ${{ number_format($missedTotal, 2) }}
+                    ${{ number_format($missedTotal, 5) }}
                 </div>
 
                 <div class="halpha-text-xs halpha-text-gray-500">
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="halpha-text-white halpha-font-semibold">
-                        ${{ number_format($lvl['amount'], 2) }}
+                        ${{ number_format($lvl['amount'], 8) }}
                     </div>
 
                 </div>
@@ -110,14 +110,14 @@
         <div class="halpha-card halpha-p-3">
             <div class="halpha-text-xs halpha-text-gray-400">ROI Bonus</div>
             <div class="halpha-text-white halpha-font-semibold">
-                ${{ number_format(collect($bonuses)->where('type','roi')->sum('amount'), 2) }}
+                ${{ number_format(collect($bonuses)->where('type','roi')->sum('amount'), 5) }}
             </div>
         </div>
 
         <div class="halpha-card halpha-p-3">
             <div class="halpha-text-xs halpha-text-gray-400">Global Bonus</div>
             <div class="halpha-text-white halpha-font-semibold">
-                ${{ number_format(collect($bonuses)->whereIn('type',['global_override','global_pool'])->sum('amount'), 2) }}
+                ${{ number_format(collect($bonuses)->whereIn('type',['global_override','global_pool'])->sum('amount'), 5) }}
             </div>
         </div>
 
@@ -138,7 +138,7 @@
 
                 <div>
                     <div class="halpha-text-sm halpha-text-white">
-                        +${{ number_format($bonus->amount, 2) }}
+                        +${{ number_format($bonus->amount, 5) }}
                     </div>
 
                     <div class="halpha-text-xs halpha-text-gray-400">
@@ -175,7 +175,7 @@
                 </span>
 
                 <span class="halpha-text-red-400">
-                    ${{ number_format($miss['amount'], 2) }}
+                    ${{ number_format($miss['amount'], 5) }}
                 </span>
 
             </div>

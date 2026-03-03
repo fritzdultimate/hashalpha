@@ -13,7 +13,9 @@ class PerformanceBonus extends Model {
         'level',
         'roi_amount',
         'type',
-        'synced_bonus'
+        'synced_bonus',
+        'bonus_date',
+        'stake_id'
     ];
 
     public function user() {

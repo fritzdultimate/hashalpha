@@ -50,7 +50,9 @@ use Illuminate\Support\Facades\Schedule;
 //     ->hourly()
 //     ->withoutOverlapping();
 
-Schedule::command('app:process-performance-bonus')
-    ->everyFiveSeconds();
-    // ->dailyAt('00:00')
-    // ->timezone('UTC');
+// Schedule::command('app:process-performance-bonus')
+//     ->dailyAt('00:00')
+//     ->timezone('UTC')
+//     ->withoutOverlapping();
+
+
