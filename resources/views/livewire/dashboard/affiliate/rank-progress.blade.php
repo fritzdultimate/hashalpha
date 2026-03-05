@@ -3,7 +3,7 @@
         Rank Progress
     </h1>
     <p class="halpha-text-xs halpha-text-gray-400">
-        View your downline bonuses
+        View your downline bonuses and <strong class="halpha-text-white">rank bonus</strong>
     </p>
 
     <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3">
