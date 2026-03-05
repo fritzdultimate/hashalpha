@@ -8,7 +8,7 @@
 
     <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3">
         <x-affiliate.stat label="Total" :value="number_format($totalAvailable,2)" prefix="$" highlight />
-        <x-affiliate.stat label="Withdrawn" :value="number_format($pending,2)" prefix="$" />
+        <x-affiliate.stat label="Withdrawn" :value="number_format($withdrawn,2)" prefix="$" />
     </div>
 
     @if($claimable > 0)
