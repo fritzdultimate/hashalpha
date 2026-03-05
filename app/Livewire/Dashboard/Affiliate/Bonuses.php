@@ -15,7 +15,7 @@ class Bonuses extends Component {
     public float $pending = 0;
 
     public float $totalAvailable = 0;
-    public float $withdrawan = 0;
+    public float $withdrawn = 0;
 
     public function mount() {
         $this->loadBonuses();
