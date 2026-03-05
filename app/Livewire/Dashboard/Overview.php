@@ -184,11 +184,11 @@ class Overview extends Component
             }
         );
 
-        $bonusAvailable = Deposit::where('user_id', $user->id)
-            ->where('status', 'finished')
-            ->sum('bonus');
+        // $bonusAvailable = Deposit::where('user_id', $user->id)
+        //     ->where('status', 'finished')
+        //     ->sum('bonus');
 
-        $mainBalance = $user->balance + $this->totalReferralBonus + $bonusAvailable + $rankBonusAvailable;
+        $mainBalance = $user->balance + $this->totalReferralBonus + $rankBonusAvailable;
         $this->balance = $mainBalance;
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
