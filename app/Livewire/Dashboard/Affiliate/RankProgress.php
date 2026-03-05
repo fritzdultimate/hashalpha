@@ -3,6 +3,7 @@
 namespace App\Livewire\Dashboard\Affiliate;
 
 use App\Models\Rank;
+use App\Models\RankBonus;
 use App\Models\ReferralReward;
 use App\Models\Stake;
 use App\Models\User;
@@ -48,11 +49,11 @@ class RankProgress extends Component
     {
         $userId = auth()->id();
 
-        $this->totalAvailable = ReferralReward::where('user_id', $userId)
+        $this->totalAvailable = RankBonus::where('user_id', $userId)
             ->get()
             ->sum(fn ($reward) => $reward->amount - ($reward->withdrawn ?? 0));
 
-        $this->withdrawn = ReferralReward::where('user_id', $userId)
+        $this->withdrawn = RankBonus::where('user_id', $userId)
             ->sum('withdrawn');
 
     }
