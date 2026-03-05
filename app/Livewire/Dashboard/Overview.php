@@ -188,7 +188,7 @@ class Overview extends Component
         //     ->where('status', 'finished')
         //     ->sum('bonus');
 
-        $mainBalance = $user->balance + $this->totalReferralBonus + $rankBonusAvailable;
+        $mainBalance = $user->balance + $this->totalReferralBonus;
         $this->balance = $mainBalance;
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
