@@ -13,7 +13,7 @@ class ChallengeCategory extends Model {
         'min_activation_amount'
     ];
 
-    public $casts = [
+    protected $casts = [
         'rewards' => 'array'
     ];
 

@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Challenge extends Model {
-    public $fillable = [
+    protected $fillable = [
         'name',
         'start_at',
         'end_at',
         'is_active'
     ];
 
-    public $casts = [
+    protected $casts = [
         'start_at' => 'datetime',
         'end_at' => 'datetime',
         'is_active' => 'boolean'
