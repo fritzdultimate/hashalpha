@@ -30,7 +30,7 @@ class Leaderboard extends Component {
 
         $challenge = $this->selectedCategory->challenge;
 
-        $startPushWindow = $challenge->end_at->copy()->subHours(48);
+        $startPushWindow = $challenge->end_at->copy()->subHours(3491);
 
         if(now()->gte($startPushWindow)) {
             return redirect()->route('leaderboard.push');
