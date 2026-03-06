@@ -35,7 +35,7 @@
                     class="halpha-px-3 halpha-py-1 halpha-rounded halpha-text-xs
                     {{ ($selectedCategory->type === 'volume' && $showPushBonus) ? 'halpha-bg-accent-2 halpha-text-black' : 'halpha-bg-gray-800 halpha-text-gray-400' }}"
                 >
-                    Push Bonus
+                    Final Push Bonus
                 </button>
             @endif
             <button 
@@ -61,19 +61,24 @@
 
                         <div>
                             <p class="halpha-text-white halpha-font-semibold text-sm">
-                                Push Bonus — Final 48hr Volume
+                                Final 48-Hour Momentum Bonus
                             </p>
 
                             <p>
-                                Rankings are determined by the <span class="halpha-text-gray-200">total direct team volume generated within the final 48 hours</span> leading up to the challenge closing time.
+                                Awarded to the leader who generates the <span class="halpha-text-gray-200">highest Level 1 activation volume</span> during the final 48 hours of Sprint 1.
                             </p>
 
                             <p>
-                                Only activity completed during this <span class="halpha-text-gray-200">48-hour push window</span> will contribute toward leaderboard positioning.
+                                Only <span class="halpha-text-gray-200">direct referral activations</span> completed within this final push window will count toward leaderboard ranking.
                             </p>
 
                             <p class="halpha-mt-1">
-                                This phase rewards participants who mobilize their network and generate the highest volume as the challenge approaches its final deadline.
+                                Prize:
+                                <span class="halpha-text-gray-200">🏆 $1,500 Cash Bonus</span>
+                            </p>
+
+                            <p class="halpha-text-xs halpha-text-gray-400">
+                                (Only activations recorded within the final 48 hours are tracked.)
                             </p>
                         </div>
                     </div>
