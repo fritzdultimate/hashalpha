@@ -12,7 +12,7 @@ class Challenge extends Model {
         'is_active'
     ];
 
-    public $cast = [
+    public $casts = [
         'start_at' => 'datetime',
         'end_at' => 'datetime',
         'is_active' => 'boolean'
