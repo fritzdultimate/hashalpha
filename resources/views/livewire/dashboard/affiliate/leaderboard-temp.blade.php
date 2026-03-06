@@ -379,7 +379,7 @@
 
                 @endphp
 
-                <div class="halpha-relative halpha-flex halpha-justify-between halpha-items-center halpha-p-3 halpha-rounded-xl halpha-border {{ $applyStyle ? $rankStyles : '' }}">
+                <div class="halpha-relative halpha-flex halpha-justify-between halpha-items-center halpha-p-3 halpha-rounded-xl halpha-border {{ $applyStyle ? $rankStyles : 'halpha-bg-card-soft halpha-border-transparent' }}">
 
                     @if($selectedCategory->type === 'fastest' && $isLocked)
                         <div class="halpha-absolute halpha-top-0 halpha-right-2 halpha-text-yellow-400">
