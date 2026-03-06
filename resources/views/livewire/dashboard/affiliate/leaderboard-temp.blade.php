@@ -55,25 +55,49 @@
 
             @if (strtolower($selectedCategory->type) === 'volume')
                 {{-- 🥇 VOLUME --}}
-                <div class="halpha-flex halpha-gap-3">
-                    <div class="halpha-text-accent-2">💰</div>
-                    <div>
-                        <p class="halpha-text-white halpha-font-semibold text-sm">
-                            Top Personal Volume — $5,000 Pool
-                        </p>
-                        <p>
-                            Leaderboard rankings are determined by <span class="halpha-text-gray-200">total personal (Volume 1)</span> participation accumulated during the Sprint 1 period.
-                        </p> 
-                            
-                        <p>
-                            Only <span class="halpha-text-gray-200">directly enrolled users</span> and personally generated volume are considered
-                        </p>
+                @if($showPushBonus)
+                    <div class="halpha-flex halpha-gap-3">
+                        <div class="halpha-text-accent-2">🚀</div>
 
-                        <p class="halpha-mt-1">
-                            Downline activity and team spillover are not included in the calculation.
-                        </p>
+                        <div>
+                            <p class="halpha-text-white halpha-font-semibold text-sm">
+                                Push Bonus — Final 48hr Volume
+                            </p>
+
+                            <p>
+                                Rankings are determined by the <span class="halpha-text-gray-200">total direct team volume generated within the final 48 hours</span> leading up to the challenge closing time.
+                            </p>
+
+                            <p>
+                                Only activity completed during this <span class="halpha-text-gray-200">48-hour push window</span> will contribute toward leaderboard positioning.
+                            </p>
+
+                            <p class="halpha-mt-1">
+                                This phase rewards participants who mobilize their network and generate the highest volume as the challenge approaches its final deadline.
+                            </p>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="halpha-flex halpha-gap-3">
+                        <div class="halpha-text-accent-2">💰</div>
+                        <div>
+                            <p class="halpha-text-white halpha-font-semibold text-sm">
+                                Top Personal Volume — $5,000 Pool
+                            </p>
+                            <p>
+                                Leaderboard rankings are determined by <span class="halpha-text-gray-200">total personal (Volume 1)</span> participation accumulated during the Sprint 1 period.
+                            </p> 
+                                
+                            <p>
+                                Only <span class="halpha-text-gray-200">directly enrolled users</span> and personally generated volume are considered
+                            </p>
+
+                            <p class="halpha-mt-1">
+                                Downline activity and team spillover are not included in the calculation.
+                            </p>
+                        </div>
+                    </div>
+                @endif
             @endif
 
             @if (strtolower($selectedCategory->type) === 'new_members')
@@ -113,9 +137,6 @@
 
         </div>
 
-        <p class="halpha-text-[11px] halpha-text-gray-400 halpha-hidden">
-            Compete, climb the ranks, and earn from the pool before the sprint ends.
-        </p>
 
     </div>
 
@@ -197,6 +218,7 @@
 
     </div>
 
+    <!-- Time remaining -->
     <div 
         x-data="{
             end: {{ $selectedCategory && $selectedCategory->challenge->end_at ? 'new Date(\''.$selectedCategory->challenge->end_at.'\').getTime()' : 'null' }},
@@ -251,9 +273,25 @@
 
     @php
         $top3 = collect($leaderboard)->take(3);
+        $top1 = collect($leaderboard)->take(1);
     @endphp
 
-    @if($top3->count() >= 1)
+    @if ($top1->count() > 0 && $showPushBonus)
+        <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-3 halpha-items-end">
+            {{-- 1st --}}
+            @if(isset($top1[0]))
+                <div class="halpha-text-center halpha-bg-accent-2 halpha-rounded-xl halpha-p-4 halpha-scale-110 shadow-lg">
+                    <p class="halpha-text-xs text-black font-bold">🥇 1st</p>
+                    <p class="halpha-text-sm text-black font-bold halpha-capitalize">{{ $top3[0]->user->name }}</p>
+                    <p class="halpha-text-xs text-black">
+                        {{ $selectedCategory->type === 'volume' ? '$'.number_format($top3[0]->score, 2) : $top3[0]->score }}
+                    </p>
+                </div>
+            @endif
+        </div>
+    @endif
+
+    @if($top3->count() >= 1 && !$showPushBonus)
         <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-3 halpha-items-end">
 
             {{-- 2nd --}}
@@ -337,9 +375,11 @@
                         default => null
                     };
 
+                    $applyStyle = !$showPushBonus || $entry->rank == 1;
+
                 @endphp
 
-                <div class="halpha-relative halpha-flex halpha-justify-between halpha-items-center halpha-p-3 halpha-rounded-xl halpha-border {{ $rankStyles }}">
+                <div class="halpha-relative halpha-flex halpha-justify-between halpha-items-center halpha-p-3 halpha-rounded-xl halpha-border {{ $applyStyle ? $rankStyles : '' }}">
 
                     @if($selectedCategory->type === 'fastest' && $isLocked)
                         <div class="halpha-absolute halpha-top-0 halpha-right-2 halpha-text-yellow-400">

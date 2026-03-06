@@ -41,7 +41,18 @@ class LeaderBoardService {
                 ->orderBy('completed_at')
                 ->get();
 
+            $entries48 = ChallengeFortyEightEntry::where('challenge_category_id', $category->id)
+                ->orderByDesc('score')
+                ->orderByRaw('completed_at IS NULL')
+                ->orderBy('completed_at')
+                ->get();
+
             foreach ($entries as $index => $entry) {
+                $entry->rank = $index + 1;
+                $entry->save();
+            }
+
+            foreach ($entries48 as $index => $entry) {
                 $entry->rank = $index + 1;
                 $entry->save();
             }
@@ -110,9 +121,9 @@ class LeaderBoardService {
             ->whereBetween('created_at', [$start_at, $endAt])
             ->sum('amount');
 
-        if ($score <= 0) {
-            return;
-        }
+        // if ($score <= 0) {
+        //     return;
+        // }
 
         ChallengeFortyEightEntry::updateOrCreate(
             [
