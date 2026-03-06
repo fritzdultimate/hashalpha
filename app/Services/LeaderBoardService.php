@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Models\ChallengeCategory;
 use App\Models\ChallengeEntry;
+use App\Models\ChallengeFortyEightEntry;
 use App\Models\LeaderboardReferralBreakage;
 use App\Models\Referral;
 use App\Models\Stake;
@@ -22,6 +23,7 @@ class LeaderBoardService {
 
                     // 🥇 VOLUME
                     self::scoreForVolume($user, $categories['volume'] ?? null);
+                    self::scoreForVolumeLast48($user, $categories['volume'] ?? null);
                     
 
                     // 🚀 New Members
@@ -81,6 +83,38 @@ class LeaderBoardService {
 
 
         ChallengeEntry::updateOrCreate(
+            [
+                'challenge_id' => $category->challenge->id,
+                'challenge_category_id' => $category->id,
+                'user_id' => $user->id
+            ],
+            [
+                'score' => $score,
+                'completed_at' => null
+            ]
+        );
+    }
+
+    private static function scoreForVolumeLast48($user, $category) {
+        if (!$category) return;
+        $downline = getDownlineUserIds($user->id, 1);
+
+        if (empty($downline)) {
+            return;
+        }
+
+        $endAt = $category->challenge->end_at;
+        $start_at = $endAt->copy()->subHours(48);
+
+        $score = Stake::whereIn('user_id', $downline)
+            ->whereBetween('created_at', [$start_at, $endAt])
+            ->sum('amount');
+
+        if ($score <= 0) {
+            return;
+        }
+
+        ChallengeFortyEightEntry::updateOrCreate(
             [
                 'challenge_id' => $category->challenge->id,
                 'challenge_category_id' => $category->id,
