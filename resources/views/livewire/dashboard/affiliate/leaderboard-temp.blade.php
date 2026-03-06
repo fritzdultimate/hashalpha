@@ -292,7 +292,7 @@
             </div>
         </div>
     @endif
-
+ 
     @if($top3->count() >= 1 && !$showPushBonus)
         <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-3 halpha-items-end">
 
