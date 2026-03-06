@@ -27,6 +27,14 @@ class Leaderboard extends Component {
 
     public function mount() {
         $this->selectedCategory = ChallengeCategory::first();
+
+        $challenge = $this->selectedCategory->challenge;
+
+        $startPushWindow = $challenge->end_at->copy()->subHours(48);
+
+        if(now()->gte($startPushWindow)) {
+            return redirect()->route('leaderboard.push');
+        }
         // LeaderBoardService::scoreLeaderBoard();
         $this->challenges = Challenge::where('is_active', true)->get();
         $this->loadLeaderboard();
