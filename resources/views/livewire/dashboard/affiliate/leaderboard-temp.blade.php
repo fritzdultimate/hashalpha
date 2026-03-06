@@ -277,17 +277,19 @@
     @endphp
 
     @if ($top1->count() > 0 && $showPushBonus)
-        <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-3 halpha-gap-3 halpha-items-end">
-            {{-- 1st --}}
-            @if(isset($top1[0]))
-                <div class="halpha-text-center halpha-bg-accent-2 halpha-rounded-xl halpha-p-4 halpha-scale-110 shadow-lg">
-                    <p class="halpha-text-xs text-black font-bold">🥇 1st</p>
-                    <p class="halpha-text-sm text-black font-bold halpha-capitalize">{{ $top3[0]->user->name }}</p>
-                    <p class="halpha-text-xs text-black">
-                        {{ $selectedCategory->type === 'volume' ? '$'.number_format($top3[0]->score, 2) : $top3[0]->score }}
-                    </p>
-                </div>
-            @endif
+        <div class="halpha-flex halpha-justify-center">
+            <div class="halpha-w-full md:halpha-w-1/3 halpha-justify-center">
+                {{-- 1st --}}
+                @if(isset($top1[0]))
+                    <div class="halpha-text-center halpha-bg-accent-2 halpha-rounded-xl halpha-p-4 halpha-scale-110 shadow-lg">
+                        <p class="halpha-text-xs text-black font-bold">🥇 1st</p>
+                        <p class="halpha-text-sm text-black font-bold halpha-capitalize">{{ $top3[0]->user->name }}</p>
+                        <p class="halpha-text-xs text-black">
+                            {{ $selectedCategory->type === 'volume' ? '$'.number_format($top3[0]->score, 2) : $top3[0]->score }}
+                        </p>
+                    </div>
+                @endif
+            </div>
         </div>
     @endif
 
