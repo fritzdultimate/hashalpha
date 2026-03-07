@@ -25,6 +25,7 @@
 
                     <span>🚀 Phase 1 Expansion Sprint is live now</span>
                     <a href="{{ route('leaderboard') }}" class="halpha-underline">👉 Go to My Team for participation details</a>
+                    <span>48 hours untill sprint1 closes</span>
 
                 </div>
 
