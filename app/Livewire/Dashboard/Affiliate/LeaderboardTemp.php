@@ -22,7 +22,7 @@ class LeaderboardTemp extends Component {
     public $categories = [];
     public $selectedCategory = null;
 
-    public $showPushBonus = true;
+    public $showPushBonus = false;
 
     public $myStats = [];
     public $myReferrals = [];
