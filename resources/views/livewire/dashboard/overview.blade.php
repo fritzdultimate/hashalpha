@@ -11,34 +11,51 @@
         }
     </style>
 
-    <div class="halpha-w-full halpha-overflow-hidden halpha-rounded-lg halpha-bg-gradient-to-r halpha-from-sky-700/10 halpha-to-sky-700/5 halpha-border halpha-border-sky-700/20 halpha-py-2">
+    <div class="halpha-w-full halpha-rounded-xl halpha-border halpha-border-amber-400/20 halpha-bg-gradient-to-r halpha-from-amber-500/10 halpha-to-yellow-400/5 halpha-p-4 halpha-flexx halpha-items-center halpha-justify-between halpha-gap-4 halpha-flex-wrap halpha-hidden">
 
-        <div class="halpha-relative halpha-overflow-hidden">
-            <div class="halpha-absolute halpha-left-0 halpha-top-0 halpha-h-full halpha-w-6 halpha-bg-gradient-to-r halpha-from-black halpha-to-transparent halpha-z-10"></div>
-            <div class="halpha-absolute halpha-right-0 halpha-top-0 halpha-h-full halpha-w-6 halpha-bg-gradient-to-l halpha-from-black halpha-to-transparent halpha-z-10"></div>
-        
+        {{-- LEFT --}}
+        <div class="halpha-flex halpha-items-start halpha-gap-3 halpha-max-w-full">
 
-            <div class="halpha-relative halpha-flex halpha-w-max halpha-animate-[ticker_25s_linear_infinite] hover:[animation-play-state:paused]">
+            <div class="halpha-text-xl halpha-shrink-0">
+                🚨
+            </div>
 
-                {{-- TRACK --}}
-                <div class="halpha-flex halpha-items-center halpha-gap-10 halpha-text-xs halpha-text-accent-2 halpha-font-medium halpha-px-4">
+            <div class="halpha-space-y-1">
+                <p class="halpha-text-sm halpha-font-semibold halpha-text-white">
+                    Sprint 1 Verification in Progress
+                </p>
 
-                    <span>🚀 Phase 1 Expansion Sprint is live now</span>
-                    <a href="{{ route('leaderboard') }}" class="halpha-underline">👉 Go to My Team for participation details</a>
-                    <span>48 hours untill sprint1 closes</span>
+                <p class="halpha-text-xs halpha-text-gray-400 halpha-max-w-xl">
+                    Sprint 1 has officially closed and the leaderboard is now frozen. Our team is reviewing all activations and qualifying volumes to ensure fair and accurate results.
+                </p>
 
-                </div>
-
-                {{-- DUPLICATE (IMPORTANT 🔥) --}}
-                <div class="halpha-flex halpha-items-center halpha-gap-10 halpha-text-xs halpha-text-accent-2 halpha-font-medium halpha-px-4">
-
-                    <span>🚀 Phase 1 Expansion Sprint is live now</span>
-                    <a href="{{ route('leaderboard') }}" class="halpha-underline">👉 Go to My Team for participation details</a>
-
-                </div>
+                <p class="halpha-text-xs halpha-text-gray-400">
+                    🏆 Winners will be announced on <span class="halpha-text-white halpha-font-medium">March 10, 2026</span>
+                </p>
 
             </div>
         </div>
+
+        {{-- STATUS (RESPONSIVE) --}}
+        <div class="halpha-grid halpha-grid-cols-1 sm:halpha-grid-cols-2 lg:halpha-grid-cols-3 halpha-gap-2 halpha-text-xs halpha-w-full lg:halpha-w-auto">
+
+            <div class="halpha-bg-black/30 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-px-3 halpha-py-2 halpha-flex halpha-items-center halpha-gap-2">
+                <span>🔒</span>
+                <span class="halpha-text-gray-300">Leaderboard Frozen</span>
+            </div>
+
+            <div class="halpha-bg-black/30 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-px-3 halpha-py-2 halpha-flex halpha-items-center halpha-gap-2">
+                <span>🔍</span>
+                <span class="halpha-text-gray-300">Results Under Review</span>
+            </div>
+
+            <div class="halpha-bg-black/30 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-px-3 halpha-py-2 halpha-flex halpha-items-center halpha-gap-2">
+                <span>📅</span>
+                <span class="halpha-text-gray-300">March 10 Announcement</span>
+            </div>
+
+        </div>
+
     </div>
 
 
