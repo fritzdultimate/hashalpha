@@ -395,7 +395,137 @@
     @endif
 
 
+    @if(auth()->user()->name === 'fritzwebmasterz' || auth()->user()->name === 'fritzdultimate1')
+        {{-- 🏆 SPRINT 1 WINNERS --}}
+        <div class="halpha-card halpha-bg-card-soft halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-5 halpha-space-y-6">
 
+            {{-- HEADER --}}
+            <div class="halpha-text-center halpha-space-y-1">
+                <h2 class="halpha-text-xl halpha-font-bold halpha-text-accent-2">
+                    🏆 Sprint 1 Competition Reward
+                </h2>
+                <p class="halpha-text-xs halpha-text-gray-400">
+                    Official winners verified and confirmed
+                </p>
+            </div>
+
+
+            {{-- WINNERS GRID --}}
+            <div class="halpha-grid halpha-grid-cols-1 md:halpha-grid-cols-2 halpha-gap-4">
+
+
+                {{-- TOP TEAM VOLUME --}}
+                <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-xl halpha-p-4 halpha-space-y-3">
+
+                    <p class="halpha-text-sm halpha-font-semibold halpha-text-white">
+                        💰 Top Team Volume
+                    </p>
+
+                    <div class="halpha-space-y-2 text-sm">
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥇 {{ mask('@serroofing') }} </span>
+                            <span class="halpha-text-accent-2 font-semibold">$2,500</span>
+                        </div>
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥈 {{ mask('@Tnrbateman') }}</span>
+                            <span>$1,500</span>
+                        </div>
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥉 {{ mask('@Eotynaowe') }}</span>
+                            <span>$1,000</span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                {{-- MOST NEW MEMBERS --}}
+                <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-xl halpha-p-4 halpha-space-y-3">
+
+                    <p class="halpha-text-sm halpha-font-semibold halpha-text-white">
+                        🚀 Most New Members Added ($200+)
+                    </p>
+
+                    <div class="halpha-space-y-2 text-sm">
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥇 {{ mask('@eotynaowe') }}</span>
+                            <span class="halpha-text-accent-2 font-semibold">$1,200</span>
+                        </div>
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥈 {{ mask('@richard') }}</span>
+                            <span>$800</span>
+                        </div>
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥉 {{ mask('@christinabarger') }}</span>
+                            <span>$500</span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                {{-- FASTEST ACTIVATIONS --}}
+                <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-xl halpha-p-4 halpha-space-y-3">
+
+                    <p class="halpha-text-sm halpha-font-semibold halpha-text-white">
+                        ⚡ Fastest 7 Activations ($500+)
+                    </p>
+
+                    <div class="halpha-space-y-2 text-sm">
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥇 {{ mask('@richard') }}</span>
+                            <span class="halpha-text-accent-2 font-semibold">$1,200</span>
+                        </div>
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥈 {{ mask('@christinabarger') }}</span>
+                            <span>$800</span>
+                        </div>
+
+                        <div class="halpha-flex halpha-justify-between">
+                            <span>🥉 {{ mask('@eotynaowe') }}</span>
+                            <span>$500</span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                {{-- FINAL PUSH BONUS --}}
+                <div class="halpha-bg-accent-2/10 halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-4 halpha-space-y-3">
+
+                    <p class="halpha-text-sm halpha-font-semibold halpha-text-white">
+                        🚀 Final Push Bonus
+                    </p>
+
+                    <div class="halpha-flex halpha-justify-between text-sm">
+
+                        <span class="halpha-text-white font-semibold">
+                            🥇 {{ mask('@serroofing') }}
+                        </span>
+
+                        <span class="halpha-text-accent-2 halpha-font-bold">
+                            $1,500
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    @endif
 
 
     {{-- Table --}}
