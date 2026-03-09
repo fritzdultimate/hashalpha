@@ -14,7 +14,7 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class LeaderboardPhaseTwo extends Component {
     public $activeTab = 1;
-    public $leaderboard = [];
+    public $leaderboard = []; 
     public $challenge;
     public $myRank = null;
     public $challenges = [];
