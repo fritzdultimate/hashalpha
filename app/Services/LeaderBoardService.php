@@ -48,12 +48,30 @@ class LeaderBoardService {
                 ->get();
 
             foreach ($entries as $index => $entry) {
-                $entry->rank = $index + 1;
+                $newRank = $index + 1;
+                $oldRank = $entry->rank;
+
+                $entry->previous_rank = $oldRank;
+                $entry->rank = $newRank;
+
+                if ($oldRank) {
+                    $entry->rank_change = $oldRank - $newRank;
+                }
+
                 $entry->save();
             }
 
             foreach ($entries48 as $index => $entry) {
-                $entry->rank = $index + 1;
+                $newRank = $index + 1;
+                $oldRank = $entry->rank;
+
+                $entry->previous_rank = $oldRank;
+                $entry->rank = $newRank;
+
+                if ($oldRank) {
+                    $entry->rank_change = $oldRank - $newRank;
+                }
+
                 $entry->save();
             }
         }
@@ -177,8 +195,11 @@ class LeaderBoardService {
 
    
 
-    private static function scoreForFastestNewUserActivators($user, $category) {
+    private static function scoreForFastestNewUserActivators($user, $category, $phase = 1) {
         if (!$category) return;
+        if($phase === 2) {
+            if($category->challenge->phase != 2) return;
+        }
 
         $threshold = $category->min_activation_amount ?? 500;
         $completedAt = null;
@@ -227,8 +248,87 @@ class LeaderBoardService {
             ],
             [
                 'score' => $score,
-                'completed_at' => $completedAt
+                'completed_at' => $completedAt,
+                'phase' => $phase
             ]
         );
-    }   
+    }
+
+    // PHASE TWOOOOO ....................
+    ////////////////////////////////////
+
+
+    private static function scoreForTeamVolume($user, $category) {
+        if (!$category) return;
+        if ($category->challenge->phase != 2) return;
+        $downline = getDownlineUserIds($user->id);
+
+        // dd(getDownlineUserIds(23, 1));
+
+
+
+        $score = Stake::whereIn('user_id', $downline)
+            ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
+            ->sum('amount');
+
+        // $score = 0;
+
+        // for ($level = 1; $level <= 10; $level++) {
+
+        //     $usersAtLevel = getDownlineUsersByLevel($user->id, $level);
+
+        //     if (empty($usersAtLevel)) continue;
+
+        //     $percentage = LeaderboardReferralBreakage::where('level', $level)->value('percentage') ?? 0;
+
+        //     $volume = Stake::whereIn('user_id', $usersAtLevel)
+        //         ->whereBetween('created_at', [
+        //             $category->challenge->start_at,
+        //             $category->challenge->end_at
+        //         ])
+        //         ->sum('amount');
+
+        //     $score += ($volume * ($percentage / 100));
+        // }
+
+
+
+        ChallengeEntry::updateOrCreate(
+            [
+                'challenge_id' => $category->challenge->id,
+                'challenge_category_id' => $category->id,
+                'user_id' => $user->id
+            ],
+            [
+                'score' => $score,
+                'completed_at' => null,
+                'phase' => 2
+            ]
+        );
+    }
+
+    private static function scoreForHighestCapital($user, $category) {
+        if (!$category) return;
+        if ($category->challenge->phase != 2) return;
+
+
+
+        $score = Stake::where('user_id', $user->id)
+            ->whereBetween('created_at', [$category->challenge->start_at, $category->challenge->end_at])
+            ->max('amount');
+
+
+        ChallengeEntry::updateOrCreate(
+            [
+                'challenge_id' => $category->challenge->id,
+                'challenge_category_id' => $category->id,
+                'user_id' => $user->id
+            ],
+            [
+                'score' => $score,
+                'completed_at' => null,
+                'phase' => 2
+            ]
+        );
+    }
 }

@@ -4,6 +4,14 @@
         Sprint Leaderboard
     </h1>
 
+    {{-- 🚨 VERIFICATION BANNER --}}
+    <div class="halpha-bg-amber-500/10 halpha-border halpha-border-amber-400/30 halpha-rounded-xl halpha-px-4 halpha-py-2 halpha-text-xs halpha-flex halpha-items-center halpha-gap-2">
+        <span>🚨</span>
+        <span class="halpha-text-amber-200">
+            Sprint 1 Verification in Progress
+        </span>
+    </div>
+
     {{-- 🏁 PHASE HEADER --}}
     <div class="halpha-flex halpha-items-center halpha-justify-between halpha-bg-gradient-to-r halpha-from-blue-800/2 halpha-to-sky-200/5 halpha-opacity-50 halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-3">
         
@@ -21,6 +29,51 @@
             <p class="halpha-text-sm halpha-font-bold halpha-text-white">
                 $10,000
             </p>
+        </div>
+
+    </div>
+
+    {{-- 🏁 SPRINT CLOSED MESSAGE --}}
+    <div class="halpha-card halpha-bg-card-soft halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-4 halpha-space-y-3 halpha-text-sm halpha-text-gray-300">
+
+        <p class="halpha-text-white halpha-font-semibold halpha-text-base">
+            🏁 Sprint 1 Has Officially Closed
+        </p>
+
+        <p>
+            The Sprint 1 leaderboard is now <span class="halpha-text-gray-200">frozen</span>.
+        </p>
+
+        <p>
+            Our team is currently conducting a <span class="halpha-text-gray-200">final verification</span> of all activations and qualifying volumes to ensure the accuracy and integrity of the results.
+        </p>
+
+        <p class="halpha-text-gray-200">
+            🏆 Official winners will be announced on <span class="halpha-text-white">March 10, 2026</span>.
+        </p>
+
+        <p class="halpha-text-gray-400 text-xs">
+            Thank you to everyone who participated and contributed to the growth of the HashAlpha network.
+        </p>
+
+    </div>
+
+    {{-- 📊 STATUS INFO --}}
+    <div class="halpha-grid halpha-grid-cols-3 halpha-gap-2 halpha-text-xs">
+
+        <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
+            <p class="halpha-text-gray-400">Leaderboard Status</p>
+            <p class="halpha-text-white halpha-font-semibold">🔒 Frozen</p>
+        </div>
+
+        <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
+            <p class="halpha-text-gray-400">Verification Status</p>
+            <p class="halpha-text-white halpha-font-semibold">🔍 In Review</p>
+        </div>
+
+        <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
+            <p class="halpha-text-gray-400">Winners Announcement</p>
+            <p class="halpha-text-white halpha-font-semibold">📅 March 10, 2026</p>
         </div>
 
     </div>
@@ -373,9 +426,9 @@
                         default => 'halpha-bg-card-soft halpha-border-transparent'
                     };
 
-                    $isLocked = $entry->score >= 7 && $entry->rank < 4;
+                    $isLocked = true;
 
-                    if ($selectedCategory->type === 'fastest' && $isLocked) {
+                    if ($selectedCategory->type === 'fastest' && $entry->rank < 4) {
                         $rankStyles = 'halpha-bg-gradient-to-r halpha-from-green-500/20 halpha-to-emerald-500/10 halpha-border-green-400/40 halpha-shadow-[0_0_25px_rgba(34,197,94,0.3)]';
                     }
 
@@ -392,7 +445,7 @@
 
                 <div class="halpha-relative halpha-flex halpha-justify-between halpha-items-center halpha-p-3 halpha-rounded-xl halpha-border {{ $applyStyle ? $rankStyles : 'halpha-bg-card-soft halpha-border-transparent' }}">
 
-                    @if($selectedCategory->type === 'fastest' && $isLocked)
+                    @if($isLocked)
                         <div class="halpha-absolute halpha-top-0 halpha-right-2 halpha-text-yellow-400">
                             🔒
                         </div>
