@@ -59,14 +59,14 @@ class Overview extends Component
 
                 [
                     'user_id' => 1,
-                    'username' => 'fritzdultimate',
+                    'username' => 'fritzwebmasterz',
                     'title' => 'Fastest 7 Activations — 3rd',
                     'reward' => '$1,500',
                 ],
 
                 [
                     'user_id' => 1,
-                    'username' => 'fritzdultimate',
+                    'username' => 'fritzwebmasterz',
                     'title' => 'Top Team Volume — 3rd',
                     'reward' => '$1,000',
                 ],
