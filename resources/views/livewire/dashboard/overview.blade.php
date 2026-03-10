@@ -11,7 +11,7 @@
         }
     </style>
 
-    @if(auth()->user()->seen_sprint1_banner)
+    @if(!auth()->user()->seen_sprint1_banner)
 
         @if(auth()->user()->name === $sprintWinners['champion']['username'])
 
