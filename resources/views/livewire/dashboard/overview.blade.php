@@ -11,52 +11,72 @@
         }
     </style>
 
-    <div class="halpha-w-full halpha-rounded-xl halpha-border halpha-border-amber-400/20 halpha-bg-gradient-to-r halpha-from-amber-500/10 halpha-to-yellow-400/5 halpha-p-4 halpha-flexx halpha-items-center halpha-justify-between halpha-gap-4 halpha-flex-wrap halpha-hidden">
+    @if(auth()->user()->seen_sprint1_banner)
 
-        {{-- LEFT --}}
-        <div class="halpha-flex halpha-items-start halpha-gap-3 halpha-max-w-full">
+        @if(auth()->user()->name === $sprintWinners['champion']['username'])
 
-            <div class="halpha-text-xl halpha-shrink-0">
-                🚨
+            <div class="halpha-w-full halpha-rounded-xl halpha-border halpha-border-yellow-400/30 halpha-bg-gradient-to-r halpha-from-yellow-500/10 halpha-to-amber-400/5 halpha-p-4 halpha-flex halpha-items-center halpha-gap-4">
+
+                <div class="halpha-text-2xl">🌴</div>
+
+                <div class="halpha-space-y-1">
+                    <p class="halpha-text-sm halpha-font-semibold halpha-text-yellow-300">
+                        Sprint 1 Champion!
+                    </p>
+
+                    <p class="halpha-text-xs halpha-text-gray-300">
+                        Congratulations on securing the first qualification to the 
+                        <span class="halpha-text-white">HashAlpha Bali Leadership Experience</span>
+                        (April 23–26, 2026).
+                    </p>
+
+                    <p class="halpha-text-xs halpha-text-gray-400">
+                        🏆 Your cash prize of 
+                        <span class="halpha-text-yellow-300 halpha-font-semibold">
+                            {{ $sprintWinners['champion']['reward'] }}
+                        </span> 
+                        has been credited and is available for withdrawal.
+                    </p>
+                </div>
+
             </div>
 
-            <div class="halpha-space-y-1">
-                <p class="halpha-text-sm halpha-font-semibold halpha-text-white">
-                    Sprint 1 Verification in Progress
+        @endif
+
+
+        @foreach($sprintWinners['winners'] as $winner)
+
+            @if(auth()->user()->name === $winner['username'])
+
+            <div class="halpha-w-full halpha-rounded-xl halpha-border halpha-border-green-400/20 halpha-bg-gradient-to-r halpha-from-green-500/10 halpha-to-emerald-400/5 halpha-p-4 halpha-space-y-2">
+
+                <p class="halpha-text-sm halpha-font-semibold halpha-text-green-400">
+                    🏆 Congratulations — Sprint 1 Winner!
                 </p>
 
-                <p class="halpha-text-xs halpha-text-gray-400 halpha-max-w-xl">
-                    Sprint 1 has officially closed and the leaderboard is now frozen. Our team is reviewing all activations and qualifying volumes to ensure fair and accurate results.
+                <p class="halpha-text-xs halpha-text-gray-300">
+                    Your competition reward has been credited to your account and is available for withdrawal.
                 </p>
 
-                <p class="halpha-text-xs halpha-text-gray-400">
-                    🏆 Winners will be announced on <span class="halpha-text-white halpha-font-medium">March 10, 2026</span>
-                </p>
+                <div class="halpha-bg-black/30 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-2 halpha-text-xs halpha-flex halpha-justify-between">
+
+                    <span class="halpha-text-gray-400">
+                        {{ $winner['title'] }}
+                    </span>
+
+                    <span class="halpha-text-white halpha-font-semibold">
+                        {{ $winner['reward'] }}
+                    </span>
+
+                </div>
 
             </div>
-        </div>
 
-        {{-- STATUS (RESPONSIVE) --}}
-        <div class="halpha-grid halpha-grid-cols-1 sm:halpha-grid-cols-2 lg:halpha-grid-cols-3 halpha-gap-2 halpha-text-xs halpha-w-full lg:halpha-w-auto">
+            @endif
 
-            <div class="halpha-bg-black/30 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-px-3 halpha-py-2 halpha-flex halpha-items-center halpha-gap-2">
-                <span>🔒</span>
-                <span class="halpha-text-gray-300">Leaderboard Frozen</span>
-            </div>
+        @endforeach
 
-            <div class="halpha-bg-black/30 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-px-3 halpha-py-2 halpha-flex halpha-items-center halpha-gap-2">
-                <span>🔍</span>
-                <span class="halpha-text-gray-300">Results Under Review</span>
-            </div>
-
-            <div class="halpha-bg-black/30 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-px-3 halpha-py-2 halpha-flex halpha-items-center halpha-gap-2">
-                <span>📅</span>
-                <span class="halpha-text-gray-300">March 10 Announcement</span>
-            </div>
-
-        </div>
-
-    </div>
+    @endif
 
 
 

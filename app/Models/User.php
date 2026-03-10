@@ -42,7 +42,8 @@ class User extends Authenticatable implements FilamentUser {
         'lock_roi',
         'suspended_until',
         'is_suspended',
-        'affiliate_code'
+        'affiliate_code',
+        'seen_sprint1_banner'
     ];
 
     /**

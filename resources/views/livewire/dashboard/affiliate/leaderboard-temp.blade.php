@@ -424,17 +424,17 @@
                     <div class="halpha-space-y-2 text-sm">
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥇 {{ mask('@serroofing') }} </span>
+                            <span>🥇 {{ '@' . mask('serroofing') }} </span>
                             <span class="halpha-text-accent-2 font-semibold">$2,500</span>
                         </div>
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥈 {{ mask('@Tnrbateman') }}</span>
+                            <span>🥈 {{ '@' . mask('tnrbateman') }}</span>
                             <span>$1,500</span>
                         </div>
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥉 {{ mask('@Eotynaowe') }}</span>
+                            <span>🥉 {{ '@' . mask('eotynaowe') }}</span>
                             <span>$1,000</span>
                         </div>
 
@@ -453,17 +453,17 @@
                     <div class="halpha-space-y-2 text-sm">
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥇 {{ mask('@eotynaowe') }}</span>
+                            <span>🥇 {{ '@' . mask('eotynaowe') }}</span>
                             <span class="halpha-text-accent-2 font-semibold">$1,200</span>
                         </div>
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥈 {{ mask('@richard') }}</span>
+                            <span>🥈 {{ '@' . mask('richard') }}</span>
                             <span>$800</span>
                         </div>
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥉 {{ mask('@christinabarger') }}</span>
+                            <span>🥉 {{ '@' . mask('christinabarger') }}</span>
                             <span>$500</span>
                         </div>
 
@@ -482,17 +482,17 @@
                     <div class="halpha-space-y-2 text-sm">
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥇 {{ mask('@richard') }}</span>
+                            <span>🥇 {{ '@' . mask('richard') }}</span>
                             <span class="halpha-text-accent-2 font-semibold">$1,200</span>
                         </div>
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥈 {{ mask('@christinabarger') }}</span>
+                            <span>🥈 {{ '@' . mask('christinabarger') }}</span>
                             <span>$800</span>
                         </div>
 
                         <div class="halpha-flex halpha-justify-between">
-                            <span>🥉 {{ mask('@eotynaowe') }}</span>
+                            <span>🥉 {{ '@' . mask('eotynaowe') }}</span>
                             <span>$500</span>
                         </div>
 
@@ -511,7 +511,7 @@
                     <div class="halpha-flex halpha-justify-between text-sm">
 
                         <span class="halpha-text-white font-semibold">
-                            🥇 {{ mask('@serroofing') }}
+                            🥇 {{ '@' . mask('serroofing') }}
                         </span>
 
                         <span class="halpha-text-accent-2 halpha-font-bold">

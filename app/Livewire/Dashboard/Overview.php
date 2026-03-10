@@ -34,12 +34,113 @@ class Overview extends Component
     public $referralRewardschartData;
     public $rank;
     public $validatedBlocks = 129392;
+    public $sprintWinners;
 
     public function loadValidatorBlocks() {
         $this->validatedBlocks = $this->validatedBlocks + ValidatorBlock::count();
     }
 
     public function mount() {
+        $this->sprintWinners = [
+
+            // 'champion' => [
+            //     'user_id' => 1,
+            //     'username' => 'fritzdultimate1',
+            //     'reward' => '$2,500',
+            // ],
+
+            'champion' => [
+                'user_id' => 274,
+                'username' => 'serroofing',
+                'reward' => '$2,500',
+            ],
+
+            'winners' => [
+
+                [
+                    'user_id' => 1,
+                    'username' => 'fritzdultimate',
+                    'title' => 'Fastest 7 Activations — 3rd',
+                    'reward' => '$1,500',
+                ],
+
+                [
+                    'user_id' => 1,
+                    'username' => 'fritzdultimate',
+                    'title' => 'Top Team Volume — 3rd',
+                    'reward' => '$1,000',
+                ],
+
+
+
+
+
+                [
+                    'user_id' => 649,
+                    'username' => 'tnrbateman',
+                    'title' => 'Top Team Volume — 2nd',
+                    'reward' => '$1,500',
+                ],
+
+                [
+                    'user_id' => 599,
+                    'username' => 'eotynaowe',
+                    'title' => 'Top Team Volume — 3rd',
+                    'reward' => '$1,000',
+                ],
+
+                [
+                    'user_id' => 599,
+                    'username' => 'eotynaowe',
+                    'title' => 'Most New Members Added',
+                    'reward' => '$1,200',
+                ],
+
+                [
+                    'user_id' => 224,
+                    'username' => 'richard',
+                    'title' => 'Most New Members Added — 2nd',
+                    'reward' => '$800',
+                ],
+
+                [
+                    'user_id' => 16,
+                    'username' => 'christinabarger',
+                    'title' => 'Most New Members Added — 3rd',
+                    'reward' => '$500',
+                ],
+
+                [
+                    'user_id' => 224,
+                    'username' => 'richard',
+                    'title' => 'Fastest 7 Activations',
+                    'reward' => '$1,200',
+                ],
+
+                [
+                    'user_id' => 16,
+                    'username' => 'christinabarger',
+                    'title' => 'Fastest 7 Activations — 2nd',
+                    'reward' => '$800',
+                ],
+
+                [
+                    'user_id' => 599,
+                    'username' => 'eotynaowe',
+                    'title' => 'Fastest 7 Activations — 3rd',
+                    'reward' => '$500',
+                ],
+
+                [
+                    'user_id' => 274,
+                    'username' => 'serroofing',
+                    'title' => 'Final Push Bonus',
+                    'reward' => '$1,500',
+                ],
+
+            ]
+
+        ];
         $user = Auth::user();
         $userId = auth()->id();
         $this->totalDeposited = (float) ($user->deposits()->sum('amount') ?? 0);
@@ -192,6 +293,10 @@ class Overview extends Component
         $this->balance = $mainBalance;
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
+
+        // auth()->user()->update([
+        //     'seen_sprint1_banner' => true
+        // ]);
     }
 
 
