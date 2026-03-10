@@ -5,10 +5,17 @@
     </h1>
 
     {{-- 🚨 VERIFICATION BANNER --}}
-    <div class="halpha-bg-amber-500/10 halpha-border halpha-border-amber-400/30 halpha-rounded-xl halpha-px-4 halpha-py-2 halpha-text-xs halpha-flex halpha-items-center halpha-gap-2">
+    <div class="halpha-bg-amber-500/10 halpha-border halpha-hidden halpha-border-amber-400/30 halpha-rounded-xl halpha-px-4 halpha-py-2 halpha-text-xs halpha-flexd halpha-items-center halpha-gap-2">
         <span>🚨</span>
         <span class="halpha-text-amber-200">
             Sprint 1 Verification in Progress
+        </span>
+    </div>
+
+    <div class="halpha-bg-green-500/10 halpha-border halpha-border-green-400/30 halpha-rounded-xl halpha-px-4 halpha-py-2 halpha-text-xs halpha-flex halpha-items-center halpha-gap-2">
+        <span>🏆</span>
+        <span class="halpha-text-green-300">
+            Sprint 1 competition has concluded. Winners have been verified and rewards have been credited.
         </span>
     </div>
 
@@ -34,7 +41,7 @@
     </div>
 
     {{-- 🏁 SPRINT CLOSED MESSAGE --}}
-    <div class="halpha-card halpha-bg-card-soft halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-4 halpha-space-y-3 halpha-text-sm halpha-text-gray-300">
+    <div class="halpha-card halpha-bg-card-soft halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-4 halpha-space-y-3 halpha-text-sm halpha-text-gray-300 halpha-hidden">
 
         <p class="halpha-text-white halpha-font-semibold halpha-text-base">
             🏁 Sprint 1 Has Officially Closed
@@ -58,8 +65,33 @@
 
     </div>
 
+    {{-- 🏆 SPRINT COMPLETED MESSAGE --}}
+    <div class="halpha-card halpha-bg-card-soft halpha-border halpha-border-green-400/30 halpha-rounded-xl halpha-p-4 halpha-space-y-3 halpha-text-sm halpha-text-gray-300">
+
+        <p class="halpha-text-white halpha-font-semibold halpha-text-base">
+            🏆 Sprint 1 Competition Completed
+        </p>
+
+        <p>
+            The <span class="halpha-text-gray-200">Sprint 1 leaderboard</span> has officially been finalized and the results have been confirmed.
+        </p>
+
+        <p>
+            All qualifying activations and volumes have been reviewed, and the winners of each competition category have now been determined.
+        </p>
+
+        <p class="halpha-text-gray-200">
+            🏆 Competition rewards have been credited to the accounts of all winners and are now available for withdrawal.
+        </p>
+
+        <p class="halpha-text-gray-400 text-xs">
+            Thank you to everyone who participated and contributed to the continued growth of the HashAlpha network.
+        </p>
+
+    </div>
+
     {{-- 📊 STATUS INFO --}}
-    <div class="halpha-grid halpha-grid-cols-3 halpha-gap-2 halpha-text-xs">
+    <div class="halpha-gridd halpha-grid-cols-3 halpha-gap-2 halpha-text-xs halpha-hidden">
 
         <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
             <p class="halpha-text-gray-400">Leaderboard Status</p>
@@ -74,6 +106,26 @@
         <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
             <p class="halpha-text-gray-400">Winners Announcement</p>
             <p class="halpha-text-white halpha-font-semibold">📅 March 10, 2026</p>
+        </div>
+
+    </div>
+
+    {{-- 📊 STATUS INFO --}}
+    <div class="halpha-grid halpha-grid-cols-3 halpha-gap-2 halpha-text-xs">
+
+        <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
+            <p class="halpha-text-gray-400">Leaderboard Status</p>
+            <p class="halpha-text-green-400 halpha-font-semibold">🏆 Finalized</p>
+        </div>
+
+        <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
+            <p class="halpha-text-gray-400">Competition Status</p>
+            <p class="halpha-text-green-400 halpha-font-semibold">✅ Completed</p>
+        </div>
+
+        <div class="halpha-bg-gray-900/40 halpha-border halpha-border-gray-700 halpha-rounded-lg halpha-p-3">
+            <p class="halpha-text-gray-400">Rewards</p>
+            <p class="halpha-text-green-400 halpha-font-semibold">💰 Credited</p>
         </div>
 
     </div>
@@ -529,7 +581,7 @@
 
 
     {{-- Table --}}
-    <div class="halpha-card halpha-p-4 halpha-space-y-3">
+    <div class="halpha-card halpha-p-4 halpha-space-y-3 halpha-hidden">
 
         @forelse($leaderboard as $entry)
             <div
