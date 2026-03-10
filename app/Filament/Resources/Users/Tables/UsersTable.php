@@ -111,6 +111,7 @@ class UsersTable
 
                             return redirect('/dashboard');
                         }),
+
                     Action::make('topup')
                     ->label('Top Up')
                     ->icon('heroicon-o-plus-circle')
@@ -139,6 +140,31 @@ class UsersTable
                             ->send();
                     }),
                     // ->visible(fn () => auth()->user()->hasRole(['super-admin'])),
+
+                    Action::make('leaderboard_payment')
+                        ->label('Leaderbd Bonus')
+                        ->icon('heroicon-o-plus-circle')
+                        ->color('success')
+                        ->form([
+                            TextInput::make('amount')
+                                ->numeric()
+                                ->required()
+                                ->minValue(0.0001),
+
+                            // Textarea::make('reason')->label('Reason (optional)'),
+                        ])
+                        ->requiresConfirmation()
+                        ->action(function ($record, array $data) {
+                            BalanceService::leaderboard(
+                                $record,
+                                $data['amount']
+                            );
+
+                            Notification::make()
+                                ->title('Balance Updated, Leaderboard bonus credited')
+                                ->success()
+                                ->send();
+                        }),
 
                 Action::make('debit')
                     ->label('Debit')

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AdminTransaction;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +19,24 @@ class BalanceService {
                 'type' => 'credit',
                 'reason' => $reason,
                 'admin_id' => $admin->id,
+            ]);
+        });
+    }
+
+    public static function leaderboard(User $user, float $amount): void
+    {
+        DB::transaction(function () use ($user, $amount) {
+            $user->increment('balance', $amount);
+
+            Transaction::create([
+                'user_id' => $user->id,
+                'amount' => $amount,
+                'type' => 'Sprint-1 Reward',
+                'related_type' => User::class,
+                'related_id' => $user->id,
+                'meta' => [
+                    'status' => 'credited'
+                ]
             ]);
         });
     }
