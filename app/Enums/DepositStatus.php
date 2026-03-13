@@ -44,8 +44,10 @@ enum DepositStatus: string
         };
     }
 
-    public function isFinal(): bool
-    {
+    public function isFinal(): bool{
+        logger('DepositStatus match failure', [
+            'status' => $this->value
+        ]);
         return in_array($this, [
             self::FINISHED,
             self::FAILED,
