@@ -32,9 +32,6 @@ enum DepositStatus: string
 
     public function color(): string
     {
-        logger('DepositStatus used', [
-        'status' => $this->value
-    ]);
         return match ($this) {
             self::PENDING => 'warning',
             self::WAITING => 'warning',
@@ -43,7 +40,11 @@ enum DepositStatus: string
             self::FAILED => 'danger',
             self::CANCELLED => 'danger',
             self::FINISHED => 'success',
-            self::EXPIRED => 'danger'
+            self::EXPIRED => 'danger',
+
+            self::SENDING => 'info',
+            self::REFUNDED => 'danger',
+            self::CONFIRMING => 'info',
         };
     }
 
