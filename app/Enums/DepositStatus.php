@@ -26,7 +26,11 @@ enum DepositStatus: string
             self::FAILED => 'Failed',
             self::CANCELLED => 'Cancelled',
             self::FINISHED => 'finished',
-            self::EXPIRED => 'expired'
+            self::EXPIRED => 'expired',
+
+            self::SENDING => 'Sending',
+            self::REFUNDED => 'Refunded',
+            self::CONFIRMING => 'Confirming',
         };
     }
 
