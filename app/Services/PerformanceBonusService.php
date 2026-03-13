@@ -59,7 +59,7 @@ class PerformanceBonusService {
             if (!$rank) continue;
 
 
-            // if (!self::meetsRequirements($upline, $rank)) continue;
+            if (!self::meetsRequirements($upline, $rank)) continue;
 
             // $percentage = PerformancePercentage::where('level', $level)
             //     ->first()?->percentage ?? 0;
@@ -115,7 +115,7 @@ class PerformanceBonusService {
             );
         }
 
-        self::handleGlobalBonus($ref, $roiAmount, $uplines, $stakeId);
+        // self::handleGlobalBonus($ref, $roiAmount, $uplines, $stakeId);
     }
 
 
