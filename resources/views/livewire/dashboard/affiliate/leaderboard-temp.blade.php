@@ -447,7 +447,7 @@
     @endif
 
 
-    @if(auth()->user()->name === 'fritzwebmasterz' || auth()->user()->name === 'fritzdultimate1')
+    @if(true)
         {{-- 🏆 SPRINT 1 WINNERS --}}
         <div class="halpha-card halpha-bg-card-soft halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-5 halpha-space-y-6">
 
