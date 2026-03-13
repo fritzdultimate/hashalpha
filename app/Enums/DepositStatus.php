@@ -32,6 +32,9 @@ enum DepositStatus: string
 
     public function color(): string
     {
+        logger('DepositStatus used', [
+        'status' => $this->value
+    ]);
         return match ($this) {
             self::PENDING => 'warning',
             self::WAITING => 'warning',
@@ -45,9 +48,6 @@ enum DepositStatus: string
     }
 
     public function isFinal(): bool{
-        logger('DepositStatus match failure', [
-            'status' => $this->value
-        ]);
         return in_array($this, [
             self::FINISHED,
             self::FAILED,
