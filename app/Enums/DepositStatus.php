@@ -31,6 +31,8 @@ enum DepositStatus: string
             self::SENDING => 'Sending',
             self::REFUNDED => 'Refunded',
             self::CONFIRMING => 'Confirming',
+
+            default => ucfirst($this->value),
         };
     }
 
@@ -49,6 +51,8 @@ enum DepositStatus: string
             self::SENDING => 'info',
             self::REFUNDED => 'danger',
             self::CONFIRMING => 'info',
+
+            default => 'info',
         };
     }
 
