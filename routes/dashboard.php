@@ -64,7 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/affiliate/leaderboard', Leaderboard::class)->name('leaderboard');
     // Route::get('/affiliate/leaderboard/phase/2', LeaderboardPhaseTwo::class)->name('leaderboard.phase2');
 
-    Route::get('/affiliate/leaderboard/push', LeaderboardTemp::class)->name('leaderboard.push');
+    Route::get('/affiliate/leaderboard/push', LeaderboardComingSoon::class)->name('leaderboard.push');
 
     Route::get('/affiliate/leaderboard-coming-soon', LeaderboardComingSoon::class);
 
