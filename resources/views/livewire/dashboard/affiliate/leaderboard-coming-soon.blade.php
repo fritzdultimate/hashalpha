@@ -58,6 +58,14 @@
                     let m = Math.floor((diff%(1000*60*60))/(1000*60))
                     let s = Math.floor((diff % (1000*60)) / 1000)
 
+                    let parts = []
+
+                    if (d > 0) parts.push(`${d}d`)
+                    if (h > 0) parts.push(`${h}h`)
+                    if (m > 0) parts.push(`${m}m`)
+                    if (s > 0) parts.push(`${s}s`)
+
+                    return parts.join(' ')
                     return `${d}d ${h}h ${m}m ${s}s`
                 }
             }"
