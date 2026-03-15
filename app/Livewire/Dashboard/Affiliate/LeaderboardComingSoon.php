@@ -13,7 +13,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('layouts.app')]
-class LeaderboardTemp extends Component {
+class LeaderboardComingSoon extends Component {
     public $activeTab = 1;
     public $leaderboard = [];
     public $challenge;
