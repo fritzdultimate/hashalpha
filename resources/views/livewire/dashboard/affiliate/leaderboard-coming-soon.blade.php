@@ -294,7 +294,7 @@
 
                 {{-- name --}}
                 <p class="halpha-text-sm halpha-text-white halpha-font-semibold">
-                    {{ mask($leader) }}
+                    {{ '@' .mask($leader) }}
                 </p>
 
                 {{-- sprint badge --}}
