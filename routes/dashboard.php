@@ -35,6 +35,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/chain/vnft', 'nft.index')->name('vnft');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::view('/leaderboard-coming-soon', 'livewire.dashboard.affiliate.leaderboad-coming-soon');
+});
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', Overview::class)->name('dashboard');
