@@ -35,10 +35,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/chain/vnft', 'nft.index')->name('vnft');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('/affiliate/leaderboard-coming-soon', 'livewire.dashboard.affiliate.leaderboad-coming-soon');
-});
-
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', Overview::class)->name('dashboard');
@@ -68,6 +64,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/affiliate/leaderboard/phase/2', LeaderboardPhaseTwo::class)->name('leaderboard.phase2');
 
     Route::get('/affiliate/leaderboard/push', LeaderboardTemp::class)->name('leaderboard.push');
+
+    Route::get('/affiliate/leaderboard-coming-soon', LeaderboardTemp::class)->name('leaderboard.push');
 
 
     Route::get('/affiliate/performance', PerformanceBonusDashboard::class)->name('performance');
