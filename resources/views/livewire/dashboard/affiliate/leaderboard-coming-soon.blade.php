@@ -56,8 +56,9 @@
                     let d = Math.floor(diff/(1000*60*60*24))
                     let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60))
                     let m = Math.floor((diff%(1000*60*60))/(1000*60))
+                    let s = Math.floor((diff % (1000*60)) / 1000)
 
-                    return `${d}d ${h}h ${m}m`
+                    return `${d}d ${h}h ${m}m ${s}s`
                 }
             }"
             class="halpha-text-center halpha-space-y-1"
