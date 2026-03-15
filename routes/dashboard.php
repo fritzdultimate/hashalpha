@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('/leaderboard-coming-soon', 'livewire.dashboard.affiliate.leaderboad-coming-soon');
+    Route::view('/affiliate/leaderboard-coming-soon', 'livewire.dashboard.affiliate.leaderboad-coming-soon');
 });
 
 
