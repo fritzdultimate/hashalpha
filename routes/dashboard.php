@@ -11,6 +11,7 @@ use App\Livewire\Dashboard\Account\WithdrawalHistory;
 use App\Livewire\Dashboard\Affiliate\Bonuses;
 use App\Livewire\Dashboard\Affiliate\Leaderboard;
 // use App\Livewire\Dashboard\Affiliate\LeaderboardPhaseTwo;
+use App\Livewire\Dashboard\Affiliate\LeaderboardComingSoon;
 use App\Livewire\Dashboard\Affiliate\LeaderboardTemp;
 use App\Livewire\Dashboard\Affiliate\PerformanceBonusDashboard;
 use App\Livewire\Dashboard\Affiliate\RankProgress;
@@ -65,7 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/affiliate/leaderboard/push', LeaderboardTemp::class)->name('leaderboard.push');
 
-    Route::get('/affiliate/leaderboard-coming-soon', LeaderboardComing::class)->name('leaderboard.push');
+    Route::get('/affiliate/leaderboard-coming-soon', LeaderboardComingSoon::class);
 
 
     Route::get('/affiliate/performance', PerformanceBonusDashboard::class)->name('performance');
