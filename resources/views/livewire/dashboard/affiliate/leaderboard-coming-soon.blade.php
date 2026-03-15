@@ -66,7 +66,6 @@
                     if (s > 0) parts.push(`${s}s`)
 
                     return parts.join(' ')
-                    return `${d}d ${h}h ${m}m ${s}s`
                 }
             }"
             class="halpha-text-center halpha-space-y-1"
