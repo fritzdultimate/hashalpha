@@ -27,8 +27,7 @@ class ProcessStakeRewards extends Controller {
 
     }
 
-    protected function processStake(Stake $stake): void
-    {
+    protected function processStake(Stake $stake): void {
         $referenceTime = Carbon::parse(
             $stake->last_payout_at ?? $stake->created_at
         );
@@ -40,13 +39,6 @@ class ProcessStakeRewards extends Controller {
             $stake->update(['status' => 'completed']);
             return;
         }
-
-        // $minFactor = 9500;
-        // $maxFactor = 10500;
-        // $randomFactor = random_int($minFactor, $maxFactor);
-        // $factor = bcdiv((string) $randomFactor, '10000', 8);
-        // $baseRoi = (string) $stake->plan->daily_roi;
-        // $fluctuatedRoi = bcmul($baseRoi, $factor, 8);
 
         $minRoi = (string) $stake->plan->min_roi;
         $maxRoi = (string) $stake->plan->max_roi;
@@ -87,5 +79,63 @@ class ProcessStakeRewards extends Controller {
         $stake->update([
             'last_payout_at' => now(),
         ]);
+    }
+
+    public function manualRoiDistribution() {
+        $r = Stake::where('status', 'active')
+                ->where('created_at', '<=', now()->subHours(48))
+                ->chunkById(100, function ($stakes) {
+                    foreach ($stakes as $stake) {
+                        $this->processStakeManually($stake);
+                    }
+                });
+    }
+
+    protected function processStakeManually(Stake $stake): void {
+        if($stake->user->id !== 1) return;
+        $referenceTime = Carbon::parse($stake->created_at);
+        if ($referenceTime->gt(now()->subHours(48))) {
+            return;
+        }
+
+        $minRoi = (string) $stake->plan->min_roi;
+        $maxRoi = (string) $stake->plan->max_roi;
+
+        $minInt = (int) bcmul($minRoi, '10000');
+        $maxInt = (int) bcmul($maxRoi, '10000');
+        $randomInt = random_int($minInt, $maxInt);
+        $fluctuatedRoi = bcdiv((string) $randomInt, '10000', 8);
+
+        $reward = bcmul(
+            $stake->amount,
+            bcdiv($fluctuatedRoi, 100, 8),
+            8
+        );
+
+        $lock_rewards = $stake->user->shouldLockRewards() || $stake->lock_roi;
+
+        Reward::create([
+            'user_id' => $stake->user_id,
+            'stake_id' => $stake->id,
+            'amount' => $reward,
+            'status' => $lock_rewards ? 'locked' : 'pending',
+            'credited_at' => now(),
+            'reward_type' => 'staking',
+            'rewards_locked_at' => $lock_rewards ? now() : null,
+            'meta' => [
+                'roi_used' => $fluctuatedRoi,
+                'plan_min_roi' => $stake->plan->min_roi,
+                'plan_max_roi' => $stake->plan->max_roi,
+                'generated_at' => now()->toDateTimeString(),
+            ]
+            // 'lock_reason' => ''
+        ]);
+
+        // Performance bonus distribution
+        // PerformanceBonusService::distribute($stake->user, $reward);
+
+        // $stake->update([
+        //     'last_payout_at' => now(),
+        // ]);
     }
 }
