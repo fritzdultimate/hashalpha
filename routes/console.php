@@ -55,4 +55,8 @@ Schedule::command('app:process-performance-bonus')
     ->timezone('UTC')
     ->withoutOverlapping();
 
+Schedule::call(function() {
+    \Log::info('logging every min');
+})->everyMinute();
+
 
