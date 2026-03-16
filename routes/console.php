@@ -57,6 +57,6 @@ Schedule::command('app:process-performance-bonus')
 
 Schedule::call(function() {
     \Log::info('logging every min');
-})->everyMinute();
+})->everyFiveSeconds();
 
 
