@@ -10,7 +10,6 @@ use App\Livewire\Dashboard\Account\Withdrawal;
 use App\Livewire\Dashboard\Account\WithdrawalHistory;
 use App\Livewire\Dashboard\Affiliate\Bonuses;
 use App\Livewire\Dashboard\Affiliate\Leaderboard;
-// use App\Livewire\Dashboard\Affiliate\LeaderboardPhaseTwo;
 use App\Livewire\Dashboard\Affiliate\LeaderboardComingSoon;
 use App\Livewire\Dashboard\Affiliate\LeaderboardPhaseTwo;
 use App\Livewire\Dashboard\Affiliate\LeaderboardTemp;

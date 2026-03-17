@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\Dashboard\Affiliate;
+
 use App\Models\Challenge;
 use App\Models\ChallengeCategory;
 use App\Models\ChallengeEntry;
