@@ -16,6 +16,7 @@ use App\Livewire\Dashboard\Affiliate\LeaderboardTemp;
 use App\Livewire\Dashboard\Affiliate\PerformanceBonusDashboard;
 use App\Livewire\Dashboard\Affiliate\RankProgress;
 use App\Livewire\Dashboard\Affiliate\ReferralCenter;
+use App\Livewire\Dashboard\Affiliate\Sprint;
 use App\Livewire\Dashboard\Affiliate\TeamDashboard;
 use App\Livewire\Dashboard\Extras\ComingSoon;
 use App\Livewire\Dashboard\StakesIndex;
@@ -63,7 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/affiliate/leaderboard', Leaderboard::class)->name('leaderboard');
 
-    Route::get('/affiliate/ffff', LeaderboardPhaseTwo::class);
+    Route::get('/affiliate/ffff', Sprint::class);
 
     Route::get('/affiliate/leaderboard/push', LeaderboardComingSoon::class)->name('leaderboard.push');
 
