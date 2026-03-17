@@ -176,6 +176,10 @@
                                 "url" => route('leaderboard'),
                                 "label" => 'Leaderboard'
                             ],
+                            [
+                                "url" => route('referral.performance'),
+                                "label" => 'Performance Bonus'
+                            ],
                             // [
                             //     "url" => route('performance'),
                             //     "label" => 'Performance Bonus'

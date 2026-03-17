@@ -71,7 +71,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/affiliate/leaderboard-coming-soon', LeaderboardComingSoon::class);
 
 
-    Route::get('/affiliate/performance', PerformanceBonusDashboard::class)->name('performance');
+    Route::get('/affiliate/performance', PerformanceBonusDashboard::class)->name('referral.performance');
 
 });
 
