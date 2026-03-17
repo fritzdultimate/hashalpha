@@ -15,7 +15,7 @@
             </h2>
         </div>
 
-        <div class="halpha-text-right">
+        <div class="halpha-text-right halpha-hidden">
             <p class="halpha-text-xs halpha-text-gray-400">Total Reward Pool</p>
             <p class="halpha-text-sm halpha-font-bold halpha-text-white">
                 ${{ number_format($prizePool, 2) }}
