@@ -22,6 +22,7 @@ class ChallengeCategoriesTable
                         'warning' => 'referrals',
                         'danger' => 'fastest',
                     ]),
+                TextColumn::make('phase')->badge(true),
                 TextColumn::make('prize_pool')
                     ->money('USD')
                     ->sortable(),

@@ -1,6 +1,8 @@
 <div class="halpha-space-y-6">
 
-    <x-leaderboard.phase-header />
+    <x-leaderboard.phase-header
+        :prizePool="$prizePool"
+    />
 
     <x-leaderboard.tabs 
         :categories="$categories"
@@ -31,6 +33,10 @@
     <x-leaderboard.timer
         :end="$selectedCategory->challenge->end_at"
     />
+
+    <x-leaderboard.milestones :milestones="$milestones" />
+
+    <x-leaderboard.qualifications :qualifications="$qualifications" />
 
     <x-leaderboard.podium
         :leaderboard="$leaderboard"

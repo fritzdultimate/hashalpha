@@ -4,6 +4,8 @@ namespace App\Livewire\Dashboard\Affiliate;
 use App\Models\Challenge;
 use App\Models\ChallengeCategory;
 use App\Models\ChallengeEntry;
+use App\Models\LeadershipMilestone;
+use App\Models\Qualification;
 use App\Models\Referral;
 use App\Models\Stake;
 use App\Models\User;
@@ -13,7 +15,7 @@ use Livewire\Component;
 
 #[Layout('layouts.app')]
 class LeaderboardPhaseTwo extends Component {
-    public $activeTab = 1;
+    public $activeTab = 'team_volume';
     public $leaderboard = []; 
     public $challenge;
     public $myRank = null;
@@ -24,17 +26,38 @@ class LeaderboardPhaseTwo extends Component {
     public $myStats = [];
     public $myReferrals = [];
 
+    public $milestones = [];
+    public $qualifications = [];
+    public $prizePool = 0;
+
+    private function loadExtras() {
+        $user = auth()->user();
+        $challenge = $this->selectedCategory->challenge;
+
+        $this->milestones = LeadershipMilestone::where([
+            'user_id' => $user->id,
+        ])->pluck('level')->toArray();
+
+        $this->qualifications = Qualification::where([
+            'user_id' => $user->id,
+        ])->get()->keyBy('type');
+    }
+
 
     public function mount() {
-        $this->selectedCategory = ChallengeCategory::first();
+        $this->selectedCategory = ChallengeCategory::where('phase', 2)->first();
 
         // LeaderBoardService::scoreLeaderBoard();
         $this->challenges = Challenge::where('is_active', true)->get();
         $this->loadLeaderboard();
 
-        $this->categories = ChallengeCategory::get();
+        $this->categories = ChallengeCategory::where('phase', 2)->get();
         $this->loadMyStats($this->selectedCategory);
         $this->loadMyReferrals($this->selectedCategory);
+
+        $this->loadExtras();
+
+        $this->prizePool = ChallengeCategory::where('phase', 2)->sum('prize_pool');
     }
 
     private function loadMyStats($category) {
@@ -110,8 +133,8 @@ class LeaderboardPhaseTwo extends Component {
     }
 
     public function setTab($id) {
-        $this->activeTab = $id;
         $this->selectedCategory = ChallengeCategory::where('id', $id)->first();
+        $this->activeTab = $this->selectedCategory->type;
         $this->loadLeaderboard();
     }
 

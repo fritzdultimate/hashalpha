@@ -17,11 +17,15 @@ class ChallengeCategoryForm
                     ->required(),
                 Select::make('type')
                     ->options([
-                        'volume' => 'Top Volume',
-                        'new_members' => 'Team Activation',
-                        'fastest' => 'Fastest 7',
+                        'team_volume' => 'Team Volume',
+                        'level_1_volume' => 'Leve One Volume',
+                        'personal_volume' => 'Personal Volume',
+                        'activation_count' => 'Action Count'
                     ])
                     ->required(),
+                TextInput::make('phase')
+                    ->required()
+                    ->numeric(), 
 
                 TextInput::make('rewards')
                     ->label('Rewards JSON')

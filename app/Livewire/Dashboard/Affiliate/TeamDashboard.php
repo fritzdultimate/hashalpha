@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard\Affiliate;
 use App\Models\Referral;
 use App\Models\ReferralReward;
 use App\Models\Stake;
+use App\Models\UnilevelPercentage;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -29,15 +30,16 @@ class TeamDashboard extends Component
         $this->activeLevel = $level;
         $user = auth()->user();
         $levelColumn = "level_{$level}_id";
-        // dd($user->referrals());
         
-        // $this->team = $user->referrals()
-        //     ->where($levelColumn, $user->id)
-        //     ->with('user')
-        //     ->get()
-        //     ->pluck('user')
-        //     ->filter()
-        //     ->values();
+        $ids = getDownlineUsersByLevel($user->id, $level);
+        $percentages = UnilevelPercentage::pluck('percentage', 'level');
+        $percentage = $percentages[$level] ?? 0;
+
+        $volume = Stake::whereIn('user_id', $ids)->sum('amount');
+
+        $weighted = ($volume * $percentage) / 100;
+
+        $this->volume = $weighted;
 
         $this->team = Referral::where($levelColumn, $user->id)
             ->with('user')
@@ -52,11 +54,6 @@ class TeamDashboard extends Component
         $this->activeMembers = $this->team
             ->where('is_suspended', false)
             ->count();
-
-        $this->volume = Stake::whereIn(
-            'user_id',
-            $this->team->pluck('id')
-        )->sum('amount');
 
         $this->earnings = ReferralReward::where('user_id', auth()->id())->where('level', $level)->sum('amount');
     }

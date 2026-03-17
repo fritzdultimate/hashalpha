@@ -11,7 +11,10 @@ class ChallengeEntry extends Model {
         'user_id',
         'score',
         'rank',
-        'completed_at'
+        'completed_at',
+        'phase',
+        'previous_rank',
+        'rank_change'
     ];
 
     public $casts = [

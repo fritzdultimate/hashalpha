@@ -55,3 +55,6 @@ Schedule::command('app:process-performance-bonus')
     ->timezone('UTC')
     ->withoutOverlapping();
 
+Schedule::command('app:run-sprint2-engine')
+    ->everyFiveMinutes();
+

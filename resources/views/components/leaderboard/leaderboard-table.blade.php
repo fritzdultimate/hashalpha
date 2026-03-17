@@ -22,9 +22,9 @@
                     default => 'halpha-bg-card-soft halpha-border-transparent'
                 };
 
-                $isLocked = $entry->score >= 7 && $entry->rank < 4;
+                $isLocked = false;
 
-                if ($category->type === 'fastest' && $isLocked) {
+                if ($isLocked) {
                     $rankStyles = 'halpha-bg-gradient-to-r halpha-from-green-500/20 halpha-to-emerald-500/10 halpha-border-green-400/40 halpha-shadow-[0_0_25px_rgba(34,197,94,0.3)]';
                 }
 
@@ -97,22 +97,6 @@
                     </div>
 
                 </div>
-
-                {{-- Score --}}
-                @if($category->type === 'fastest' && false)
-
-                    @if($entry->score <= 7)
-                        <span class="halpha-text-green-400 halpha-font-bold halpha-text-xs">
-                            ✅
-                        </span>
-                    @else
-                        <span class="halpha-text-gray-300 halpha-text-sm">
-                            {{ number_format($entry->score) }}/7
-                        </span>
-                    @endif
-
-                @else
-                @endif
                 <div class="halpha-text-right">
 
                     @if($entry->rank <= 3)
@@ -130,19 +114,18 @@
                                 2 => 'halpha-bg-gray-300/10 halpha-border-gray-400/30',
                                 3 => 'halpha-bg-orange-400/10 halpha-border-orange-400/30',
                             };
+
+                            $type = strtolower($category->type);
+                            $isMoney = in_array($type, ['team_volume', 'level_1_volume', 'personal_volume']);
+
+                            $formatScore = fn($entry) => $isMoney ? '$' . number_format($entry->score, 2) : number_format($entry->score);
                         @endphp
 
 
                         <div class="halpha-inline-block halpha-px-3 halpha-py-1 halpha-rounded-lg halpha-border {{ $badgeBg }}">
 
                             <p class="halpha-text-sm halpha-font-bold {{ $scoreStyles }}">
-
-                                @if($category->type === 'volume')
-                                    ${{ format_compact($entry->score) }}
-                                @else
-                                    {{ number_format($entry->score) }}
-                                @endif
-
+                                {{ $formatScore($entry) }}
                             </p>
 
                         </div>
@@ -151,11 +134,7 @@
 
                         {{-- normal users --}}
                         <p class="halpha-text-sm halpha-text-white halpha-font-semibold">
-                            @if($category->type === 'volume')
-                                ${{ number_format($entry->score, 2) }}
-                            @else
-                                {{ number_format($entry->score) }}
-                            @endif
+                            {{ $formatScore($entry) }}
                         </p>
 
                     @endif

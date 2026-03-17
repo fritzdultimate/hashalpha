@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChallengeCategory extends Model {
     public $fillable = [
         'challenge_id',
+        'phase',
         'type',
         'rewards',
         'prize_pool',

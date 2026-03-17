@@ -18,7 +18,7 @@
         <div class="halpha-text-right">
             <p class="halpha-text-xs halpha-text-gray-400">Total Reward Pool</p>
             <p class="halpha-text-sm halpha-font-bold halpha-text-white">
-                $10,000
+                ${{ number_format($prizePool, 2) }}
             </p>
         </div>
 

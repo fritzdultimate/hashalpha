@@ -61,6 +61,32 @@
 
 }
 
+.halpha-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 4px 10px;
+    border-radius: 9999px;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(6px);
+
+    transition: all 0.2s ease;
+}
+
+.halpha-badge:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
 .halpha-scrollbar-hide {
     -ms-overflow-style: none;     /* IE & Edge */
     scrollbar-width: none;        /* Firefox */
