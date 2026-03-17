@@ -26,4 +26,4 @@ Route::get('/cron/add-validator-block', [AddValidatorBlock::class, 'handle'])
 Route::get('/cron/assign-rank', [RankController::class, 'assignRank'])
     ->name('rank.assign');
 
-Route::get('/cron/leaderboard-score', [LeaderBoardController::class, 'leaderBoardEntry'])->name('leaderboard.score');
+Route::get('/cron/leaderboard-score', [LeaderBoardController::class, 'sprintTwoEntry'])->name('leaderboard.score');
