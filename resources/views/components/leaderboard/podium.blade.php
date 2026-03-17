@@ -7,7 +7,7 @@
     $isMoney = in_array($type, ['team_volume', 'level_1_volume', 'personal_volume']);
 
     $formatScore = fn($entry) =>
-        $isMoney ? '$' . number_format($entry->score, 0) : number_format($entry->score);
+        $isMoney ? '$' . number_format($entry->score, 2) : number_format($entry->score);
 
     $rewards = match($type) {
         'team_volume' => [1 => '$5,000 + Bali', 2 => '$3,000', 3 => '$1,500', 4 => '$1,000', 5 => '$750'],
@@ -147,7 +147,7 @@
                 <p class="halpha-text-xs halpha-text-gray-400">🥈 2nd</p>
                 <p class="halpha-text-sm halpha-text-white font-semibold halpha-capitalize">{{ $top3[1]->user->name }}</p>
                 <p class="halpha-text-xs halpha-text-gray-400">
-                    {{ $category->type === 'volume' ? '$'.number_format($top3[1]->score, 2) : $top3[1]->score }}
+                    {{ $formatScore($top3[1]) }}
                 </p>
             </div>
             @endif
@@ -158,7 +158,7 @@
                 <p class="halpha-text-xs text-black font-bold">🥇 1st</p>
                 <p class="halpha-text-sm text-black font-bold halpha-capitalize">{{ $top3[0]->user->name }}</p>
                 <p class="halpha-text-xs text-black">
-                    {{ $category->type === 'volume' ? '$'.number_format($top3[0]->score, 2) : $top3[0]->score }}
+                    {{ {{ $formatScore($top3[0]) }} }}
                 </p>
             </div>
             @endif
@@ -169,7 +169,7 @@
                 <p class="halpha-text-xs halpha-text-gray-400">🥉 3rd</p>
                 <p class="halpha-text-sm halpha-text-white font-semibold halpha-capitalize">{{ $top3[2]->user->name }}</p>
                 <p class="halpha-text-xs halpha-text-gray-400">
-                    {{ $category->type === 'volume' ? '$'.number_format($top3[2]->score, 2) : $top3[2]->score }}
+                    {{ {{ $formatScore($top3[2]) }} }}
                 </p>
             </div>
             @endif
