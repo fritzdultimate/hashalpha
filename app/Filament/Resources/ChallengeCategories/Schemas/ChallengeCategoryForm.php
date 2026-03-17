@@ -18,9 +18,9 @@ class ChallengeCategoryForm
                 Select::make('type')
                     ->options([
                         'team_volume' => 'Team Volume',
-                        'level_1_volume' => 'Leve One Volume',
+                        'level_1_volume' => 'Level One Volume',
                         'personal_volume' => 'Personal Volume',
-                        'activation_count' => 'Action Count'
+                        'activation_count' => 'Activation Count'
                     ])
                     ->required(),
                 TextInput::make('phase')
