@@ -158,7 +158,7 @@
                 <p class="halpha-text-xs text-black font-bold">🥇 1st</p>
                 <p class="halpha-text-sm text-black font-bold halpha-capitalize">{{ $top3[0]->user->name }}</p>
                 <p class="halpha-text-xs text-black">
-                    {{ {{ $formatScore($top3[0]) }} }}
+                    {{ $formatScore($top3[0]) }}
                 </p>
             </div>
             @endif
@@ -169,7 +169,7 @@
                 <p class="halpha-text-xs halpha-text-gray-400">🥉 3rd</p>
                 <p class="halpha-text-sm halpha-text-white font-semibold halpha-capitalize">{{ $top3[2]->user->name }}</p>
                 <p class="halpha-text-xs halpha-text-gray-400">
-                    {{ {{ $formatScore($top3[2]) }} }}
+                    {{ $formatScore($top3[2]) }}
                 </p>
             </div>
             @endif
