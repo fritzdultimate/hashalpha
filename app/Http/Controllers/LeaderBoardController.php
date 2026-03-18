@@ -16,6 +16,7 @@ class LeaderBoardController extends Controller {
     }
 
     public function sprintTwoEntry() {
+        dd(getDownlineUsersByLevel(23, 1));
         $categories = ChallengeCategory::where('phase', 2)->whereHas('challenge', function ($q) {
             $q->where('is_active', true);
         })->get();

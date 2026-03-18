@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class PerformanceBonusController extends Controller {
     public function process() {
-        dd(getDownlineUsersByLevel(23, 1));
         Stake::where('status', 'active')
             ->where(function ($q) {
                 $q->where('expected_end_date', '>=', now());
