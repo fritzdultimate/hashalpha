@@ -9,6 +9,7 @@ use App\Models\LeadershipMilestone;
 use App\Models\Qualification;
 use App\Models\Referral;
 use App\Models\Stake;
+use App\Services\Sprint2\TeamVolumeService;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -29,6 +30,8 @@ class Sprint extends Component {
     public $qualifications = [];
     public $prizePool = 0;
 
+    public $currentVolume = 0;
+
     private function loadExtras() {
         $user = auth()->user();
         $challenge = $this->selectedCategory->challenge;
@@ -40,6 +43,10 @@ class Sprint extends Component {
         $this->qualifications = Qualification::where([
             'user_id' => $user->id,
         ])->get()->keyBy('type');
+
+        $service = app(TeamVolumeService::class);
+
+        $this->currentVolume = $service->getTotalTeamVolume($user->id, $challenge->start_at, $challenge->end_at);
     }
 
 
