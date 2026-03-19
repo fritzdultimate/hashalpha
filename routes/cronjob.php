@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/cron/process-stake-rewards', [ProcessStakeRewards::class, 'handle'])
     ->name('cron.process-stake-rewards');
 
-// Route::get('/manual/process-stake-rewards', [ProcessStakeRewards::class, 'manualRoiDistribution']);
+Route::get('/manual/process-stake-rewards', [ProcessStakeRewards::class, 'manualRoiDistribution']);
 
 Route::get('/cron/process-validator-rewards', [GenerateValidatorReward::class, 'handle'])
     ->name('cron.process-validator-rewards');
