@@ -93,19 +93,48 @@ class SendMarketingEmail extends Page implements HasForms {
             return;
         }
 
+        $successCount = 0;
+        $failedEmails = [];
+
 
         foreach (array_unique($emails) as $email) {
-            SendSendGridEmail::dispatch(
-                $data['template_id'],
-                $email
-            );
+            // SendSendGridEmail::dispatch(
+            //     $data['template_id'],
+            //     $email
+            // );
+
+            try {
+                SendSendGridEmail::dispatch(
+                    $data['template_id'],
+                    $email
+                );
+
+                $successCount++;
+            } catch (\Throwable $e) {
+                $failedEmails[] = $email;
+
+                \Log::error('Email dispatch failed', [
+                    'email' => $email,
+                    'error' => $e->getMessage()
+                ]);
+            }
         }
 
-        Notification::make()
-            ->title('Emails Sent')
-            ->body(count($emails) . ' emails have been sent to recipients.')
-            ->success()
-            ->send();
+        if ($successCount > 0) {
+            Notification::make()
+                ->title('Emails Processed')
+                ->body("$successCount emails queued successfully.")
+                ->success()
+                ->send();
+        }
+
+        if (!empty($failedEmails)) {
+            Notification::make()
+                ->title('Some Emails Failed')
+                ->body(count($failedEmails) . ' emails failed to queue.')
+                ->danger()
+                ->send();
+        }
 
         $this->form->fill();
 
