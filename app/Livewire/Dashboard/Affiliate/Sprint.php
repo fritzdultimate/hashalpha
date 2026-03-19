@@ -31,6 +31,7 @@ class Sprint extends Component {
     public $prizePool = 0;
 
     public $currentVolume = 0;
+    public $personalVolume = 0;
 
     private function loadExtras() {
         $user = auth()->user();
@@ -46,7 +47,13 @@ class Sprint extends Component {
 
         $service = app(TeamVolumeService::class);
 
-        $this->currentVolume = $service->getTotalTeamVolume($user->id, $challenge->start_at, $challenge->end_at);
+        $start_at = $challenge->start_at;
+        $end_at = $challenge->end_at;
+
+        $this->currentVolume = $service->getTotalTeamVolume($user->id, $start_at, $end_at);
+        $this->personalVolume = $service->getPersonalVolume($user->id, $start_at, $end_at);
+
+        // dd($this->currentVolume);
     }
 
 

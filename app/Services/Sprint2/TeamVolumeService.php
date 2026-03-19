@@ -15,6 +15,7 @@ class TeamVolumeService {
 
             $ids = getDownlineUsersByLevel($userId, $level);
 
+
             if (empty($ids)) continue;
 
             $volume = Stake::whereIn('user_id', $ids)

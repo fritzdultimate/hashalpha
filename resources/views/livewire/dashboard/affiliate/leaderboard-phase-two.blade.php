@@ -34,9 +34,16 @@
         :end="$selectedCategory->challenge->end_at"
     />
 
-    <x-leaderboard.milestones :milestones="$milestones" />
+    <x-leaderboard.milestones 
+        :currentVolume="$currentVolume" 
+        :milestones="$milestones" 
+    />
 
-    <x-leaderboard.qualifications :qualifications="$qualifications" />
+    <x-leaderboard.qualifications 
+        :qualifications="$qualifications"
+        :currentTeamVolume="$currentVolume"
+        :currentPersonalVolume="$personalVolume"
+    />
 
     <x-leaderboard.podium
         :leaderboard="$leaderboard"
