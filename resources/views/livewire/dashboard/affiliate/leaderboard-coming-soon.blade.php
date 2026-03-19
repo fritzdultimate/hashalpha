@@ -32,7 +32,7 @@
             </p>
 
             <p class="halpha-text-lg halpha-font-bold halpha-text-white">
-                📅 March 18, 2026
+                📅 March 20, 2026
             </p>
 
         </div>
@@ -41,7 +41,7 @@
         {{-- COUNTDOWN --}}
         <div
             x-data="{
-                end: new Date('2026-03-18T00:00:00').getTime(),
+                end: new Date('2026-03-20T00:00:00').getTime(),
                 now: new Date().getTime(),
                 init() {
                     setInterval(() => {

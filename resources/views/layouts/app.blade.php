@@ -173,7 +173,7 @@
                                 "label" => 'Rank Progress'
                             ],
                             [
-                                "url" => route('leaderboard'),
+                                "url" => route('referral.sprint-two'),
                                 "label" => 'Leaderboard'
                             ],
                             [

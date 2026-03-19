@@ -294,9 +294,9 @@ class Overview extends Component
 
         $this->referralRewardschartData = $referral_rewards->pluck('amount')->map(fn($v) => round($v, 2));
 
-        // auth()->user()->update([
-        //     'seen_sprint1_banner' => true
-        // ]);
+        auth()->user()->update([
+            'seen_sprint1_banner' => true
+        ]);
     }
 
 

@@ -4,6 +4,8 @@
         :prizePool="$prizePool"
     />
 
+    <x-leaderboard.sprint-two-preparation />
+
     <x-leaderboard.tabs 
         :categories="$categories"
         :activeTab="$activeTab"

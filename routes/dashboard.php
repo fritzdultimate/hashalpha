@@ -64,7 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/affiliate/leaderboard', Leaderboard::class)->name('leaderboard');
 
-    Route::get('/affiliate/leaderboard/sprint/ii', Sprint::class);
+    Route::get('/affiliate/leaderboard/sprint/ii', Sprint::class)->name('referral.sprint-two');
 
     Route::get('/affiliate/leaderboard/push', LeaderboardComingSoon::class)->name('leaderboard.push');
 
