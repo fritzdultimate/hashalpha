@@ -83,7 +83,7 @@ class ProcessStakeRewards extends Controller {
 
     public function manualRoiDistribution() {
         $r = Stake::where('status', 'active')
-                ->where('created_at', '<=', now()->subHours(96))
+                // ->where('created_at', '<=', now()->subHours(96))
                 ->chunkById(100, function ($stakes) {
                     foreach ($stakes as $stake) {
                         $this->processStakeManually($stake);
