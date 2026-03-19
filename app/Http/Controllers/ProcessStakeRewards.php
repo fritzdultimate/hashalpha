@@ -94,9 +94,9 @@ class ProcessStakeRewards extends Controller {
     protected function processStakeManually(Stake $stake): void {
         if($stake->user->id !== 1) return;
         $referenceTime = Carbon::parse($stake->created_at);
-        if ($referenceTime->gt(now()->subHours(48))) {
-            return;
-        }
+        // if ($referenceTime->gt(now()->subHours(48))) {
+        //     return;
+        // }
 
         $minRoi = (string) $stake->plan->min_roi;
         $maxRoi = (string) $stake->plan->max_roi;
