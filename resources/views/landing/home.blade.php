@@ -8,7 +8,7 @@
                 <div class="grid-2-columns _1-col-tablet">
                     <div id="w-node-_924b8ab0-686c-9d71-25ab-87214b088c45-bd0d2b38" class="inner-container _510px _100-tablet">
                         <h1 data-w-id="e94fab0b-b7aa-0619-af02-bbb42d83efb8" style="opacity: 1; filter: blur(0px);" class="display-1 heading-color-gradient mg-bottom-0">
-                            Earn daily from the backbone of blockchain
+                            Become part of a growing blockchain infrastructure network.
                         </h1>
                         
                         <p class="color-neutral-100 mg-bottom-32px !halpha-hidden">
