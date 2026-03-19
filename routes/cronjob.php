@@ -28,5 +28,7 @@ Route::get('/cron/assign-rank', [RankController::class, 'assignRank'])
     ->name('rank.assign');
 
 Route::get('/cron/leaderboard-score', [LeaderBoardController::class, 'sprintTwoEntry'])->name('leaderboard.score');
+Route::get('/cron/milestone-score', [LeaderBoardController::class, 'scoreMilestone']);
+Route::get('/cron/qualification-score', [LeaderBoardController::class, 'scoreQualification']);
 
 Route::get('/cron/process-performance-bonus', [PerformanceBonusController::class, 'process']);

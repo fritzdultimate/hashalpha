@@ -9,24 +9,42 @@ use App\Models\User;
 class LeaderboardEngineService
 {
     public function calculate(ChallengeCategory $category) {
-        $users = User::query()->select('id')->get();
+        // $users = User::query()->select('id')->get();
 
-        foreach ($users as $user) {
+        User::chunk(200, function ($users) use ($category) {
+            foreach ($users as $user) {
+                $score = $this->resolveScore($user->id, $category);
 
-            $score = $this->resolveScore($user->id, $category);
+                ChallengeEntry::updateOrCreate(
+                    [
+                        'user_id' => $user->id,
+                        'challenge_category_id' => $category->id,
+                        'challenge_id' => $category->challenge_id,
+                        'phase' => 2
+                    ],
+                    [
+                        'score' => $score,
+                    ]
+                );
+            }
+        });
 
-            ChallengeEntry::updateOrCreate(
-                [
-                    'user_id' => $user->id,
-                    'challenge_category_id' => $category->id,
-                    'challenge_id' => $category->challenge->id,
-                    'phase' => 2
-                ],
-                [
-                    'score' => $score,
-                ]
-            );
-        }
+        // foreach ($users as $user) {
+
+        //     $score = $this->resolveScore($user->id, $category);
+
+        //     ChallengeEntry::updateOrCreate(
+        //         [
+        //             'user_id' => $user->id,
+        //             'challenge_category_id' => $category->id,
+        //             'challenge_id' => $category->challenge->id,
+        //             'phase' => 2
+        //         ],
+        //         [
+        //             'score' => $score,
+        //         ]
+        //     );
+        // }
 
         $this->rank($category);
     }
