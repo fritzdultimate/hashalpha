@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Deposit;
 use App\Models\PerformanceBonus;
 use App\Models\PerformancePercentage;
+use App\Models\Rank;
 use App\Models\Referral;
 use App\Models\User;
 
@@ -11,10 +12,12 @@ use App\Models\User;
 
 class PerformanceBonusService {
 
-    protected static function meetsRequirements(User $user, $rank): bool {
+    protected static function meetsRequirements(User $user, $level): bool {
         $deposits = Deposit::where([
             'user_id' => $user->id,
         ])->sum('amount_paid');
+
+        $rank = Rank::where('level', $level)->first();
 
         if ($deposits < $rank->deposits) {
             return false;
@@ -59,7 +62,7 @@ class PerformanceBonusService {
             if (!$rank) continue;
 
 
-            if (!self::meetsRequirements($upline, $rank)) continue;
+            if (!self::meetsRequirements($upline, $level)) continue;
 
             if($upline->id === 39) {
                 dd($level);
