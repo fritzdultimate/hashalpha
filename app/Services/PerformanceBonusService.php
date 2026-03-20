@@ -64,7 +64,7 @@ class PerformanceBonusService {
 
             if (!self::meetsRequirements($upline, $level)) {
                 if($upline->id === 39) {
-                    dd("level $level did not meet requirement", $upline->id);
+                    dd("level $level did not meet requirement");
                 }
                 continue;
             }
