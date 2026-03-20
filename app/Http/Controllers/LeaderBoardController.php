@@ -26,7 +26,7 @@ class LeaderBoardController extends Controller {
                 ->calculate($category);
         }
 
-        $challenge = Challenge::where('is_active', true)->first();
+        // $challenge = Challenge::where('is_active', true)->first();
 
         // User::chunk(200, function ($users) use ($challenge) {
         //     foreach ($users as $user) {

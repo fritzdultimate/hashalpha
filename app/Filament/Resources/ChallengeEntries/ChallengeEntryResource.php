@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class ChallengeEntryResource extends Resource
 {
@@ -23,6 +24,12 @@ class ChallengeEntryResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return ChallengeEntryForm::configure($schema);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('phase', 2);
     }
 
     public static function table(Table $table): Table
