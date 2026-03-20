@@ -37,7 +37,7 @@
                     <div class="halpha-grid halpha-grid-cols-2 halpha-gap-3 halpha-w-full md:halpha-w-3/4">
                         <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a] halpha-text-center">
                             <div class="halpha-text-sm halpha-text-gray-300">Active Infrastructure Nodes</div>
-                            <div class="halpha-text-2xl halpha-font-bold halpha-text-white">128+</div>
+                            <div class="halpha-text-2xl halpha-font-bold halpha-text-white">136+</div>
                         </div>
                         <div class="halpha-rounded-[12px] halpha-p-4 halpha-bg-[#07121a] halpha-text-center">
                             <div class="halpha-text-sm halpha-text-gray-300">Average Network Uptime</div>
