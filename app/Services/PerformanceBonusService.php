@@ -63,15 +63,15 @@ class PerformanceBonusService {
 
 
             if (!self::meetsRequirements($upline, $level)) {
-                if($upline->id === 39) {
-                    dd("level $level did not meet requirement");
-                }
+                // if($upline->id === 39) {
+                //     dd("level $level did not meet requirement");
+                // }
                 continue;
             }
 
-            if($upline->id === 39) {
-                dd($level);
-            }
+            // if($upline->id === 39) {
+            //     dd($level);
+            // }
 
             // $percentage = PerformancePercentage::where('level', $level)
             //     ->first()?->percentage ?? 0;
