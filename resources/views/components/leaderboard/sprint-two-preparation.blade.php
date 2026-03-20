@@ -3,7 +3,22 @@
 {{-- ============================= --}}
 
 <div
-    class="halpha-card halpha-bg-card-soft halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-6 halpha-space-y-8">
+    class="halpha-card halpha-bg-card-soft halpha-border halpha-border-accent-3 halpha-rounded-xl halpha-p-6 halpha-space-y-8"
+    x-data="{
+        end: new Date('2026-03-20T13:00:00').getTime(),
+        now: new Date().getTime(),
+        init() {
+            setInterval(() => {
+                this.now = new Date().getTime()
+            }, 1000)
+        },
+        get isActive() {
+            return this.now < this.end
+        }
+    }"
+    x-show="isActive"
+    x-transition
+>
 
     {{-- HEADER --}}
     <div class="halpha-text-center halpha-space-y-2">
