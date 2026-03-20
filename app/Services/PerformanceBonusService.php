@@ -58,12 +58,12 @@ class PerformanceBonusService {
             $rank = $upline->currentRank?->rank->load('percentages');
             if (!$rank) continue;
 
-            if($upline->id === 39) {
-                dd($level, $rank);
-            }
-
 
             if (!self::meetsRequirements($upline, $rank)) continue;
+
+            if($upline->id === 39) {
+                dd($level);
+            }
 
             // $percentage = PerformancePercentage::where('level', $level)
             //     ->first()?->percentage ?? 0;
