@@ -15,6 +15,12 @@
         :category="$selectedCategory"
     />
 
+    <div class="halpha-mt-4 halpha-text-center">
+        <p class="halpha-text-xs halpha-text-yellow-400 halpha-bg-yellow-400/10 halpha-border halpha-border-yellow-400/20 halpha-rounded-lg halpha-p-3">
+            ⚠️ Travel rewards are not cumulative. Participants qualifying through multiple pathways will receive only the highest applicable travel reward.
+        </p>
+    </div>
+
     <x-leaderboard.leaderboard-winners 
         :category="$selectedCategory"
         :leaderboard="$leaderboard"
