@@ -40,7 +40,9 @@
         <div class="halpha-rounded-xl halpha-p-3 halpha-border halpha-transition
             {{ $sc 
                 ? 'halpha-bg-gradient-to-br halpha-from-green-500/10 halpha-to-emerald-500/10 halpha-border-green-400/30 halpha-shadow-[0_0_25px_rgba(34,197,94,0.2)]'
-                : 'halpha-bg-gray-900 halpha-border-white/5' }}">
+                : 'halpha-bg-gray-900 halpha-border-white/5' }}"
+            x-data="{ open: false }"
+        >
 
             <div class="halpha-flex halpha-justify-between halpha-items-start">
 
@@ -54,8 +56,14 @@
                     </p>
                 </div>
 
-                <div class="halpha-text-sm">
-                    {!! $sc ? '✅' : '❌' !!}
+                <div class="halpha-flex halpha-items-center halpha-gap-2">
+                    <!-- {!! $sc ? '✅' : '❌' !!} -->
+                     <span class="halpha-text-sm">{!! $sc ? '✅' : '❌' !!}</span>
+
+                     <button @click="open = !open"
+                        class="halpha-text-[10px] halpha-text-green-400 hover:halpha-underline">
+                        Rewards
+                    </button>
                 </div>
 
             </div>
@@ -87,7 +95,18 @@
 
             </div>
 
+            <div x-show="open" x-transition class="halpha-mt-3 halpha-space-y-1 halpha-text-[10px] halpha-text-gray-300">
+
+                <p>✈️ Economy Flight to Bali</p>
+                <p>🏨 5-Star Resort — 3 Nights</p>
+                <p>🏝️ Bali Leadership Experience Access</p>
+                <p>🎖️ VIP Leadership Seating</p>
+
+            </div>
+
         </div>
+
+        
 
 
         {{-- 🏆 NETWORK BUILDER --}}
@@ -99,7 +118,9 @@
         <div class="halpha-rounded-xl halpha-p-3 halpha-border halpha-transition
             {{ $nb 
                 ? 'halpha-bg-gradient-to-br halpha-from-blue-500/10 halpha-to-indigo-500/10 halpha-border-blue-400/30 halpha-shadow-[0_0_25px_rgba(59,130,246,0.2)]'
-                : 'halpha-bg-gray-900 halpha-border-white/5' }}">
+                : 'halpha-bg-gray-900 halpha-border-white/5' }}"
+            x-data="{ open: false }"
+        >
 
             <div class="halpha-flex halpha-justify-between halpha-items-start">
 
