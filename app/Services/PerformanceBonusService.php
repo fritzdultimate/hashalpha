@@ -63,7 +63,7 @@ class PerformanceBonusService {
             if (!$rank) continue;
 
             if($upline->id === 39) {
-                dd($level);
+                dd($level, $rank);
             }
 
 
