@@ -40,7 +40,7 @@
 
     {{-- COUNTDOWN --}}
     <div x-data="{
-                end: new Date('2026-03-20T00:00:00').getTime(),
+                end: new Date('2026-03-20T13:00:00').getTime(),
                 now: new Date().getTime(),
                 init() {
                     setInterval(() => {
