@@ -135,7 +135,12 @@
                 </div>
 
                 <div class="halpha-text-sm">
-                    {!! $nb ? '✅' : '❌' !!}
+                    <!-- {!! $nb ? '✅' : '❌' !!} -->
+                     <span class="halpha-text-sm">{!! $nb ? '✅' : '❌' !!}</span>
+                    <button @click="open = !open"
+                        class="halpha-text-[10px] halpha-text-green-400 hover:halpha-underline">
+                        Rewards
+                    </button>
                 </div>
 
             </div>
@@ -164,6 +169,15 @@
                         ✓ Qualified — Leadership Recognition Secured
                     </p>
                 @endif
+
+            </div>
+
+            <div x-show="open" x-transition class="halpha-mt-3 halpha-space-y-1 halpha-text-[10px] halpha-text-gray-300">
+
+                <p>✈️ Economy Flight to Bali</p>
+                <p>🏨 5-Star Resort — 3 Nights</p>
+                <p>🏝️ Bali Leadership Experience Access</p>
+                <p>🏆 Leadership Recognition</p>
 
             </div>
 
