@@ -96,8 +96,12 @@ class Withdrawal extends Component {
             return;
         }
 
-        TwoFactorService::generateFor(Auth::user(), 'withdrawal', 4, 10);
-        $this->showOtpForm = true;
+        if($user->withdrawal_confirmation) {
+            TwoFactorService::generateFor(Auth::user(), 'withdrawal', 4, 10);
+            $this->showOtpForm = true;
+        } else {
+            $this->proceedWithdrawal();
+        }
 
     }
 
@@ -131,14 +135,16 @@ class Withdrawal extends Component {
 
     public function proceedWithdrawal() {
         $this->loading = true;
-        if($this->otp === null) {
-            $this->addError('otp', 'Your OTP is required.');
-            return;
-        }
-        $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'withdrawal');
-        if(!$ok) {
-            $this->addError('otp', 'Invalid or expired otp.');
-            return;
+        if(auth()->user()->withdrawal_confirmation) {
+            if($this->otp === null) {
+                $this->addError('otp', 'Your OTP is required.');
+                return;
+            }
+            $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'withdrawal');
+            if(!$ok) {
+                $this->addError('otp', 'Invalid or expired otp.');
+                return;
+            }
         }
 
         DB::transaction(function () {
