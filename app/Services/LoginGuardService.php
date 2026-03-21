@@ -9,10 +9,10 @@ class LoginGuardService
     public static function recordFailedAttempt($user) {
         $user->failed_logins++;
         $user->last_failed_at = Carbon::now();
-        if ($user->failed_logins >= 5) {
-            $user->is_suspended = true;
-            $user->suspended_until = Carbon::now()->addMinutes(1); // hold 30 minutes
-        }
+        // if ($user->failed_logins >= 5) {
+        //     $user->is_suspended = true;
+        //     $user->suspended_until = Carbon::now()->addMinutes(1);
+        // }
         $user->save();
     }
 
