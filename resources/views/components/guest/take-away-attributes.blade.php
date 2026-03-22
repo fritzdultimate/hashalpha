@@ -35,7 +35,7 @@
                                     loading="eager" alt="" class="max-w-24px">
                                 <div class="mg-top-2px">
                                     <div class="text-200 medium color-neutral-100">
-                                        Seamless blockchain investing
+                                        Seamless blockchain participation
                                     </div>
                                 </div>
                             </div>
