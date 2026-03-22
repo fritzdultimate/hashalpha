@@ -194,7 +194,7 @@ class Create extends Component {
 
             $invoice = null;
 
-            if(false) {
+            if($useHardCoded) {
                 $invoice = HardNowPaymentsService::createInvoice($deposit);
                 $deposit->override = true;
                 $deposit->save();
