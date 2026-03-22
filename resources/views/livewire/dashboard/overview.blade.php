@@ -54,7 +54,7 @@
                     <a href="{{ route('referral.sprint-two') }}"
                     class="halpha-flex halpha-items-center halpha-gap-2 halpha-bg-yellow-400/10 halpha-border halpha-border-yellow-400/30 halpha-px-3 halpha-py-1 halpha-rounded-full hover:halpha-bg-yellow-400/20 halpha-transition">
 
-                        📊 <span class="halpha-font-semibold">View Leaderboard</span>
+                        📊 <span class="halpha-font-semibold">For more information, visit the leaderboard</span>
 
                     </a>
 
@@ -81,7 +81,7 @@
                     <a href="{{ route('referral.sprint-two') }}"
                     class="halpha-flex halpha-items-center halpha-gap-2 halpha-bg-yellow-400/10 halpha-border halpha-border-yellow-400/30 halpha-px-3 halpha-py-1 halpha-rounded-full hover:halpha-bg-yellow-400/20 halpha-transition">
 
-                        📊 <span class="halpha-font-semibold">View Leaderboard</span>
+                        📊 <span class="halpha-font-semibold">For more information, visit the leaderboard</span>
 
                     </a>
 
