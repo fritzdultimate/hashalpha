@@ -69,10 +69,6 @@ class PerformanceBonusService {
                 continue;
             }
 
-            // if($upline->id === 39) {
-            //     dd($level);
-            // }
-
             // $percentage = PerformancePercentage::where('level', $level)
             //     ->first()?->percentage ?? 0;
 
