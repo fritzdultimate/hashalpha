@@ -9,7 +9,89 @@
                 transform: translateX(-100%);
             }
         }
+
+        /* glowing live dot */
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+            100% { opacity: 1; transform: scale(1); }
+        }
     </style>
+
+    <div class="halpha-relative halpha-overflow-hidden halpha-rounded-xl halpha-border halpha-border-emerald-400/20 halpha-bg-gradient-to-r halpha-from-emerald-500/10 halpha-to-cyan-500/10 halpha-backdrop-blur halpha-shadow-[0_0_40px_rgba(16,185,129,0.15)]">
+
+        <div class="halpha-flex halpha-w-max halpha-gap-10 halpha-whitespace-nowrap halpha-py-3 halpha-animate-[ticker_30s_linear_infinite]">
+
+            <!-- duplicate content for loop -->
+            <div class="halpha-flex halpha-gap-10">
+
+                
+                <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-sm halpha-text-emerald-300 halpha-font-medium">
+
+                    <!-- LIVE DOT -->
+                    <span class="halpha-w-2 halpha-h-2 halpha-bg-emerald-400 halpha-rounded-full"
+                        style="animation: pulse 1.2s infinite;"></span>
+
+                    <span class="halpha-text-white halpha-font-semibold">
+                        Sprint 2 is LIVE
+                    </span>
+
+                    <span class="halpha-text-emerald-300">
+                        Capital Expansion Phase Activated 🚀
+                    </span>
+
+                </div>
+
+                
+                <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-sm halpha-text-cyan-300">
+
+                    <span>🏝️ Bali Leadership Experience now unlockable</span>
+
+                </div>
+
+                <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-sm halpha-text-yellow-300">
+
+                    <a href="{{ route('leaderboard.score') }}"
+                    class="halpha-flex halpha-items-center halpha-gap-2 halpha-bg-yellow-400/10 halpha-border halpha-border-yellow-400/30 halpha-px-3 halpha-py-1 halpha-rounded-full hover:halpha-bg-yellow-400/20 halpha-transition">
+
+                        📊 <span class="halpha-font-semibold">View Leaderboard</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            
+            <div class="halpha-flex halpha-gap-10">
+
+                <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-sm halpha-text-emerald-300 halpha-font-medium">
+                    <span class="halpha-w-2 halpha-h-2 halpha-bg-emerald-400 halpha-rounded-full"
+                        style="animation: pulse 1.2s infinite;"></span>
+                    <span class="halpha-text-white halpha-font-semibold">Sprint 2 is LIVE</span>
+                    <span>Capital Expansion Phase Activated 🚀</span>
+                </div>
+
+                <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-sm halpha-text-cyan-300">
+                    <span>🏝️ Bali Leadership Experience now unlockable</span>
+                </div>
+
+                <div class="halpha-flex halpha-items-center halpha-gap-3 halpha-text-sm halpha-text-yellow-300">
+
+                    <a href="{{ route('leaderboard.score') }}"
+                    class="halpha-flex halpha-items-center halpha-gap-2 halpha-bg-yellow-400/10 halpha-border halpha-border-yellow-400/30 halpha-px-3 halpha-py-1 halpha-rounded-full hover:halpha-bg-yellow-400/20 halpha-transition">
+
+                        📊 <span class="halpha-font-semibold">View Leaderboard</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
     @if(!auth()->user()->seen_sprint1_banner)
 
