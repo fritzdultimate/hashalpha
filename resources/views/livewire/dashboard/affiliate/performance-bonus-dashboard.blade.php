@@ -58,19 +58,118 @@
 
         <div x-show="open" x-transition class="halpha-mt-3 halpha-space-y-2">
 
-            @foreach($allRanks as $r)
-                <div class="halpha-flex halpha-justify-between halpha-text-xs halpha-bg-gray-900 halpha-p-2 halpha-rounded">
+            <div class="halpha-card halpha-p-5 halpha-space-y-4">
 
-                    <span class="halpha-text-white">
-                        {{ $r->name }}
-                    </span>
+                <!-- HEADER -->
+                <div class="halpha-flex halpha-justify-between halpha-items-center">
+                    <div>
+                        <p class="halpha-text-sm halpha-text-gray-400">
+                            Rank Progression
+                        </p>
+                        <p class="halpha-text-xs halpha-text-gray-500">
+                            Unlock deeper earning levels as you advance
+                        </p>
+                    </div>
+                </div>
 
-                    <span class="halpha-text-gray-400">
-                        ${{ number_format($r->deposits) }} • {{ $r->direct_referrals }} directs
-                    </span>
+                <!-- RANK LADDER -->
+                <div class="halpha-space-y-3">
+
+                    @foreach($allRanks as $r)
+
+                        @php
+                            $isCurrent = ($rank?->id === $r->id);
+                            $isUnlocked = ($rank?->level ?? 0) >= $r->level;
+                        @endphp
+
+                        <div class="halpha-rounded-xl halpha-p-4 halpha-transition halpha-border
+                            {{ $isCurrent 
+                                ? 'halpha-bg-gradient-to-r halpha-from-emerald-500/10 halpha-to-green-500/10 halpha-border-emerald-400/30 halpha-shadow-[0_0_25px_rgba(16,185,129,0.15)]'
+                                : ($isUnlocked 
+                                    ? 'halpha-bg-gray-900 halpha-border-white/5'
+                                    : 'halpha-bg-gray-900/50 halpha-border-white/5 halpha-opacity-60') }}">
+
+                            <div class="halpha-flex halpha-justify-between halpha-items-center">
+
+                                <!-- LEFT -->
+                                <div class="halpha-space-y-1">
+
+                                    <p class="halpha-text-white halpha-text-sm halpha-font-semibold">
+                                        {{ $r->name }}
+                                    </p>
+
+                                    <p class="halpha-text-[11px] halpha-text-gray-400">
+                                        Unlocks up to <span class="halpha-text-white">Level {{ $r->level }}</span>
+                                    </p>
+
+                                </div>
+
+                                <!-- STATUS -->
+                                <div class="halpha-text-xs">
+                                    @if($isCurrent)
+                                        <span class="halpha-text-emerald-400 halpha-font-semibold">
+                                            ● Current
+                                        </span>
+                                    @elseif($isUnlocked)
+                                        <span class="halpha-text-green-400">
+                                            ✓ Unlocked
+                                        </span>
+                                    @else
+                                        <span class="halpha-text-gray-500">
+                                            🔒 Locked
+                                        </span>
+                                    @endif
+                                </div>
+
+                            </div>
+
+                            <!-- REQUIREMENTS -->
+                            <div class="halpha-mt-3 halpha-space-y-2">
+
+                                <!-- Deposit -->
+                                <div>
+                                    <div class="halpha-flex halpha-justify-between halpha-text-[11px] halpha-text-gray-400">
+                                        <span>Capital</span>
+                                        <span>${{ number_format($r->deposits) }}</span>
+                                    </div>
+
+                                    <div class="halpha-w-full halpha-h-1 halpha-bg-gray-800 halpha-rounded mt-1">
+                                        <div class="halpha-h-full halpha-bg-accent-2 halpha-rounded"
+                                            style="width: {{ min(100, ($currentPersonalVolume / max(1, $r->deposits)) * 100) }}%">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Directs -->
+                                <div>
+                                    <div class="halpha-flex halpha-justify-between halpha-text-[11px] halpha-text-gray-400">
+                                        <span>Direct Referrals</span>
+                                        <span>{{ $r->direct_referrals }}</span>
+                                    </div>
+
+                                    <div class="halpha-w-full halpha-h-1 halpha-bg-gray-800 halpha-rounded halpha-mt-1">
+                                        <div class="halpha-h-full halpha-bg-accent-2 halpha-rounded"
+                                            style="width: {{ min(100, ($userDirects / max(1, $r->direct_referrals)) * 100) }}%">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- CTA FOR LOCKED -->
+                            @if(!$isUnlocked)
+                                <div class="halpha-mt-3 halpha-text-[11px] halpha-text-yellow-400">
+                                    Complete requirements to unlock this rank
+                                </div>
+                            @endif
+
+                        </div>
+
+                    @endforeach
 
                 </div>
-            @endforeach
+
+            </div>
 
         </div>
 
@@ -376,7 +475,7 @@
         @endforeach
 
         <div class="halpha-mt-4 halpha-pagination">
-            {{ $bonuses->links() }}
+            {{ $bonuses->onEachSide(1)->links() }}
         </div>
 
     </div>

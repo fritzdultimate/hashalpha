@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard\Affiliate;
 
+use App\Models\Deposit;
 use App\Models\PerformancePercentage;
 use App\Models\Rank;
 use App\Models\Referral;
@@ -32,8 +33,15 @@ class PerformanceBonusDashboard extends Component {
 
     public $allRanks;
 
+    public $currentPersonalVolume;
+    public $userDirects;
+
     public function mount() {
         $user = auth()->user();
+
+        $this->currentPersonalVolume = $user->deposits()->sum('amount_paid');
+
+        $this->userDirects = Referral::where('level_1_id', $user->id)->count();
 
         // Current rank
         $this->rank = $user->currentRank?->rank;
