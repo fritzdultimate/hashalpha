@@ -130,7 +130,7 @@
                                 <div>
                                     <div class="halpha-flex halpha-justify-between halpha-text-[11px] halpha-text-gray-400">
                                         <span>Capital</span>
-                                        <span>${{ number_format($currentPersonalVolume) }}/${{ number_format($r->deposits) }}</span>
+                                        <span><strong>${{ number_format($currentPersonalVolume) }}</strong>/${{ number_format($r->deposits) }}</span>
                                     </div>
 
                                     <div class="halpha-w-full halpha-h-1 halpha-bg-gray-800 halpha-rounded mt-1">
@@ -144,7 +144,7 @@
                                 <div>
                                     <div class="halpha-flex halpha-justify-between halpha-text-[11px] halpha-text-gray-400">
                                         <span>Direct Referrals</span>
-                                        <span>{{ $userDirects }}/{{ $r->direct_referrals }}</span>
+                                        <span><strong>{{ $userDirects }}</strong>/{{ $r->direct_referrals }}</span>
                                     </div>
 
                                     <div class="halpha-w-full halpha-h-1 halpha-bg-gray-800 halpha-rounded halpha-mt-1">
