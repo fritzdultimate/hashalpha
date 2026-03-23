@@ -32,6 +32,26 @@ class PerformanceBonusService {
         return true;
     }
 
+    protected static function checkRequirements(User $user, $level): array {
+        $rank = Rank::where('level', $level)->first();
+
+        $deposits = Deposit::where('user_id', $user->id)->sum('amount_paid');
+        $directs = Referral::where('level_1_id', $user->id)->count();
+
+        return [
+            'qualified' => $deposits >= $rank->deposits && $directs >= $rank->direct_referrals,
+
+            'deposit_required' => $rank->deposits,
+            'deposit_current' => $deposits,
+
+            'direct_required' => $rank->direct_referrals,
+            'direct_current' => $directs,
+
+            'missing_deposit' => max($rank->deposits - $deposits, 0),
+            'missing_directs' => max($rank->direct_referrals - $directs, 0),
+        ];
+    }
+
     public static function distribute(User $user, float $roiAmount, $stakeId) {
         $ref = Referral::where('user_id', $user->id)->first();
         $percentages = PerformancePercentage::pluck('percentage', 'level');
@@ -62,13 +82,6 @@ class PerformanceBonusService {
             if (!$rank) continue;
 
 
-            if (!self::meetsRequirements($upline, $level)) {
-                // if($upline->id === 39) {
-                //     dd("level $level did not meet requirement");
-                // }
-                continue;
-            }
-
             // $percentage = PerformancePercentage::where('level', $level)
             //     ->first()?->percentage ?? 0;
 
@@ -81,6 +94,28 @@ class PerformanceBonusService {
                 bcdiv((string)$percentage, '100', 8),
                 8
             );
+
+            $check = self::checkRequirements($upline, $level);
+
+            if (!$check['qualified']) {
+                PerformanceBonus::create(
+                    [
+                        'user_id' => $upline->id,
+                        'source_user_id' => $user->id,
+                        'stake_id' => $stakeId,
+                        'level' => $level,
+                        'bonus_date' => now()->toDateString(),
+                        'amount' => $bonus,
+                        'percentage' => $percentage,
+                        'roi_amount' => $roiAmount,
+                        'type' => 'missed',
+                        'meta' => json_encode($check)
+                        
+                    ]
+                );
+
+                continue;
+            }
 
             if ($level > $rank->level) {
                 // calculate for missed
@@ -98,7 +133,17 @@ class PerformanceBonusService {
                         'amount' => $bonus,
                         'percentage' => $percentage,
                         'roi_amount' => $roiAmount,
-                        'type' => 'missed'
+                        'type' => 'missed_rank',
+                        'meta' => json_encode([
+                            'reason' => 'rank_limit',
+
+                            'current_rank_level' => $rank->level,
+                            'required_level' => $level,
+
+                            'levels_locked' => $level - $rank->level,
+
+                            'message' => "Your current rank only unlocks up to level {$rank->level}"
+                        ])
                     ]
                 );
 

@@ -40,7 +40,7 @@ class PerformanceBonusController extends Controller {
             foreach ($users as $user) {
                 $unsyncedBonuses = PerformanceBonus::where('user_id', $user->id)
                     ->where('synced_bonus', false)
-                    ->where('type', '!=', 'missed')
+                    ->where('type', '==', 'roi')
                     ->get();
                 if ($unsyncedBonuses->isEmpty()) {
                     continue;

@@ -90,3 +90,14 @@ Route::view('email-template', 'emaim-template');
 require __DIR__.'/auth.php';
 require __DIR__.'/dashboard.php'; 
 require __DIR__.'/cronjob.php'; 
+
+Route::get('/secure/run-migration', function () {
+
+    abort_unless(request('key') === 'your-secret-key-376812', 403);
+
+    \Artisan::call('migrate', [
+        '--force' => true
+    ]);
+
+    return 'Migration executed successfully';
+});

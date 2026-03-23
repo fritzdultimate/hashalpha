@@ -43,6 +43,40 @@
         </div>
     </div>
 
+    <div x-data="{ open: false }" class="halpha-card halpha-p-4">
+
+        <div class="halpha-flex halpha-justify-between">
+            <p class="halpha-text-sm halpha-text-gray-400">
+                Rank Requirements
+            </p>
+
+            <button @click="open = !open"
+                class="halpha-text-xs halpha-text-accent-2">
+                View
+            </button>
+        </div>
+
+        <div x-show="open" x-transition class="halpha-mt-3 halpha-space-y-2">
+
+            @foreach($allRanks as $r)
+                <div class="halpha-flex halpha-justify-between halpha-text-xs halpha-bg-gray-900 halpha-p-2 halpha-rounded">
+
+                    <span class="halpha-text-white">
+                        {{ $r->name }}
+                    </span>
+
+                    <span class="halpha-text-gray-400">
+                        ${{ number_format($r->deposits) }} • {{ $r->direct_referrals }} directs
+                    </span>
+
+                </div>
+            @endforeach
+
+        </div>
+
+    </div>
+
+    <!-- Missed -->
     <div class="halpha-card halpha-p-4 halpha-border halpha-border-red-500/20">
 
         <div class="halpha-flex halpha-justify-between halpha-items-center">
@@ -57,7 +91,7 @@
                 </div>
 
                 <div class="halpha-text-xs halpha-text-gray-500">
-                    Upgrade your rank to unlock these earnings
+                    Upgrade your rank and meet up requirements to unlock these earnings
                 </div>
             </div>
 
@@ -71,6 +105,13 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="halpha-text-xs halpha-text-yellow-400 halpha-bg-yellow-400/10 halpha-p-3 halpha-rounded-lg">
+
+        💡 You're close to unlocking more earnings.
+        Complete your remaining requirements to activate higher-level bonuses.
+
     </div>
 
 
@@ -159,9 +200,13 @@
             </div>
         @endforelse
 
+        <div class="halpha-mt-4 halpha-pagination">
+            {{ $bonuses->links() }}
+        </div>
+
     </div>
 
-    <div class="halpha-card halpha-p-4 halpha-space-y-2">
+    <div class="halpha-card halpha-p-4 halpha-space-y-2 halpha-hidden">
 
         <div class="halpha-text-sm halpha-text-gray-400">
             Missed Breakdown
@@ -182,5 +227,160 @@
         @endforeach
 
     </div>
+
+    <div x-data="{ open: false }" class="halpha-card halpha-p-5 halpha-space-y-4">
+
+    <!-- HEADER -->
+    <div class="halpha-flex halpha-justify-between halpha-items-center">
+        <div>
+            <p class="halpha-text-sm halpha-text-gray-400">
+                Earnings Intelligence
+            </p>
+            <p class="halpha-text-xs halpha-text-gray-500">
+                Understand why earnings were not unlocked
+            </p>
+        </div>
+
+        <button @click="open = !open"
+            class="halpha-text-xs halpha-text-accent-2 halpha-bg-accent-2/10 halpha-px-3 halpha-py-1 halpha-rounded-md hover:halpha-bg-accent-2/20 transition">
+            View Insights
+        </button>
+    </div>
+
+    <!-- CONTENT -->
+    <div x-show="open" x-transition class="halpha-space-y-4">
+
+        @foreach($bonuses->whereIn('type', ['missed', 'missed_rank']) as $miss)
+
+            @php 
+            
+                $meta = json_decode($miss->meta ?? '{}', true); 
+                $type = $miss->type;
+            @endphp
+
+            @if($type === 'missed')
+                <div class="halpha-bg-gradient-to-br halpha-from-gray-900 halpha-to-gray-800 halpha-rounded-xl halpha-p-4 halpha-space-y-3 halpha-border halpha-border-white/5">
+
+                    <!-- TOP -->
+                    <div class="halpha-flex halpha-justify-between halpha-items-center">
+                        <div>
+                            <p class="halpha-text-white halpha-text-sm halpha-font-semibold">
+                                Level {{ $miss->level }} Earnings Locked
+                            </p>
+                            <p class="halpha-text-xs halpha-text-gray-400">
+                                You missed <span class="halpha-text-red-400 font-medium">
+                                    ${{ number_format($miss->amount, 5) }}
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="halpha-text-xs halpha-text-red-400">
+                            Not Qualified
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="halpha-flex halpha-justify-between halpha-text-[11px] halpha-text-gray-400">
+                            <span>Capital Requirement</span>
+                            <span>
+                                ${{ number_format($meta['deposit_current'] ?? 0) }} /
+                                ${{ number_format($meta['deposit_required'] ?? 0) }}
+                            </span>
+                        </div>
+
+                        <div class="halpha-w-full halpha-h-1.5 halpha-bg-gray-800 halpha-rounded mt-1">
+                            <div class="halpha-h-full halpha-bg-red-400 halpha-rounded"
+                                style="width: {{ min(100, (($meta['deposit_current'] ?? 0) / max(1, $meta['deposit_required'] ?? 1)) * 100) }}%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROGRESS: DIRECTS -->
+                    <div>
+                        <div class="halpha-flex halpha-justify-between halpha-text-[11px] halpha-text-gray-400">
+                            <span>Direct Referrals</span>
+                            <span>
+                                {{ $meta['direct_current'] ?? 0 }} /
+                                {{ $meta['direct_required'] ?? 0 }}
+                            </span>
+                        </div>
+
+                        <div class="halpha-w-full halpha-h-1.5 halpha-bg-gray-800 halpha-rounded mt-1">
+                            <div class="halpha-h-full halpha-bg-red-400 halpha-rounded"
+                                style="width: {{ min(100, (($meta['direct_current'] ?? 0) / max(1, $meta['direct_required'] ?? 1)) * 100) }}%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHY (HUMAN LANGUAGE) -->
+                    <div class="halpha-text-[11px] halpha-text-gray-400 halpha-bg-white/5 halpha-p-2 halpha-rounded">
+
+                        @if(($meta['missing_deposit'] ?? 0) > 0 && ($meta['missing_directs'] ?? 0) > 0)
+                            You need an additional
+                            <span class="halpha-text-red-400 font-medium">
+                                ${{ number_format($meta['missing_deposit']) }}
+                            </span>
+                            in capital and
+                            <span class="halpha-text-red-400 font-medium">
+                                {{ $meta['missing_directs'] }} referrals
+                            </span>
+                            to unlock this level.
+                        @elseif(($meta['missing_deposit'] ?? 0) > 0)
+                            You need an additional
+                            <span class="halpha-text-red-400 font-medium">
+                                ${{ number_format($meta['missing_deposit']) }}
+                            </span>
+                            in capital to qualify.
+                        @elseif(($meta['missing_directs'] ?? 0) > 0)
+                            You need
+                            <span class="halpha-text-red-400 font-medium">
+                                {{ $meta['missing_directs'] }} more referrals
+                            </span>
+                            to qualify.
+                        @else
+                            Requirements not met.
+                        @endif
+
+                    </div>
+
+                </div>
+            @endif
+
+            @if($type === 'missed_rank')
+
+                <div class="halpha-bg-indigo-500/10 halpha-border halpha-border-indigo-400/20 halpha-p-3 halpha-rounded-lg">
+
+                    <p class="halpha-text-xs halpha-text-indigo-300 font-semibold">
+                        🔒 Rank Restriction
+                    </p>
+
+                    <p class="halpha-text-[11px] halpha-text-gray-400 mt-1">
+                        Your current rank unlocks up to <span class="halpha-text-white font-medium">
+                            Level {{ $meta['current_rank_level'] ?? '?' }}
+                        </span>.
+
+                        This earning was generated at
+                        <span class="halpha-text-white font-medium">
+                            Level {{ $meta['required_level'] ?? '?' }}
+                        </span>.
+                    </p>
+
+                    <p class="halpha-text-[11px] halpha-text-indigo-300 mt-1">
+                        Upgrade your rank to unlock deeper level earnings.
+                    </p>
+
+                </div>
+
+            @endif
+
+        @endforeach
+
+        <div class="halpha-mt-4 halpha-pagination">
+            {{ $bonuses->links() }}
+        </div>
+
+    </div>
+
+</div>
 
 </div>

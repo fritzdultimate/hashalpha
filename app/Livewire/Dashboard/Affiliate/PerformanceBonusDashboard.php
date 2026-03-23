@@ -11,10 +11,13 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\PerformanceBonus;
+use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-class PerformanceBonusDashboard extends Component
-{
+class PerformanceBonusDashboard extends Component {
+    use WithPagination;
+
+    protected $paginationTheme = 'tailwind';
     public $rank;
     public $nextRank;
 
@@ -22,11 +25,12 @@ class PerformanceBonusDashboard extends Component
     public float $todayBonus = 0;
 
     public array $levels = [];
-    public $bonuses = [];
 
     public int $progress = 0;
     public float $missedTotal = 0;
     public array $missedBreakdown = [];
+
+    public $allRanks;
 
     public function mount() {
         $user = auth()->user();
@@ -66,22 +70,17 @@ class PerformanceBonusDashboard extends Component
             ];
         })->toArray();
 
-        // Activity feed
-        $this->bonuses = PerformanceBonus::with('sourceUser')
-            ->where('user_id', $user->id)
-            ->latest()
-            ->limit(20)
-            ->get();
-
         
 
         $this->missedBreakdown = PerformanceBonus::where('user_id', auth()->id())
-            ->where('type', 'missed')
+            ->whereIn('type', ['missed', 'missed_rank'])
             ->get()->toArray();
 
         $this->missedTotal = collect($this->missedBreakdown)->sum('amount');
 
         $this->loadRankProgress($user);
+
+        $this->allRanks = Rank::orderBy('level')->get();
         
     }
 
@@ -118,6 +117,11 @@ class PerformanceBonusDashboard extends Component
     }
 
     public function render() {
-        return view('livewire.dashboard.affiliate.performance-bonus-dashboard');
+        return view('livewire.dashboard.affiliate.performance-bonus-dashboard', [
+            'bonuses' => PerformanceBonus::with('sourceUser')
+                ->where('user_id', auth()->id())
+                ->latest()
+                ->paginate(2),
+        ]);
     }
 }
