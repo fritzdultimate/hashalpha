@@ -129,7 +129,7 @@ class PerformanceBonusDashboard extends Component {
             'bonuses' => PerformanceBonus::with('sourceUser')
                 ->where('user_id', auth()->id())
                 ->latest()
-                ->paginate(2),
+                ->paginate(10),
         ]);
     }
 }
