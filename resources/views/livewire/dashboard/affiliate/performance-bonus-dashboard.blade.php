@@ -234,10 +234,10 @@
     <div class="halpha-flex halpha-justify-between halpha-items-center">
         <div>
             <p class="halpha-text-sm halpha-text-gray-400">
-                Earnings Intelligence
+                Missed Breakdown
             </p>
             <p class="halpha-text-xs halpha-text-gray-500">
-                Understand why earnings were not unlocked
+                Why earnings are locked
             </p>
         </div>
 
