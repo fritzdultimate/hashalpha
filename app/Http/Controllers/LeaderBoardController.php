@@ -26,18 +26,6 @@ class LeaderBoardController extends Controller {
                 ->calculate($category);
         }
 
-        // $challenge = Challenge::where('is_active', true)->first();
-
-        // User::chunk(200, function ($users) use ($challenge) {
-        //     foreach ($users as $user) {
-        //         app(MilestoneService::class)
-        //         ->check($user, $challenge);
-
-        //         app(QualificationService::class)
-        //             ->check($user, $challenge);
-        //     }
-        // });
-
         
     }
 
