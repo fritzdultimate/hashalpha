@@ -34,7 +34,7 @@ class Register extends Component {
         'password' => 'required|string|min:6|confirmed',
         'password_confirmation' => 'required|string|min:6',
         'terms' => 'accepted',
-        // 'ref' => 'required'
+        'ref' => 'required'
     ];
 
     protected $messages = [
@@ -51,11 +51,11 @@ class Register extends Component {
 
     public function mount() {
         $this->ref = request()->query('ref');
-        // $referrer = User::where('affiliate_code', $this->ref)->first();
+        $referrer = User::where('affiliate_code', $this->ref)->first();
 
-        // if(!$this->ref) {
-        //     return redirect()->route('login');
-        // }
+        if(!$this->ref) {
+            return redirect()->route('login');
+        }
     }
 
     public function submit() {
@@ -96,8 +96,8 @@ class Register extends Component {
                 try {
                     $referrer = User::where('affiliate_code', $this->ref)->first();
                     if(!$referrer) {
-                        // $this->addError('ref', 'You must provide an upline to register.');
-                        // return;
+                        $this->addError('ref', 'You must provide an upline to register.');
+                        return;
                     }
                     $user = User::create([
                         'firstname' => $firstName,
