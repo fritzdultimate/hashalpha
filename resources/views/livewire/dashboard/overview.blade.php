@@ -18,7 +18,7 @@
         }
     </style>
 
-    <div class="halpha-relative halpha-overflow-hidden halpha-rounded-xl halpha-border halpha-border-emerald-400/20 halpha-bg-gradient-to-r halpha-from-emerald-500/10 halpha-to-cyan-500/10 halpha-backdrop-blur halpha-shadow-[0_0_40px_rgba(16,185,129,0.15)]">
+    <div class="halpha-relative halpha-hidden halpha-overflow-hidden halpha-rounded-xl halpha-border halpha-border-emerald-400/20 halpha-bg-gradient-to-r halpha-from-emerald-500/10 halpha-to-cyan-500/10 halpha-backdrop-blur halpha-shadow-[0_0_40px_rgba(16,185,129,0.15)]">
 
         <div class="halpha-flex halpha-w-max halpha-gap-10 halpha-whitespace-nowrap halpha-py-3 halpha-animate-[ticker_30s_linear_infinite]">
 
