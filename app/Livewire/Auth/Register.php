@@ -34,7 +34,7 @@ class Register extends Component {
         'password' => 'required|string|min:6|confirmed',
         'password_confirmation' => 'required|string|min:6',
         'terms' => 'accepted',
-        'ref' => 'required'
+        // 'ref' => 'required'
     ];
 
     protected $messages = [
