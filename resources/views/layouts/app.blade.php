@@ -172,10 +172,10 @@
                                 "url" => route('referral.progress'),
                                 "label" => 'Rank Progress'
                             ],
-                            [
-                                "url" => route('referral.sprint-two'),
-                                "label" => 'Leaderboard'
-                            ],
+                            // [
+                            //     "url" => route('referral.sprint-two'),
+                            //     "label" => 'Leaderboard'
+                            // ],
                             [
                                 "url" => route('referral.performance'),
                                 "label" => 'Performance Bonus'
