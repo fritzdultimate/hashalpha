@@ -96,7 +96,7 @@
 
                     </div>
 
-                    <input wire:model.defer="ref" type="text" placeholder="Sponsor code" required
+                    <input wire:model.defer="ref" type="text" placeholder="Sponsor code" 
                         class="halpha-w-full !halpha-bg-transparent halpha-border halpha-border-gray-700 halpha-rounded-[22px] halpha-py-4 halpha-px-5 halpha-text-lg halpha-placeholder-gray-400 halpha-focus:outline-none input">
 
                     
