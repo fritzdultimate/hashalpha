@@ -85,8 +85,7 @@ class SupportController extends Controller {
         return back()->with('success','KYC submitted successfully. We will notify you once verification is complete.');
     }
 
-    public function faq()
-    {
+    public function faq() {
         $faqs = cache()->remember('support.faqs', 3600, function () {
             // ideally from DB: SupportFaq::orderBy('priority')->get();
             return [

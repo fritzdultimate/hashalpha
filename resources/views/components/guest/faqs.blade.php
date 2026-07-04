@@ -5,7 +5,7 @@
             <div class="inner-container _564px _100-tablet">
                 <h2 class="display-2 heading-color-gradient mg-bottom-0">FAQ</h2>
                 <p class="color-neutral-100 mg-bottom-16px !halpha-text-gray-400">
-                    Understanding HashAlpha’s Infrastructure Model
+                    Understanding VertexStake’s Infrastructure Model
                 </p>
             </div>
         </div>
@@ -14,18 +14,18 @@
             @php
                 $faqs = [
                     [
-                        'q' => 'What is HashAlpha building?',
+                        'q' => 'What is VertexStake building?',
                         'a' => [
-                            'HashAlpha is developing a multi-layer digital infrastructure ecosystem anchored by validator operations and expanding into scalable infrastructure services.',
+                            'VertexStake is developing a multi-layer digital infrastructure ecosystem anchored by validator operations and expanding into scalable infrastructure services.',
                             'Validators are the foundation — not the ceiling.',
                             'Phase 2 extends our architecture to support diversified operational layers and long-term network participation.'
                         ]
                     ],
                     [
-                        'q' => 'Is HashAlpha only a staking platform?',
+                        'q' => 'Is VertexStake only a staking platform?',
                         'a' => [
                             'No.',
-                            'While validator operations remain core, HashAlpha is evolving into a broader infrastructure operator. This includes infrastructure optimization, performance engineering, and scalable hosting frameworks designed for long-term ecosystem participation.'
+                            'While validator operations remain core, VertexStake is evolving into a broader infrastructure operator. This includes infrastructure optimization, performance engineering, and scalable hosting frameworks designed for long-term ecosystem participation.'
                         ]
                     ],
                     [
@@ -43,7 +43,7 @@
                         ]
                     ],
                     [
-                        'q' => 'How does HashAlpha approach scalability?',
+                        'q' => 'How does VertexStake approach scalability?',
                         'a' => [
                             'Scalability is achieved through layered infrastructure design. Instead of increasing exposure within a single vertical, we are expanding operational layers to reduce concentration risk and support diversified participation.',
                             'Phase 2 focuses on structured expansion rather than aggressive growth.'
@@ -67,7 +67,7 @@
                         'q' => 'Are returns fixed?',
                         'a' => [
                             'No.',
-                            'Participation outcomes depend on network conditions, validator performance, and infrastructure efficiency. HashAlpha does not promise fixed or guaranteed returns.',
+                            'Participation outcomes depend on network conditions, validator performance, and infrastructure efficiency. VertexStake does not promise fixed or guaranteed returns.',
                             'Our focus is sustainable participation, not yield marketing.'
                         ]
                     ],
@@ -86,9 +86,9 @@
                         ]
                     ],
                     [
-                        'q' => 'Who is HashAlpha designed for?',
+                        'q' => 'Who is VertexStake designed for?',
                         'a' => [
-                            'HashAlpha is built for:',
+                            'VertexStake is built for:',
                             [
                                 'Long-term digital asset participants',
                                 'Infrastructure-focused operators',
