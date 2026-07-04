@@ -97,7 +97,7 @@
                     <div class="grid-3-columns footer-main-pages-grid">
                         <ul role="list" class="footer-list-wrapper">
                             <li class="footer-list-item">
-                                <a href="{{ asset('resources/terms-and-conditions.pdf') }}" target="_blank" aria-current="page" class="footer-link w--current halpha-text-sm">Terms & Conditions</a>
+                                <a href="{{ asset('resources/VertexStake_Terms_and_Conditions.pdf') }}" target="_blank" aria-current="page" class="footer-link w--current halpha-text-sm">Terms & Conditions</a>
                             </li>
 
                             <li class="footer-list-item">
