@@ -101,7 +101,7 @@
                             </li>
 
                             <li class="footer-list-item">
-                                <a href="{{ asset('resources/privacy-policy.pdf') }}" target="_blank" aria-current="page" class="footer-link w--current halpha-text-sm">Privacy Policy</a>
+                                <a href="{{ asset('resources/VertexStake_Privacy_Policy.pdf') }}" target="_blank" aria-current="page" class="footer-link w--current halpha-text-sm">Privacy Policy</a>
                             </li>
 
                             <li class="footer-list-item !halpha-hidden">
