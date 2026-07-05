@@ -35,7 +35,7 @@
 
                         <li class="header-nav-list-item">
                             <a href="{{ route('hash-token') }}" class="header-nav-link w-nav-link" style="max-width: 1316px;">
-                                $Hash Token
+                                $Vertex Token
                             </a>
                         </li>
                         <li class="header-nav-list-item">
