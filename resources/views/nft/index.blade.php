@@ -10,7 +10,7 @@
                 <!-- Logo -->
                 <div class="h-16 flex items-center px-6 border-b border-gray-900">
                     <div class="flex items-center space-x-3">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="HashAlpha Logo" class="h-10 w-auto">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="{{ env('APP_NAME') }} Logo" class="h-10 w-auto">
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@
                 <div class="h-12 w-12 flex items-center justify-center">
                     <img src="{{ asset('assets/images/logo.png') }}" class="h-8 w-auto">
                 </div>
-                <span class="text-white font-bold ml-2">HashAlpha</span>
+                <span class="text-white font-bold ml-2">{{ env('APP_NAME') }}</span>
             </div>
 
             <!-- Scrollable Content -->
@@ -88,7 +88,7 @@
                         <!-- Header -->
                         <div class="mb-8">
                             <h1 class="text-2xl font-bold text-white mb-2">My V-NFTs & Tokens</h1>
-                            <p class="text-gray-400 text-sm">Manage your Validator NFTs and HASH token rewards.</p>
+                            <p class="text-gray-400 text-sm">Manage your Validator NFTs and VERTEX token rewards.</p>
                         </div>
 
                         <!-- Top Grid: Wallet & Status -->

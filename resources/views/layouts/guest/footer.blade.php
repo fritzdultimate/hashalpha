@@ -63,7 +63,7 @@
                             </li>
 
                             <li class="footer-list-item">
-                                <a href="{{ route('hash-token') }}" aria-current="page" class="footer-link w--current halpha-text-sm">$HASH Token (Coming Soon)</a>
+                                <a href="{{ route('hash-token') }}" aria-current="page" class="footer-link w--current halpha-text-sm">$VERTEX Token (Coming Soon)</a>
                             </li>
 
                             <li class="footer-list-item">

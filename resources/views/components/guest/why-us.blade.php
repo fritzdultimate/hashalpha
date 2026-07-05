@@ -49,7 +49,7 @@
                         'img' => asset('images/landing/send-and-receive-circle-image.png')
                     ],
                     [
-                        'title' => 'Digital Infrastructure Identity (V-NFTs & $HASH)', 
+                        'title' => 'Digital Infrastructure Identity (V-NFTs & $VERTEX)', 
                         'text' => [
                             'A utility-driven ecosystem of digital infrastructure credentials and governance tools designed to support participation, alignment, and long-term ecosystem growth.'
                         ], 

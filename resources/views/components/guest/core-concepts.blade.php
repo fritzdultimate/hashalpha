@@ -13,7 +13,7 @@
                 <ul class="halpha-flex halpha-flex-col halpha-gap-5 halpha-w-full !halpha-pl-0">
                     @php
                         $concepts = [
-                            'Each deposit contributes to HashAlpha’s diversified blockchain infrastructure engine — spanning validator operations, institutional delegation, node hosting, and performance-driven infrastructure strategies.', 
+                            'Each deposit contributes to VertexStake’s diversified blockchain infrastructure engine — spanning validator operations, institutional delegation, node hosting, and performance-driven infrastructure strategies.', 
                             'Revenue is generated across multiple infrastructure verticals, including Ethereum consensus rewards, MEV optimization, delegation service fees, and enterprise infrastructure services.', 
                             'Infrastructure revenue is aggregated, risk-managed, and allocated to participant pools based on plan structure, lock-up period, and overall infrastructure performance',
                             'Distributions are backed by real on-chain activity and operational output — aligned with scaling capacity and network conditions.'

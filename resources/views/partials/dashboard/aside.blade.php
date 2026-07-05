@@ -9,9 +9,9 @@
     <div
         class="halpha-flex halpha-items-center halpha-justify-between halpha-px-6 halpha-py-3 halpha-border-b halpha-border-black/10">
         <div class="halpha-flex halpha-items-center halpha-gap-3">
-            <img src="{{ asset('img/logo/logo-white.png') }}" alt="HashAlpha" class="halpha-w-[70px] halpha-h-auto" />
+            <img src="{{ asset('img/logo/logo-white.png') }}" alt="{{ env('APP_NAME') }}" class="halpha-w-[70px] halpha-h-auto" />
             <span class="halpha-text halpha-font-semibold halpha-text-sm halpha-sr-only"
-                x-show="!sidebarCollapsed">HashAlpha</span>
+                x-show="!sidebarCollapsed">{{ env('APP_NAME') }}</span>
         </div>
     </div>
 

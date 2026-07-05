@@ -50,7 +50,7 @@
 
                             <p data-w-id="99d33e05-7615-7eef-aaa3-86bd50bab513" style="opacity: 1; filter: blur(0px);"
                                 class="mg-bottom-32px halpha-text-gray-300">
-                                Beyond validator consensus rewards, HashAlpha operates advanced execution systems designed to enhance block-level revenue capture and transaction efficiency.
+                                Beyond validator consensus rewards, {{ env('APP_NAME') }} operates advanced execution systems designed to enhance block-level revenue capture and transaction efficiency.
                             </p>
 
                             <p data-w-id="99d33e05-7615-7eef-aaa3-86bd50bab513" style="opacity: 1; filter: blur(0px);"
@@ -86,7 +86,7 @@
 
                             <p data-w-id="99d33e05-7615-7eef-aaa3-86bd50bab513" style="opacity: 1; filter: blur(0px);"
                                 class="mg-bottom-32px halpha-text-gray-300">
-                                As part of Phase 2, HashAlpha is expanding into scalable infrastructure services.
+                                As part of Phase 2, {{ env('APP_NAME') }} is expanding into scalable infrastructure services.
                             </p>
 
                             <p data-w-id="99d33e05-7615-7eef-aaa3-86bd50bab513" style="opacity: 1; filter: blur(0px);"

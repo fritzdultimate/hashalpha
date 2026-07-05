@@ -20,8 +20,8 @@
             <div class="halpha-flex halpha-items-center halpha-justify-between">
                 <div class="halpha-flex halpha-items-center halpha-gap-3">
                     <img src="{{ asset('img/logo/logo-white.png') }}"
-                        alt="HashAlpha" class="halpha-w-[50px] halpha-h-auto" />
-                    <span class="halpha-text halpha-font-semibold halpha-sr-only">HashAlpha</span>
+                        alt="{{ env('APP_NAME') }}" class="halpha-w-[50px] halpha-h-auto" />
+                    <span class="halpha-text halpha-font-semibold halpha-sr-only">{{ env('APP_NAME') }}</span>
                 </div>
             </div>
         </div>
