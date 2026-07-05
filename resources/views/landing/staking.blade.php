@@ -91,7 +91,7 @@
             <div class="halpha-mt-6">
                 <div class="halpha-flex halpha-flex-col">
                     <p class="!halpha-text-gray-400">
-                        Performance within HashAlpha’s ecosystem is derived from multiple operational layers, including:
+                        Performance within VertexStake’s ecosystem is derived from multiple operational layers, including:
                     </p>
 
                     <ul class="halpha-list-disc halpha-text-gray-300 halpha-text-base">
@@ -158,7 +158,7 @@
             <div class="halpha-mt-6">
                 <div class="halpha-flex halpha-flex-col">
                     <p class="!halpha-text-gray-400">
-                        Phase 2 expands HashAlpha into a broader infrastructure and execution ecosystem designed to:
+                        Phase 2 expands {{ env('APP_NAME') }} into a broader infrastructure and execution ecosystem designed to:
                     </p>
 
                     <ul class="halpha-list-disc halpha-text-gray-300 halpha-text-base">

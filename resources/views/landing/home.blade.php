@@ -141,7 +141,7 @@
                         <div>
                             <h5 class="halpha-text-white halpha-font-semibold">Validator Deployment Phase</h5>
                             <p class="halpha-text-sm halpha-text-gray-300">
-                                Launch of HashAlpha’s institutional-grade Ethereum validators, MEV relay integration, and transparency framework.
+                                Launch of VertexStakes's institutional-grade Ethereum validators, MEV relay integration, and transparency framework.
                             </p>
                         </div>
                     </div>

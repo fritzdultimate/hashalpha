@@ -9,7 +9,7 @@
                     V-NFTs — Validator Network Tokens
                 </h1>
                 <p class="halpha-text-xl halpha-text-gray-400 mg-top-12px">
-                    Digital Infrastructure Credentials for the HashAlpha Ecosystem
+                    Digital Infrastructure Credentials for the {{ env('APP_NAME') }} Ecosystem
                 </p>
             </div>
         </section>
@@ -18,9 +18,9 @@
         <section class="small">
             <div class="container-default w-container inner-container _764px- center">
                 <p class="halpha-text-gray-400 halpha-text-lg">
-                    HashAlpha introduces V-NFTs (Validator Network Tokens) — a non-speculative digital credential
+                    {{ env('APP_NAME') }} introduces V-NFTs (Validator Network Tokens) — a non-speculative digital credential
                     system designed to recognize verifiable contribution, long-term alignment, and network
-                    participation within the HashAlpha infrastructure ecosystem.
+                    participation within the {{ env('APP_NAME') }} infrastructure ecosystem.
                 </p>
 
                 <p class="halpha-text-gray-400 halpha-text-lg mg-top-12px">
@@ -30,7 +30,7 @@
                 </p>
 
                 <p class="halpha-text-gray-400 halpha-text-lg mg-top-12px">
-                    V-NFTs are foundational to HashAlpha’s long-term vision and will play a central role in
+                    V-NFTs are foundational to VertextStake’s long-term vision and will play a central role in
                     governance, access, and future token utility.
                 </p>
             </div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <p class="halpha-text-gray-400 halpha-text-lg mg-top-24px">
-                    Each V-NFT reflects real economic or operational contribution to the HashAlpha network.
+                    Each V-NFT reflects real economic or operational contribution to the {{ env('APP_NAME') }} network.
                 </p>
             </div>
         </section>
@@ -83,7 +83,7 @@
                         'Achieving specific participation or rank tiers',
                         'Reaching cumulative team or network volume thresholds',
                         'Unlocking validator-level participation benchmarks',
-                        'Long-term alignment with the HashAlpha ecosystem',
+                        'Long-term alignment with the VertexStake ecosystem',
                     ] as $item)
                         <div class="halpha-card halpha-p-5">
                             <p class="halpha-text-gray-300">{{ $item }}</p>
@@ -126,7 +126,7 @@
         {{-- ROLE IN ECOSYSTEM --}}
         <section class="small">
             <div class="container-default w-container">
-                <h2 class="display-2 mg-bottom-32px">Role of V-NFTs in the HashAlpha Ecosystem</h2>
+                <h2 class="display-2 mg-bottom-32px">Role of V-NFTs in the {{ env('APP_NAME') }} Ecosystem</h2>
 
                 <div class="halpha-flex halpha-flex-col halpha-gap-6">
                     <div class="halpha-card halpha-p-6">
@@ -156,9 +156,9 @@
                     </div>
 
                     <div class="halpha-card halpha-p-6">
-                        <h3 class="display-3 mg-bottom-8px">4. Token Integration ($HASH)</h3>
+                        <h3 class="display-3 mg-bottom-8px">4. Token Integration ($VERTEX)</h3>
                         <p class="halpha-text-gray-300">
-                            V-NFTs integrate deeply with the upcoming $HASH utility token ecosystem,
+                            V-NFTs integrate deeply with the upcoming $VERTEX utility token ecosystem,
                             including staking multipliers, token-gated access, and long-term
                             alignment incentives.
                         </p>
@@ -170,15 +170,15 @@
         {{-- V-NFT + HASH --}}
         <section class="small">
             <div class="container-default w-container">
-                <h2 class="display-2 mg-bottom-24px">V-NFTs and the $HASH Token</h2>
+                <h2 class="display-2 mg-bottom-24px">V-NFTs and the $VERTEX Token</h2>
 
                 <p class="halpha-text-gray-300 halpha-text-lg">
-                    V-NFTs and $HASH are designed to work together — not independently.
+                    V-NFTs and $VERTEX are designed to work together — not independently.
                 </p>
 
                 <ul class="halpha-text-gray-300 halpha-text-lg mg-top-12px list-disc list-inside">
                     <li>V-NFTs represent contribution and credibility</li>
-                    <li>$HASH represents utility and economic coordination</li>
+                    <li>$VERTEX represents utility and economic coordination</li>
                 </ul>
 
                 <p class="halpha-text-gray-300 halpha-text-lg mg-top-16px">
@@ -204,7 +204,7 @@
                 </ul>
 
                 <p class="halpha-text-gray-300 halpha-text-lg mg-top-16px">
-                    HashAlpha’s priority is long-term network integrity, not short-term liquidity.
+                    VertexStake’s priority is long-term network integrity, not short-term liquidity.
                 </p>
             </div>
         </section>
