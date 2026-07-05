@@ -30,7 +30,7 @@
                     </p>
 
                     <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-lg">
-                        Through institutional-grade infrastructure, disciplined operational management, and a structured participation layer, HashAlpha enables broader access to blockchain infrastructure economics — while aligning growth with real network contribution.
+                        Through institutional-grade infrastructure, disciplined operational management, and a structured participation layer, {{ env('APP_NAME') }} enables broader access to blockchain infrastructure economics — while aligning growth with real network contribution.
                     </p>
                 </div>
 
@@ -42,7 +42,7 @@
                     </p>
 
                     <p class="mg-bottom-0 halpha-text-gray-300 halpha-text-base">
-                        HashAlpha is entering its next phase of infrastructure expansion — scaling beyond core validator operations into a diversified infrastructure model designed for long-term resilience, performance alignment, and global accessibility.
+                        {{ env('APP_NAME') }} is entering its next phase of infrastructure expansion — scaling beyond core validator operations into a diversified infrastructure model designed for long-term resilience, performance alignment, and global accessibility.
                     </p>
 
                     <div>

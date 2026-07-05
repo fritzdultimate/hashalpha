@@ -6,10 +6,10 @@
         <section class="top-section halpha-py-20">
             <div class="container-default w-container text-center">
                 <h1 class="display-1 heading-color-gradient">
-                    $HASH — The Infrastructure Utility Token
+                    $VERTEX — The Infrastructure Utility Token
                 </h1>
                 <p class="halpha-text-xl halpha-text-gray-400 mg-top-12px">
-                    The native coordination and utility layer of the HashAlpha ecosystem
+                    The native coordination and utility layer of the {{ env('APP_NAME') }} ecosystem
                 </p>
             </div>
         </section>
@@ -18,7 +18,7 @@
         <section class="small">
             <div class="container-default w-container inner-container _764px center">
                 <p class="halpha-text-gray-400 halpha-text-lg">
-                    $HASH is the native utility token powering the HashAlpha ecosystem.
+                    $VERTEX is the native utility token powering the {{ env('APP_NAME') }} ecosystem.
                 </p>
 
                 <p class="halpha-text-gray-400 halpha-text-lg mg-top-12px">
@@ -28,7 +28,7 @@
                 </p>
 
                 <p class="halpha-text-gray-400 halpha-text-lg mg-top-12px">
-                    $HASH is not positioned as a speculative asset, but as an operational token
+                    $VERTEX is not positioned as a speculative asset, but as an operational token
                     that connects users, validators, V-NFT credentials, and future protocol
                     utilities into one coherent system.
                 </p>
@@ -38,15 +38,15 @@
         {{-- PURPOSE --}}
         <section class="small">
             <div class="container-default w-container">
-                <h2 class="display-2 mg-bottom-32px">Purpose of $HASH</h2>
+                <h2 class="display-2 mg-bottom-32px">Purpose of $VERTEX</h2>
 
                 <p class="halpha-text-gray-300 halpha-text-lg mg-bottom-24px">
-                    The role of $HASH is to:
+                    The role of $VERTEX is to:
                 </p>
 
                 <div class="grid-2-columns gap-row-24px">
                     @foreach([
-                        'Anchor value within the HashAlpha infrastructure',
+                        'Anchor value within the VertexStake infrastructure',
                         'Incentivize long-term participation and ecosystem loyalty',
                         'Enable future protocol-level utilities',
                         'Coordinate governance and access rights',
@@ -59,7 +59,7 @@
                 </div>
 
                 <p class="halpha-text-gray-300 halpha-text-lg mg-top-24px">
-                    $HASH functions as a participation and coordination token,
+                    $VERTEX functions as a participation and coordination token,
                     not a short-term trading instrument.
                 </p>
             </div>
@@ -68,13 +68,13 @@
         {{-- CORE UTILITIES --}}
         <section class="small">
             <div class="container-default w-container">
-                <h2 class="display-2 mg-bottom-32px">Core Utilities of $HASH</h2>
+                <h2 class="display-2 mg-bottom-32px">Core Utilities of $VERTEX</h2>
 
                 {{-- 1 --}}
                 <div class="halpha-card halpha-p-6 mg-bottom-24px">
                     <h3 class="display-3 mg-bottom-8px">1. Staking & Yield Enhancement</h3>
                     <p class="halpha-text-gray-300 mg-bottom-12px">
-                        In future phases, $HASH will be stakeable within the HashAlpha ecosystem.
+                        In future phases, $VERTEX will be stakeable within the {{ env('APP_NAME') }} ecosystem.
                     </p>
                     <ul class="halpha-text-gray-300 list-disc list-inside">
                         <li>Enhanced reward tiers</li>
@@ -90,7 +90,7 @@
                     <h3 class="display-3 mg-bottom-8px">2. Validator & Infrastructure Access</h3>
                     <p class="halpha-text-gray-300">
                         Certain infrastructure features and participation thresholds will require
-                        $HASH holdings or staking, directly tying token demand to real operational infrastructure.
+                        $VERTEX holdings or staking, directly tying token demand to real operational infrastructure.
                     </p>
                 </div>
 
@@ -98,7 +98,7 @@
                 <div class="halpha-card halpha-p-6 mg-bottom-24px">
                     <h3 class="display-3 mg-bottom-8px">3. Governance & Ecosystem Direction</h3>
                     <p class="halpha-text-gray-300 mg-bottom-12px">
-                        $HASH will play a role in future governance frameworks, including:
+                        $VERTEX will play a role in future governance frameworks, including:
                     </p>
                     <ul class="halpha-text-gray-300 list-disc list-inside">
                         <li>Ecosystem upgrades</li>
@@ -118,16 +118,16 @@
                 <div class="halpha-card halpha-p-6 mg-bottom-24px">
                     <h3 class="display-3 mg-bottom-8px">4. V-NFT Integration</h3>
                     <p class="halpha-text-gray-300 mg-bottom-12px">
-                        $HASH and V-NFTs are structurally connected.
+                        $VERTEX and V-NFTs are structurally connected.
                     </p>
 
                     <ul class="halpha-text-gray-300 list-disc list-inside">
                         <li>V-NFTs act as achievement credentials, access keys, and reputation markers</li>
-                        <li>$HASH acts as the economic engine and governance layer</li>
+                        <li>$VERTEX acts as the economic engine and governance layer</li>
                     </ul>
 
                     <p class="halpha-text-gray-300 mg-top-12px">
-                        Certain V-NFT tiers may require $HASH staking to activate,
+                        Certain V-NFT tiers may require $VERTEX staking to activate,
                         enhance rewards, or unlock token-gated utilities.
                     </p>
                 </div>
@@ -136,7 +136,7 @@
                 <div class="halpha-card halpha-p-6">
                     <h3 class="display-3 mg-bottom-8px">5. Ecosystem Expansion & Partner Integration</h3>
                     <p class="halpha-text-gray-300">
-                        As HashAlpha grows, $HASH will be used across partner infrastructure platforms,
+                        As {{ env('APP_NAME') }} grows, $VERTEX will be used across partner infrastructure platforms,
                         validator services, DeFi integrations, and cross-chain tools.
                     </p>
                 </div>
@@ -202,7 +202,7 @@
                 </ul>
 
                 <p class="halpha-text-gray-300 mg-top-12px">
-                    HashAlpha will release detailed disclosures prior to launch.
+                    {{ env('APP_NAME') }} will release detailed disclosures prior to launch.
                 </p>
             </div>
         </section>
@@ -213,7 +213,7 @@
                 <h2 class="display-2 mg-bottom-24px">Roadmap Positioning</h2>
 
                 <p class="halpha-text-gray-300 halpha-text-lg">
-                    $HASH is a Phase-Two and Phase-Three ecosystem component.
+                    $VERTEX is a Phase-Two and Phase-Three ecosystem component.
                 </p>
 
                 <ul class="halpha-text-gray-300 list-disc list-inside mg-top-12px">
@@ -249,7 +249,7 @@
                 <div class="halpha-card halpha-p-6 halpha-bg-gray-900">
                     <h3 class="display-3 mg-bottom-8px">Important Notice</h3>
                     <p class="halpha-text-gray-400 text-sm">
-                        $HASH is a utility token intended for ecosystem participation.
+                        $VERTEX is a utility token intended for ecosystem participation.
                         It does not represent equity, ownership, or guaranteed returns.
                         Token functionality and availability are subject to ongoing development
                         and regulatory considerations.
