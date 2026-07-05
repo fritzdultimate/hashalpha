@@ -372,7 +372,7 @@ class UsersTable
                             ->icon('heroicon-o-key')
                             ->color('success')
                             ->requiresConfirmation()
-                            // ->visible(fn ($record) => auth()->user()->hasRole('super-admin') && ! $record->hasRole('super-admin'))
+                            ->visible(fn ($record) => auth()->user()->hasRole('super-admin') && ! $record->hasRole('super-admin'))
                             ->action(function ($record) {
 
                                 abort_if($record->hasRole('super-admin'), 403);
