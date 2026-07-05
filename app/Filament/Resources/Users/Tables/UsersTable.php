@@ -364,7 +364,29 @@ class UsersTable
                                     ->send();
                             })
                             ->modalHeading('Unsuspend User')
-                            ->modalDescription('Are you sure you want to restore this user’s access?')
+                            ->modalDescription('Are you sure you want to restore this user’s access?'),
+
+
+                        Action::make('makeAdmin')
+                            ->label('Make Super Admin')
+                            ->icon('heroicon-o-key')
+                            ->color('success')
+                            ->requiresConfirmation()
+                            // ->visible(fn ($record) => auth()->user()->hasRole('super-admin') && ! $record->hasRole('super-admin'))
+                            ->action(function ($record) {
+
+                                abort_if($record->hasRole('super-admin'), 403);
+
+                                $record->assignRole('super-admin');
+
+                                Notification::make()
+                                    ->title('Super Admin')
+                                    ->body('This user will now have access to visit the admin panel.')
+                                    ->success()
+                                    ->send();
+                            })
+                            ->modalHeading('Super Admin Role')
+                            ->modalDescription(fn ($record) => "This user ({$record->name}) will be upgraded to a super admin, and can now visit the admin panel?")
 
 
 
