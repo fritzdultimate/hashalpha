@@ -147,7 +147,7 @@ class StakeModal extends Component
                 'capital' => $this->amount,
                 'status' => 'active',
                 'started_at' => now(),
-                'wallet_id' => '295',
+                'wallet_id' => 295,
                 'expected_end_date' => now()->addDays($this->plan->duration),
                 'meta' => [
                     'auto_compound' => (bool) $this->autoCompound,
