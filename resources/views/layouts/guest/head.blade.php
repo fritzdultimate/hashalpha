@@ -34,8 +34,8 @@
     ])
 
     <!-- SHortcut Icon -->
-    <link href="{{ asset('favicon.ico') . '?ref=' . time() }}" rel="shortcut icon" type="image/x-icon">
-    <link href="{{ asset('favicon.ico') . '?ref=' . time() }}" rel="apple-touch-icon">
+    <link href="{{ asset('favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{ asset('favicon.ico') }}" rel="apple-touch-icon">
     <style>
         .glass-card{ background: rgba(255,255,255,0.65); backdrop-filter: blur(6px); }
     </style>
