@@ -3,7 +3,8 @@ function depositPanel() {
     return {
         panelOpen: false,
         selected: {currency: '', label: ''},
-        networks: ['Mainnet', 'ERC20', 'BEP20', 'TRC20'],
+        networks: [],
+        // networks: ['Mainnet', 'ERC20', 'BEP20', 'TRC20'],
         // network: 'Maka',
         form: { currency: '', network: '', amount: '' },
         step: 'form', // 'form' | 'otp' | 'address'
@@ -15,6 +16,7 @@ function depositPanel() {
         progress: 0,
         pollInterval: null,
         pay_amount: 0.00,
+        is_manual: false,
         total: 20 * 60,
         time: 0,
         created_at: null,
@@ -46,20 +48,21 @@ function depositPanel() {
                     this.depositId = event.detail.depositId;
                 }
 
-                console.log('init', this.depositId);
                 if (s === 'address' && this.depositId) {
-                    const { address, pay_amount } = event.detail;
+                    const { address, pay_amount, is_manual  } = event.detail;
                     this.address = address;
                     this.pay_amount = pay_amount;
-                    console.log("address", address);
-                    console.log("amount", pay_amount);
-                    this.startPolling();
+                    this.is_manual = is_manual;
+                    if(!is_manual) {
+                        this.startPolling();
+                    }
                 }
             };
             window.addEventListener('deposit:step', this._depositStepListener);
         },
 
         openPanel(wallet) {
+            this.is_manual = false;
             this.selected = wallet;
             this.form.currency = wallet.currency;
             // set sensible default network if you have one per coin

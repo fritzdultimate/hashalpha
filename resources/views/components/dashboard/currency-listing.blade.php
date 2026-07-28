@@ -63,8 +63,8 @@
                             data-wallet='@json($wallet)'
                         >
                             <span
-                                class="halpha-w-6 halpha-h-6 {{ $wallet['bg'] }} halpha-rounded-full halpha-flex halpha-justify-center halpha-items-center">
-                                <span class="icon {{ $wallet['icon'] }}"></span>
+                                class="halpha-w-6 halpha-h-6 {{ $wallet['bg'] ?? 'tt' }} halpha-rounded-full halpha-flex halpha-justify-center halpha-items-center">
+                                <span class="icon {{ $wallet['icon'] ?? 'ff' }}"></span>
                             </span>
                             <div class="halpha-flex-1">
                                 <div class="halpha-flex halpha-items-baseline halpha-justify-between">

@@ -18,4 +18,12 @@ class PaymentSetting extends Model {
         'api_key' => 'encrypted',
         'ipn_secret' => 'encrypted',
     ];
+
+    protected static function booted() {
+        static::saving(function (PaymentSetting $setting) {
+            if ($setting->is_active) {
+                static::where('id', '!=', $setting->id)->update(['is_active' => false]);
+            }
+        });
+    }
 }

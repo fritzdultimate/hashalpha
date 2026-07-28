@@ -161,9 +161,9 @@ class NowPaymentsService {
             $out[$symbol]['raw_entries'][] = $rawU;
 
             $networkObj = [
-                'network'            => $foundNetwork,
-                'label'              => $foundNetwork ? $foundNetwork : 'mainnet',
-                'raw'                => $rawU,
+                'network' => $foundNetwork,
+                'label' => $foundNetwork ? $foundNetwork : 'mainnet',
+                'raw' => $rawU,
                 'min_amount'         => null,
                 'max_amount'         => null,
                 'deposit_enabled'    => null,

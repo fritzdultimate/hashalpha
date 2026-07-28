@@ -36,9 +36,13 @@
             <div class="halpha-text-center">
                 <div class="halpha-flex halpha-items-center halpha-text-lg halpha-font-semibold halpha-text-white halpha-gap-2">
                     <div class="">Deposit</div>
-                    <div class="halpha-text-lg halpha-font-semibold halpha-text-white" x-text="pay_amount + ' ' + form.currency.toUpperCase()"></div>
+
+                    <div 
+                        class="halpha-text-lg halpha-font-semibold halpha-text-white" 
+                        x-text="is_manual ? ('$' + Number(pay_amount).toFixed(2)) : (pay_amount + ' ' + form.currency.toUpperCase())"
+                    ></div>
                 </div>
-                <span class="halpha-font-semibold halpha-text-xs halpha-text-gray-400"><span x-text="network"></span> Network</span>
+                <span class="halpha-font-semibold halpha-text-xs halpha-text-gray-400"><span x-text="network ?? 'Mainnet'"></span> Network</span>
             </div>
 
             <div>

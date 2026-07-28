@@ -16,7 +16,7 @@ class PaymentSettingForm
                 Section::make([
                     TextInput::make('provider')
                         ->default('nowpayments')
-                        ->disabled()
+                        // ->disabled()
                         ->dehydrated(),
                     TextInput::make('api_key')
                         ->label('API Key')
@@ -26,13 +26,13 @@ class PaymentSettingForm
                         ->label('IPN / Webhook Secret')
                         ->password()
                         ->required(),
-                    TextInput::make('webhook_url')
+                    TextInput::make('webhook_url') 
                         ->default(fn () => route('webhooks.nowpayments'))
                         ->label('Webhook URL')
                         ->disabled()
                         ->dehydrated(),
                     Toggle::make('is_active')
-                        ->label('Enable NowPayments'),
+                        ->label('Enable'),
                 ]),
             ]);
     }

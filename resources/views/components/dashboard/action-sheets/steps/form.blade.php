@@ -95,6 +95,7 @@
         </div>
     </div>
 
+    
     <div>
         <label for="network" class="halpha-text-xs halpha-text-gray-300">Choose Network</label>
         <select id="network" wire:model="network"
@@ -108,6 +109,7 @@
             </template>
         </select>
     </div>
+    
 
     <div>
         <label for="amount" class="halpha-text-xs halpha-text-gray-300">Amount</label>

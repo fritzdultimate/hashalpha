@@ -46,7 +46,7 @@ class PaymentSettingResource extends Resource
     }
 
     public static function canCreate(): bool {
-        return PaymentSetting::count() === 0;
+        return PaymentSetting::count() < 2;
     }
 
     public static function getPages(): array

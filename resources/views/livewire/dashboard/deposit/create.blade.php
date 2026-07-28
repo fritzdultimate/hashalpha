@@ -89,9 +89,15 @@
 
         Livewire.on('address-created', (event) => {
             $wire.dispatch('set-address', { address: event.invoice.pay_address });
-            console.log(event)
+            console.log(event.is_manual)
             window.dispatchEvent(new CustomEvent('deposit:step', {
-                detail: { step: 'address', depositId: event.depositId, address: event.invoice.pay_address, pay_amount: event.invoice.pay_amount  }
+                detail: { 
+                    step: 'address', 
+                    depositId: event.depositId, 
+                    address: event.invoice.pay_address, 
+                    pay_amount: event.invoice.pay_amount,
+                    is_manual: event.is_manual ?? false 
+                }
             }));
         });
 

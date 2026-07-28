@@ -10,7 +10,10 @@ use App\Models\Deposit;
 use App\Models\Wallet;
 use App\Services\DepositService;
 use App\Services\HardNowPaymentsService;
+use App\Services\ManualPaymentService;
+use App\Services\ManualWalletService;
 use App\Services\NowPaymentsService;
+use App\Services\PaymentSettingService;
 use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +42,7 @@ class Create extends Component {
     public $selectedWallet = null;
     public $bonusPercent;
     public $bonusDuration;
+    public $pprovider;
 
     public function updated($prop, $value) {
         if($prop === "search") {
@@ -103,9 +107,16 @@ class Create extends Component {
         $this->otp = preg_replace('/\D/', '', substr($value, 0, 4));
     }
 
-    public function mount(NowPaymentsService $np) {
-        $this->nowPaymentWallets = $np->getCurrencies();
+    public function mount(NowPaymentsService $np, ManualWalletService $manual) {
+        $this->pprovider = PaymentSettingService::activeProvider();
+        $this->nowPaymentWallets = $this->pprovider === 'manual'
+        ? $manual->getCurrencies()
+        : $np->getCurrencies();
+
+
         $this->filteredCurrencies = $this->nowPaymentWallets;
+
+        // dd($this->filteredCurrencies);
 
         $this->bonusPercent = CustomSetting::get('deposit_bonus_percentage', 0);
         $this->bonusDuration = CustomSetting::get('deposit_bonus_duration_days', 0);
@@ -128,14 +139,6 @@ class Create extends Component {
     public function prepareDeposit() {
         $this->validate();
 
-        // if(auth()->user()->hasUnsettledDeposit()) {
-        //     $this->addError('general', 'You have an ongoing deposit transaction. Please finish it before creating a new one.');
-        //     return;
-        // }
-
-        // TwoFactorService::generateFor(Auth::user(), 'deposit', 4, 10);
-        // $this->dispatch('otp-created', $this->invoice);
-
         $this->createPayment();
 
 
@@ -143,21 +146,6 @@ class Create extends Component {
 
 
     public function createPayment() {
-
-        // if($this->otp === null) {
-        //     $this->addError('otp', 'Your OTP is required.');
-        //     return;
-        // }
-
-        // $ok = TwoFactorService::validate(Auth::user(), $this->otp, 'deposit');
-        // if(!$ok) {
-        //     $this->addError('otp', 'Invalid or expired otp.');
-        //     return;
-        // }
-
-
-
-
         DB::transaction(function () {
             $wallet = Wallet::firstOrCreate(
             ['user_id' => auth()->id(), 'currency' => $this->currency],
@@ -168,12 +156,14 @@ class Create extends Component {
                 ]
             );
 
+            $provider = PaymentSettingService::activeProvider();
 
+            // dd($this->currency);
             $deposit = Deposit::create([
                 'user_id' => auth()->id(),
                 'wallet_id' => $wallet->id,
-                'currency' => $this->network,
-                'amount' => $this->amount,
+                'currency' => $provider === 'manual' ? $this->currency : $this->network,
+                'amount' =>  $this->amount,
                 'status' => DepositStatus::WAITING,
                 'note' => $this->note
             ]);
@@ -194,7 +184,9 @@ class Create extends Component {
 
             $invoice = null;
 
-            if($useHardCoded) {
+            if ($provider === 'manual') {
+                $invoice = ManualPaymentService::createInvoice($deposit, $this->network);
+            } elseif ($useHardCoded) {
                 $invoice = HardNowPaymentsService::createInvoice($deposit);
                 $deposit->override = true;
                 $deposit->save();
@@ -216,7 +208,7 @@ class Create extends Component {
             session()->put('pay_address', $invoice['pay_address']);
 
             $this->depositId = $deposit->id;
-            $this->dispatch('address-created', invoice: $this->invoice, depositId: $this->depositId);
+            $this->dispatch('address-created', invoice: $this->invoice, depositId: $this->depositId, is_manual: $this->pprovider === 'manual');
             $this->dispatch('toast', payload: [
                 'message' => 'Your deposit wallet is on the way! Processing time is subject to network conditions.',
                 'timeout' => 10000,
@@ -230,9 +222,17 @@ class Create extends Component {
 
 
     public function checkInvoiceStatus() {
-        if (!$this->invoice || empty($this->invoice['id'])) return;
+        if (!$this->invoice) return;
 
+        if ($this->invoice['is_manual'] ?? false) {
+            $dep = Deposit::find($this->depositId);
+            if ($dep) {
+                $this->invoice['payment_status'] = strtolower($dep->status->value ?? $dep->status);
+            }
+            return;
+        }
 
+        if (empty($this->invoice['id'])) return;
         $latest = NowPaymentsService::checkInvoice($this->invoice['id']);
         $this->invoice = $latest;
 
