@@ -47,8 +47,9 @@ class WithdrawalsTable
                     ->color('info'),
                 BadgeColumn::make('address')
                     ->color('info')
-                    ->copyable()
                     ->limit(10)
+                    ->copyable()
+                    ->copyableState(fn ($record) => $record->address)
                     ->copyMessage('Address copied')
                     ->copyMessageDuration(1500)
                     ->icon('heroicon-o-clipboard')
