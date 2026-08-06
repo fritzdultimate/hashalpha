@@ -199,7 +199,7 @@ class Create extends Component {
             $deposit->address = $invoice['pay_address'];
             $deposit->save();
 
-            $wallet->address = $invoice['pay_address'];
+            $wallet->address = $invoice['pay_address'] . "_" . $deposit->id;
             $wallet->save();
 
 
