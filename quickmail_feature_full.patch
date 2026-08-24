@@ -1,0 +1,519 @@
+diff --git a/app/Filament/Pages/QuickMail.php b/app/Filament/Pages/QuickMail.php
+index 0ad55d5..e8308bd 100644
+--- a/app/Filament/Pages/QuickMail.php
++++ b/app/Filament/Pages/QuickMail.php
+@@ -5,13 +5,15 @@
+ use App\Jobs\SendQuickEmail;
+ use App\Models\User;
+ use BackedEnum;
++use Filament\Forms\Components\RichEditor;
+ use Filament\Forms\Components\Select;
+-use Filament\Forms\Components\Textarea;
++use Filament\Forms\Components\TagsInput;
+ use Filament\Forms\Components\TextInput;
+ use Filament\Forms\Concerns\InteractsWithForms;
+ use Filament\Forms\Contracts\HasForms;
+ use Filament\Notifications\Notification;
+ use Filament\Pages\Page;
++use Filament\Schemas\Components\Section;
+ use Filament\Schemas\Schema;
+ use Filament\Support\Icons\Heroicon;
+ use UnitEnum;
+@@ -21,8 +23,17 @@ class QuickMail extends Page implements HasForms {
+ 
+     protected static string|UnitEnum|null $navigationGroup = 'Mail System';
+     protected static string|BackedEnum|null $navigationIcon = Heroicon::Envelope;
++    protected static ?string $navigationLabel = 'Send Custom Email';
++    protected static ?string $title = 'Send Custom Email';
+     protected string $view = 'filament.pages.quick-mail';
+ 
++    /**
++     * HTML tags allowed to survive from the rich text editor into the
++     * outgoing email. This strips anything unexpected (e.g. <script>,
++     * <style>, <iframe>) while preserving normal formatting.
++     */
++    protected const ALLOWED_BODY_TAGS = '<p><br><strong><b><em><i><u><s><ul><ol><li><a><h1><h2><h3><h4><blockquote><img><span><table><thead><tbody><tr><td><th><hr><code><pre>';
++
+     public array $data = [];
+ 
+     public function mount(): void {
+@@ -33,51 +44,115 @@ public function form(Schema $schema): Schema {
+         return $schema
+             ->statePath('data')
+             ->schema([
+-                Select::make('users')
+-                    ->label('Select Users')
+-                    ->multiple()
+-                    ->searchable()
+-                    ->options(fn () => User::pluck('email', 'id')->toArray())
+-                    ->required(),
+-
+-                TextInput::make('subject')
+-                    ->label('Email Subject')
+-                    ->required(),
+-
+-                Textarea::make('content')
+-                    ->label('Email Content')
+-                    ->rows(6)
+-                    ->required(),
++                Section::make('Recipients')
++                    ->description('Pick registered users and/or type any other email addresses. You can use both at once.')
++                    ->schema([
++                        Select::make('user_ids')
++                            ->label('Registered Users')
++                            ->multiple()
++                            ->searchable()
++                            ->preload()
++                            ->options(fn () => User::query()
++                                ->orderBy('name')
++                                ->get()
++                                ->mapWithKeys(fn (User $user) => [
++                                    $user->id => trim(($user->name ?: $user->email) . ' <' . $user->email . '>'),
++                                ])
++                                ->toArray()),
++
++                        TagsInput::make('custom_emails')
++                            ->label('Additional Email Addresses')
++                            ->helperText('For recipients who are not registered users. Press space, comma or enter after each address.')
++                            ->placeholder('name@example.com')
++                            ->splitKeys([',', ' ', 'Tab', 'Enter']),
++                    ])
++                    ->columns(1),
++
++                Section::make('Message')
++                    ->schema([
++                        TextInput::make('subject')
++                            ->label('Email Subject')
++                            ->required()
++                            ->maxLength(255)
++                            ->columnSpanFull(),
++
++                        RichEditor::make('content')
++                            ->label('Email Content')
++                            ->required()
++                            ->helperText('This message is automatically placed inside the official platform email design (logo, header and footer), so it arrives looking like it came straight from the platform.')
++                            ->toolbarButtons([
++                                'bold', 'italic', 'underline', 'strike', 'link',
++                                'bulletList', 'orderedList', 'blockquote',
++                                'h2', 'h3', 'redo', 'undo',
++                            ])
++                            ->columnSpanFull(),
++                    ])
++                    ->columns(1),
+             ]);
+     }
+ 
+     public function send(): void {
+         $data = $this->form->getState();
+ 
+-        $emails = User::whereIn('id', $data['users'])
++        $userEmails = User::query()
++            ->whereIn('id', $data['user_ids'] ?? [])
+             ->pluck('email')
+-            ->toArray();
++            ->all();
++
++        $customEmails = collect($data['custom_emails'] ?? [])
++            ->map(fn ($email) => trim((string) $email))
++            ->filter()
++            ->values();
++
++        $invalidEmails = $customEmails
++            ->reject(fn ($email) => filter_var($email, FILTER_VALIDATE_EMAIL) !== false)
++            ->values();
++
++        if ($invalidEmails->isNotEmpty()) {
++            Notification::make()
++                ->title('Invalid Email Address')
++                ->body('These entries are not valid email addresses: ' . $invalidEmails->implode(', '))
++                ->danger()
++                ->send();
++            return;
++        }
++
++        $emails = collect($userEmails)
++            ->merge($customEmails)
++            ->filter()
++            ->unique(fn ($email) => strtolower($email))
++            ->values()
++            ->all();
+ 
+         if (empty($emails)) {
+             Notification::make()
+-                ->title('No Users Selected')
+-                ->body('Please select at least one user.')
++                ->title('No Recipients Selected')
++                ->body('Select at least one registered user or enter an email address.')
+                 ->danger()
+                 ->send();
+             return;
+         }
+ 
++        $subject = trim((string) ($data['subject'] ?? ''));
++        $content = strip_tags((string) ($data['content'] ?? ''), self::ALLOWED_BODY_TAGS);
+ 
+-        SendQuickEmail::dispatch($emails, $data['subject'], $data['content']);
++        if ($content === '') {
++            Notification::make()
++                ->title('Email Content Required')
++                ->body('Please write a message before sending.')
++                ->danger()
++                ->send();
++            return;
++        }
++
++        SendQuickEmail::dispatch($emails, $subject, $content);
+ 
+         Notification::make()
+-            ->title('Email sent')
+-            ->body(count($emails) . ' users will receive the email.')
++            ->title('Email Queued')
++            ->body(count($emails) . ' recipient(s) will receive the email shortly.')
+             ->success()
+             ->send();
+ 
+         $this->form->fill();
+-
+     }
+-
+ }
+diff --git a/app/Jobs/SendQuickEmail.php b/app/Jobs/SendQuickEmail.php
+index bb07fb2..c6916b7 100644
+--- a/app/Jobs/SendQuickEmail.php
++++ b/app/Jobs/SendQuickEmail.php
+@@ -2,16 +2,28 @@
+ 
+ namespace App\Jobs;
+ 
++use App\Mail\AdminCustomMail;
++use App\Models\User;
+ use Illuminate\Bus\Queueable;
+ use Illuminate\Contracts\Queue\ShouldQueue;
+-use Illuminate\Foundation\Events\Dispatchable;
++use Illuminate\Foundation\Bus\Dispatchable;
+ use Illuminate\Queue\InteractsWithQueue;
+ use Illuminate\Queue\SerializesModels;
++use Illuminate\Support\Facades\Log;
+ use Illuminate\Support\Facades\Mail;
+ 
+ class SendQuickEmail implements ShouldQueue {
+     use Queueable, InteractsWithQueue, SerializesModels, Dispatchable;
+ 
++    public int $tries = 3;
++
++    public int $backoff = 30;
++
++    /**
++     * @param  array<int, string>  $emails  Recipient email addresses (platform users and/or arbitrary addresses).
++     * @param  string  $subject  Subject line chosen by the admin.
++     * @param  string  $content  Sanitized HTML body produced by the admin's rich text editor.
++     */
+     public function __construct(
+         public array $emails,
+         public string $subject,
+@@ -19,12 +31,26 @@ public function __construct(
+     ) {}
+ 
+     public function handle(): void {
+-        dd($this->emails);
++        // Look up any recipients who are also platform users so the email
++        // can be personalised with a greeting, without requiring every
++        // recipient to be a registered user.
++        $users = User::whereIn('email', $this->emails)
++            ->get()
++            ->keyBy(fn (User $user) => strtolower($user->email));
++
+         foreach ($this->emails as $email) {
+-            Mail::raw($this->content, function ($message) use ($email) {
+-                $message->to($email)
+-                        ->subject($this->subject);
+-            });
++            try {
++                $user = $users->get(strtolower($email));
++
++                Mail::to($email)->send(
++                    new AdminCustomMail($this->subject, $this->content, $user)
++                );
++            } catch (\Throwable $e) {
++                Log::error('Admin custom email failed to send', [
++                    'email' => $email,
++                    'error' => $e->getMessage(),
++                ]);
++            }
+         }
+     }
+ }
+diff --git a/app/Mail/AdminCustomMail.php b/app/Mail/AdminCustomMail.php
+new file mode 100644
+index 0000000..076953e
+--- /dev/null
++++ b/app/Mail/AdminCustomMail.php
+@@ -0,0 +1,63 @@
++<?php
++
++namespace App\Mail;
++
++use App\Models\User;
++use Illuminate\Bus\Queueable;
++use Illuminate\Mail\Mailable;
++use Illuminate\Mail\Mailables\Content;
++use Illuminate\Mail\Mailables\Envelope;
++use Illuminate\Queue\SerializesModels;
++
++/**
++ * A one-off, professionally branded email composed by an admin from the
++ * Filament "Send Custom Email" page and sent to any user or arbitrary
++ * email address. It reuses the same platform email shell (logo, header,
++ * footer) as the rest of the transactional emails so it reads as an
++ * official message from the platform rather than a plain-text blast.
++ */
++class AdminCustomMail extends Mailable
++{
++    use Queueable, SerializesModels;
++
++    /**
++     * @param  string  $emailSubject  The subject line chosen by the admin.
++     * @param  string  $body  Sanitized HTML produced by the admin's rich text editor.
++     * @param  User|null  $user  The matching platform user, when the recipient is a known user.
++     */
++    public function __construct(
++        public string $emailSubject,
++        public string $body,
++        public ?User $user = null,
++    ) {
++        $this->subject = $this->emailSubject;
++    }
++
++    public function envelope(): Envelope
++    {
++        return new Envelope(
++            subject: $this->emailSubject,
++        );
++    }
++
++    public function content(): Content
++    {
++        return new Content(
++            markdown: 'emails.admin.custom',
++            with: [
++                'subject' => $this->emailSubject,
++                'appName' => config('app.name'),
++                'body' => $this->body,
++                'user' => $this->user,
++            ],
++        );
++    }
++
++    /**
++     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
++     */
++    public function attachments(): array
++    {
++        return [];
++    }
++}
+diff --git a/resources/views/emails/admin/custom.blade.php b/resources/views/emails/admin/custom.blade.php
+new file mode 100644
+index 0000000..43b985d
+--- /dev/null
++++ b/resources/views/emails/admin/custom.blade.php
+@@ -0,0 +1,62 @@
++@extends('emails.layouts.app')
++
++@push('email-styles')
++<style>
++    /* Styles for the admin-authored rich text body. Inline-friendly fallbacks
++       are also applied via the tags below for clients that strip <style>. */
++    .halpha-rich-body p { margin: 0 0 14px; }
++    .halpha-rich-body p:last-child { margin-bottom: 0; }
++    .halpha-rich-body a { color: #38bdf8; text-decoration: underline; }
++    .halpha-rich-body strong, .halpha-rich-body b { color: #ffffff; }
++    .halpha-rich-body h1, .halpha-rich-body h2, .halpha-rich-body h3 {
++        color: #ffffff; margin: 0 0 12px; line-height: 1.3;
++    }
++    .halpha-rich-body ul, .halpha-rich-body ol { margin: 0 0 14px; padding-left: 20px; }
++    .halpha-rich-body li { margin-bottom: 6px; }
++    .halpha-rich-body blockquote {
++        margin: 0 0 14px; padding: 10px 16px; border-left: 3px solid #38bdf8;
++        background: #0b0b14; color: #c7c7cc; border-radius: 4px;
++    }
++    .halpha-rich-body img { max-width: 100%; border-radius: 8px; }
++    .halpha-rich-body hr { border: none; border-top: 1px solid #2b2b33; margin: 18px 0; }
++</style>
++@endpush
++
++@section('contents')
++    @if ($user)
++        <tr>
++            <td style="font-size:14px; color:#d1d1d6; text-align:left; padding-bottom:16px;">
++                Hi {{ $user->first_name ?? $user->name ?? 'there' }},
++            </td>
++        </tr>
++    @endif
++
++    <!-- Admin authored content -->
++    <tr>
++        <td>
++            <table width="100%" cellpadding="0" cellspacing="0"
++                style="
++                    background:#0f0f14;
++                    border-radius:12px;
++                    padding:20px;
++                    border:1px solid #1f2937;
++                ">
++                <tr>
++                    <td class="halpha-rich-body" style="font-size:14px; color:#d1d1d6; text-align:left; line-height:22px;">
++                        {!! $body !!}
++                    </td>
++                </tr>
++            </table>
++        </td>
++    </tr>
++
++    <!-- Footer note -->
++    <tr>
++        <td style="padding-top:22px; font-size:12px; color:#8d8d95; text-align:center; line-height:18px;">
++            This message was sent to you by the <strong>{{ $appName }}</strong> team.
++            <br><br>
++            If you weren't expecting this email or need help, contact us at
++            <a href="mailto:support@hashalpha.io" style="color:#38bdf8; text-decoration:none;">support@hashalpha.io</a>.
++        </td>
++    </tr>
++@endsection
+diff --git a/resources/views/emails/layouts/header.blade.php b/resources/views/emails/layouts/header.blade.php
+index 67cc6ff..1eaf405 100644
+--- a/resources/views/emails/layouts/header.blade.php
++++ b/resources/views/emails/layouts/header.blade.php
+@@ -4,6 +4,7 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>{{ $subject }}</title>
++    @stack('email-styles')
+ </head>
+ 
+ <body style="margin:0; padding:0; background:#0f0f11; font-family:Arial, Helvetica, sans-serif;">
+diff --git a/tests/Feature/QuickMailSmokeTest.php b/tests/Feature/QuickMailSmokeTest.php
+new file mode 100644
+index 0000000..63ab34e
+--- /dev/null
++++ b/tests/Feature/QuickMailSmokeTest.php
+@@ -0,0 +1,119 @@
++<?php
++
++namespace Tests\Feature;
++
++use App\Filament\Pages\QuickMail;
++use App\Mail\AdminCustomMail;
++use App\Models\User;
++use Illuminate\Support\Facades\Mail;
++use Livewire\Livewire;
++use Spatie\Permission\Models\Role;
++use Tests\TestCase;
++
++class QuickMailSmokeTest extends TestCase
++{
++    /**
++     * This app's migrations include some MySQL-only statements unrelated to
++     * this feature (e.g. raw `MODIFY` / duplicate-index migrations), which
++     * fail against the sqlite connection used for tests. Rather than run the
++     * full migrator (RefreshDatabase), only build the handful of tables this
++     * test actually needs: users + Spatie permission tables.
++     */
++    protected function setUp(): void
++    {
++        parent::setUp();
++
++        $migrations = [
++            '0001_01_01_000000_create_users_table.php',
++            '2025_10_27_000002_alter_users_for_affiliate_kyc_2fa.php',
++            '2025_10_30_000001_add_auth_fields_to_users.php',
++            '2025_10_30_000003_alter_users_for_first_and_lastname.php',
++            '2025_12_01_000001_add_balance_to_users.php',
++            '2026_01_15_000001_add_phone_etc_to_users.php',
++            '2026_01_16_162420_add_login_alerts_and_withdrawal_confirmation_to_users_table.php',
++            '2026_01_21_201507_add_is_leader_to_users_table.php',
++            '2026_01_22_101507_add_lock_roi_to_users_table.php',
++            '2026_02_04_144259_add_deposit_wallet_and_co_to_users.php',
++            '2026_03_10_121349_add_seen_sprint1_banner_to_users.php',
++            '2026_01_13_002534_create_permission_tables.php',
++        ];
++
++        foreach ($migrations as $migration) {
++            (require base_path('database/migrations/' . $migration))->up();
++        }
++    }
++
++    public function test_admin_can_send_custom_email_to_a_user_and_a_raw_address(): void
++    {
++        Mail::fake();
++
++        Role::firstOrCreate(['name' => 'super-admin']);
++
++        $admin = User::factory()->create();
++        $admin->assignRole('super-admin');
++
++        $recipient = User::factory()->create([
++            'name' => 'Jane Doe',
++            'email' => 'jane@example.com',
++        ]);
++
++        $this->actingAs($admin);
++
++        // The RichEditor field's raw Livewire state is a TipTap JSON document
++        // (matching what the browser editor produces); Filament converts it
++        // to HTML on dehydration, which is what QuickMail::send() consumes.
++        $contentDocument = [
++            'type' => 'doc',
++            'content' => [
++                [
++                    'type' => 'paragraph',
++                    'content' => [
++                        ['type' => 'text', 'text' => 'Hello there, '],
++                        ['type' => 'text', 'marks' => [['type' => 'bold']], 'text' => 'thanks'],
++                        ['type' => 'text', 'text' => ' for being with us.'],
++                    ],
++                ],
++            ],
++        ];
++
++        Livewire::test(QuickMail::class)
++            ->fillForm([
++                'user_ids' => [$recipient->id],
++                'custom_emails' => ['guest@example.com'],
++                'subject' => 'A Message From The Team',
++                'content' => $contentDocument,
++            ])
++            ->call('send')
++            ->assertHasNoFormErrors()
++            ->assertNotified('Email Queued');
++
++        // The job is queued; run it synchronously (QUEUE_CONNECTION=sync in phpunit.xml).
++        Mail::assertSentCount(2);
++        Mail::assertSent(AdminCustomMail::class, function (AdminCustomMail $mail) use ($recipient) {
++            return $mail->hasTo($recipient->email) && $mail->user?->is($recipient);
++        });
++
++        Mail::assertSent(AdminCustomMail::class, function (AdminCustomMail $mail) {
++            return $mail->hasTo('guest@example.com') && $mail->user === null;
++        });
++    }
++
++    public function test_script_tags_are_stripped_from_the_rendered_email(): void
++    {
++        Role::firstOrCreate(['name' => 'super-admin']);
++        $admin = User::factory()->create();
++        $admin->assignRole('super-admin');
++        $this->actingAs($admin);
++
++        $mail = new AdminCustomMail(
++            'Test',
++            strip_tags('<p>Safe</p><script>alert(1)</script>', '<p><br><strong>'),
++            null
++        );
++
++        $html = $mail->render();
++
++        $this->assertStringNotContainsString('<script>', $html);
++        $this->assertStringContainsString('Safe', $html);
++    }
++}
