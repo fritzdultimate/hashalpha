@@ -56,7 +56,7 @@
             This message was sent to you by the <strong>{{ $appName }}</strong> team.
             <br><br>
             If you weren't expecting this email or need help, contact us at
-            <a href="mailto:support@hashalpha.io" style="color:#38bdf8; text-decoration:none;">support@hashalpha.io</a>.
+            <a href="mailto:support@hashalpha.io" style="color:#38bdf8; text-decoration:none;">support@vertexstake.com</a>.
         </td>
     </tr>
 @endsection
