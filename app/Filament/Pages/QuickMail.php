@@ -153,6 +153,11 @@ class QuickMail extends Page implements HasForms {
             ->success()
             ->send();
 
-        $this->form->fill();
+        $this->form->fill([
+            'user_ids' => [],
+            'custom_emails' => [],
+            'subject' => $data['subject'] ?? '',
+            'content' => $data['content'] ?? '',
+        ]);
     }
 }
