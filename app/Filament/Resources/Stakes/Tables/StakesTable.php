@@ -131,6 +131,18 @@ class StakesTable
                         ->action(function (Stake $record) {
                             StakeService::unlockReward($record);
                         }),
+
+                    Action::make('endStake')
+                        ->label('End Stake')
+                        ->color('success')
+                        ->icon('heroicon-o-lock-open')
+                        ->requiresConfirmation()
+                        ->visible(fn (Stake $record) =>
+                            $record->status !== StakeStatus::COMPLETED
+                        )
+                        ->action(function (Stake $record) {
+                            StakeService::endStake($record);
+                        }),
                     DeleteAction::make(),
                 ])
                 ->label('Action')

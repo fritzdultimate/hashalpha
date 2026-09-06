@@ -40,6 +40,8 @@ class User extends Authenticatable implements FilamentUser {
         'is_leader',
         'kyc_status',
         'kyc_submitted_at',
+        'enhanced_verification_status',
+        'enhanced_verification_submitted_at',
         'lock_roi',
         'suspended_until',
         'is_suspended',
@@ -73,6 +75,7 @@ class User extends Authenticatable implements FilamentUser {
             'lock_roi' => 'boolean',
             'is_suspended' => 'boolean',
             'suspended_until' => 'datetime',
+            'enhanced_verification_submitted_at' => 'datetime',
             'created_at' => 'datetime'
         ];
     }
@@ -154,6 +157,10 @@ class User extends Authenticatable implements FilamentUser {
 
     public function kyc() {
         return $this->hasOne(KycVerification::class);
+    }
+
+    public function enhancedVerification() {
+        return $this->hasOne(EnhancedVerification::class);
     }
 
     public function withdraw(string $amount): void {

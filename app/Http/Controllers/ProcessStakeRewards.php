@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reward;
 use App\Models\Stake;
+use App\Services\CompoundingOfferService;
 use App\Services\PerformanceBonusService;
 use Carbon\Carbon;
 
@@ -37,6 +38,13 @@ class ProcessStakeRewards extends Controller {
         
         if ($stake->expected_end_date && now()->gte($stake->expected_end_date)) {
             $stake->update(['status' => 'completed']);
+
+            // Give the user the option to voluntarily reinvest this matured
+            // stake's principal into a new locked compounding term, using
+            // the terms of the plan it was staked under. This is purely an
+            // opt-in offer -- nothing is force-locked here.
+            CompoundingOfferService::createForMaturedStake($stake);
+
             return;
         }
 

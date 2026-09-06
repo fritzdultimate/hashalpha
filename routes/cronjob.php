@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddValidatorBlock;
 use App\Http\Controllers\ClaimValidatorReward;
+use App\Http\Controllers\CompoundingOfferCronController;
 use App\Http\Controllers\GenerateValidatorReward;
 use App\Http\Controllers\LeaderBoardController;
 use App\Http\Controllers\PerformanceBonusController;
@@ -32,3 +33,9 @@ Route::get('/cron/milestone-score', [LeaderBoardController::class, 'scoreMilesto
 Route::get('/cron/qualification-score', [LeaderBoardController::class, 'scoreQualification']);
 
 Route::get('/cron/process-performance-bonus', [PerformanceBonusController::class, 'process']);
+
+Route::get('/cron/compounding-daily-progress', [CompoundingOfferCronController::class, 'sendDailyProgress'])
+    ->name('cron.compounding-daily-progress');
+
+Route::get('/cron/compounding-expire-offers', [CompoundingOfferCronController::class, 'expireOffers'])
+    ->name('cron.compounding-expire-offers');

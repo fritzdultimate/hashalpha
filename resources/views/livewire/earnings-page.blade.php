@@ -85,16 +85,25 @@
                     ${{ number_format((float) $withdrawable, 8) }}
                 </div>
 
-                <div class="halpha-flex halpha-items-center halpha-gap-2 halpha-w-full md:halpha-w-auto">
+                <div class="halpha-flex halpha-flex-col halpha-gap-2 halpha-w-full md:halpha-w-40">
                     <button
                         @disabled(auth()->user()->is_leader)
                         wire:click="claimAll"
-                        class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-w-full halpha-max-h-8 disabled:halpha-opacity-40"
+                        class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-bg-accent-2 halpha-text-white halpha-font-semibold halpha-w-full halpha-max-h-8 halpha-whitespace-nowrap disabled:halpha-opacity-40"
                         aria-label="Claim all rewards"
                     >
                         <span wire:loading.remove wire:target="claimAll">Claim all</span>
                         <x-ri-loader-4-fill wire:target="claimAll" wire:loading class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
                         
+                    </button>
+                    <button
+                        @disabled(auth()->user()->is_leader)
+                        wire:click="compoundAll"
+                        class="halpha-text-xs halpha-px-3 halpha-py-2 halpha-rounded halpha-border halpha-border-accent-2 halpha-text-accent-2 halpha-font-semibold halpha-w-full halpha-max-h-8 halpha-whitespace-nowrap disabled:halpha-opacity-40"
+                        aria-label="Compound all rewards"
+                    >
+                        <span wire:loading.remove wire:target="compoundAll">Compound all</span>
+                        <x-ri-loader-4-fill wire:target="compoundAll" wire:loading class="halpha-w-5 halpha-h-5 halpha-animate-spin" />
                     </button>
                 </div>
             </div>
