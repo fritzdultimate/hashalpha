@@ -20,7 +20,7 @@
         <!-- Page title or breadcrumb -->
         <div>
             <h1 class="halpha-text halpha-font-semibold halpha-text-lg halpha-hidden lg:halpha-block halpha-text-[#e6f6ff]">{{ $pageTitle ?? 'Dashboard' }}</h1>
-            <span class="halpha-muted halpha-text-xs">Welcome back, {{ Auth::user()->name ?? 'User' }}</span>
+            <span class="halpha-muted halpha-text-xs">Welcome back, User ID: {{ Auth::user()->affiliate_code }}</span>
         </div>
     </div>
 

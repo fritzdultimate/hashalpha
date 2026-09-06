@@ -18,10 +18,12 @@
 
             <div class="halpha-card halpha-p-4 halpha-space-y-4">
 
-                {{-- Name --}}
+                {{-- User ID (was: editable-looking Username field bound to name; the
+                     account's display name still exists and is used elsewhere e.g. the
+                     leaderboard -- this only changes what shows here) --}}
                 <div>
-                    <label class="halpha-text-xs halpha-text-gray-400">Username</label>
-                    <input disabled type="text" wire:model.defer="name" class="halpha-input disabled:halpha-opacity-50" placeholder="Your full name" />
+                    <label class="halpha-text-xs halpha-text-gray-400">User ID</label>
+                    <input disabled type="text" value="{{ auth()->user()->affiliate_code }}" class="halpha-input disabled:halpha-opacity-50" placeholder="User ID" />
                 </div>
 
                 {{-- Email --}}

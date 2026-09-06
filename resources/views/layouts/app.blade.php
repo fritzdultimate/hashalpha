@@ -227,6 +227,14 @@
                                 "label" => "KYC"
                             ],
                             [
+                                "url" => route('account.enhanced-verification'),
+                                "label" => "Enhanced Verification"
+                            ],
+                            [
+                                "url" => route('account.compounding-offers'),
+                                "label" => "Compounding Offers"
+                            ],
+                            [
                                 "url" => route('account.withdrawal'),
                                 "label" => 'Withdrawal'
                             ],

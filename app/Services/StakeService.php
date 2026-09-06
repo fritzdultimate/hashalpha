@@ -22,6 +22,13 @@ class StakeService {
         });
     }
 
+    public static function endStake(Stake $stake) {
+        if ($stake->status === StakeStatus::COMPLETED || $stake->status === StakeStatus::CANCELLED) {
+            return;
+        }
+        $stake->update(['status' => 'completed']);
+    }
+
     public static function lockReward(Stake $stake): void {
         abort_if($stake->lock_roi, 403);
 

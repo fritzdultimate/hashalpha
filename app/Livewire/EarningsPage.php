@@ -280,4 +280,66 @@ class EarningsPage extends Component
 
 
     }
+
+    /**
+     * Bulk version of compoundProfit(): reinvests every currently-compoundable
+     * reward (same eligibility as isCompoundable()) back into its stake in one
+     * pass, grouped per stake so a stake with several eligible rewards only
+     * gets a single amount update instead of one per reward.
+     */
+    public function compoundAll() {
+        $user = auth()->user();
+
+        if ($user->is_leader) {
+            $this->dispatch('toast', payload: [
+                'message' => 'Action denied!',
+                'timeout' => 5000,
+                'variant' => 'subtle'
+            ]);
+            return;
+        }
+
+        $pendingRewards = $user->rewards()
+            ->whereNull('rewards_locked_at')
+            ->whereNull('compounded_at')
+            ->where('status', 'pending')
+            ->with('stake')
+            ->get()
+            ->filter(fn ($reward) => $this->isCompoundable($reward));
+
+        if ($pendingRewards->isEmpty()) {
+            $this->dispatch('toast', payload: [
+                'message' => 'No compoundable rewards.',
+                'timeout' => 5000,
+                'variant' => 'subtle'
+            ]);
+            return;
+        }
+
+        DB::transaction(function () use ($pendingRewards) {
+            foreach ($pendingRewards->groupBy('stake_id') as $rewardsForStake) {
+                $stake = $rewardsForStake->first()->stake;
+                $addAmount = $rewardsForStake->sum('amount');
+
+                $stake->update([
+                    'amount' => bcadd((string) $stake->amount, (string) $addAmount, 8),
+                    'compounding' => true,
+                ]);
+
+                foreach ($rewardsForStake as $reward) {
+                    $reward->update([
+                        'status' => RewardStatus::COMPOUNDED,
+                        'compounded_at' => now(),
+                    ]);
+                }
+            }
+        });
+
+        $this->dispatch('toast', payload: [
+            'message' => 'Compounded all eligible rewards.',
+            'timeout' => 5000,
+            'type' => 'success'
+        ]);
+        $this->dispatch('$refresh');
+    }
 }

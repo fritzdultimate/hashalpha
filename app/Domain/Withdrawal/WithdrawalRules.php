@@ -3,6 +3,7 @@
 namespace App\Domain\Withdrawal;
 
 use App\Enums\WithdrawalStatus;
+use App\Models\CustomSetting;
 use App\Models\ReferralReward;
 use App\Models\Stake;
 use App\Models\User;
@@ -17,6 +18,8 @@ class WithdrawalRules {
         self::maximumAmount($amount);
         self::kycRequired($user);
         self::cooldownCheck($user);
+        self::compoundingOfferLock($user);
+        self::enhancedVerificationRequired($user, $amount);
     }
 
     protected static function kycRequired($user) {
@@ -78,6 +81,51 @@ class WithdrawalRules {
         if($compounded) {
             throw new DomainException(
                 "Account has active compounding stakes. Withdrawals are not allowed."
+            );
+        }
+    }
+
+    /**
+     * Locks withdrawals while the user has an active stake created by
+     * accepting a compounding offer -- the amount is locked for the term
+     * the user agreed to when they opted in, per the plan's own duration.
+     * Deliberately scoped to `is_compounding_offer` rather than the
+     * generic `compounding` flag above, so it never affects ordinary
+     * reward reinvestment (e.g. Compound All on the earnings page).
+     */
+    protected static function compoundingOfferLock(User $user): void {
+        $lockedStake = $user->stakes()
+            ->where('status', 'active')
+            ->where('is_compounding_offer', true)
+            ->first();
+
+        if ($lockedStake) {
+            $endDate = $lockedStake->expected_end_date?->format('M d, Y');
+
+            throw new DomainException(
+                "You have an active compounding term locked until"
+                . ($endDate ? " {$endDate}." : " it completes.")
+            );
+        }
+    }
+
+    /**
+     * Requires an approved, company-issued enhanced verification for
+     * withdrawal amounts above a configurable threshold. No external
+     * certificate or third-party provider is ever involved -- the
+     * threshold and the review are both handled internally.
+     */
+    protected static function enhancedVerificationRequired(User $user, $amount): void {
+        $threshold = CustomSetting::get('enhanced_verification_threshold', '5000');
+
+        if (bccomp((string) $amount, (string) $threshold, 8) === -1) {
+            return;
+        }
+
+        if ($user->enhanced_verification_status !== 'approved') {
+            throw new DomainException(
+                "Withdrawals above $" . number_format((float) $threshold, 2)
+                . " require enhanced verification. Please submit your documents for review."
             );
         }
     }
