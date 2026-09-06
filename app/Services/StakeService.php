@@ -6,6 +6,7 @@ use App\Enums\DepositStatus;
 use App\Enums\StakeStatus;
 use App\Models\Deposit;
 use App\Models\Stake;
+use App\Models\StakingPlan;
 use Illuminate\Support\Facades\DB;
 
 class StakeService {
@@ -22,11 +23,14 @@ class StakeService {
         });
     }
 
-    public static function endStake(Stake $stake) {
+    public static function endStake(Stake $stake, StakingPlan $plan) {
         if ($stake->status === StakeStatus::COMPLETED || $stake->status === StakeStatus::CANCELLED) {
             return;
         }
+
         $stake->update(['status' => 'completed']);
+
+        CompoundingOfferService::createForMaturedStake($stake, $plan);
     }
 
     public static function lockReward(Stake $stake): void {

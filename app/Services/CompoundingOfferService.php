@@ -7,6 +7,7 @@ use App\Mail\CompoundingOfferAcceptedMail;
 use App\Mail\CompoundingOfferCreatedMail;
 use App\Models\CompoundingOffer;
 use App\Models\Stake;
+use App\Models\StakingPlan;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -27,13 +28,13 @@ class CompoundingOfferService
     // How long the user has to decide before the offer expires.
     protected const DECISION_WINDOW_DAYS = 7;
 
-    public static function createForMaturedStake(Stake $stake): ?CompoundingOffer
+    public static function createForMaturedStake(Stake $stake, ?StakingPlan $plan): ?CompoundingOffer
     {
         if (CompoundingOffer::where('stake_id', $stake->id)->exists()) {
             return null;
         }
 
-        $plan = $stake->plan;
+        $plan = $plan ?? $stake->plan;
 
         if (! $plan) {
             return null;

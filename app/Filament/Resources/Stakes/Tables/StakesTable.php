@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Stakes\Tables;
 
 use App\Enums\StakeStatus;
 use App\Models\Stake;
+use App\Models\StakingPlan;
 use App\Services\StakeService;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -11,6 +12,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -140,9 +142,18 @@ class StakesTable
                         ->visible(fn (Stake $record) =>
                             $record->status !== StakeStatus::COMPLETED
                         )
-                        ->action(function (Stake $record) {
-                            StakeService::endStake($record);
+                        ->form([
+                            Select::make('plan_id')
+                                ->label('New Plan')
+                                ->options(fn () => StakingPlan::pluck('name', 'id'))
+                                ->searchable()
+                                ->required(),
+                        ])
+                        ->action(function (Stake $record, array $data) {
+                            StakeService::endStake($record, StakingPlan::findOrFail($data['plan_id']));
                         }),
+
+                    
                     DeleteAction::make(),
                 ])
                 ->label('Action')

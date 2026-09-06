@@ -43,7 +43,7 @@ class ProcessStakeRewards extends Controller {
             // stake's principal into a new locked compounding term, using
             // the terms of the plan it was staked under. This is purely an
             // opt-in offer -- nothing is force-locked here.
-            CompoundingOfferService::createForMaturedStake($stake);
+            // CompoundingOfferService::createForMaturedStake($stake);
 
             return;
         }
