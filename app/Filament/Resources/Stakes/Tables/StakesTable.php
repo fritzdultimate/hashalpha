@@ -136,8 +136,8 @@ class StakesTable
 
                     Action::make('endStake')
                         ->label('End Stake')
-                        ->color('success')
-                        ->icon('heroicon-o-lock-open')
+                        ->color('danger')
+                        ->icon('heroicon-o-flag')
                         ->requiresConfirmation()
                         ->visible(fn (Stake $record) =>
                             $record->status !== StakeStatus::COMPLETED
@@ -149,6 +149,7 @@ class StakesTable
                                 ->searchable()
                                 ->required(),
                         ])
+                        ->modalDescription('Select new plan for compounding.')
                         ->action(function (Stake $record, array $data) {
                             StakeService::endStake($record, StakingPlan::findOrFail($data['plan_id']));
                         }),
