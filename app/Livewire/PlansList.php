@@ -41,7 +41,7 @@ class PlansList extends Component {
 
     #[On('stakeCreated')]
     public function refresh() {
-        $this->plans = StakingPlan::orderBy('apy_decimal', 'desc')->get();
+        $this->plans = StakingPlan::where('for_compounding', false)->orderBy('apy_decimal', 'desc')->get();
         $this->dispatch('refreshDashboard');
     }
 
@@ -68,7 +68,7 @@ class PlansList extends Component {
     }
 
      protected function query() {
-        $q = StakingPlan::query()
+        $q = StakingPlan::where('for_compounding', false)
             ->withSum(['stakes as active_staked_amount' => function ($q) {
                 $q->where('status', 'active');
             }], 'amount');
@@ -95,7 +95,7 @@ class PlansList extends Component {
     }
 
     public function getPlansProperty(): Collection {
-        $totalActive = Stake::where('status', 'active')->sum('amount');
+        $totalActive = Stake::where(['status' => 'active'])->sum('amount');
         $plans = $this->query()->limit($this->perPage)->get();
 
         $plans->each(function ($plan) use ($totalActive) {

@@ -145,7 +145,7 @@ class StakesTable
                         ->form([
                             Select::make('plan_id')
                                 ->label('New Plan')
-                                ->options(fn () => StakingPlan::pluck('name', 'id'))
+                                ->options(fn () => StakingPlan::where('for_compounding', true)->pluck('name', 'id'))
                                 ->searchable()
                                 ->required(),
                         ])

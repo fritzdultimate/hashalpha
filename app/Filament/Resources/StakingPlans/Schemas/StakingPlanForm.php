@@ -31,6 +31,8 @@ class StakingPlanForm
                     ->required()
                     ->numeric()
                     ->default(0),
+                Toggle::make('for_compounding')
+                    ->required(),
                 TextInput::make('payout_frequency')
                     ->required()
                     ->default('daily'),

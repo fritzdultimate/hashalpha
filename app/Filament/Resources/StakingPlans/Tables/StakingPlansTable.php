@@ -29,6 +29,8 @@ class StakingPlansTable
                 TextColumn::make('max_roi')
                     ->numeric()
                     ->sortable(),
+                IconColumn::make('for_compounding')
+                    ->boolean(),
                 TextColumn::make('payout_frequency')
                     ->searchable(),
                 IconColumn::make('compound_allowed')
