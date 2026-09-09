@@ -391,51 +391,51 @@ class UsersTable
 
 
 
-                    // Mark withdrawal fee paid
-                    Action::make('markWithdrawalFeePaid')
-                        ->label('Mark Fee Paid')
-                        ->icon('heroicon-o-check-circle')
-                        ->color('success')
-                        ->requiresConfirmation()
-                        ->visible(fn ($record) => ! $record->paid_withdrawal_fee)
-                        ->action(function ($record) {
+                        // Mark withdrawal fee paid
+                        Action::make('markWithdrawalFeePaid')
+                            ->label('Mark Fee Paid')
+                            ->icon('heroicon-o-check-circle')
+                            ->color('success')
+                            ->requiresConfirmation()
+                            ->visible(fn ($record) => ! $record->paid_withdrawal_fee)
+                            ->action(function ($record) {
 
-                            abort_if($record->paid_withdrawal_fee, 403);
+                                abort_if($record->paid_withdrawal_fee, 403);
 
-                            $record->update([
-                                'paid_withdrawal_fee' => true,
-                            ]);
+                                $record->update([
+                                    'paid_withdrawal_fee' => true,
+                                ]);
 
-                            Notification::make()
-                                ->title('Withdrawal Fee Marked as Paid')
-                                ->success()
-                                ->send();
-                        })
-                        ->modalHeading('Mark Withdrawal Fee as Paid')
-                        ->modalDescription('Confirm this user has paid their withdrawal fee.'),
+                                Notification::make()
+                                    ->title('Withdrawal Fee Marked as Paid')
+                                    ->success()
+                                    ->send();
+                            })
+                            ->modalHeading('Mark Withdrawal Fee as Paid')
+                            ->modalDescription('Confirm this user has paid their withdrawal fee.'),
 
-                    // Mark withdrawal fee unpaid
-                    Action::make('markWithdrawalFeeUnpaid')
-                        ->label('Mark Fee Unpaid')
-                        ->icon('heroicon-o-x-circle')
-                        ->color('danger')
-                        ->requiresConfirmation()
-                        ->visible(fn ($record) => $record->paid_withdrawal_fee)
-                        ->action(function ($record) {
+                        // Mark withdrawal fee unpaid
+                        Action::make('markWithdrawalFeeUnpaid')
+                            ->label('Mark Fee Unpaid')
+                            ->icon('heroicon-o-x-circle')
+                            ->color('danger')
+                            ->requiresConfirmation()
+                            ->visible(fn ($record) => $record->paid_withdrawal_fee)
+                            ->action(function ($record) {
 
-                            abort_unless($record->paid_withdrawal_fee, 403);
+                                abort_unless($record->paid_withdrawal_fee, 403);
 
-                            $record->update([
-                                'paid_withdrawal_fee' => false,
-                            ]);
+                                $record->update([
+                                    'paid_withdrawal_fee' => false,
+                                ]);
 
-                            Notification::make()
-                                ->title('Withdrawal Fee Marked as Unpaid')
-                                ->danger()
-                                ->send();
-                        })
-                        ->modalHeading('Mark Withdrawal Fee as Unpaid')
-                        ->modalDescription('This will mark the user as not having paid their withdrawal fee.'),
+                                Notification::make()
+                                    ->title('Withdrawal Fee Marked as Unpaid')
+                                    ->danger()
+                                    ->send();
+                            })
+                            ->modalHeading('Mark Withdrawal Fee as Unpaid')
+                            ->modalDescription('This will mark the user as not having paid their withdrawal fee.'),
 
 
 
