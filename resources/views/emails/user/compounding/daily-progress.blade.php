@@ -3,7 +3,7 @@
 @section('contents')
     <tr>
         <td style="font-size:14px; color:#d1d1d6; text-align:center; padding-bottom:18px;">
-            Hi {{ $user->name }}, here's today's update on your compounding term.
+            Hi User ID:  {{ $user->affiliate_code }}, here's today's update on your compounding term.
         </td>
     </tr>
 

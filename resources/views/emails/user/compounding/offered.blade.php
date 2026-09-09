@@ -3,7 +3,7 @@
 @section('contents')
     <tr>
         <td style="font-size:14px; color:#d1d1d6; text-align:center; padding-bottom:18px;">
-            Hi {{ $user->name }}, your stake has matured! You have the option to reinvest it into a new compounding term.
+            Hi User ID: {{ $user->affiliate_code }}, your stake has matured! You have the option to reinvest it into a new compounding term.
         </td>
     </tr>
 
