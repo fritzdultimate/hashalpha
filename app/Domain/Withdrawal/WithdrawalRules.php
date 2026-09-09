@@ -2,7 +2,9 @@
 
 namespace App\Domain\Withdrawal;
 
+use App\Enums\CompoundingOfferStatus;
 use App\Enums\WithdrawalStatus;
+use App\Models\CompoundingOffer;
 use App\Models\CustomSetting;
 use App\Models\ReferralReward;
 use App\Models\Stake;
@@ -20,12 +22,25 @@ class WithdrawalRules {
         self::cooldownCheck($user);
         self::compoundingOfferLock($user);
         self::enhancedVerificationRequired($user, $amount);
+        self::onCompounding($user);
     }
 
     protected static function kycRequired($user) {
         if($user->kyc_status !== 'approved') {
             throw new DomainException(
                 "For security and compliance reasons, you must complete KYC verification before proceeding."
+            );
+        }
+    }
+
+    protected static function onCompounding($user) {
+        $activeCompounding = CompoundingOffer::where('user_id', $user->id)
+            ->whereIn('status', [CompoundingOfferStatus::ACCEPTED, CompoundingOfferStatus::OFFERED])
+            ->exists();
+
+        if ($activeCompounding) {
+            throw new DomainException(
+                "You have an active compounding offer on your account. Please resolve it before making a withdrawal."
             );
         }
     }
