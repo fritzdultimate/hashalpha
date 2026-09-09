@@ -46,7 +46,8 @@ class User extends Authenticatable implements FilamentUser {
         'suspended_until',
         'is_suspended',
         'affiliate_code',
-        'seen_sprint1_banner'
+        'seen_sprint1_banner',
+        'paid_withdrawal_fee'
     ];
 
     /**
@@ -76,7 +77,8 @@ class User extends Authenticatable implements FilamentUser {
             'is_suspended' => 'boolean',
             'suspended_until' => 'datetime',
             'enhanced_verification_submitted_at' => 'datetime',
-            'created_at' => 'datetime'
+            'created_at' => 'datetime',
+            'paid_withdrawal_fee' => 'boolean'
         ];
     }
 

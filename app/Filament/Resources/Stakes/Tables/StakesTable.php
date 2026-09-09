@@ -13,6 +13,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -45,6 +46,14 @@ class StakesTable
                     ->badge()
                     ->color(fn (StakeStatus  $state): string => $state->color())      
                     ->searchable(),
+
+                IconColumn::make('paid_withdrawal_fee')
+                    ->label('Withdrawal Fee')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger'),
 
                 IconColumn::make('lock_roi')
                     ->label('ROI Lock')
@@ -153,6 +162,52 @@ class StakesTable
                         ->action(function (Stake $record, array $data) {
                             StakeService::endStake($record, StakingPlan::findOrFail($data['plan_id']));
                         }),
+
+                    // Mark maintenance fee paid
+                    Action::make('markWithdrawalFeePaid')
+                        ->label('Mark Fee Paid')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->requiresConfirmation()
+                        ->visible(fn ($record) => ! $record->paid_withdrawal_fee)
+                        ->action(function ($record) {
+
+                            abort_if($record->paid_withdrawal_fee, 403);
+
+                            $record->update([
+                                'paid_withdrawal_fee' => true,
+                            ]);
+
+                            Notification::make()
+                                ->title('Withdrawal Fee Marked as Paid')
+                                ->success()
+                                ->send();
+                        })
+                        ->modalHeading('Mark Withdrawal Fee as Paid')
+                        ->modalDescription('Confirm this user has paid their withdrawal fee.'),
+
+                    // Mark withdrawal fee unpaid
+                    Action::make('markWithdrawalFeeUnpaid')
+                        ->label('Mark Fee Unpaid')
+                        ->icon('heroicon-o-x-circle')
+                        ->color('danger')
+                        ->requiresConfirmation()
+                        ->visible(fn ($record) => $record->paid_withdrawal_fee)
+                        ->action(function ($record) {
+
+                            abort_unless($record->paid_withdrawal_fee, 403);
+
+                            $record->update([
+                                'paid_withdrawal_fee' => false,
+                            ]);
+
+                            Notification::make()
+                                ->title('Withdrawal Fee Marked as Unpaid')
+                                ->danger()
+                                ->send();
+                        })
+                        ->modalHeading('Mark Withdrawal Fee as Unpaid')
+                        ->modalDescription('This will mark the user as not having paid their withdrawal fee.'),
 
                     
                     DeleteAction::make(),

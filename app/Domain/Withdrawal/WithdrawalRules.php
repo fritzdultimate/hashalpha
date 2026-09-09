@@ -45,6 +45,14 @@ class WithdrawalRules {
         }
     }
 
+    protected static function onWithdrawalFee($user) {
+        if (! $user->paid_withdrawal_fee) {
+            throw new DomainException(
+                "You need to pay the withdrawal fee before you can withdraw. Please settle it to proceed."
+            );
+        }
+    }
+
     protected static function cooldownCheck($user): void {
         $lastWithdrawal = Withdrawal::where('user_id', $user->id)
             ->latest()
