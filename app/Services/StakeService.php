@@ -28,7 +28,10 @@ class StakeService {
             return;
         }
 
-        $activeStakes = Stake::where('status', StakeStatus::ACTIVE);
+        $activeStakes = Stake::where([
+            'status' => StakeStatus::ACTIVE,
+            'user_id' => $stake->user_id
+        ]);
         $activeStakesCapitalSum = $activeStakes->sum('capital');
 
         $activeStakes->update([

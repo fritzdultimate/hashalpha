@@ -41,6 +41,7 @@
                         <x-halpha-rounded-progress
                             :started-at="$s->started_at"
                             :duration-days="$s->plan->duration"
+                            :expected-end-date="$s->expected_end_date"
                             size="56"
                             stroke="6"
                         />
