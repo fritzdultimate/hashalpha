@@ -140,7 +140,7 @@ class StakesTable
                         ->icon('heroicon-o-flag')
                         ->requiresConfirmation()
                         ->visible(fn (Stake $record) =>
-                            $record->status !== StakeStatus::COMPLETED
+                            $record->status === StakeStatus::ACTIVE
                         )
                         ->form([
                             Select::make('plan_id')

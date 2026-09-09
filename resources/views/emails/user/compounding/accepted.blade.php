@@ -20,7 +20,7 @@
                 letter-spacing:0.5px;
                 color:#38bdf8;
             ">
-                ${{ number_format($stake->amount, 2) }}
+                ${{ number_format($amount, 2) }}
             </div>
             <p style="margin-top:10px; font-size:12px; color:#9CA3AF; text-align:center;">
                 Locked amount

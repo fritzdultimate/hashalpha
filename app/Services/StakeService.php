@@ -28,7 +28,16 @@ class StakeService {
             return;
         }
 
-        $stake->update(['status' => 'completed']);
+        $activeStakes = Stake::where('status', StakeStatus::ACTIVE);
+        $activeStakesCapitalSum = $activeStakes->sum('capital');
+
+        $activeStakes->update([
+            'status' => 'completed',
+            'expected_end_date' => now()
+        ]);
+
+        $stake->user->balance = bcadd($stake->user->balance, (string) $activeStakesCapitalSum, 8);
+        $stake->user->save();
 
         CompoundingOfferService::createForMaturedStake($stake, $plan);
     }

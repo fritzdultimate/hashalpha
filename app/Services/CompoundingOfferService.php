@@ -8,6 +8,7 @@ use App\Mail\CompoundingOfferCreatedMail;
 use App\Models\CompoundingOffer;
 use App\Models\Stake;
 use App\Models\StakingPlan;
+use App\Models\Transaction;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -75,7 +76,11 @@ class CompoundingOfferService
 
         return DB::transaction(function () use ($offer, $notifyDaily) {
             $originalStake = $offer->stake;
-            $amount = $originalStake->capital ?? $originalStake->amount;
+            $amount = $originalStake->user->balance;
+
+            $originalStake->user->balance = bcsub($originalStake->user->balance, (string)$amount, 8);
+            $originalStake->user->save();
+
 
             $newStake = Stake::create([
                 'user_id' => $offer->user_id,
@@ -96,6 +101,22 @@ class CompoundingOfferService
                 ],
             ]);
 
+            Transaction::create([
+                'user_id' => $originalStake->user->id,
+                'type' => 'hold',
+                'amount' => $amount,
+                'balance_after' => $originalStake->user->balance,
+                'related_type' => 'App\Models\Stake',
+                'related_id' => $newStake->id,
+                'meta' => [
+                    'note' => 'Staked',
+                    'used_bonus' => 0,
+                    'used_balance' => $amount,
+                ],
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
             $offer->update([
                 'status' => CompoundingOfferStatus::ACCEPTED->value,
                 'new_stake_id' => $newStake->id,
@@ -103,7 +124,7 @@ class CompoundingOfferService
                 'responded_at' => now(),
             ]);
 
-            Mail::to($offer->user->email)->send(new CompoundingOfferAcceptedMail($offer->fresh(), $newStake));
+            Mail::to($offer->user->email)->send(new CompoundingOfferAcceptedMail($offer->fresh(), $newStake, $amount));
 
             return $newStake;
         });

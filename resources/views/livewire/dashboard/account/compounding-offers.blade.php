@@ -34,7 +34,7 @@
                 <div class="halpha-card halpha-bg-card-soft halpha-p-3">
                     <p class="halpha-text-gray-400">Amount to Lock</p>
                     <p class="halpha-text-white halpha-font-semibold halpha-mt-1">
-                        ${{ number_format($offer->stake->capital ?? $offer->stake->amount, 2) }}
+                        ${{ number_format($offer->stake->user->balance, 2) }}
                     </p>
                 </div>
                 <div class="halpha-card halpha-bg-card-soft halpha-p-3">

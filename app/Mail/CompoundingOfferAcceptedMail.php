@@ -14,7 +14,7 @@ class CompoundingOfferAcceptedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public CompoundingOffer $offer, public Stake $stake)
+    public function __construct(public CompoundingOffer $offer, public Stake $stake, public $amount)
     {
         $this->subject = 'Your Compounding Term Has Started';
     }
@@ -36,6 +36,7 @@ class CompoundingOfferAcceptedMail extends Mailable
                 'stake' => $this->stake,
                 'subject' => $this->subject,
                 'appName' => config('app.name'),
+                'amount' => $this->amount
             ]
         );
     }
