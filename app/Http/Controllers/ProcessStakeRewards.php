@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\CompoundingOfferStatus;
+use App\Enums\StakeStatus;
 use App\Models\Reward;
 use App\Models\Stake;
-use App\Services\CompoundingOfferService;
-use App\Services\PerformanceBonusService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ProcessStakeRewards extends Controller {
     public function handle() {
@@ -36,9 +35,16 @@ class ProcessStakeRewards extends Controller {
         if ($referenceTime->gt(now()->subHours(24))) {
             return;
         }
-        
+
         if ($stake->expected_end_date && now()->gte($stake->expected_end_date)) {
-            $stake->update(['status' => 'completed']);
+            DB::transaction(function () use ($stake) {
+                $user = $stake->user()->lockForUpdate()->first();
+
+                $user->balance = bcadd($user->balance, (string) $stake->amount, 8);
+                $user->save();
+
+                $stake->update(['status' => StakeStatus::COMPLETED->value]);
+            });
 
             // Give the user the option to voluntarily reinvest this matured
             // stake's principal into a new locked compounding term, using
@@ -64,7 +70,6 @@ class ProcessStakeRewards extends Controller {
         );
 
         $lock_rewards = $stake->user->shouldLockRewards() || $stake->lock_roi;
-
         $isCompoundedStake = $stake->is_compounding_offer;
 
         Reward::create([
@@ -84,9 +89,12 @@ class ProcessStakeRewards extends Controller {
             // 'lock_reason' => ''
         ]);
 
-        if($isCompoundedStake) {
-            $stake->user->balance = bcadd($stake->user->balance, (string) $reward, 8);
-            $stake->user->save();
+        if ($isCompoundedStake) {
+            DB::transaction(function () use ($stake, $reward) {
+                $user = $stake->user()->lockForUpdate()->first();
+                $user->balance = bcadd($user->balance, (string) $reward, 8);
+                $user->save();
+            });
         }
 
         // Performance bonus distribution

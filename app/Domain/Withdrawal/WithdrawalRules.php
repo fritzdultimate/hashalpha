@@ -21,8 +21,11 @@ class WithdrawalRules {
         self::kycRequired($user);
         self::cooldownCheck($user);
         self::compoundingOfferLock($user);
-        self::enhancedVerificationRequired($user, $amount);
+        // self::enhancedVerificationRequired($user, $amount);
         self::onCompounding($user);
+
+        self::onWithdrawalFee($user);
+        self::onEnhancedVerification($user);
     }
 
     protected static function kycRequired($user) {
@@ -48,8 +51,27 @@ class WithdrawalRules {
     protected static function onWithdrawalFee($user) {
         if (! $user->paid_withdrawal_fee) {
             throw new DomainException(
-                "You need to pay the withdrawal fee before you can withdraw. Please settle it to proceed."
+                "Your withdrawal is pending because the required ITF fee has not been paid. Please settle the ITF fee to proceed."
             );
+        }
+    }
+
+    protected static function onEnhancedVerification($user) {
+        switch ($user->enhanced_verification_status) {
+            case 'required':
+                throw new DomainException(
+                    "Enhanced verification is required for your account before you can withdraw. Please complete the verification process and submit it for review."
+                );
+
+            case 'pending':
+                throw new DomainException(
+                    "Your enhanced verification is currently under review. Please wait for admin approval before withdrawing."
+                );
+
+            case 'rejected':
+                throw new DomainException(
+                    "Your enhanced verification was rejected. Please contact support for further assistance."
+                );
         }
     }
 
