@@ -4,8 +4,9 @@
         <h1 class="halpha-text-xl halpha-font-semibold halpha-text-white">
             Enhanced Verification
         </h1>
+        <!-- Required for withdrawals above ${{ number_format($this->threshold, 2) }}.  -->
         <p class="halpha-text-xs halpha-text-gray-400">
-            Required for withdrawals above ${{ number_format($this->threshold, 2) }}. Submit additional documents for manual review by our team.
+            Submit additional documents for manual review by our team.
         </p>
     </div>
 
@@ -65,7 +66,7 @@
         <div class="halpha-card halpha-p-4 halpha-space-y-4">
 
             <div class="halpha-space-y-2 halpha-flex halpha-flex-col">
-                <p class="halpha-text-xs halpha-text-gray-400">Proof of Funds Document</p>
+                <p class="halpha-text-xs halpha-text-gray-400">Vertex Trading Document</p>
                 <label
                     class="halpha-card halpha-border halpha-border-dashed halpha-border-gray-600
                         halpha-p-4 halpha-text-center halpha-cursor-pointer
@@ -79,7 +80,7 @@
                     @else
                         <div class="halpha-space-y-2">
                             <div class="halpha-text-gray-500">📤</div>
-                            <p class="halpha-text-xs halpha-text-gray-300">Upload proof of funds</p>
+                            <p class="halpha-text-xs halpha-text-gray-300">Upload Vertex Trading Document</p>
                             <p class="halpha-text-[10px] halpha-text-gray-500">PDF, JPG or PNG • Max 8MB</p>
                         </div>
                     @endif
