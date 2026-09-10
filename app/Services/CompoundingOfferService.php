@@ -3,12 +3,14 @@
 namespace App\Services;
 
 use App\Enums\CompoundingOfferStatus;
+use App\Enums\StakeStatus;
 use App\Mail\CompoundingOfferAcceptedMail;
 use App\Mail\CompoundingOfferCreatedMail;
 use App\Models\CompoundingOffer;
 use App\Models\Stake;
 use App\Models\StakingPlan;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -71,6 +73,11 @@ class CompoundingOfferService
                 'responded_at' => now(),
             ]);
 
+            Stake::where([
+                'user_id' => $offer->user_id,
+                'compounding_offer_status' => CompoundingOfferStatus::OFFERED
+            ])->update(['compounding_offer_status' => null]);
+
             throw new DomainException('This compounding offer has expired.');
         }
 
@@ -80,6 +87,11 @@ class CompoundingOfferService
 
             $originalStake->user->balance = bcsub($originalStake->user->balance, (string)$amount, 8);
             $originalStake->user->save();
+
+            Stake::where([
+                'user_id' => $offer->user_id,
+                'compounding_offer_status' => CompoundingOfferStatus::OFFERED
+            ])->update(['compounding_offer_status' => CompoundingOfferStatus::ACCEPTED]);
 
 
             $newStake = Stake::create([
@@ -134,6 +146,28 @@ class CompoundingOfferService
     {
         if ($offer->status !== CompoundingOfferStatus::OFFERED) {
             throw new DomainException('This compounding offer is no longer available.');
+        }
+
+        $offeredCompoundingStakes = Stake::where([
+            'user_id' => $offer->user_id,
+            'compounding_offer_status' => CompoundingOfferStatus::OFFERED
+        ]);
+
+        $totalAmount = $offeredCompoundingStakes->sum('amount');
+
+        $offer->user->balance = bcsub($offer->user->balance, (string) $totalAmount, 8);
+        $offer->user->save();
+
+        foreach ($offeredCompoundingStakes->get() as $stake) {
+            $expectedEndDate = Carbon::parse($stake->started_at)
+                ->addDays($stake->plan->duration);
+            
+            $stake->update([
+                'status' => StakeStatus::ACTIVE,
+                'compounding_offer_status' => null,
+                'expected_end_date' => $expectedEndDate,
+            ]);
+
         }
 
         $offer->update([

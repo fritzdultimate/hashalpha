@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Enums\CompoundingOfferStatus;
 use App\Enums\StakeStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,8 @@ class Stake extends Model {
         'status' => StakeStatus::class,
         'expected_end_date' => 'datetime',
         'created_at' => 'datetime',
-        'lock_roi' => 'boolean'
+        'lock_roi' => 'boolean',
+        'compounding_offer_status' => CompoundingOfferStatus::class
     ];
 
     public function user() {

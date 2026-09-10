@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\CompoundingOfferStatus;
 use App\Enums\DepositStatus;
 use App\Enums\StakeStatus;
 use App\Models\Deposit;
@@ -30,13 +31,14 @@ class StakeService {
 
         $activeStakes = Stake::where([
             'status' => StakeStatus::ACTIVE,
-            'user_id' => $stake->user_id
+            'user_id' => $stake->user_id,
         ]);
-        $activeStakesCapitalSum = $activeStakes->sum('capital');
+        $activeStakesCapitalSum = $activeStakes->sum('amount');
 
         $activeStakes->update([
             'status' => 'completed',
-            'expected_end_date' => now()
+            'expected_end_date' => now(),
+            'compounding_offer_status' => CompoundingOfferStatus::OFFERED
         ]);
 
         $stake->user->balance = bcadd($stake->user->balance, (string) $activeStakesCapitalSum, 8);

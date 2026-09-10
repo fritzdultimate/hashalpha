@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CompoundingOfferStatus;
 use App\Models\Reward;
 use App\Models\Stake;
 use App\Services\CompoundingOfferService;
@@ -64,14 +65,16 @@ class ProcessStakeRewards extends Controller {
 
         $lock_rewards = $stake->user->shouldLockRewards() || $stake->lock_roi;
 
+        $isCompoundedStake = $stake->is_compounding_offer;
+
         Reward::create([
             'user_id' => $stake->user_id,
             'stake_id' => $stake->id,
             'amount' => $reward,
-            'status' => $lock_rewards ? 'locked' : 'pending',
+            'status' => $isCompoundedStake ? 'claimed' : ($lock_rewards ? 'locked' : 'pending'),
             'credited_at' => now(),
             'reward_type' => 'staking',
-            'rewards_locked_at' => $lock_rewards ? now() : null,
+            'rewards_locked_at' => $isCompoundedStake ? null : ($lock_rewards ? now() : null),
             'meta' => [
                 'roi_used' => $fluctuatedRoi,
                 'plan_min_roi' => $stake->plan->min_roi,
@@ -80,6 +83,11 @@ class ProcessStakeRewards extends Controller {
             ]
             // 'lock_reason' => ''
         ]);
+
+        if($isCompoundedStake) {
+            $stake->user->balance = bcadd($stake->user->balance, (string) $reward, 8);
+            $stake->user->save();
+        }
 
         // Performance bonus distribution
         // PerformanceBonusService::distribute($stake->user, $reward);
