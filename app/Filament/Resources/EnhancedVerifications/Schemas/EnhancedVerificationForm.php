@@ -16,6 +16,7 @@ class EnhancedVerificationForm
         return $schema
             ->components([
                 FileUpload::make('proof_of_funds_document')
+                    ->label('Trading Document')
                     ->disabled()
                     ->disk('local')
                     ->downloadable(),
