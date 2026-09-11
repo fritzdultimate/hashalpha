@@ -21,6 +21,7 @@ class EnhancedVerificationForm
                     ->disk('local')
                     ->downloadable(),
                 FileUpload::make('additional_document')
+                    ->label('Statement of Account')
                     ->disabled()
                     ->disk('local')
                     ->downloadable(),

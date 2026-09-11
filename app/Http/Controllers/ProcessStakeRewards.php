@@ -92,9 +92,6 @@ class ProcessStakeRewards extends Controller {
 
         if ($isCompoundedStake) {
             DB::transaction(function () use ($stake, $reward) {
-                // $user = $stake->user()->lockForUpdate()->first();
-                // $user->balance = bcadd($user->balance, (string) $reward, 8);
-                // $user->save();
 
                 $stake->update([
                     'amount' => bcadd($stake->amount, (string) $reward, 8)
