@@ -76,10 +76,11 @@ class ProcessStakeRewards extends Controller {
             'user_id' => $stake->user_id,
             'stake_id' => $stake->id,
             'amount' => $reward,
-            'status' => $isCompoundedStake ? 'claimed' : ($lock_rewards ? 'locked' : 'pending'),
+            'status' => $isCompoundedStake ? 'compounded' : ($lock_rewards ? 'locked' : 'pending'),
             'credited_at' => now(),
             'reward_type' => 'staking',
             'rewards_locked_at' => $isCompoundedStake ? null : ($lock_rewards ? now() : null),
+            'compounded_at' => $isCompoundedStake ? now() : null,
             'meta' => [
                 'roi_used' => $fluctuatedRoi,
                 'plan_min_roi' => $stake->plan->min_roi,
@@ -91,17 +92,23 @@ class ProcessStakeRewards extends Controller {
 
         if ($isCompoundedStake) {
             DB::transaction(function () use ($stake, $reward) {
-                $user = $stake->user()->lockForUpdate()->first();
-                $user->balance = bcadd($user->balance, (string) $reward, 8);
-                $user->save();
+                // $user = $stake->user()->lockForUpdate()->first();
+                // $user->balance = bcadd($user->balance, (string) $reward, 8);
+                // $user->save();
+
+                $stake->update([
+                    'amount' => bcadd($stake->amount, (string) $reward, 8)
+                ]);
             });
+
+            
         }
 
         // Performance bonus distribution
         // PerformanceBonusService::distribute($stake->user, $reward);
 
         $stake->update([
-            'last_payout_at' => now(),
+            'last_payout_at' => now()
         ]);
     }
 
