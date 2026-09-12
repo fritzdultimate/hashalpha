@@ -93,8 +93,11 @@ class ProcessStakeRewards extends Controller {
         if ($isCompoundedStake) {
             DB::transaction(function () use ($stake, $reward) {
 
+                $stake->lockForUpdate()->first();
+
                 $stake->update([
-                    'amount' => bcadd($stake->amount, (string) $reward, 8)
+                    'amount' => bcadd($stake->amount, (string) $reward, 8),
+                    'last_payout_at' => now()
                 ]);
             });
 
