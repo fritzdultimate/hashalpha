@@ -17,7 +17,8 @@ class Stake extends Model {
         'expected_end_date' => 'datetime',
         'created_at' => 'datetime',
         'lock_roi' => 'boolean',
-        'compounding_offer_status' => CompoundingOfferStatus::class
+        'compounding_offer_status' => CompoundingOfferStatus::class,
+        'is_compounding_offer' => 'boolean'
     ];
 
     public function user() {
