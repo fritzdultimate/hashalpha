@@ -39,6 +39,7 @@ class WithdrawalRules {
     protected static function onCompounding($user) {
         $activeCompounding = CompoundingOffer::where('user_id', $user->id)
             ->whereIn('status', [CompoundingOfferStatus::ACCEPTED, CompoundingOfferStatus::OFFERED])
+            ->where('expires_at', '>', now())
             ->exists();
 
         if ($activeCompounding) {
