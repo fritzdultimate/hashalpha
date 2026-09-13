@@ -38,11 +38,15 @@ class WithdrawalRules {
 
     protected static function onCompounding($user) {
         $activeCompounding = CompoundingOffer::where('user_id', $user->id)
-            ->whereIn('status', [CompoundingOfferStatus::ACCEPTED, CompoundingOfferStatus::OFFERED])
-            ->where('expires_at', '>', now())
+            ->where('status', CompoundingOfferStatus::OFFERED)
             ->exists();
 
-        if ($activeCompounding) {
+        $activeCompoundedStakes = Stake::where('user_id', $user->id)
+            ->where('compounding_offer_status', 'accepted')
+            ->where('status', 'active')
+            ->exists();
+
+        if ($activeCompounding || $activeCompoundedStakes) {
             throw new DomainException(
                 "You have an active compounding offer on your account. Please resolve it before making a withdrawal."
             );
