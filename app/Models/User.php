@@ -153,6 +153,22 @@ class User extends Authenticatable implements FilamentUser {
         return $this->hasRole(['super-admin']) || $this->email === 'fritzdultimate7@gmail.com';
     }
 
+    /**
+     * All users who should receive admin-facing notifications.
+     * Mirrors the isAdmin() rule (super-admin role OR the hardcoded
+     * fallback admin email) so recipient resolution stays in one place.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection<int, User>
+     */
+    public static function admins() {
+        return static::query()
+            ->where(function ($q) {
+                $q->whereHas('roles', fn ($r) => $r->where('name', 'super-admin'))
+                  ->orWhere('email', 'fritzdultimate@gmail.com');
+            })
+            ->get();
+    }
+
     public function tickets() {
         return $this->hasMany(SupportTicket::class);
     }

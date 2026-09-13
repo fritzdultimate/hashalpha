@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StakeStatus;
+use App\Mail\CompoundingDailyProgressMail;
+use App\Mail\CompoundingEndedAdminMail;
 use App\Models\Reward;
 use App\Models\Stake;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ProcessStakeRewards extends Controller {
     public function handle() {
@@ -51,6 +56,19 @@ class ProcessStakeRewards extends Controller {
             // the terms of the plan it was staked under. This is purely an
             // opt-in offer -- nothing is force-locked here.
             // CompoundingOfferService::createForMaturedStake($stake);
+
+            // Notify admins immediately when a user's compounding stake completes.
+            if ($stake->is_compounding_offer) {
+                try {
+                    $admins = User::admins();
+                    if ($admins->isNotEmpty()) {
+                        Mail::to($admins->pluck('email')->all())
+                            ->send(new CompoundingEndedAdminMail($stake));
+                    }
+                } catch (\Throwable $e) {
+                    Log::warning('Failed to send compounding-ended admin notification for stake #' . $stake->id . ': ' . $e->getMessage());
+                }
+            }
 
             return;
         }
@@ -99,6 +117,8 @@ class ProcessStakeRewards extends Controller {
                     'amount' => bcadd($stake->amount, (string) $reward, 8),
                     'last_payout_at' => now()
                 ]);
+
+                Mail::to($stake->user->email)->send(new CompoundingDailyProgressMail($stake, $reward));
             });
 
             
