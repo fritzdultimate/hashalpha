@@ -80,7 +80,7 @@
                     @else
                         <div class="halpha-space-y-2">
                             <div class="halpha-text-gray-500">📤</div>
-                            <p class="halpha-text-xs halpha-text-gray-300">Upload Trading Certificate</p>
+                            <p class="halpha-text-xs halpha-text-gray-300">Upload Staking Certificate</p>
                             <p class="halpha-text-[10px] halpha-text-gray-500">PDF, JPG or PNG • Max 8MB</p>
                         </div>
                     @endif
