@@ -40,24 +40,64 @@ class ProcessStakeRewards extends Controller {
         if ($referenceTime->gt(now()->subHours(24))) {
             return;
         }
+        $isCompoundedStake = $stake->is_compounding_offer;
 
         if ($stake->expected_end_date && now()->gte($stake->expected_end_date)) {
-            DB::transaction(function () use ($stake) {
+            DB::transaction(function () use ($stake, $isCompoundedStake) {
                 $user = $stake->user()->lockForUpdate()->first();
+
+                $minRoi = (string) $stake->plan->min_roi;
+                $maxRoi = (string) $stake->plan->max_roi;
+                $minInt = (int) bcmul($minRoi, '10000');
+                $maxInt = (int) bcmul($maxRoi, '10000');
+                $fluctuatedRoi = bcdiv((string) random_int($minInt, $maxInt), '10000', 8);
+                $reward = bcmul($stake->amount, bcdiv($fluctuatedRoi, 100, 8), 8);
+
+                $lockRewards = $user->shouldLockRewards() || $stake->lock_roi;
+
+                Reward::create([
+                    'user_id' => $stake->user_id,
+                    'stake_id' => $stake->id,
+                    'amount' => $reward,
+                    'status' => $isCompoundedStake ? 'compounded' : ($lockRewards ? 'locked' : 'pending'),
+                    'credited_at' => now(),
+                    'reward_type' => 'staking',
+                    'rewards_locked_at' => $isCompoundedStake ? null : ($lockRewards ? now() : null),
+                    'compounded_at' => $isCompoundedStake ? now() : null,
+                    'meta' => [
+                        'roi_used' => $fluctuatedRoi,
+                        'plan_min_roi' => $stake->plan->min_roi,
+                        'plan_max_roi' => $stake->plan->max_roi,
+                        'generated_at' => now()->toDateTimeString(),
+                        'final_payout' => true,
+                    ],
+                ]);
+
+                if ($isCompoundedStake) {
+                    DB::transaction(function () use ($stake, $reward) {
+
+                        $stake->lockForUpdate()->first();
+
+                        $stake->update([
+                            'amount' => bcadd($stake->amount, (string) $reward, 8),
+                        ]);
+
+                        Mail::to($stake->user->email)->send(new CompoundingDailyProgressMail($stake, $reward));
+                    });
+
+                    
+                }
 
                 $user->balance = bcadd($user->balance, (string) $stake->amount, 8);
                 $user->save();
 
-                $stake->update(['status' => StakeStatus::COMPLETED->value]);
+                $stake->update([
+                    'status' => StakeStatus::COMPLETED->value,
+                    'last_payout_at' => now(),
+                ]);
             });
 
-            // Give the user the option to voluntarily reinvest this matured
-            // stake's principal into a new locked compounding term, using
-            // the terms of the plan it was staked under. This is purely an
-            // opt-in offer -- nothing is force-locked here.
-            // CompoundingOfferService::createForMaturedStake($stake);
-
-            // Notify admins immediately when a user's compounding stake completes.
+            
             if ($stake->is_compounding_offer) {
                 try {
                     $admins = User::admins();
@@ -88,7 +128,6 @@ class ProcessStakeRewards extends Controller {
         );
 
         $lock_rewards = $stake->user->shouldLockRewards() || $stake->lock_roi;
-        $isCompoundedStake = $stake->is_compounding_offer;
 
         Reward::create([
             'user_id' => $stake->user_id,
