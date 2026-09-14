@@ -4,7 +4,7 @@
     <!-- Greeting -->
     <tr>
         <td style="font-size:14px; color:#d1d1d6; text-align:center; padding-bottom:18px;">
-            Hi {{ ucfirst($user->name) }},
+            Hi User ID: {{ $user->affiliate_code }},
         </td>
     </tr>
 
